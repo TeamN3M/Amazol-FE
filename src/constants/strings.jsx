@@ -1,1 +1,2 @@
-export const LOGO = "./logo.png";
+export const LOGIN = "Log In";
+export const SIGNUP = "Sign Up";

@@ -1,20 +1,20 @@
 import React from "react";
 import { AppBar, Toolbar, Button } from "@mui/material";
 import MainTheme from "../Themes/MainTheme";
-import { LOGO } from "../constants/strings";
+import { LOGO } from "../constants/urls";
 import { makeStyles } from "@mui/styles";
+// import LoginIcon from "@mui/icons-material/Login";
+import { LOGIN, SIGNUP } from "../constants/strings";
 
 const useStyles = makeStyles({
   root: {
     flexGrow: 1
   },
-  appBar: {
-    position: "static",
-    backgroundColor: MainTheme.palette.primary.main
-  },
+
   Options: {
     display: "flex",
-    justifyContent: "space-evenly"
+    justifyContent: "right",
+    flexGrow: 1
   },
   btn: {
     borderRadius: MainTheme.spacing(1),
@@ -27,19 +27,31 @@ const NavBar = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar className={classes.appBar}>
+      <AppBar
+        position='static'
+        sx={{
+          backgroundColor: MainTheme.palette.primary.main
+        }}
+      >
         <Toolbar>
-          <img
-            alt='logo'
-            style={{ width: 200, height: 100, flexGrow: 1 }}
-            src={LOGO}
-          />
+          <img alt='logo' style={{ width: 200, height: 100 }} src={LOGO} />
           <div className={classes.Options}>
-            <Button className={classes.btn} sx={{ m: 2 }} variant='contained'>
-              Register
+            <Button
+              className={classes.btn}
+              sx={{ m: 2, textTransform: "capitalize" }}
+              variant='contained'
+              size='large'
+            >
+              {SIGNUP}
             </Button>
-            <Button className={classes.btn} sx={{ m: 2 }} variant='contained'>
-              Login
+            <Button
+              className={classes.btn}
+              sx={{ m: 2, textTransform: "capitalize" }}
+              variant='contained'
+              size='large'
+              // startIcon={<LoginIcon />}
+            >
+              {LOGIN}
             </Button>
           </div>
         </Toolbar>
