@@ -1,56 +1,51 @@
 import React from "react";
-import { AppBar,Toolbar,Button, Grid } from "@mui/material";
+import { AppBar, Toolbar, Button } from "@mui/material";
 import MainTheme from "../Themes/MainTheme";
 import { LOGO } from "../constants/strings";
-import { margin } from "@mui/system";
+import { makeStyles } from "@mui/styles";
 
+const useStyles = makeStyles({
+  root: {
+    flexGrow: 1
+  },
+  appBar: {
+    position: "static",
+    backgroundColor: MainTheme.palette.primary.main
+  },
+  logo: {
+    flexGrow: 1,
+    width: 200,
+    height: 100
+  },
+  Options: {
+    display: "flex",
+    justifyContent: "space-evenly"
+  },
+  btn: {
+    borderRadius: MainTheme.spacing(1),
+    color: "white"
+  }
+});
 
 const NavBar = () => {
-//   const navigate = useNavigate();
-
-//   const handleLoginClicked = () => {
-//     navigate(paths.login);
-//   };
-//   const handleRegisterClicked = () => {
-//     navigate(paths.register);
-//   };
+  const classes = useStyles();
 
   return (
-    <AppBar
-      position="static"
-      sx={{
-        backgroundColor: MainTheme.palette.primary.main
-      }}
-    >
-      <Toolbar sx={{ justifyContent: "left" }}>
-          <img alt="logo" src={LOGO} width={200} height={100}/>
-          <Grid sx={{ justifyContent:"space-between", mr:30}}>
-          <Button
-          sx={{
-            borderRadius: MainTheme.spacing(1),
-            color: "white",
-            margin:"5"
-          }}
-          variant="outlined"
-        //   onClick={handleLoginClicked}
-        >
-          Login
-        </Button>
-        <Button
-          sx={{
-            borderRadius: MainTheme.spacing(1),
-            color: "white",
-            margin:"5"
-          }}
-          variant="outlined"
-        //   onClick={handleRegisterClicked}
-        >
-          Register
-        </Button>
-        </Grid>
-        
-      </Toolbar>
-    </AppBar>
+    <div className={classes.root}>
+      <AppBar className={classes.appBar}>
+        <Toolbar>
+          <img alt='logo' src={LOGO} />
+          <div className={classes.Options}>
+            <Button className={classes.btn} sx={{ m: 2 }} variant='contained'>
+              Register
+            </Button>
+            <Button className={classes.btn} sx={{ m: 2 }} variant='contained'>
+              Login
+            </Button>
+          </div>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 };
 
