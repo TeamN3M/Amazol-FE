@@ -12,11 +12,6 @@ const useStyles = makeStyles({
     position: "static",
     backgroundColor: MainTheme.palette.primary.main
   },
-  logo: {
-    flexGrow: 1,
-    width: 200,
-    height: 100
-  },
   Options: {
     display: "flex",
     justifyContent: "space-evenly"
@@ -34,7 +29,11 @@ const NavBar = () => {
     <div className={classes.root}>
       <AppBar className={classes.appBar}>
         <Toolbar>
-          <img alt='logo' src={LOGO} />
+          <img
+            alt='logo'
+            style={{ width: 200, height: 100, flexGrow: 1 }}
+            src={LOGO}
+          />
           <div className={classes.Options}>
             <Button className={classes.btn} sx={{ m: 2 }} variant='contained'>
               Register
