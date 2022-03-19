@@ -5,6 +5,8 @@ import { LOGO } from "../constants/urls";
 import { makeStyles } from "@mui/styles";
 // import LoginIcon from "@mui/icons-material/Login";
 import { LOGIN, SIGNUP } from "../constants/strings";
+//import { useNavigate } from 'react-router-dom';
+
 
 const useStyles = makeStyles({
   root: {
@@ -24,7 +26,6 @@ const useStyles = makeStyles({
 
 const NavBar = () => {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <AppBar
@@ -41,6 +42,11 @@ const NavBar = () => {
               sx={{ m: 2, textTransform: "capitalize" }}
               variant='contained'
               size='large'
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href='/Register';
+                }}
+          
             >
               {SIGNUP}
             </Button>
@@ -49,6 +55,10 @@ const NavBar = () => {
               sx={{ m: 2, textTransform: "capitalize" }}
               variant='contained'
               size='large'
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href='/Login';
+                }}
               // startIcon={<LoginIcon />}
             >
               {LOGIN}
