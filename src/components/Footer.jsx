@@ -15,8 +15,9 @@ const Footer = () => (
     sx={{
       display: "flex",
       width: "100%",
-      backgroundColor: "#bdbdbd",
-      marginTop: MainTheme.spacing(10)
+      backgroundColor: "#e3f2fd",
+      marginTop: MainTheme.spacing(10),
+      borderTop: 1
     }}
   >
     <Grid container spacing={5} justifyContent='space-around'>

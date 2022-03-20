@@ -1,5 +1,5 @@
 export default Object.freeze({
-    index: "/",
-    login: "/login",
-    register: "/register"
-  });
+  index: "/",
+  login: "/Login",
+  register: "/Register"
+});

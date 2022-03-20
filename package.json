@@ -5,7 +5,9 @@
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
+    "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
+    "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.1",
     "@mui/styles": "^5.5.1",
     "@testing-library/jest-dom": "^5.16.2",
@@ -15,6 +17,7 @@
     "browser-router": "^0.2.0",
     "express": "^4.17.3",
     "i": "^0.3.7",
+    "material-icons": "^1.10.8",
     "npm": "^8.5.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -23,7 +26,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server",
+    "run": "react-scripts start",
     "build": "react-scripts build",
     "test": "mocha tests/*.spec.js --color",
     "eject": "react-scripts eject",
@@ -54,6 +58,7 @@
     "eslint": "^8.11.0",
     "eslint-plugin-react": "^7.29.4",
     "mocha": "^9.2.2",
+    "sass": "^1.49.9",
     "sass-loader": "^12.6.0",
     "style-loader": "^3.3.1"
   }
