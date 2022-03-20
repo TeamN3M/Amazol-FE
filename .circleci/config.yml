@@ -16,7 +16,7 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
-            - run: npm lint
+            - run: npm run lint
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
