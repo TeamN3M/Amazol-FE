@@ -5,7 +5,10 @@ import { LOGO } from "../constants/urls";
 import { makeStyles } from "@mui/styles";
 import LoginIcon from "@mui/icons-material/Login";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
-import { SIGNIN, SIGNUP } from "../constants/strings";
+import HomeIcon from "@mui/icons-material/Home";
+import { SIGNIN, SIGNUP, HOMEPAGE } from "../constants/strings";
+import { useNavigate } from "react-router-dom";
+import paths from "../constants/paths";
 
 const useStyles = makeStyles({
   root: {
@@ -24,9 +27,23 @@ const useStyles = makeStyles({
 });
 
 const NavBar = () => {
+  const navigate = useNavigate();
   const classes = useStyles();
   const [isHomePage, setIsHomePage] = useState(true);
-  console.log(isHomePage);
+
+  const handleLoginClicked = () => {
+    setIsHomePage(false);
+    navigate(paths.login);
+  };
+  const handleRegisterClicked = () => {
+    setIsHomePage(false);
+    navigate(paths.register);
+  };
+  const handleHomeClicked = () => {
+    setIsHomePage(true);
+    navigate(paths.index);
+  };
+
   return (
     <>
       {isHomePage ? (
@@ -39,18 +56,13 @@ const NavBar = () => {
           >
             <Toolbar>
               <img alt='logo' style={{ width: 200, height: 70 }} src={LOGO} />
-
               <div className={classes.Options}>
                 <Button
                   className={classes.btn}
                   sx={{ m: 2, textTransform: "capitalize" }}
                   variant='contained'
                   size='small'
-                  onClick={(e) => {
-                    e.preventDefault();
-                    window.location.href = "/Register";
-                    setIsHomePage(false);
-                  }}
+                  onClick={handleRegisterClicked}
                   startIcon={<AppRegistrationIcon />}
                 >
                   {SIGNUP}
@@ -60,11 +72,7 @@ const NavBar = () => {
                   sx={{ m: 2, textTransform: "capitalize" }}
                   variant='contained'
                   size='small'
-                  onClick={(e) => {
-                    e.preventDefault();
-                    window.location.href = "/Login";
-                    setIsHomePage(false);
-                  }}
+                  onClick={handleLoginClicked}
                   startIcon={<LoginIcon />}
                 >
                   {SIGNIN}
@@ -90,14 +98,10 @@ const NavBar = () => {
                   sx={{ m: 2, textTransform: "capitalize" }}
                   variant='contained'
                   size='small'
-                  onClick={(e) => {
-                    e.preventDefault();
-                    window.location.href = "/Login";
-                    setIsHomePage(false);
-                  }}
-                  startIcon={<LoginIcon />}
+                  onClick={handleHomeClicked}
+                  startIcon={<HomeIcon />}
                 >
-                  stam
+                  {HOMEPAGE}
                 </Button>
               </div>
             </Toolbar>
