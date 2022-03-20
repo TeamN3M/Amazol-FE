@@ -2,7 +2,7 @@ import React from "react";
 import { ThemeProvider } from "@mui/styles";
 import { BrowserRouter } from "react-router-dom";
 import MainTheme from "./Themes/MainTheme";
-import "./App.css";
+// import "./App.css";
 
 import RouteNavigate from "./components/RouteNavigate";
 
