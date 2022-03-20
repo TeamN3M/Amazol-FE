@@ -6,7 +6,7 @@ import Footer from "./Footer";
 import NavBar from "./NavBar";
 import HomePage from "./HomePage";
 import Login from "./Login";
-import Register from "./Register/Register";
+import Register from "./Register";
 
 const RouteNavigate = () => (
   <Stack>

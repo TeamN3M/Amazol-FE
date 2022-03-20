@@ -12,7 +12,7 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { SIGNIN } from "../constants/strings";
+import { SIGNIN, FORGOT, SIGNUP_OPT } from "../constants/strings";
 import paths from "../constants/paths";
 
 const theme = createTheme();
@@ -104,12 +104,12 @@ const Login = () => {
               <Grid container>
                 <Grid item xs>
                   <Link href='/' variant='body2'>
-                    Forgot password?
+                    {FORGOT}
                   </Link>
                 </Grid>
                 <Grid item>
                   <Link href={paths.register} variant='body2'>
-                    {"Don't have an account? Sign Up"}
+                    {SIGNUP_OPT}
                   </Link>
                 </Grid>
               </Grid>
