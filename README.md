@@ -57,22 +57,26 @@ run command
      alt="React" width="50" height="50">
 <sup>We utilized components and JSX extensions so that we can
 Work with a combination of HTML and JavaScript on the same files. </sub>
-###We used the following libraries to help us design our e-commerce website:
+
+  ### We used the following libraries to help us design our e-commerce website:
   * **Material UI** -a library that allows us to import and use different components to create a user
 interface in our React applications (we used on some of the JSX files in line CSS combined
 with material UI).
-###We used the following libraries to help us test our code:
+
+  ### We used the following libraries to help us test our code:
   * **Mocha**- Mocha is a JavaScript test framework for Node.js programs, featuring browser
 support, asynchronous testing, test coverage reports, and use of any assertion library.
   * **Chai**- Chai is an assertion library for node and the browser that can be delightfully paired
 with any JavaScript testing framework (Mocha in our case).<img src="https://miro.medium.com/max/1200/1*__HSK-HxN6v84TnBq9GGPw.png" align="right"
      alt="Chai&Mocha" width="120" height="50">
-###We used the following library to handle our back-end server communication.
+     
+  ### We used the following library to handle our back-end server communication.
   * **Express.js**- Express, is a back-end web application framework for Node.js, It is designed for
 building web applications and APIs.<img src="https://buttercms.com/static/images/tech_banners/ExpressJS.png" align="right"
      alt="ExpressJS" width="150" height="50">
-###We used the following libraries and tools to help us deploy and integrate the code efficiently:
-3
+     
+  ### We used the following libraries and tools to help us deploy and integrate the code efficiently:
+
   * **LinterES**- linter, is a static code analysis tool used to flag programming errors, bugs, stylistic
 errors and suspicious constructs.
 * **Prettier**- Prettier is an opinionated code formatter which ensures one unified code format.<img src="https://miro.medium.com/max/1200/1*83PZeBAFQkP1XyOfDigxsg.png" align="right"
@@ -99,7 +103,7 @@ deploy, manage, and scale modern apps. <img src="https://images.g2crowd.com/uplo
 
 ## The site
 
-You can view the site on this address 
+ You can view the site on this address :
 
 
 [https://amazol-n3m.com/](https://amazol-n3m.herokuapp.com/)
@@ -107,7 +111,7 @@ You can view the site on this address
 
 
 
-### `ScreenShots`
+ ### `ScreenShots`
 
 ![image](https://user-images.githubusercontent.com/73241556/159358795-70726a2e-c23d-4594-adb3-63e467e3060b.png)
 ![image](https://user-images.githubusercontent.com/73241556/159358862-387c120d-b3f9-48c1-96f3-4a0714e3e3fc.png)
