@@ -18,6 +18,33 @@ import paths from "../constants/paths";
 const theme = createTheme();
 
 const Login = () => {
+
+  const [email, setEmail] = React.useState("");
+  const [emailErrorText, setEmailErrorText] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [passwordErrorText, setPasswordErrorText] = React.useState("");
+
+  const onSubmit = e => {
+    e.preventDefault();
+    if (!email) {
+      setEmailErrorText("Please enter email");
+    }
+     else {
+      setEmailErrorText("");
+    }
+    if (!password) {
+      setPasswordErrorText("Please enter password");
+    }
+     else {
+      setPasswordErrorText("");
+    }
+  }
+
+
+
+
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -78,6 +105,10 @@ const Login = () => {
                 name='email'
                 autoComplete='email'
                 autoFocus
+                value={email}
+                error={!!emailErrorText}
+                helperText={emailErrorText}
+                onChange={e => setEmail(e.target.value)}
               />
               <TextField
                 margin='normal'
@@ -88,6 +119,10 @@ const Login = () => {
                 type='password'
                 id='password'
                 autoComplete='current-password'
+                value={password}
+                error={!!passwordErrorText}
+                helperText={passwordErrorText}
+                onChange={e => setPassword(e.target.value)}
               />
               <FormControlLabel
                 control={<Checkbox value='remember' color='primary' />}
@@ -95,6 +130,7 @@ const Login = () => {
               />
               <Button
                 type='submit'
+                onClick={onSubmit}
                 fullWidth
                 variant='contained'
                 sx={{ mt: 3, mb: 2 }}

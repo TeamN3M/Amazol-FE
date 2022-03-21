@@ -17,6 +17,65 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme();
 
 const Register = () => {
+
+  const [email, setEmail] = React.useState("");
+  const [emailErrorText, setEmailErrorText] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [passwordErrorText, setPasswordErrorText] = React.useState("");
+  const [firstname, setFirstname] = React.useState("");
+  const [firstnameErrorText, setFirstnameErrorText] = React.useState("");
+  const [lastname, setLastname] = React.useState("");
+  const [lastnameErrorText, setLastnameErrorText] = React.useState("");
+
+  function validateEmail (email) {
+    const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regexp.test(email);
+  }
+  function validateNames (name) {
+    const regexp = /[^A-Za-z]+/;
+    return !regexp.test(name);
+  }
+
+  const onSubmit = e => {
+    e.preventDefault();
+    if (!email) {
+      setEmailErrorText("Please enter email");
+    }
+    else if(! validateEmail (email)){
+      setEmailErrorText("email is not valid!");
+    }
+     else {
+      setEmailErrorText("");
+    }
+    if (!password) {
+      setPasswordErrorText("Please enter password");
+    }
+    else if(password.length<6){
+      setPasswordErrorText("Your password is too short !");
+    }
+     else {
+      setPasswordErrorText("");
+    }
+    if (!firstname) {
+      setFirstnameErrorText("Please enter first name");
+    } 
+    else if( !validateNames (firstname) || firstname.length<2)   {
+      setFirstnameErrorText("The first name cant contain this char");
+    }
+    else {
+      setFirstnameErrorText("");
+    }
+    if (!lastname) {
+      setLastnameErrorText("Please enter last name");
+    } 
+    else if( !validateNames(lastname) || lastname.length<2)  {
+      setFirstnameErrorText("The last name cant contain this char");
+    }else {
+      setLastnameErrorText("");
+    }
+  };
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -25,13 +84,7 @@ const Register = () => {
       password: data.get("password")
     });
   };
-  // const [fname, setFname] = useState("");
-  // const [lname, setLname] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [passwordError, setPasswordError] = useState(false);
-  // const [emailError, setEmailError] = useState(false);
-  // const [passwordVisible, setPasswordVisible] = useState(false);
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -69,6 +122,10 @@ const Register = () => {
                 id='firstName'
                 label='First Name'
                 autoFocus
+                value={firstname}
+                error={!!firstnameErrorText}
+                helperText={firstnameErrorText}
+                onChange={e => setFirstname(e.target.value)}
               />
               <TextField
                 margin='normal'
@@ -78,6 +135,10 @@ const Register = () => {
                 label='Last Name'
                 name='lastName'
                 autoComplete='family-name'
+                value={lastname}
+                error={!!lastnameErrorText}
+                helperText={lastnameErrorText}
+                onChange={e => setLastname(e.target.value)}
               />
               <TextField
                 margin='normal'
@@ -87,6 +148,10 @@ const Register = () => {
                 label='Email Address'
                 name='email'
                 autoComplete='email'
+                value={email}
+                error={!!emailErrorText}
+                helperText={emailErrorText}
+                onChange={e => setEmail(e.target.value)}
               />
               <TextField
                 margin='normal'
@@ -97,8 +162,12 @@ const Register = () => {
                 type='password'
                 id='password'
                 autoComplete='new-password'
+                value={password}
+                error={!!passwordErrorText}
+                helperText={passwordErrorText}
+                onChange={e => setPassword(e.target.value)}
               />
-              <box>
+              <Box>
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={
@@ -107,14 +176,14 @@ const Register = () => {
                     label={OFFERS}
                   />
                 </Grid>
-              </box>
+              </Box>
 
               <Box textAlign='center'>
                 <Button
                   type='submit'
                   fullWidth
+                  onClick={onSubmit}
                   variant='contained'
-                  ma
                   sx={{ mt: 3, mb: 2 }}
                   style={{
                     maxWidth: "700px",
