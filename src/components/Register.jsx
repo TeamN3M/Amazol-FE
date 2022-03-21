@@ -3,7 +3,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import { SIGNUP } from "../constants/strings";
+import { SIGNUP, SIGNIN_OPT, OFFERS } from "../constants/strings";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
@@ -25,6 +25,13 @@ const Register = () => {
       password: data.get("password")
     });
   };
+  // const [fname, setFname] = useState("");
+  // const [lname, setLname] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [passwordError, setPasswordError] = useState(false);
+  // const [emailError, setEmailError] = useState(false);
+  // const [passwordVisible, setPasswordVisible] = useState(false);
 
   return (
     <ThemeProvider theme={theme}>
@@ -97,7 +104,7 @@ const Register = () => {
                     control={
                       <Checkbox value='allowExtraEmails' color='primary' />
                     }
-                    label='I want to receive inspiration, marketing promotions and updates via email.'
+                    label={OFFERS}
                   />
                 </Grid>
               </box>
@@ -116,13 +123,13 @@ const Register = () => {
                     minHeight: "30px"
                   }}
                 >
-                  Sign Up
+                  {SIGNUP}
                 </Button>
               </Box>
               <Grid container justifyContent='flex-end'>
                 <Grid item>
-                  <Link href='/Login' variant='body2'>
-                    Already have an Account ?
+                  <Link href='/Login' variant='body2' textTransform='ltr'>
+                    {SIGNIN_OPT}
                   </Link>
                 </Grid>
               </Grid>
