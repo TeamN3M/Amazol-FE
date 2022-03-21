@@ -18,6 +18,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { InputAdornment } from "@mui/material";
 import { IconButton } from "@mui/material";
+import paths from "../constants/paths";
+import { useNavigate } from "react-router-dom";
 import {
   validateNames,
   validateEmail,
@@ -35,6 +37,7 @@ const Register = () => {
   const [firstnameErrorText, setFirstnameErrorText] = React.useState("");
   const [lastname, setLastname] = React.useState("");
   const [lastnameErrorText, setLastnameErrorText] = React.useState("");
+  const navigate = useNavigate();
 
   const checkNames = (name) => {
     return !validateNames.test(name);
@@ -226,7 +229,13 @@ const Register = () => {
 
               <Grid container justifyContent='flex-end'>
                 <Grid item>
-                  <Link href='/Login' variant='body2' textTransform='ltr'>
+                  <Link
+                    component='button'
+                    onClick={() => {
+                      navigate(paths.login);
+                    }}
+                    variant='body2'
+                  >
                     {SIGNIN_OPT}
                   </Link>
                 </Grid>

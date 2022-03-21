@@ -16,7 +16,7 @@ const Footer = () => (
       display: "flex",
       width: "100%",
       backgroundColor: "#e3f2fd",
-      marginTop: MainTheme.spacing(10),
+      marginTop: MainTheme.spacing(30),
       borderTop: 1
     }}
   >

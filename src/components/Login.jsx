@@ -14,36 +14,30 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { SIGNIN, FORGOT, SIGNUP_OPT } from "../constants/strings";
 import paths from "../constants/paths";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
 const Login = () => {
-
   const [email, setEmail] = React.useState("");
   const [emailErrorText, setEmailErrorText] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [passwordErrorText, setPasswordErrorText] = React.useState("");
+  const navigate = useNavigate();
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     if (!email) {
       setEmailErrorText("Please enter email");
-    }
-     else {
+    } else {
       setEmailErrorText("");
     }
     if (!password) {
       setPasswordErrorText("Please enter password");
-    }
-     else {
+    } else {
       setPasswordErrorText("");
     }
-  }
-
-
-
-
-
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -108,7 +102,7 @@ const Login = () => {
                 value={email}
                 error={!!emailErrorText}
                 helperText={emailErrorText}
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
                 margin='normal'
@@ -122,7 +116,7 @@ const Login = () => {
                 value={password}
                 error={!!passwordErrorText}
                 helperText={passwordErrorText}
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <FormControlLabel
                 control={<Checkbox value='remember' color='primary' />}
@@ -135,7 +129,7 @@ const Login = () => {
                 variant='contained'
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                {SIGNIN}
               </Button>
               <Grid container>
                 <Grid item xs>
@@ -144,7 +138,13 @@ const Login = () => {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href={paths.register} variant='body2'>
+                  <Link
+                    component='button'
+                    onClick={() => {
+                      navigate(paths.register);
+                    }}
+                    variant='body2'
+                  >
                     {SIGNUP_OPT}
                   </Link>
                 </Grid>

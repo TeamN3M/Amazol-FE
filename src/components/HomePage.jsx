@@ -1,20 +1,34 @@
 import React from "react";
 import { Grid } from "@mui/material";
-import { BACKGRUOND } from "../constants/urls";
+
+import CssBaseline from "@mui/material/CssBaseline";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme();
 
 const HomePage = () => {
   return (
     <>
-      <Grid
-        container
-        spacing={0}
-        direction='column'
-        alignItems='center'
-        justifyContent='center'
-        style={{ minHeight: "100vh" }}
-      >
-        <img alt='home_back' src={BACKGRUOND} />
-      </Grid>
+      <ThemeProvider theme={theme}>
+        <Grid container component='main' sx={{ height: "80vh" }}>
+          <CssBaseline />
+          <Grid
+            style={{
+              minWidth: "85%",
+              height: "100vh"
+            }}
+            sx={{
+              marginLeft: 20,
+              marginTop: 2,
+
+              backgroundImage: `url("../images/home page/homebackground.jpg")`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundPosition: "center"
+            }}
+          />
+        </Grid>
+      </ThemeProvider>
     </>
   );
 };
