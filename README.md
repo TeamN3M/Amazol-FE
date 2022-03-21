@@ -1,70 +1,115 @@
-# Getting Started with Create React App
+# AmaZol | <img src="https://img.shields.io/badge/CurrentSprint-1-green" alt="Sprint" >  | ![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg) | <img src="https://upload.wikimedia.org/wikipedia/he/4/44/SCE_logo.png"  alt="SCE logo" width="100" height="30">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+ By: Team <img src="https://amazol-n3m.herokuapp.com/images/n3m-logo.jpg"
+     alt="SCE logo" width="120" height="50">
+ 
+ * **Neriya Zudi** | <img src="https://img.shields.io/badge/Neria-Programmer-blue" alt="Programmer" > <img src="https://amazol-n3m.herokuapp.com/images/team/neriya.jpg" width="50" height="50">
+ 
+ * **Matan Sofer** | <img src="https://img.shields.io/badge/Matan-Programmer-blue" alt="Programmer" > <img src="https://amazol-n3m.herokuapp.com/images/team/smatan.jpg" width="50" height="50">
+ <img src="https://amazol-n3m.herokuapp.com/logo.jpg" align="right"
+     alt="AmaZol logo" width="300" height="150">
+ * **Matan Ohayon** |<img src="https://img.shields.io/badge/Matan-Programmer-blue" alt="Programmer" > <img src="https://amazol-n3m.herokuapp.com/images/team/omatan.jpg" width="50" height="50">
+ 
+ * **Maor Arnon** | <img src="https://img.shields.io/badge/Maor-Programmer-blue" alt="Programmer" >  <img src="https://amazol-n3m.herokuapp.com/images/team/maor.jpg" width="50" height="50"> 
+ 
+ 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## How to set up and run project explanation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Run command 
+  ### `npm install`
+3. To run tests run command
+run command 
+  ### `npm test`
+3. To boot the server and listen
+run command 
+  ### `npm start`
+4. To upload the site locally
+run command 
+  ### `npm run r`
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    <Note> : For opening and running the project these things
+    are needed in advance
+    1. Node js version is installed on the computer
+    2. IDE or Command Terminal 
 
-### `npm run build`
+     
+     
+   <hr>
+   
+   ## Tools and Technologies we used
+ 
+  In order to work in a synchronized and clean manner we used GIT and GitKraken. <img src="https://1v5ymx3zt3y73fq5gy23rtnc-wpengine.netdna-ssl.com/wp-content/uploads/2021/06/gitkraken-logo-dark-sq.png" align="right"
+     alt="GitKraken" width="50" height="50">
+  ###In summery we used the following tools and technologies:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  * **HTML** <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/1200px-HTML5_logo_and_wordmark.svg.png" align="right"
+     alt="HTML" width="50" height="50">
+  * **JavaScript** <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/2048px-Unofficial_JavaScript_logo_2.svg.png" align="right"
+     alt="JS" width="50" height="50">
+  * **React.js** (JavaScript library) <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" align="right"
+     alt="React" width="50" height="50">
+<sup>We utilized components and JSX extensions so that we can
+Work with a combination of HTML and JavaScript on the same files. </sub>
+###We used the following libraries to help us design our e-commerce website:
+  * **Material UI** -a library that allows us to import and use different components to create a user
+interface in our React applications (we used on some of the JSX files in line CSS combined
+with material UI).
+###We used the following libraries to help us test our code:
+  * **Mocha**- Mocha is a JavaScript test framework for Node.js programs, featuring browser
+support, asynchronous testing, test coverage reports, and use of any assertion library.
+  * **Chai**- Chai is an assertion library for node and the browser that can be delightfully paired
+with any JavaScript testing framework (Mocha in our case).<img src="https://miro.medium.com/max/1200/1*__HSK-HxN6v84TnBq9GGPw.png" align="right"
+     alt="Chai&Mocha" width="120" height="50">
+###We used the following library to handle our back-end server communication.
+  * **Express.js**- Express, is a back-end web application framework for Node.js, It is designed for
+building web applications and APIs.<img src="https://buttercms.com/static/images/tech_banners/ExpressJS.png" align="right"
+     alt="ExpressJS" width="150" height="50">
+###We used the following libraries and tools to help us deploy and integrate the code efficiently:
+3
+  * **LinterES**- linter, is a static code analysis tool used to flag programming errors, bugs, stylistic
+errors and suspicious constructs.
+* **Prettier**- Prettier is an opinionated code formatter which ensures one unified code format.<img src="https://miro.medium.com/max/1200/1*83PZeBAFQkP1XyOfDigxsg.png" align="right"
+     alt="Prettier+linterES" width="200" height="100">
+* **CircleCI**- CircleCI is a continuous integration and continuous delivery platform that can be
+used to implement DevOps practices, all of the group project members signed up to circleCI
+in order to be able to change the deployment script. <img src="https://d3r49iyjzglexf.cloudfront.net/circleci-logo-stacked-fb-657e221fda1646a7e652c09c9fbfb2b0feb5d710089bb4d8e8c759d37a832694.png" align="right"
+     alt="CircleCI" width="50" height="50">
+* **Heroku**-Heroku is a container-based cloud Platform as a Service (PaaS). we use Heroku to
+deploy, manage, and scale modern apps. <img src="https://images.g2crowd.com/uploads/product/image/social_landscape/social_landscape_bf0fb4cb7fe948c42f37ded73895638f/salesforce-heroku.png" align="right"
+     alt="heroku" width="100" height="50">
+  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    `<Note> Definitions, dependencies, scripts, and more information about the project can
+    be found in the file Package.json`
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+ 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## The site
 
-### Code Splitting
+You can view the site on this address 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+[https://amazol-n3m.com/](https://amazol-n3m.herokuapp.com/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+### `ScreenShots`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+![image](https://user-images.githubusercontent.com/73241556/159358795-70726a2e-c23d-4594-adb3-63e467e3060b.png)
+![image](https://user-images.githubusercontent.com/73241556/159358862-387c120d-b3f9-48c1-96f3-4a0714e3e3fc.png)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
