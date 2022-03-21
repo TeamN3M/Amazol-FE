@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AppBar, Toolbar, Button } from "@mui/material";
-import MainTheme from "../Themes/MainTheme";
+import MainTheme from "../themes/MainTheme";
 import { LOGO } from "../constants/urls";
 import { makeStyles } from "@mui/styles";
 import LoginIcon from "@mui/icons-material/Login";

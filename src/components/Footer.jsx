@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Grid, IconButton, Typography, Paper } from "@mui/material";
-import MainTheme from "../Themes/MainTheme";
+import MainTheme from "../themes/MainTheme";
 import {
   rightMembers,
   leftMembers,

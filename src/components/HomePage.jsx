@@ -14,11 +14,10 @@ const HomePage = () => {
           <CssBaseline />
           <Grid
             style={{
-              minWidth: "85%",
+              minWidth: "100%",
               height: "100vh"
             }}
             sx={{
-              marginLeft: 20,
               marginTop: 2,
 
               backgroundImage: `url("../images/home page/homebackground.jpg")`,
