@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,14 +11,22 @@ import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
+import InfoPop from "./InfoPop";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { InputAdornment } from "@mui/material";
+import { IconButton } from "@mui/material";
+import {
+  validateNames,
+  validateEmail,
+  validatePassword
+} from "../constants/strings";
 
 const theme = createTheme();
 
 const Register = () => {
-
   const [email, setEmail] = React.useState("");
   const [emailErrorText, setEmailErrorText] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -27,54 +36,59 @@ const Register = () => {
   const [lastname, setLastname] = React.useState("");
   const [lastnameErrorText, setLastnameErrorText] = React.useState("");
 
-  function validateEmail (email) {
-    const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return regexp.test(email);
-  }
-  function validateNames (name) {
-    const regexp = /[^A-Za-z]+/;
-    return !regexp.test(name);
-  }
+  const checkNames = (name) => {
+    return !validateNames.test(name);
+  };
 
-  const onSubmit = e => {
+  const checkEmail = (email) => {
+    return !validateEmail.test(email);
+  };
+
+  const checkPassword = (password) => {
+    return !validatePassword.test(password);
+  };
+
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const handleClickShowPassword = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
+  const onSubmit = (e) => {
     e.preventDefault();
     if (!email) {
       setEmailErrorText("Please enter email");
-    }
-    else if(! validateEmail (email)){
+    } else if (checkEmail(email)) {
       setEmailErrorText("email is not valid!");
-    }
-     else {
+    } else {
       setEmailErrorText("");
     }
     if (!password) {
       setPasswordErrorText("Please enter password");
-    }
-    else if(password.length<6){
-      setPasswordErrorText("Your password is too short !");
-    }
-     else {
+    } else if (checkPassword(password)) {
+      setPasswordErrorText("Invalid password !");
+    } else {
       setPasswordErrorText("");
     }
     if (!firstname) {
       setFirstnameErrorText("Please enter first name");
-    } 
-    else if( !validateNames (firstname) || firstname.length<2)   {
+    } else if (!checkNames(firstname)) {
       setFirstnameErrorText("The first name cant contain this char");
-    }
-    else {
+    } else if (firstname.length < 2) {
+      setFirstnameErrorText("The first name must contain at least 2 letters");
+    } else {
       setFirstnameErrorText("");
     }
     if (!lastname) {
       setLastnameErrorText("Please enter last name");
-    } 
-    else if( !validateNames(lastname) || lastname.length<2)  {
-      setFirstnameErrorText("The last name cant contain this char");
-    }else {
+    } else if (!checkNames(lastname)) {
+      setLastnameErrorText("The last name cant contain this char");
+    } else if (lastname.length < 2) {
+      setLastnameErrorText("The last name must contain at least 2 letters");
+    } else {
       setLastnameErrorText("");
     }
   };
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -84,7 +98,6 @@ const Register = () => {
       password: data.get("password")
     });
   };
-
 
   return (
     <ThemeProvider theme={theme}>
@@ -125,7 +138,7 @@ const Register = () => {
                 value={firstname}
                 error={!!firstnameErrorText}
                 helperText={firstnameErrorText}
-                onChange={e => setFirstname(e.target.value)}
+                onChange={(e) => setFirstname(e.target.value)}
               />
               <TextField
                 margin='normal'
@@ -138,7 +151,7 @@ const Register = () => {
                 value={lastname}
                 error={!!lastnameErrorText}
                 helperText={lastnameErrorText}
-                onChange={e => setLastname(e.target.value)}
+                onChange={(e) => setLastname(e.target.value)}
               />
               <TextField
                 margin='normal'
@@ -151,7 +164,7 @@ const Register = () => {
                 value={email}
                 error={!!emailErrorText}
                 helperText={emailErrorText}
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
                 margin='normal'
@@ -159,13 +172,25 @@ const Register = () => {
                 fullWidth
                 name='password'
                 label='Password'
-                type='password'
+                type={passwordVisible ? "text" : "password"}
                 id='password'
                 autoComplete='new-password'
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position='end'>
+                      <IconButton
+                        aria-label='toggle password visibility'
+                        onClick={handleClickShowPassword}
+                      >
+                        {passwordVisible ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
                 value={password}
                 error={!!passwordErrorText}
                 helperText={passwordErrorText}
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <Box>
                 <Grid item xs={12}>
@@ -195,6 +220,10 @@ const Register = () => {
                   {SIGNUP}
                 </Button>
               </Box>
+              <Grid sx={{ mr: 2 }}>
+                <InfoPop />
+              </Grid>
+
               <Grid container justifyContent='flex-end'>
                 <Grid item>
                   <Link href='/Login' variant='body2' textTransform='ltr'>

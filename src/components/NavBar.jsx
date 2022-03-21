@@ -32,15 +32,15 @@ const NavBar = () => {
   const [isHomePage, setIsHomePage] = useState(true);
 
   const handleLoginClicked = () => {
-    setIsHomePage(false);
+    setIsHomePage(!isHomePage);
     navigate(paths.login);
   };
   const handleRegisterClicked = () => {
-    setIsHomePage(false);
+    setIsHomePage(!isHomePage);
     navigate(paths.register);
   };
   const handleHomeClicked = () => {
-    setIsHomePage(true);
+    setIsHomePage(!isHomePage);
     navigate(paths.index);
   };
 
@@ -55,7 +55,11 @@ const NavBar = () => {
             }}
           >
             <Toolbar>
-              <img alt='logo' style={{ width: 200, height: 70 }} src={LOGO} />
+              <img
+                alt='logo'
+                style={{ width: 150, height: 70, justifyContent: "left" }}
+                src={LOGO}
+              />
               <div className={classes.Options}>
                 <Button
                   className={classes.btn}

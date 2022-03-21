@@ -3,13 +3,13 @@ export const leftMembers = [
     name: "Neriya Zudi",
     linkedin: "https://www.linkedin.com/in/neriyazudi/",
     github: "https://github.com/NeriyaZudi",
-    img: "./images/neriya.jpg"
+    img: "./images/team/neriya.jpg"
   },
   {
     name: "Matan Sofer",
     linkedin: "https://www.linkedin.com/in/matan-sofer-86291820b/",
     github: "https://github.com/MatanSofer",
-    img: "./images/smatan.jpg"
+    img: "./images/team/smatan.jpg"
   }
 ];
 export const rightMembers = [
@@ -18,13 +18,13 @@ export const rightMembers = [
     linkedin:
       "https://www.linkedin.com/in/maor-arnon-software-engineer-student/",
     github: "https://github.com/Maor-Ar",
-    img: "./images/maor.jpg"
+    img: "./images/team/maor.jpg"
   },
   {
     name: "Matan hoayon",
     linkedin: "https://www.linkedin.com/in/matan-ohayon-35b94421b//",
     github: "https://github.com/matan15595m",
-    img: "./images/omatan.jpg"
+    img: "./images/team/omatan.jpg"
   }
 ];
 
