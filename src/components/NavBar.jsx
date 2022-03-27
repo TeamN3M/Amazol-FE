@@ -22,7 +22,9 @@ const useStyles = makeStyles({
   },
   btn: {
     borderRadius: MainTheme.spacing(1),
-    color: "white"
+    color: "white",
+    borderColor: "white",
+    backgroundcolor: "#333333"
   }
 });
 
@@ -63,8 +65,11 @@ const NavBar = () => {
               <div className={classes.Options}>
                 <Button
                   className={classes.btn}
-                  sx={{ m: 2, textTransform: "capitalize" }}
-                  variant='contained'
+                  sx={{
+                    m: 2,
+                    textTransform: "capitalize"
+                  }}
+                  variant='outlined'
                   size='small'
                   onClick={handleRegisterClicked}
                   startIcon={<AppRegistrationIcon />}
@@ -74,7 +79,7 @@ const NavBar = () => {
                 <Button
                   className={classes.btn}
                   sx={{ m: 2, textTransform: "capitalize" }}
-                  variant='contained'
+                  variant='outlined'
                   size='small'
                   onClick={handleLoginClicked}
                   startIcon={<LoginIcon />}
@@ -100,7 +105,7 @@ const NavBar = () => {
                 <Button
                   className={classes.btn}
                   sx={{ m: 2, textTransform: "capitalize" }}
-                  variant='contained'
+                  variant='outlined'
                   size='small'
                   onClick={handleHomeClicked}
                   startIcon={<HomeIcon />}

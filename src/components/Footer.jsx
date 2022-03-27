@@ -15,7 +15,7 @@ const Footer = () => (
     sx={{
       display: "flex",
       width: "100%",
-      backgroundColor: "#e3f2fd",
+      backgroundColor: "#757575",
       marginTop: MainTheme.spacing(30),
       borderTop: 1
     }}

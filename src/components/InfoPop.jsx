@@ -7,15 +7,16 @@ import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
+import MainTheme from "../themes/MainTheme";
 
 const InfoPop = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClick = (event) => {
+  const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handlePopoverClose = () => {
     setAnchorEl(null);
   };
 
@@ -23,18 +24,47 @@ const InfoPop = () => {
 
   return (
     <>
-      <Button startIcon={<InfoIcon />} size='large' onClick={handleClick} />
+      <Button
+        startIcon={<InfoIcon />}
+        size='large'
+        aria-owns={open ? "mouse-over-popover" : undefined}
+        aria-haspopup='true'
+        onMouseEnter={handlePopoverOpen}
+        onMouseLeave={handlePopoverClose}
+        style={{
+          color: MainTheme.palette.text.primary,
+          mt: 15
+        }}
+        // onClick={handleClick}
+      />
       <Popover
+        sx={{
+          pointerEvents: "none"
+        }}
         open={open}
         anchorEl={anchorEl}
-        onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "left"
         }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left"
+        }}
+        onClose={handlePopoverClose}
+        disableRestoreFocus
       >
-        <Typography>
-          <List dense={true}>
+        <Typography
+          style={{
+            color: MainTheme.palette.primary.main
+          }}
+        >
+          <List
+            dense={true}
+            style={{
+              backgroundColor: "rgba(0,0,0,0.3)"
+            }}
+          >
             <ListItem>
               <ListItemIcon>
                 <PersonIcon />

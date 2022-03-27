@@ -9,24 +9,23 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import InfoPop from "./InfoPop";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { InputAdornment } from "@mui/material";
 import { IconButton } from "@mui/material";
 import paths from "../constants/paths";
 import { useNavigate } from "react-router-dom";
+import MainTheme from "../themes/MainTheme";
+import { makeStyles } from "@material-ui/styles";
 import {
   validateNames,
   validateEmail,
   validatePassword
 } from "../constants/strings";
-
-const theme = createTheme();
 
 const Register = () => {
   const [email, setEmail] = React.useState("");
@@ -101,13 +100,51 @@ const Register = () => {
       password: data.get("password")
     });
   };
+  const useStyles = makeStyles({
+    textFiled: {
+      color: "white"
+    },
+    cssLabel: {
+      color: "white"
+    },
+
+    cssOutlinedInput: {
+      "&$cssFocused $notchedOutline": {
+        borderColor: "#FFF"
+      }
+    },
+    cssFocused: {},
+
+    notchedOutline: {
+      borderWidth: "1px",
+      borderColor: "white !important"
+    }
+  });
+  const classes = useStyles();
 
   return (
-    <ThemeProvider theme={theme}>
-      <Grid container component='main' sx={{ height: "80vh", mb: 15 }}>
+    <ThemeProvider theme={MainTheme}>
+      <Grid
+        theme={MainTheme}
+        container
+        component='main'
+        sx={{
+          minWidth: "100%",
+          height: "100vh",
+          mb: 15
+        }}
+      >
         <CssBaseline />
-
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid
+          theme={MainTheme}
+          item
+          xs={12}
+          sm={8}
+          md={5}
+          component='main'
+          elevation={6}
+        >
+          <CssBaseline />
           <Box
             sx={{
               my: 8,
@@ -117,19 +154,22 @@ const Register = () => {
               alignItems: "center"
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <Avatar sx={{ m: 1, bgcolor: "#161e33", color: "#fff" }}>
               <AccountBoxIcon />
             </Avatar>
             <Typography component='h1' variant='h5'>
               {SIGNUP}
             </Typography>
             <Box
+              theme={MainTheme}
               component='form'
               noValidate
               onSubmit={handleSubmit}
               sx={{ mt: 1 }}
             >
+              <CssBaseline />
               <TextField
+                className={classes.textField}
                 margin='normal'
                 autoComplete='given-name'
                 name='firstName'
@@ -137,17 +177,34 @@ const Register = () => {
                 fullWidth
                 id='firstName'
                 label='First Name'
+                color='secondary'
                 autoFocus
+                InputLabelProps={{
+                  classes: {
+                    root: classes.cssLabel,
+                    focused: classes.cssFocused
+                  }
+                }}
+                InputProps={{
+                  classes: {
+                    root: classes.cssOutlinedInput,
+                    focused: classes.cssFocused,
+                    notchedOutline: classes.notchedOutline
+                  }
+                }}
                 value={firstname}
                 error={!!firstnameErrorText}
                 helperText={firstnameErrorText}
                 onChange={(e) => setFirstname(e.target.value)}
               />
+
               <TextField
+                className={classes.textField}
                 margin='normal'
                 required
                 fullWidth
                 id='lastName'
+                color='secondary'
                 label='Last Name'
                 name='lastName'
                 autoComplete='family-name'
@@ -155,12 +212,26 @@ const Register = () => {
                 error={!!lastnameErrorText}
                 helperText={lastnameErrorText}
                 onChange={(e) => setLastname(e.target.value)}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.cssLabel,
+                    focused: classes.cssFocused
+                  }
+                }}
+                InputProps={{
+                  classes: {
+                    root: classes.cssOutlinedInput,
+                    focused: classes.cssFocused,
+                    notchedOutline: classes.notchedOutline
+                  }
+                }}
               />
               <TextField
                 margin='normal'
                 required
                 fullWidth
                 id='email'
+                color='secondary'
                 label='Email Address'
                 name='email'
                 autoComplete='email'
@@ -168,22 +239,44 @@ const Register = () => {
                 error={!!emailErrorText}
                 helperText={emailErrorText}
                 onChange={(e) => setEmail(e.target.value)}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.cssLabel,
+                    focused: classes.cssFocused
+                  }
+                }}
+                InputProps={{
+                  classes: {
+                    root: classes.cssOutlinedInput,
+                    focused: classes.cssFocused,
+                    notchedOutline: classes.notchedOutline
+                  }
+                }}
               />
               <TextField
                 margin='normal'
                 required
                 fullWidth
+                color='secondary'
                 name='password'
                 label='Password'
                 type={passwordVisible ? "text" : "password"}
                 id='password'
                 autoComplete='new-password'
                 InputProps={{
+                  classes: {
+                    root: classes.cssOutlinedInput,
+                    focused: classes.cssFocused,
+                    notchedOutline: classes.notchedOutline
+                  },
                   endAdornment: (
                     <InputAdornment position='end'>
                       <IconButton
                         aria-label='toggle password visibility'
                         onClick={handleClickShowPassword}
+                        style={{
+                          color: MainTheme.palette.text.primary
+                        }}
                       >
                         {passwordVisible ? <Visibility /> : <VisibilityOff />}
                       </IconButton>
@@ -194,12 +287,23 @@ const Register = () => {
                 error={!!passwordErrorText}
                 helperText={passwordErrorText}
                 onChange={(e) => setPassword(e.target.value)}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.cssLabel,
+                    focused: classes.cssFocused
+                  }
+                }}
               />
               <Box>
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={
-                      <Checkbox value='allowExtraEmails' color='primary' />
+                      <Checkbox
+                        value='allowExtraEmails'
+                        style={{
+                          color: MainTheme.palette.text.primary
+                        }}
+                      />
                     }
                     label={OFFERS}
                   />
@@ -217,7 +321,8 @@ const Register = () => {
                     maxWidth: "700px",
                     maxHeight: "50px",
                     minWidth: "350px",
-                    minHeight: "30px"
+                    minHeight: "30px",
+                    backgroundColor: "#161e33"
                   }}
                 >
                   {SIGNUP}
@@ -234,6 +339,9 @@ const Register = () => {
                     onClick={() => {
                       navigate(paths.login);
                     }}
+                    style={{
+                      color: MainTheme.palette.text.primary
+                    }}
                     variant='body2'
                   >
                     {SIGNIN_OPT}
@@ -244,21 +352,21 @@ const Register = () => {
           </Box>
         </Grid>
         <Grid
+          theme={MainTheme}
           item
+          component='main'
           xs={false}
           sm={4}
           md={7}
           sx={{
             backgroundImage: `url("../images/sign up page/sign-up.jpg")`,
             backgroundRepeat: "no-repeat",
-            backgroundColor: (t) =>
-              t.palette.mode === "light"
-                ? t.palette.grey[50]
-                : t.palette.grey[900],
+            backgroundColor: MainTheme.palette.background.default,
             backgroundSize: "contain",
             backgroundPosition: "center"
           }}
         />
+        <CssBaseline />
       </Grid>
     </ThemeProvider>
   );

@@ -1,31 +1,23 @@
 import React from "react";
-import { Grid } from "@mui/material";
-
-import CssBaseline from "@mui/material/CssBaseline";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-const theme = createTheme();
+import { Grid, Typography } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import MainTheme from "../themes/MainTheme";
+import { CssBaseline } from "@mui/material";
 
 const HomePage = () => {
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <Grid container component='main' sx={{ height: "80vh" }}>
+      <ThemeProvider theme={MainTheme}>
+        <Grid
+          container
+          component='main'
+          sx={{
+            minWidth: "100%",
+            height: "100vh"
+          }}
+        >
           <CssBaseline />
-          <Grid
-            style={{
-              minWidth: "100%",
-              height: "100vh"
-            }}
-            sx={{
-              marginTop: 2,
-
-              backgroundImage: `url("../images/home page/homebackground.jpg")`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              backgroundPosition: "center"
-            }}
-          />
+          <Typography variant='h1'>HOME PAGE</Typography>
         </Grid>
       </ThemeProvider>
     </>
