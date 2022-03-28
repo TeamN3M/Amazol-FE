@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -6,24 +7,63 @@ import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { SIGNIN, FORGOT, SIGNUP_OPT } from "../constants/strings";
+import { ThemeProvider } from "@mui/material/styles";
+import {
+  SIGNIN,
+  MANAGERSIGNIN,
+  FORGOT,
+  SIGNUP_OPT
+} from "../constants/strings";
 import paths from "../constants/paths";
 import { useNavigate } from "react-router-dom";
-
-const theme = createTheme();
+import { makeStyles } from "@mui/styles";
+import MainTheme from "../themes/MainTheme";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { InputAdornment } from "@mui/material";
+import { IconButton } from "@mui/material";
 
 const Login = () => {
-  const [email, setEmail] = React.useState("");
-  const [emailErrorText, setEmailErrorText] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [passwordErrorText, setPasswordErrorText] = React.useState("");
+  const [email, setEmail] = useState("");
+  const [emailErrorText, setEmailErrorText] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordErrorText, setPasswordErrorText] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
+
+  const handleClickShowPassword = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
+  const useStyles = makeStyles({
+    textFiled: {
+      color: "white",
+      backgroundColor: "#212121"
+    },
+    cssLabel: {
+      color: "white"
+    },
+
+    cssOutlinedInput: {
+      "&$cssFocused $notchedOutline": {
+        borderColor: "#FFF"
+      },
+      "&:-webkit-autofill": {
+        WebkitBoxShadow: "#212121"
+      }
+    },
+    cssFocused: {},
+
+    notchedOutline: {
+      borderWidth: "1px",
+      borderColor: "white !important"
+    }
+  });
+  const classes = useStyles();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -49,10 +89,16 @@ const Login = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Grid container component='main' sx={{ height: "80vh" }}>
+    <ThemeProvider theme={MainTheme}>
+      <Grid
+        theme={MainTheme}
+        container
+        component='main'
+        sx={{ height: "80vh" }}
+      >
         <CssBaseline />
         <Grid
+          theme={MainTheme}
           item
           xs={false}
           sm={4}
@@ -60,37 +106,69 @@ const Login = () => {
           sx={{
             backgroundImage: `url("../images/sign in page/sign-in.jpg")`,
             backgroundRepeat: "no-repeat",
-            backgroundColor: (t) =>
-              t.palette.mode === "light"
-                ? t.palette.grey[50]
-                : t.palette.grey[900],
+
             backgroundSize: "cover",
             backgroundPosition: "center"
           }}
-        />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        >
+          <CssBaseline />
+        </Grid>
+        <Grid
+          theme={MainTheme}
+          component='main'
+          item
+          xs={12}
+          sm={8}
+          md={5}
+          elevation={6}
+          square
+        >
+          <Box textAlign='center'>
+            <Button
+              type='submit'
+              fullWidth
+              // onClick={onSubmit}
+              variant='contained'
+              sx={{ mt: 3, mb: 2 }}
+              startIcon={<ManageAccountsIcon />}
+              style={{
+                maxWidth: "400px",
+                maxHeight: "50px",
+                minWidth: "150px",
+                minHeight: "30px",
+                backgroundColor: "#161e33",
+                textTransform: "capitalize"
+              }}
+            >
+              {MANAGERSIGNIN}
+            </Button>
+          </Box>
+          <CssBaseline />
           <Box
             sx={{
-              my: 8,
+              my: 4,
               mx: 4,
               display: "flex",
               flexDirection: "column",
               alignItems: "center"
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <Avatar sx={{ m: 1, bgcolor: "#161e33", color: "#fff" }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component='h1' variant='h5'>
               {SIGNIN}
             </Typography>
             <Box
+              theme={MainTheme}
               component='form'
               noValidate
               onSubmit={handleSubmit}
               sx={{ mt: 1 }}
             >
+              <CssBaseline />
               <TextField
+                className={classes.textField}
                 margin='normal'
                 required
                 fullWidth
@@ -98,28 +176,77 @@ const Login = () => {
                 label='Email Address'
                 name='email'
                 autoComplete='email'
+                color='secondary'
                 autoFocus
                 value={email}
                 error={!!emailErrorText}
                 helperText={emailErrorText}
                 onChange={(e) => setEmail(e.target.value)}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.cssLabel,
+                    focused: classes.cssFocused
+                  }
+                }}
+                InputProps={{
+                  classes: {
+                    root: classes.cssOutlinedInput,
+                    focused: classes.cssFocused,
+                    notchedOutline: classes.notchedOutline
+                  }
+                }}
               />
               <TextField
+                className={classes.textField}
                 margin='normal'
                 required
                 fullWidth
                 name='password'
                 label='Password'
-                type='password'
+                type={passwordVisible ? "text" : "password"}
                 id='password'
                 autoComplete='current-password'
+                color='secondary'
                 value={password}
                 error={!!passwordErrorText}
                 helperText={passwordErrorText}
                 onChange={(e) => setPassword(e.target.value)}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.cssLabel,
+                    focused: classes.cssFocused
+                  }
+                }}
+                InputProps={{
+                  classes: {
+                    root: classes.cssOutlinedInput,
+                    focused: classes.cssFocused,
+                    notchedOutline: classes.notchedOutline
+                  },
+                  endAdornment: (
+                    <InputAdornment position='end'>
+                      <IconButton
+                        aria-label='toggle password visibility'
+                        onClick={handleClickShowPassword}
+                        style={{
+                          color: MainTheme.palette.text.primary
+                        }}
+                      >
+                        {passwordVisible ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
               />
               <FormControlLabel
-                control={<Checkbox value='remember' color='primary' />}
+                control={
+                  <Checkbox
+                    value='remember'
+                    style={{
+                      color: MainTheme.palette.text.primary
+                    }}
+                  />
+                }
                 label='Remember me'
               />
               <Button
@@ -128,12 +255,22 @@ const Login = () => {
                 fullWidth
                 variant='contained'
                 sx={{ mt: 3, mb: 2 }}
+                style={{
+                  color: MainTheme.palette.text.primary,
+                  backgroundColor: "#161e33"
+                }}
               >
                 {SIGNIN}
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href='/' variant='body2'>
+                  <Link
+                    href='/'
+                    variant='body2'
+                    style={{
+                      color: MainTheme.palette.text.primary
+                    }}
+                  >
                     {FORGOT}
                   </Link>
                 </Grid>
@@ -142,6 +279,9 @@ const Login = () => {
                     component='button'
                     onClick={() => {
                       navigate(paths.register);
+                    }}
+                    style={{
+                      color: MainTheme.palette.text.primary
                     }}
                     variant='body2'
                   >

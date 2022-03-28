@@ -4,7 +4,12 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import { SIGNUP, SIGNIN_OPT, OFFERS } from "../constants/strings";
+import {
+  SIGNUP,
+  MANAGERSIGNUP,
+  SIGNIN_OPT,
+  OFFERS
+} from "../constants/strings";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
@@ -21,6 +26,7 @@ import paths from "../constants/paths";
 import { useNavigate } from "react-router-dom";
 import MainTheme from "../themes/MainTheme";
 import { makeStyles } from "@material-ui/styles";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import {
   validateNames,
   validateEmail,
@@ -102,7 +108,8 @@ const Register = () => {
   };
   const useStyles = makeStyles({
     textFiled: {
-      color: "white"
+      color: "white",
+      backgroundColor: MainTheme.palette.background.default
     },
     cssLabel: {
       color: "white"
@@ -130,7 +137,7 @@ const Register = () => {
         component='main'
         sx={{
           minWidth: "100%",
-          height: "100vh",
+          height: "80vh",
           mb: 15
         }}
       >
@@ -144,10 +151,29 @@ const Register = () => {
           component='main'
           elevation={6}
         >
-          <CssBaseline />
+          <Box textAlign='center'>
+            <Button
+              type='submit'
+              fullWidth
+              // onClick={onSubmit}
+              variant='contained'
+              sx={{ mt: 3, mb: 2 }}
+              startIcon={<ManageAccountsIcon />}
+              style={{
+                maxWidth: "400px",
+                maxHeight: "50px",
+                minWidth: "150px",
+                minHeight: "30px",
+                backgroundColor: "#161e33",
+                textTransform: "capitalize"
+              }}
+            >
+              {MANAGERSIGNUP}
+            </Button>
+          </Box>
           <Box
             sx={{
-              my: 8,
+              my: 4,
               mx: 4,
               display: "flex",
               flexDirection: "column",
@@ -294,6 +320,7 @@ const Register = () => {
                   }
                 }}
               />
+
               <Box>
                 <Grid item xs={12}>
                   <FormControlLabel
@@ -328,10 +355,9 @@ const Register = () => {
                   {SIGNUP}
                 </Button>
               </Box>
-              <Grid sx={{ mr: 2 }}>
+              <Grid item justifyContent='flex-start' sx={{ mr: 2 }}>
                 <InfoPop />
               </Grid>
-
               <Grid container justifyContent='flex-end'>
                 <Grid item>
                   <Link
@@ -362,7 +388,7 @@ const Register = () => {
             backgroundImage: `url("../images/sign up page/sign-up.jpg")`,
             backgroundRepeat: "no-repeat",
             backgroundColor: MainTheme.palette.background.default,
-            backgroundSize: "contain",
+            backgroundSize: "cover",
             backgroundPosition: "center"
           }}
         />

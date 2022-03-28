@@ -33,7 +33,8 @@ const InfoPop = () => {
         onMouseLeave={handlePopoverClose}
         style={{
           color: MainTheme.palette.text.primary,
-          mt: 15
+          mt: 15,
+          justifyContent: "left"
         }}
         // onClick={handleClick}
       />

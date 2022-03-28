@@ -1,5 +1,7 @@
 export const SIGNIN = "Sign In";
 export const SIGNUP = "Sign Up";
+export const MANAGERSIGNIN = "Manager ? Sign In here";
+export const MANAGERSIGNUP = "Manager ? Sign Up here";
 export const HOMEPAGE = "Home Page";
 export const FORGOT = "Forgot password?";
 export const SIGNUP_OPT = "Don't have an account? Sign Up";
