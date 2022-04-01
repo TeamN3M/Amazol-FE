@@ -100,11 +100,10 @@ deploy, manage, and scale modern apps. <img src="https://images.g2crowd.com/uplo
 
 
 
+---
+<div align="center">
 
-
-## The site
-
- You can view the site on this address :
+ **You can view the site on this address :**
 
 
 [https://amazol-n3m.com/](https://amazol-n3m.herokuapp.com/)
@@ -112,9 +111,17 @@ deploy, manage, and scale modern apps. <img src="https://images.g2crowd.com/uplo
 
 
 
- ### `ScreenShots`
+ ## `ScreenShots`
+ 
+ ###  Updated - new look
+![image](https://user-images.githubusercontent.com/73241556/161255739-73f68c07-c25f-46ea-af58-57f73aa8f40f.png)
+![image](https://user-images.githubusercontent.com/73241556/161255883-1631dde1-f40e-41da-95a3-9267fe7554ba.png)
+![image](https://user-images.githubusercontent.com/73241556/161255909-de714e65-d7f7-4607-8bb2-1603afa77ef4.png)
 
+
+ ###  old look
 ![image](https://user-images.githubusercontent.com/73241556/159358795-70726a2e-c23d-4594-adb3-63e467e3060b.png)
 ![image](https://user-images.githubusercontent.com/73241556/159358862-387c120d-b3f9-48c1-96f3-4a0714e3e3fc.png)
 
 
+<div />
