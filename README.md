@@ -3,17 +3,18 @@
 
 
 
- By: Team <img src="https://amazol-n3m.herokuapp.com/images/n3m-logo.jpg"
+
+ By: Team <img src="https://user-images.githubusercontent.com/73241556/161255383-ee411e2c-5460-4f44-a045-8da0b2b1f87b.png"
      alt="SCE logo" width="120" height="50">
  
- * **Neriya Zudi** | <img src="https://img.shields.io/badge/Neria-Programmer-blue" alt="Programmer" > <img src="https://amazol-n3m.herokuapp.com/images/team/neriya.jpg" width="50" height="50">
+ * **Neriya Zudi** | <img src="https://img.shields.io/badge/Neria-Programmer-blue" alt="Programmer" > <img src="https://user-images.githubusercontent.com/73241556/161254994-d038ea66-dbca-4b62-9170-5157cfd3bad0.png" width="50" height="50">
  
- * **Matan Sofer** | <img src="https://img.shields.io/badge/Matan-Programmer-blue" alt="Programmer" > <img src="https://amazol-n3m.herokuapp.com/images/team/smatan.jpg" width="50" height="50">
- <img src="https://amazol-n3m.herokuapp.com/logo.jpg" align="right"
+ * **Matan Sofer** | <img src="https://img.shields.io/badge/Matan-Programmer-blue" alt="Programmer" > <img src="https://user-images.githubusercontent.com/73241556/161255111-ee28e62d-6efa-4c05-abdd-f4d9c2cba642.png" width="50" height="50">
+ <img src="https://user-images.githubusercontent.com/73241556/161255321-1dc059f0-6276-4a6f-8cb2-23187112db8d.png" align="right"
      alt="AmaZol logo" width="300" height="150">
- * **Matan Ohayon** |<img src="https://img.shields.io/badge/Matan-Programmer-blue" alt="Programmer" > <img src="https://amazol-n3m.herokuapp.com/images/team/omatan.jpg" width="50" height="50">
+ * **Matan Ohayon** |<img src="https://img.shields.io/badge/Matan-Programmer-blue" alt="Programmer" > <img src="https://user-images.githubusercontent.com/73241556/161255182-ca729d95-1227-465b-8f6b-47423e5b7f2b.png" width="50" height="50">
  
- * **Maor Arnon** | <img src="https://img.shields.io/badge/Maor-Programmer-blue" alt="Programmer" >  <img src="https://amazol-n3m.herokuapp.com/images/team/maor.jpg" width="50" height="50"> 
+ * **Maor Arnon** | <img src="https://img.shields.io/badge/Maor-Programmer-blue" alt="Programmer" >  <img src="https://user-images.githubusercontent.com/73241556/161255247-26a8dd6e-023f-4c41-bf09-5e1396d28b3b.png" width="50" height="50"> 
  
  
 
