@@ -42,7 +42,7 @@ const Login = () => {
   const useStyles = makeStyles({
     textFiled: {
       color: "white",
-      backgroundColor: "#212121"
+      backgroundColor: MainTheme.palette.background.default,
     },
     cssLabel: {
       color: "white"
@@ -52,16 +52,21 @@ const Login = () => {
       "&$cssFocused $notchedOutline": {
         borderColor: "#FFF"
       },
-      "&:-webkit-autofill": {
-        WebkitBoxShadow: "#212121"
-      }
+
     },
     cssFocused: {},
 
     notchedOutline: {
       borderWidth: "1px",
       borderColor: "white !important"
+    },
+    input: {
+      "&:-webkit-autofill": {
+        WebkitBoxShadow:  '0 0 0 100px #212121 inset',
+        WebkitTextFillColor : "white"
+      }
     }
+
   });
   const classes = useStyles();
 
@@ -192,7 +197,8 @@ const Login = () => {
                   classes: {
                     root: classes.cssOutlinedInput,
                     focused: classes.cssFocused,
-                    notchedOutline: classes.notchedOutline
+                    notchedOutline: classes.notchedOutline,
+                    input:classes.input
                   }
                 }}
               />
@@ -206,22 +212,12 @@ const Login = () => {
                 type={passwordVisible ? "text" : "password"}
                 id='password'
                 autoComplete='current-password'
-                color='secondary'
-                value={password}
-                error={!!passwordErrorText}
-                helperText={passwordErrorText}
-                onChange={(e) => setPassword(e.target.value)}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.cssLabel,
-                    focused: classes.cssFocused
-                  }
-                }}
                 InputProps={{
                   classes: {
                     root: classes.cssOutlinedInput,
                     focused: classes.cssFocused,
-                    notchedOutline: classes.notchedOutline
+                    notchedOutline: classes.notchedOutline,
+                    input:classes.input
                   },
                   endAdornment: (
                     <InputAdornment position='end'>
@@ -237,6 +233,19 @@ const Login = () => {
                     </InputAdornment>
                   )
                 }}
+                color='secondary'
+                value={password}
+                error={!!passwordErrorText}
+                helperText={passwordErrorText}
+                onChange={(e) => setPassword(e.target.value)}
+
+                InputLabelProps={{
+                  classes: {
+                    root: classes.cssLabel,
+                    focused: classes.cssFocused
+                  }
+                }}
+
               />
               <FormControlLabel
                 control={

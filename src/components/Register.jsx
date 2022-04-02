@@ -106,25 +106,37 @@ const Register = () => {
       password: data.get("password")
     });
   };
+  
   const useStyles = makeStyles({
     textFiled: {
       color: "white",
-      backgroundColor: MainTheme.palette.background.default
+      backgroundColor: MainTheme.palette.background.default,
+
+
     },
     cssLabel: {
-      color: "white"
+      color: "white",
+      
     },
 
     cssOutlinedInput: {
       "&$cssFocused $notchedOutline": {
         borderColor: "#FFF"
-      }
+      },
+
     },
     cssFocused: {},
-
+    
     notchedOutline: {
       borderWidth: "1px",
       borderColor: "white !important"
+    },
+    
+    input: {
+      "&:-webkit-autofill": {
+        WebkitBoxShadow:  '0 0 0 100px #212121 inset',
+        WebkitTextFillColor : "white"
+      }
     }
   });
   const classes = useStyles();
@@ -205,19 +217,23 @@ const Register = () => {
                 label='First Name'
                 color='secondary'
                 autoFocus
+
                 InputLabelProps={{
                   classes: {
                     root: classes.cssLabel,
                     focused: classes.cssFocused
+
                   }
                 }}
                 InputProps={{
                   classes: {
                     root: classes.cssOutlinedInput,
                     focused: classes.cssFocused,
-                    notchedOutline: classes.notchedOutline
+                    notchedOutline: classes.notchedOutline,
+                    input:classes.input
                   }
                 }}
+
                 value={firstname}
                 error={!!firstnameErrorText}
                 helperText={firstnameErrorText}
@@ -241,16 +257,19 @@ const Register = () => {
                 InputLabelProps={{
                   classes: {
                     root: classes.cssLabel,
-                    focused: classes.cssFocused
+                    focused: classes.cssFocused,
                   }
                 }}
                 InputProps={{
                   classes: {
                     root: classes.cssOutlinedInput,
                     focused: classes.cssFocused,
-                    notchedOutline: classes.notchedOutline
+                    notchedOutline: classes.notchedOutline,
+                    input:classes.input
+                    
                   }
                 }}
+                
               />
               <TextField
                 margin='normal'
@@ -275,9 +294,11 @@ const Register = () => {
                   classes: {
                     root: classes.cssOutlinedInput,
                     focused: classes.cssFocused,
-                    notchedOutline: classes.notchedOutline
+                    notchedOutline: classes.notchedOutline,
+                    input:classes.input
                   }
                 }}
+
               />
               <TextField
                 margin='normal'
@@ -293,7 +314,8 @@ const Register = () => {
                   classes: {
                     root: classes.cssOutlinedInput,
                     focused: classes.cssFocused,
-                    notchedOutline: classes.notchedOutline
+                    notchedOutline: classes.notchedOutline,
+                    input:classes.input
                   },
                   endAdornment: (
                     <InputAdornment position='end'>
