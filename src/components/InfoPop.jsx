@@ -26,57 +26,57 @@ const InfoPop = () => {
     <>
       <Button
         startIcon={<InfoIcon />}
-        size='large'
+        size="large"
         aria-owns={open ? "mouse-over-popover" : undefined}
-        aria-haspopup='true'
+        aria-haspopup="true"
         onMouseEnter={handlePopoverOpen}
         onMouseLeave={handlePopoverClose}
         style={{
           color: MainTheme.palette.text.primary,
           mt: 15,
-          justifyContent: "left"
+          justifyContent: "left",
         }}
         // onClick={handleClick}
       />
       <Popover
         sx={{
-          pointerEvents: "none"
+          pointerEvents: "none",
         }}
         open={open}
         anchorEl={anchorEl}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "left"
+          horizontal: "left",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "left"
+          horizontal: "left",
         }}
         onClose={handlePopoverClose}
         disableRestoreFocus
       >
         <Typography
           style={{
-            color: MainTheme.palette.primary.main
+            color: MainTheme.palette.primary.main,
           }}
         >
           <List
             dense={true}
             style={{
-              backgroundColor: "rgba(0,0,0,0.3)"
+              backgroundColor: "rgba(0,0,0,0.3)",
             }}
           >
             <ListItem>
               <ListItemIcon>
                 <PersonIcon />
               </ListItemIcon>
-              <ListItemText primary='The name must contain at least 2 letters in English only' />
+              <ListItemText primary="The name must contain at least 2 letters in English only" />
             </ListItem>
             <ListItem>
               <ListItemIcon>
                 <AlternateEmailIcon />
               </ListItemIcon>
-              <ListItemText primary='Email must meet the required formats' />
+              <ListItemText primary="Email must meet the required formats" />
             </ListItem>
             <ListItem>
               <ListItemIcon>

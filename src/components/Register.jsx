@@ -8,7 +8,7 @@ import {
   SIGNUP,
   MANAGERSIGNUP,
   SIGNIN_OPT,
-  OFFERS
+  OFFERS,
 } from "../constants/strings";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -30,7 +30,7 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import {
   validateNames,
   validateEmail,
-  validatePassword
+  validatePassword,
 } from "../constants/strings";
 
 const Register = () => {
@@ -103,41 +103,37 @@ const Register = () => {
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
-      password: data.get("password")
+      password: data.get("password"),
     });
   };
-  
+
   const useStyles = makeStyles({
     textFiled: {
       color: "white",
       backgroundColor: MainTheme.palette.background.default,
-
-
     },
     cssLabel: {
       color: "white",
-      
     },
 
     cssOutlinedInput: {
       "&$cssFocused $notchedOutline": {
-        borderColor: "#FFF"
+        borderColor: "#FFF",
       },
-
     },
     cssFocused: {},
-    
+
     notchedOutline: {
       borderWidth: "1px",
-      borderColor: "white !important"
+      borderColor: "white !important",
     },
-    
+
     input: {
       "&:-webkit-autofill": {
-        WebkitBoxShadow:  '0 0 0 100px #212121 inset',
-        WebkitTextFillColor : "white"
-      }
-    }
+        WebkitBoxShadow: "0 0 0 100px #212121 inset",
+        WebkitTextFillColor: "white",
+      },
+    },
   });
   const classes = useStyles();
 
@@ -146,11 +142,11 @@ const Register = () => {
       <Grid
         theme={MainTheme}
         container
-        component='main'
+        component="main"
         sx={{
           minWidth: "100%",
           height: "80vh",
-          mb: 15
+          mb: 15,
         }}
       >
         <CssBaseline />
@@ -160,15 +156,15 @@ const Register = () => {
           xs={12}
           sm={8}
           md={5}
-          component='main'
+          component="main"
           elevation={6}
         >
-          <Box textAlign='center'>
+          <Box textAlign="center">
             <Button
-              type='submit'
+              type="submit"
               fullWidth
               // onClick={onSubmit}
-              variant='contained'
+              variant="contained"
               sx={{ mt: 3, mb: 2 }}
               startIcon={<ManageAccountsIcon />}
               style={{
@@ -177,7 +173,7 @@ const Register = () => {
                 minWidth: "150px",
                 minHeight: "30px",
                 backgroundColor: "#161e33",
-                textTransform: "capitalize"
+                textTransform: "capitalize",
               }}
             >
               {MANAGERSIGNUP}
@@ -189,18 +185,18 @@ const Register = () => {
               mx: 4,
               display: "flex",
               flexDirection: "column",
-              alignItems: "center"
+              alignItems: "center",
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: "#161e33", color: "#fff" }}>
               <AccountBoxIcon />
             </Avatar>
-            <Typography component='h1' variant='h5'>
+            <Typography component="h1" variant="h5">
               {SIGNUP}
             </Typography>
             <Box
               theme={MainTheme}
-              component='form'
+              component="form"
               noValidate
               onSubmit={handleSubmit}
               sx={{ mt: 1 }}
@@ -208,32 +204,29 @@ const Register = () => {
               <CssBaseline />
               <TextField
                 className={classes.textField}
-                margin='normal'
-                autoComplete='given-name'
-                name='firstName'
+                margin="normal"
+                autoComplete="given-name"
+                name="firstName"
                 required
                 fullWidth
-                id='firstName'
-                label='First Name'
-                color='secondary'
+                id="firstName"
+                label="First Name"
+                color="secondary"
                 autoFocus
-
                 InputLabelProps={{
                   classes: {
                     root: classes.cssLabel,
-                    focused: classes.cssFocused
-
-                  }
+                    focused: classes.cssFocused,
+                  },
                 }}
                 InputProps={{
                   classes: {
                     root: classes.cssOutlinedInput,
                     focused: classes.cssFocused,
                     notchedOutline: classes.notchedOutline,
-                    input:classes.input
-                  }
+                    input: classes.input,
+                  },
                 }}
-
                 value={firstname}
                 error={!!firstnameErrorText}
                 helperText={firstnameErrorText}
@@ -242,14 +235,14 @@ const Register = () => {
 
               <TextField
                 className={classes.textField}
-                margin='normal'
+                margin="normal"
                 required
                 fullWidth
-                id='lastName'
-                color='secondary'
-                label='Last Name'
-                name='lastName'
-                autoComplete='family-name'
+                id="lastName"
+                color="secondary"
+                label="Last Name"
+                name="lastName"
+                autoComplete="family-name"
                 value={lastname}
                 error={!!lastnameErrorText}
                 helperText={lastnameErrorText}
@@ -258,28 +251,26 @@ const Register = () => {
                   classes: {
                     root: classes.cssLabel,
                     focused: classes.cssFocused,
-                  }
+                  },
                 }}
                 InputProps={{
                   classes: {
                     root: classes.cssOutlinedInput,
                     focused: classes.cssFocused,
                     notchedOutline: classes.notchedOutline,
-                    input:classes.input
-                    
-                  }
+                    input: classes.input,
+                  },
                 }}
-                
               />
               <TextField
-                margin='normal'
+                margin="normal"
                 required
                 fullWidth
-                id='email'
-                color='secondary'
-                label='Email Address'
-                name='email'
-                autoComplete='email'
+                id="email"
+                color="secondary"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
                 value={email}
                 error={!!emailErrorText}
                 helperText={emailErrorText}
@@ -287,49 +278,48 @@ const Register = () => {
                 InputLabelProps={{
                   classes: {
                     root: classes.cssLabel,
-                    focused: classes.cssFocused
-                  }
+                    focused: classes.cssFocused,
+                  },
                 }}
                 InputProps={{
                   classes: {
                     root: classes.cssOutlinedInput,
                     focused: classes.cssFocused,
                     notchedOutline: classes.notchedOutline,
-                    input:classes.input
-                  }
+                    input: classes.input,
+                  },
                 }}
-
               />
               <TextField
-                margin='normal'
+                margin="normal"
                 required
                 fullWidth
-                color='secondary'
-                name='password'
-                label='Password'
+                color="secondary"
+                name="password"
+                label="Password"
                 type={passwordVisible ? "text" : "password"}
-                id='password'
-                autoComplete='new-password'
+                id="password"
+                autoComplete="new-password"
                 InputProps={{
                   classes: {
                     root: classes.cssOutlinedInput,
                     focused: classes.cssFocused,
                     notchedOutline: classes.notchedOutline,
-                    input:classes.input
+                    input: classes.input,
                   },
                   endAdornment: (
-                    <InputAdornment position='end'>
+                    <InputAdornment position="end">
                       <IconButton
-                        aria-label='toggle password visibility'
+                        aria-label="toggle password visibility"
                         onClick={handleClickShowPassword}
                         style={{
-                          color: MainTheme.palette.text.primary
+                          color: MainTheme.palette.text.primary,
                         }}
                       >
                         {passwordVisible ? <Visibility /> : <VisibilityOff />}
                       </IconButton>
                     </InputAdornment>
-                  )
+                  ),
                 }}
                 value={password}
                 error={!!passwordErrorText}
@@ -338,8 +328,8 @@ const Register = () => {
                 InputLabelProps={{
                   classes: {
                     root: classes.cssLabel,
-                    focused: classes.cssFocused
-                  }
+                    focused: classes.cssFocused,
+                  },
                 }}
               />
 
@@ -348,9 +338,9 @@ const Register = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        value='allowExtraEmails'
+                        value="allowExtraEmails"
                         style={{
-                          color: MainTheme.palette.text.primary
+                          color: MainTheme.palette.text.primary,
                         }}
                       />
                     }
@@ -359,38 +349,38 @@ const Register = () => {
                 </Grid>
               </Box>
 
-              <Box textAlign='center'>
+              <Box textAlign="center">
                 <Button
-                  type='submit'
+                  type="submit"
                   fullWidth
                   onClick={onSubmit}
-                  variant='contained'
+                  variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                   style={{
                     maxWidth: "700px",
                     maxHeight: "50px",
                     minWidth: "350px",
                     minHeight: "30px",
-                    backgroundColor: "#161e33"
+                    backgroundColor: "#161e33",
                   }}
                 >
                   {SIGNUP}
                 </Button>
               </Box>
-              <Grid item justifyContent='flex-start' sx={{ mr: 2 }}>
+              <Grid item justifyContent="flex-start" sx={{ mr: 2 }}>
                 <InfoPop />
               </Grid>
-              <Grid container justifyContent='flex-end'>
+              <Grid container justifyContent="flex-end">
                 <Grid item>
                   <Link
-                    component='button'
+                    component="button"
                     onClick={() => {
                       navigate(paths.login);
                     }}
                     style={{
-                      color: MainTheme.palette.text.primary
+                      color: MainTheme.palette.text.primary,
                     }}
-                    variant='body2'
+                    variant="body2"
                   >
                     {SIGNIN_OPT}
                   </Link>
@@ -402,7 +392,7 @@ const Register = () => {
         <Grid
           theme={MainTheme}
           item
-          component='main'
+          component="main"
           xs={false}
           sm={4}
           md={7}
@@ -411,7 +401,7 @@ const Register = () => {
             backgroundRepeat: "no-repeat",
             backgroundColor: MainTheme.palette.background.default,
             backgroundSize: "cover",
-            backgroundPosition: "center"
+            backgroundPosition: "center",
           }}
         />
         <CssBaseline />
