@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import paths from "../constants/paths";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
-import MenuSearchBar from "./MenuSearchBar";
+// import MenuSearchBar from "./MenuSearchBar";
 import Profile from "./ManageAccount/Profile";
 import HomePage from "./HomePage";
 import Login from "./Login";
@@ -18,7 +18,7 @@ const RouteNavigate = () => (
   <ThemeProvider theme={MainTheme}>
     <Stack>
       <NavBar />
-      <MenuSearchBar />
+      {/* <MenuSearchBar /> */}
       <Routes>
         <Route path={paths.index} element={<HomePage />} />
         <Route path={paths.login} element={<Login />} />
