@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import MainNavBar from "./Logout/MainNavBar";
-import CustomerNavBar from "./Login/CustomerNavBar";
+import React, { useState } from 'react';
+import MainNavBar from './Logout/MainNavBar';
+import CustomerNavBar from './Login/CustomerNavBar';
 
 const NavBar = () => {
-  const [isLoggedIn, setisLoggedIn] = useState(false);
+  //const [isLoggedIn, setisLoggedIn] = useState(false);
+  const [isLoggedIn] = useState(false);
 
   return <>{isLoggedIn ? <MainNavBar /> : <CustomerNavBar />}</>;
 };
