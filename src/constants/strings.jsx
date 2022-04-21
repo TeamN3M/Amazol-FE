@@ -15,3 +15,6 @@ export const validateEmail =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 // validate name
 export const validateNames = /[^A-Za-z]+/;
+
+export const JWT_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNWZjNjUzZjc4MmE4NjcwMjRjNTEyOSIsImlhdCI6MTY1MDU1MDI4NiwiZXhwIjoxNjUyNjIzODg2fQ.z8ys4X9ev2yohfiqKVNLX5TY4kE1Z7rC8sCfg7_pVSA";
