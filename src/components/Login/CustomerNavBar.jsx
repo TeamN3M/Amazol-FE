@@ -14,6 +14,7 @@ import paths from '../../constants/paths';
 import { useNavigate } from 'react-router-dom';
 import { LOGO } from '../../constants/urls';
 import { Button } from '@mui/material';
+// import { alignProperty } from '@mui/material/styles/cssUtils';
 //import MainTheme from "../../themes/MainTheme";
 
 const Search = styled('div')(({ theme }) => ({
@@ -103,7 +104,7 @@ const CustomerNavBar = () => {
           />
         </Search>
 
-        <Typography variant='h6' noWrap sx={{ flexGrow: 1, ml: 95 }}>
+        <Typography variant='h6' noWrap sx={{ flexGrow: 1 }} align='right'>
           Hello Customer
         </Typography>
 
