@@ -1,9 +1,11 @@
+
 import React from 'react';
 import { Stack } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import paths from '../constants/paths';
 import Footer from './Footer';
 import NavBar from './NavBar';
+
 // import MenuSearchBar from "./MenuSearchBar";
 import Profile from './ManageAccount/Profile';
 import HomePage from './HomePage';
@@ -15,6 +17,9 @@ import MainTheme from '../themes/MainTheme';
 
 //import Products from "./products/Products";
 //import Cart from "./cart/Cart";
+import { getJwtKey } from "../constants/helpers";
+import { getUser } from "../Services/services";
+
 
 const RouteNavigate = () => (
   <ThemeProvider theme={MainTheme}>
@@ -32,5 +37,6 @@ const RouteNavigate = () => (
     </Stack>
   </ThemeProvider>
 );
+
 
 export default RouteNavigate;
