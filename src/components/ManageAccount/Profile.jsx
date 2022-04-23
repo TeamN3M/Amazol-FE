@@ -11,11 +11,11 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Grid from "@mui/material/Grid";
 import AddressForm from "./AddressForm";
 import PaymentForm from "./PaymentForm";
 import { keyframes } from "@emotion/react";
-
+import { makeStyles } from "@material-ui/styles";
 const RGB = keyframes`
     0% { color: red; }
   33% { color: blue; }
@@ -48,10 +48,17 @@ function getStepContent(step) {
       throw new Error("Unknown step");
   }
 }
-
-const theme = createTheme();
+const useStyles = makeStyles({
+  paperRoot: {
+    backgroundColor: "#212121",
+    borderRadius: 20,
+    borderColor: "white",
+    padding: 50,
+  },
+});
 
 export default function Checkout() {
+  const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
@@ -63,7 +70,7 @@ export default function Checkout() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <Grid>
       <CssBaseline />
       <AppBar
         position="absolute"
@@ -82,6 +89,7 @@ export default function Checkout() {
       </AppBar>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper
+          classes={{ root: classes.paperRoot }}
           variant="outlined"
           sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
         >
@@ -126,6 +134,6 @@ export default function Checkout() {
         </Paper>
         <Copyright />
       </Container>
-    </ThemeProvider>
+    </Grid>
   );
 }
