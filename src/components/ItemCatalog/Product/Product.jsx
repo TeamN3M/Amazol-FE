@@ -5,9 +5,9 @@ import {
   CardContent,
   CardActions,
   Typography,
-  IconButton,
   Grid,
 } from "@material-ui/core";
+import IconButton from "@mui/material/IconButton";
 import Rating from "@mui/material/Rating";
 import { AddShoppingCart, Favorite } from "@material-ui/icons";
 import useStyles from "./styles";
@@ -18,11 +18,11 @@ const Product = ({ product }) => {
   const inStock =
     parseInt(product.quantity) > 0
       ? "✅ In-stock (" + product.quantity + ")"
-      : "❌ not available in store";
+      : "❌ Not in-stock";
   return (
     <Card className={classes.root}>
       <CardActions disableSpacing className={classes.cardFavButt}>
-        <IconButton aria-label="Add to Favorite">
+        <IconButton aria-label="Example">
           <Favorite />
         </IconButton>
       </CardActions>
@@ -78,7 +78,7 @@ const Product = ({ product }) => {
         />
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
-        <IconButton aria-label="Add to Cart">
+        <IconButton aria-label="Example">
           <AddShoppingCart />
         </IconButton>
       </CardActions>
