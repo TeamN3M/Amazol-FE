@@ -62,6 +62,7 @@ const Login = () => {
       borderColor: "white !important",
     },
     input: {
+      color: "white",
       "&:-webkit-autofill": {
         WebkitBoxShadow: "0 0 0 100px #212121 inset",
         WebkitTextFillColor: "white",
