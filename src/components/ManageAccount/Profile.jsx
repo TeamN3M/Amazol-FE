@@ -3,13 +3,11 @@ import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import Toolbar from "@mui/material/Toolbar";
 import Paper from "@mui/material/Paper";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import AddressForm from "./AddressForm";
@@ -22,19 +20,6 @@ const RGB = keyframes`
   66% { color: green; }
   100% { color: red; }
 `;
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Amazol
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const steps = ["Shipping address", "Payment details"];
 
@@ -80,13 +65,7 @@ export default function Checkout() {
           position: "relative",
           borderBottom: (t) => `1px solid ${t.palette.divider}`,
         }}
-      >
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Costumer
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      ></AppBar>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper
           classes={{ root: classes.paperRoot }}
@@ -132,7 +111,6 @@ export default function Checkout() {
             )}
           </React.Fragment>
         </Paper>
-        <Copyright />
       </Container>
     </Grid>
   );
