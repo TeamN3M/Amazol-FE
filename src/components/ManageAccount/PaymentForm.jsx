@@ -3,43 +3,42 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { makeStyles } from "@material-ui/styles";
+const useStyles = makeStyles({
+  textFiled: {
+    color: "white",
+    "& .MuiFormHelperText-root": {
+      color: "white",
+    },
+  },
+  cssLabel: {
+    color: "white",
+    "&.Mui-focused": {
+      color: "white",
+    },
+  },
+
+  cssOutlinedInput: {
+    "&$cssFocused $notchedOutline": {
+      borderColor: "#FFF",
+    },
+  },
+  cssFocused: {},
+
+  notchedOutline: {
+    borderWidth: "1px",
+    borderColor: "white !important",
+  },
+
+  input: {
+    color: "white",
+    "&:-webkit-autofill": {
+      WebkitBoxShadow: "0 0 0 100px #212121 inset",
+      WebkitTextFillColor: "white",
+    },
+  },
+});
 
 export default function PaymentForm() {
-  const useStyles = makeStyles({
-    textFiled: {
-      color: "white",
-      "& .MuiFormHelperText-root": {
-        color: "white",
-      },
-    },
-    cssLabel: {
-      color: "white",
-      "&.Mui-focused": {
-        color: "white",
-      },
-    },
-
-    cssOutlinedInput: {
-      "&$cssFocused $notchedOutline": {
-        borderColor: "#FFF",
-      },
-    },
-    cssFocused: {},
-
-    notchedOutline: {
-      borderWidth: "1px",
-      borderColor: "white !important",
-    },
-
-    input: {
-      color: "white",
-      "&:-webkit-autofill": {
-        WebkitBoxShadow: "0 0 0 100px #212121 inset",
-        WebkitTextFillColor: "white",
-      },
-    },
-  });
-
   const classes = useStyles();
   return (
     <React.Fragment>

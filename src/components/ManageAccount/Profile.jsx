@@ -35,9 +35,9 @@ function getStepContent(step) {
 }
 const useStyles = makeStyles({
   paperRoot: {
-    backgroundColor: "#212121",
+    backgroundColor: "#212121 !important",
     borderRadius: 20,
-    borderColor: "white",
+    borderColor: "white !important",
     padding: 50,
   },
 });
