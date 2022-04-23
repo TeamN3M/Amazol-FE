@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Stack } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
@@ -17,9 +16,8 @@ import MainTheme from '../themes/MainTheme';
 
 //import Products from "./products/Products";
 //import Cart from "./cart/Cart";
-import { getJwtKey } from "../constants/helpers";
-import { getUser } from "../Services/services";
-
+// import { getJwtKey } from "../constants/helpers";
+// import { getUser } from "../Services/services";
 
 const RouteNavigate = () => (
   <ThemeProvider theme={MainTheme}>
@@ -37,6 +35,5 @@ const RouteNavigate = () => (
     </Stack>
   </ThemeProvider>
 );
-
 
 export default RouteNavigate;
