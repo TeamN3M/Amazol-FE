@@ -18,7 +18,7 @@ import Box from "@mui/material/Box";
 import InfoPop from "./InfoPop";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Typography from "@mui/material/Typography";
-//import { ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { InputAdornment } from "@mui/material";
 import { IconButton } from "@mui/material";
@@ -114,9 +114,6 @@ const Register = () => {
     },
     cssLabel: {
       color: "white",
-      "&.Mui-focused": {
-        color: "white",
-      },
     },
 
     cssOutlinedInput: {
@@ -132,287 +129,284 @@ const Register = () => {
     },
 
     input: {
-      color: "white",
       "&:-webkit-autofill": {
         WebkitBoxShadow: "0 0 0 100px #212121 inset",
         WebkitTextFillColor: "white",
       },
     },
   });
-
   const classes = useStyles();
 
   return (
-    <Grid
-      container
-      component="main"
-      sx={{
-        minWidth: "100%",
-        height: "80vh",
-        mb: 15,
-      }}
-    >
-      <CssBaseline />
-      <Grid item xs={12} sm={8} md={5} component="main" elevation={6}>
-        <Box textAlign="center">
-          <Button
-            type="submit"
-            fullWidth
-            // onClick={onSubmit}
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-            startIcon={<ManageAccountsIcon />}
-            style={{
-              maxWidth: "400px",
-              maxHeight: "50px",
-              minWidth: "150px",
-              minHeight: "30px",
-              backgroundColor: "#161e33",
-              textTransform: "capitalize",
-            }}
-          >
-            {MANAGERSIGNUP}
-          </Button>
-        </Box>
-        <Box
-          sx={{
-            my: 4,
-            mx: 4,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "#161e33", color: "#fff" }}>
-            <AccountBoxIcon />
-          </Avatar>
-          <Typography
-            component="h1"
-            variant="h5"
-            style={{
-              color: "white",
-            }}
-          >
-            {SIGNUP}
-          </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 1 }}
-          >
-            <CssBaseline />
-            <TextField
-              className={classes.textField}
-              margin="normal"
-              autoComplete="given-name"
-              name="firstName"
-              required
-              fullWidth
-              id="firstName"
-              label="First Name"
-              color="secondary"
-              autoFocus
-              InputLabelProps={{
-                classes: {
-                  root: classes.cssLabel,
-                  focused: classes.cssFocused,
-                },
-              }}
-              InputProps={{
-                classes: {
-                  root: classes.cssOutlinedInput,
-                  focused: classes.cssFocused,
-                  notchedOutline: classes.notchedOutline,
-                  input: classes.input,
-                },
-              }}
-              value={firstname}
-              error={!!firstnameErrorText}
-              helperText={firstnameErrorText}
-              onChange={(e) => setFirstname(e.target.value)}
-            />
-
-            <TextField
-              className={classes.textField}
-              margin="normal"
-              required
-              fullWidth
-              id="lastName"
-              color="secondary"
-              label="Last Name"
-              name="lastName"
-              autoComplete="family-name"
-              value={lastname}
-              error={!!lastnameErrorText}
-              helperText={lastnameErrorText}
-              onChange={(e) => setLastname(e.target.value)}
-              InputLabelProps={{
-                classes: {
-                  root: classes.cssLabel,
-                  focused: classes.cssFocused,
-                },
-              }}
-              InputProps={{
-                classes: {
-                  root: classes.cssOutlinedInput,
-                  focused: classes.cssFocused,
-                  notchedOutline: classes.notchedOutline,
-                  input: classes.input,
-                },
-              }}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              color="secondary"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              value={email}
-              error={!!emailErrorText}
-              helperText={emailErrorText}
-              onChange={(e) => setEmail(e.target.value)}
-              InputLabelProps={{
-                classes: {
-                  root: classes.cssLabel,
-                  focused: classes.cssFocused,
-                },
-              }}
-              InputProps={{
-                classes: {
-                  root: classes.cssOutlinedInput,
-                  focused: classes.cssFocused,
-                  notchedOutline: classes.notchedOutline,
-                  input: classes.input,
-                },
-              }}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              color="secondary"
-              name="password"
-              label="Password"
-              type={passwordVisible ? "text" : "password"}
-              id="password"
-              autoComplete="new-password"
-              InputProps={{
-                classes: {
-                  root: classes.cssOutlinedInput,
-                  focused: classes.cssFocused,
-                  notchedOutline: classes.notchedOutline,
-                  input: classes.input,
-                },
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      style={{
-                        color: "white",
-                      }}
-                    >
-                      {passwordVisible ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              value={password}
-              error={!!passwordErrorText}
-              helperText={passwordErrorText}
-              onChange={(e) => setPassword(e.target.value)}
-              InputLabelProps={{
-                classes: {
-                  root: classes.cssLabel,
-                  focused: classes.cssFocused,
-                },
-              }}
-            />
-
-            <Box>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      value="allowExtraEmails"
-                      sx={{
-                        color: "#FFFFFF",
-                        "&.Mui-checked": {
-                          color: "#FFFFFF",
-                        },
-                      }}
-                    />
-                  }
-                  style={{
-                    color: "white",
-                  }}
-                  label={OFFERS}
-                />
-              </Grid>
-            </Box>
-
-            <Box textAlign="center">
-              <Button
-                type="submit"
-                fullWidth
-                onClick={onSubmit}
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                style={{
-                  maxWidth: "700px",
-                  maxHeight: "50px",
-                  minWidth: "350px",
-                  minHeight: "30px",
-                  backgroundColor: "#161e33",
-                }}
-              >
-                {SIGNUP}
-              </Button>
-            </Box>
-            <Grid item justifyContent="flex-start" sx={{ mr: 2 }}>
-              <InfoPop />
-            </Grid>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link
-                  component="button"
-                  onClick={() => {
-                    navigate(paths.login);
-                  }}
-                  style={{
-                    color: "white",
-                    textDecoration: "none",
-                  }}
-                  variant="body2"
-                >
-                  {SIGNIN_OPT}
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-      </Grid>
+    <ThemeProvider theme={MainTheme}>
       <Grid
         theme={MainTheme}
-        item
+        container
         component="main"
-        xs={false}
-        sm={4}
-        md={7}
         sx={{
-          backgroundImage: `url("../images/sign up page/sign-up.jpg")`,
-          backgroundRepeat: "no-repeat",
-          backgroundColor: MainTheme.palette.background.default,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          minWidth: "100%",
+          height: "80vh",
+          mb: 15,
         }}
-      />
-      <CssBaseline />
-    </Grid>
+      >
+        <CssBaseline />
+        <Grid
+          theme={MainTheme}
+          item
+          xs={12}
+          sm={8}
+          md={5}
+          component="main"
+          elevation={6}
+        >
+          <Box textAlign="center">
+            <Button
+              type="submit"
+              fullWidth
+              // onClick={onSubmit}
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              startIcon={<ManageAccountsIcon />}
+              style={{
+                maxWidth: "400px",
+                maxHeight: "50px",
+                minWidth: "150px",
+                minHeight: "30px",
+                backgroundColor: "#161e33",
+                textTransform: "capitalize",
+              }}
+            >
+              {MANAGERSIGNUP}
+            </Button>
+          </Box>
+          <Box
+            sx={{
+              my: 4,
+              mx: 4,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: "#161e33", color: "#fff" }}>
+              <AccountBoxIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              {SIGNUP}
+            </Typography>
+            <Box
+              theme={MainTheme}
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 1 }}
+            >
+              <CssBaseline />
+              <TextField
+                className={classes.textField}
+                margin="normal"
+                autoComplete="given-name"
+                name="firstName"
+                required
+                fullWidth
+                id="firstName"
+                label="First Name"
+                color="secondary"
+                autoFocus
+                InputLabelProps={{
+                  classes: {
+                    root: classes.cssLabel,
+                    focused: classes.cssFocused,
+                  },
+                }}
+                InputProps={{
+                  classes: {
+                    root: classes.cssOutlinedInput,
+                    focused: classes.cssFocused,
+                    notchedOutline: classes.notchedOutline,
+                    input: classes.input,
+                  },
+                }}
+                value={firstname}
+                error={!!firstnameErrorText}
+                helperText={firstnameErrorText}
+                onChange={(e) => setFirstname(e.target.value)}
+              />
+
+              <TextField
+                className={classes.textField}
+                margin="normal"
+                required
+                fullWidth
+                id="lastName"
+                color="secondary"
+                label="Last Name"
+                name="lastName"
+                autoComplete="family-name"
+                value={lastname}
+                error={!!lastnameErrorText}
+                helperText={lastnameErrorText}
+                onChange={(e) => setLastname(e.target.value)}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.cssLabel,
+                    focused: classes.cssFocused,
+                  },
+                }}
+                InputProps={{
+                  classes: {
+                    root: classes.cssOutlinedInput,
+                    focused: classes.cssFocused,
+                    notchedOutline: classes.notchedOutline,
+                    input: classes.input,
+                  },
+                }}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                color="secondary"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                value={email}
+                error={!!emailErrorText}
+                helperText={emailErrorText}
+                onChange={(e) => setEmail(e.target.value)}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.cssLabel,
+                    focused: classes.cssFocused,
+                  },
+                }}
+                InputProps={{
+                  classes: {
+                    root: classes.cssOutlinedInput,
+                    focused: classes.cssFocused,
+                    notchedOutline: classes.notchedOutline,
+                    input: classes.input,
+                  },
+                }}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                color="secondary"
+                name="password"
+                label="Password"
+                type={passwordVisible ? "text" : "password"}
+                id="password"
+                autoComplete="new-password"
+                InputProps={{
+                  classes: {
+                    root: classes.cssOutlinedInput,
+                    focused: classes.cssFocused,
+                    notchedOutline: classes.notchedOutline,
+                    input: classes.input,
+                  },
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        style={{
+                          color: MainTheme.palette.text.primary,
+                        }}
+                      >
+                        {passwordVisible ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                value={password}
+                error={!!passwordErrorText}
+                helperText={passwordErrorText}
+                onChange={(e) => setPassword(e.target.value)}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.cssLabel,
+                    focused: classes.cssFocused,
+                  },
+                }}
+              />
+
+              <Box>
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        value="allowExtraEmails"
+                        style={{
+                          color: MainTheme.palette.text.primary,
+                        }}
+                      />
+                    }
+                    label={OFFERS}
+                  />
+                </Grid>
+              </Box>
+
+              <Box textAlign="center">
+                <Button
+                  type="submit"
+                  fullWidth
+                  onClick={onSubmit}
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  style={{
+                    maxWidth: "700px",
+                    maxHeight: "50px",
+                    minWidth: "350px",
+                    minHeight: "30px",
+                    backgroundColor: "#161e33",
+                  }}
+                >
+                  {SIGNUP}
+                </Button>
+              </Box>
+              <Grid item justifyContent="flex-start" sx={{ mr: 2 }}>
+                <InfoPop />
+              </Grid>
+              <Grid container justifyContent="flex-end">
+                <Grid item>
+                  <Link
+                    component="button"
+                    onClick={() => {
+                      navigate(paths.login);
+                    }}
+                    style={{
+                      color: MainTheme.palette.text.primary,
+                    }}
+                    variant="body2"
+                  >
+                    {SIGNIN_OPT}
+                  </Link>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </Grid>
+        <Grid
+          theme={MainTheme}
+          item
+          component="main"
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage: `url("../images/sign up page/sign-up.jpg")`,
+            backgroundRepeat: "no-repeat",
+            backgroundColor: MainTheme.palette.background.default,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <CssBaseline />
+      </Grid>
+    </ThemeProvider>
   );
 };
 export default Register;

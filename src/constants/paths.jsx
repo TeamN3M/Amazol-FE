@@ -1,11 +1,8 @@
 export default Object.freeze({
-
-  index: '/',
-  login: '/Login',
-  register: '/Register',
-  profile: '/Profile',
-  search: '/Search',
-
+  index: "/",
+  login: "/Login",
+  register: "/Register",
+  profile: "/Profile"
 });
 
 const api = "api";
