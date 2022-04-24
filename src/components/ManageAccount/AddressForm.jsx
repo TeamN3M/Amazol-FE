@@ -6,12 +6,27 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles({
   textFiled: {
     color: "white",
+    "& .MuiFormHelperText-root": {
+      color: "white",
+    },
   },
   cssLabel: {
     color: "white",
     "&.Mui-focused": {
       color: "white",
     },
+  },
+
+  cssOutlinedInput: {
+    "&$cssFocused $notchedOutline": {
+      borderColor: "#FFF",
+    },
+  },
+  cssFocused: {},
+
+  notchedOutline: {
+    borderWidth: "1px",
+    borderColor: "white !important",
   },
 
   input: {

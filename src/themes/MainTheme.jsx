@@ -3,20 +3,20 @@ import { createTheme } from "@mui/material/styles";
 const MainTheme = createTheme({
   palette: {
     primary: {
-      main: "#000000 !important",
+      main: "#000000 ",
     },
     secondary: {
-      main: "#bdbdbd !important",
+      main: "#bdbdbd ",
     },
     background: {
-      default: "#212121 !important",
+      default: "#212121 ",
     },
     text: {
-      primary: "#FFFFFF !important",
-      secondory: "#EEEEEE !important",
+      primary: "#FFFFFF ",
+      secondory: "#EEEEEE ",
     },
     button: {
-      color: "#424242 !important",
+      color: "#424242",
     },
   },
 });

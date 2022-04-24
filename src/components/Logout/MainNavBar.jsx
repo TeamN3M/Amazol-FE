@@ -12,23 +12,23 @@ import paths from "../../constants/paths";
 
 const useStyles = makeStyles({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
 
   Options: {
     display: "flex",
     justifyContent: "right",
-    flexGrow: 1
+    flexGrow: 1,
   },
   btn: {
     borderRadius: MainTheme.spacing(1),
     color: "white",
     borderColor: "white",
-    backgroundcolor: "#333333"
-  }
+    backgroundcolor: "#333333",
+  },
 });
 
-const MainNavBar = () => {
+const NavBar = () => {
   const navigate = useNavigate();
   const classes = useStyles();
   const [isHomePage, setIsHomePage] = useState(true);
@@ -51,14 +51,14 @@ const MainNavBar = () => {
       {isHomePage ? (
         <div className={classes.root}>
           <AppBar
-            position='static'
+            position="static"
             sx={{
-              backgroundColor: MainTheme.palette.primary.main
+              backgroundColor: MainTheme.palette.primary.main,
             }}
           >
             <Toolbar>
               <img
-                alt='logo'
+                alt="logo"
                 style={{ width: 150, height: 70, justifyContent: "left" }}
                 src={LOGO}
               />
@@ -67,10 +67,10 @@ const MainNavBar = () => {
                   className={classes.btn}
                   sx={{
                     m: 2,
-                    textTransform: "capitalize"
+                    textTransform: "capitalize",
                   }}
-                  variant='outlined'
-                  size='small'
+                  variant="outlined"
+                  size="small"
                   onClick={handleRegisterClicked}
                   startIcon={<AppRegistrationIcon />}
                 >
@@ -79,8 +79,8 @@ const MainNavBar = () => {
                 <Button
                   className={classes.btn}
                   sx={{ m: 2, textTransform: "capitalize" }}
-                  variant='outlined'
-                  size='small'
+                  variant="outlined"
+                  size="small"
                   onClick={handleLoginClicked}
                   startIcon={<LoginIcon />}
                 >
@@ -93,20 +93,20 @@ const MainNavBar = () => {
       ) : (
         <div className={classes.root}>
           <AppBar
-            position='static'
+            position="static"
             sx={{
-              backgroundColor: MainTheme.palette.primary.main
+              backgroundColor: MainTheme.palette.primary.main,
             }}
           >
             <Toolbar>
-              <img alt='logo' style={{ width: 200, height: 70 }} src={LOGO} />
+              <img alt="logo" style={{ width: 200, height: 70 }} src={LOGO} />
 
               <div className={classes.Options}>
                 <Button
                   className={classes.btn}
                   sx={{ m: 2, textTransform: "capitalize" }}
-                  variant='outlined'
-                  size='small'
+                  variant="outlined"
+                  size="small"
                   onClick={handleHomeClicked}
                   startIcon={<HomeIcon />}
                 >
@@ -121,4 +121,4 @@ const MainNavBar = () => {
   );
 };
 
-export default MainNavBar;
+export default NavBar;
