@@ -5,7 +5,7 @@ import CustomerNavBar from "./Login/CustomerNavBar";
 
 const NavBar = () => {
   //const [isLoggedIn, setisLoggedIn] = useState(false);
-  const [isLoggedIn] = useState(false);
+  const [isLoggedIn] = useState(true);
 
   return <>{isLoggedIn ? <MainNavBar /> : <CustomerNavBar />}</>;
 };

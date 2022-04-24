@@ -22,9 +22,9 @@ const useStyles = makeStyles({
   },
   btn: {
     borderRadius: MainTheme.spacing(1),
-    color: "white",
-    borderColor: "white",
-    backgroundcolor: "#333333",
+    color: "white !important",
+    borderRadiusColor: "white ",
+    backgroundcolor: "#333333 ",
   },
 });
 
