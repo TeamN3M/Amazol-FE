@@ -1,9 +1,9 @@
-import React from "react";
-import { Grid } from "@mui/material";
+import React from 'react';
+import { Grid } from '@mui/material';
 // import { ThemeProvider } from '@mui/material/styles';
 // import MainTheme from '../../themes/MainTheme';
-import { CssBaseline } from "@mui/material";
-import Products from "./Products/Products";
+import { CssBaseline } from '@mui/material';
+import Products from './Products/Products';
 // import { keyframes } from '@emotion/react';
 // import ImageList from '@mui/material/ImageList';
 // import ImageListItemBar from '@mui/material/ImageListItem';
@@ -14,11 +14,11 @@ import Products from "./Products/Products";
 // import IconButton from '@mui/material/IconButton';
 // import InfoIcon from '@mui/icons-material/Info';
 
-const SearchResult = () => {
+const SearchResult = (props) => {
   return (
     <>
       <Grid>
-        <Products />
+        <Products props={props} />
       </Grid>
 
       <CssBaseline />
