@@ -21,9 +21,9 @@ import { createTheme } from "@mui/material/styles";
 const themeDark = createTheme({
   palette: {
     background: {
-      default: "#212121",
-    },
-  },
+      default: "#212121"
+    }
+  }
 });
 
 const RouteNavigate = () => (
@@ -31,7 +31,6 @@ const RouteNavigate = () => (
     <ThemeProvider theme={MainTheme}>
       <NavBar />
     </ThemeProvider>
-    {/* <MenuSearchBar /> */}
     <ThemeProvider theme={themeDark}>
       <Routes>
         <Route path={paths.index} element={<HomePage />} />

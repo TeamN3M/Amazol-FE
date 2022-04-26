@@ -14,21 +14,25 @@ import { useNavigate } from "react-router-dom";
 import { LOGO } from "../../constants/urls";
 import { Button } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-// import { alignProperty } from '@mui/material/styles/cssUtils';
+import { useDispatch } from "react-redux";
+import { endLoginSession } from "../../constants/helpers";
+import { logoutUser } from "../../store/State";
+import { useSelector } from "react-redux";
+import { getUser } from "../../store/State";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme.palette.common.white, 0.25)
   },
   marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(1),
-    width: "auto",
-  },
+    width: "auto"
+  }
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -38,7 +42,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   pointerEvents: "none",
   display: "flex",
   alignItems: "center",
-  justifyContent: "center",
+  justifyContent: "center"
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -52,10 +56,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     [theme.breakpoints.up("sm")]: {
       width: "12ch",
       "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
+        width: "20ch"
+      }
+    }
+  }
 }));
 
 const ITEM_HEIGHT = 48;
@@ -67,10 +71,11 @@ const CustomerNavBar = () => {
     ["Cart", paths.login],
     ["Delivery", paths.login],
     ["Wishlist", paths.login],
-    ["Log Out", paths.login],
+    ["Log Out", paths.index]
   ];
   // const itempath = [paths.login];
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleLogoClick = () => {
@@ -82,13 +87,26 @@ const CustomerNavBar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleLogoutClick = () => {
+    endLoginSession();
+    dispatch(logoutUser());
+    navigate(paths.index);
+  };
+  const state = useSelector((s) => s);
+  const user = getUser(state);
+  const userFisrtName = user.first_name;
+  const userLastName = user.last_name;
+  const FL =
+    userFisrtName.substring(0, 1).toUpperCase() +
+    userLastName.substring(0, 1).toUpperCase();
+
   return (
-    <AppBar position="sticky" style={{ border: "solid white 0.1px" }}>
+    <AppBar position='sticky' style={{ border: "solid white 0.1px" }}>
       <Toolbar sx={{ justifyContent: "flex-start" }}>
         <Button onClick={handleLogoClick}>
           <Box
-            component="img"
-            alt="logo"
+            component='img'
+            alt='logo'
             src={LOGO}
             sx={{ width: 150, height: 70 }}
           />
@@ -99,30 +117,36 @@ const CustomerNavBar = () => {
             <SearchIcon />
           </SearchIconWrapper>
           <StyledInputBase
-            placeholder="Search…"
+            placeholder='Search…'
             inputProps={{ "aria-label": "search" }}
           />
         </Search>
 
-        <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} align="right">
-          Hello Customer
+        <Typography
+          variant='h6'
+          noWrap
+          sx={{ flexGrow: 1 }}
+          align='right'
+          textTransform='capitalize'
+        >
+          Hello {userFisrtName}
         </Typography>
 
         <IconButton
-          aria-label="more"
-          id="long-button"
+          aria-label='more'
+          id='long-button'
           aria-controls={open ? "long-menu" : undefined}
           aria-expanded={open ? "true" : undefined}
-          aria-haspopup="true"
+          aria-haspopup='true'
           onClick={handleClick}
           style={{ color: "white" }}
         >
-          <Avatar sx={{ bgcolor: "white" }}>MM</Avatar>
+          <Avatar sx={{ bgcolor: "white" }}>{FL}</Avatar>
         </IconButton>
         <Menu
-          id="long-menu"
+          id='long-menu'
           MenuListProps={{
-            "aria-labelledby": "long-button",
+            "aria-labelledby": "long-button"
           }}
           anchorEl={anchorEl}
           open={open}
@@ -130,17 +154,21 @@ const CustomerNavBar = () => {
           PaperProps={{
             style: {
               maxHeight: ITEM_HEIGHT * 5,
-              width: "20ch",
-            },
+              width: "20ch"
+            }
           }}
         >
-          {options.map((option) => (
+          {options.map((option, index) => (
             <MenuItem
               key={option[0]}
               style={{ color: "black" }}
               selected={option === "Pyxis"}
               onClick={() => {
                 handleClose;
+                if (index == 5) {
+                  handleLogoutClick();
+                }
+
                 navigate(option[1]);
               }}
             >
