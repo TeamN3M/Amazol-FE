@@ -6,18 +6,10 @@ import { getUser } from "../store/State";
 //import ManagerNavBar from "./Login/ManagerNavBar";
 
 const NavBar = () => {
-  const state = useSelector((s) => s);
-  // const dispatch=useDispatch();
+  //const [isLoggedIn, setisLoggedIn] = useState(false);
+  const [isLoggedIn] = useState(true);
 
-  const user = getUser(state);
-  if (user !== undefined) {
-    console.log(user.first_name);
-  } else {
-    console.log("no log in");
-  }
-
-  // eslint-disable-next-line react/react-in-jsx-scope
-  return <>{user !== undefined ? <CustomerNavBar /> : <MainNavBar />}</>;
+  return <>{isLoggedIn ? <MainNavBar /> : <CustomerNavBar />}</>;
 };
 
 export default NavBar;

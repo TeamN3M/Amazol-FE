@@ -37,12 +37,12 @@ const Search = styled("div")(({ theme }) => ({
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center"
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -51,15 +51,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch"
-      }
-    }
-  }
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
+    },
+  },
 }));
 
 const ITEM_HEIGHT = 48;
@@ -75,7 +75,6 @@ const CustomerNavBar = () => {
   ];
   // const itempath = [paths.login];
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleLogoClick = () => {
@@ -87,19 +86,6 @@ const CustomerNavBar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleLogoutClick = () => {
-    endLoginSession();
-    dispatch(logoutUser());
-    navigate(paths.index);
-  };
-  const state = useSelector((s) => s);
-  const user = getUser(state);
-  const userFisrtName = user.first_name;
-  const userLastName = user.last_name;
-  const FL =
-    userFisrtName.substring(0, 1).toUpperCase() +
-    userLastName.substring(0, 1).toUpperCase();
-
   return (
     <AppBar position='sticky' style={{ border: "solid white 0.1px" }}>
       <Toolbar sx={{ justifyContent: "flex-start" }}>
@@ -158,17 +144,13 @@ const CustomerNavBar = () => {
             }
           }}
         >
-          {options.map((option, index) => (
+          {options.map((option) => (
             <MenuItem
               key={option[0]}
               style={{ color: "black" }}
               selected={option === "Pyxis"}
               onClick={() => {
                 handleClose;
-                if (index == 5) {
-                  handleLogoutClick();
-                }
-
                 navigate(option[1]);
               }}
             >
