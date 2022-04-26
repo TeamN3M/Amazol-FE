@@ -11,17 +11,11 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import {
-  SIGNIN,
-  MANAGERSIGNIN,
-  FORGOT,
-  SIGNUP_OPT
-} from "../constants/strings";
+import { SIGNIN, FORGOT, SIGNUP_OPT } from "../constants/strings";
 import paths from "../constants/paths";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import MainTheme from "../themes/MainTheme";
-import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { InputAdornment } from "@mui/material";
 import { IconButton } from "@mui/material";
@@ -140,27 +134,6 @@ const Login = () => {
         <CssBaseline />
       </Grid>
       <Grid component='main' item xs={12} sm={8} md={5} elevation={6} square>
-        <Box textAlign='center'>
-          <Button
-            type='submit'
-            fullWidth
-            // onClick={onSubmit}
-            variant='contained'
-            sx={{ mt: 3, mb: 2 }}
-            startIcon={<ManageAccountsIcon />}
-            style={{
-              maxWidth: "400px",
-              maxHeight: "50px",
-              minWidth: "150px",
-              minHeight: "30px",
-              backgroundColor: "#161e33",
-              textTransform: "capitalize"
-            }}
-          >
-            {MANAGERSIGNIN}
-          </Button>
-        </Box>
-        <CssBaseline />
         <Box
           sx={{
             my: 4,
