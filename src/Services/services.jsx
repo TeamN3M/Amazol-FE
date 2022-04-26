@@ -24,6 +24,7 @@ export const registerUser = async (email, password) => {
 export const getUser = async () => {
   try {
     const res = await get(getUserURL);
+    console.log(res.data);
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);
