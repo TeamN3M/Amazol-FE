@@ -12,4 +12,7 @@ export default makeStyles(() => ({
   paper: {
     backgroundColor: '#888888',
   },
+  summary: {
+    fontSize: '2.5rem',
+  }
 }));

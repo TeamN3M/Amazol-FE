@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
 import CartItem from '../CartItem/CartItem';
-import { CssBaseline } from '@mui/material';
+import { CssBaseline, Typography } from '@mui/material';
 import useStyles from './styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -40,11 +40,12 @@ const CartGrid = (props /*, addToCart, removeFromCart*/) => {
               height: '100%',
             }}
           >
-            &nbsp;Summary
+            <Typography className={classes.summary}>&nbsp;Summary</Typography>
+
             <Divider></Divider>
-            <h3>
+            <Typography className={classes.summary}>
               &nbsp;Total: &nbsp;${calculateTotal(props.products).toFixed(2)}
-            </h3>
+            </Typography>
           </Paper>
         </Box>
       </Grid>
