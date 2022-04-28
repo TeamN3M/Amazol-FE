@@ -11,17 +11,39 @@ import { useNavigate } from "react-router-dom";
 import { LOGO } from "../../constants/urls";
 import { Button } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
+import PersonIcon from "@mui/icons-material/Person";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import BallotIcon from "@mui/icons-material/Ballot";
 // import { alignProperty } from '@mui/material/styles/cssUtils';
+import CategoryIcon from "@mui/icons-material/Category";
+import TimelineIcon from "@mui/icons-material/Timeline";
 
 const ITEM_HEIGHT = 48;
 
-const CustomerNavBar = () => {
+const ManagerNavBar = () => {
   const options = [
-    ["Profile", paths.profile],
-    ["Product Managment", paths.login],
-    ["Financial Information", paths.login],
-    ["Order Managment", paths.login],
+    {
+      name: "Profile",
+      path: paths.Mprofile,
+      icon: <PersonIcon />,
+    },
+    {
+      name: "Product Managment",
+      path: paths.login,
+      icon: <CategoryIcon />,
+    },
+    {
+      name: "Financial Information",
+      path: paths.login,
+      icon: <TimelineIcon />,
+    },
+    {
+      name: "Order Managment",
+      path: paths.login,
+      icon: <BallotIcon />,
+    },
   ];
+
   // const itempath = [paths.login];
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -35,6 +57,7 @@ const CustomerNavBar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <AppBar position="sticky" style={{ border: "solid white 0.1px" }}>
       <Toolbar sx={{ justifyContent: "flex-start" }}>
@@ -70,24 +93,27 @@ const CustomerNavBar = () => {
           anchorEl={anchorEl}
           open={open}
           onClose={handleClose}
+          disableScrollLock={true}
           PaperProps={{
             style: {
               maxHeight: ITEM_HEIGHT * 5,
-              width: "20ch",
+              width: "25ch",
             },
           }}
         >
           {options.map((option) => (
             <MenuItem
-              key={option[0]}
-              style={{ color: "black" }}
+              key={option}
+              style={{ color: "black", icon: option[2] }}
               selected={option === "Pyxis"}
               onClick={() => {
                 handleClose;
-                navigate(option[1]);
+                navigate(option.path);
               }}
+              divider="true"
             >
-              {option[0]}
+              <ListItemIcon>{option.icon}</ListItemIcon>
+              {option.name}
             </MenuItem>
           ))}
         </Menu>
@@ -95,4 +121,4 @@ const CustomerNavBar = () => {
     </AppBar>
   );
 };
-export default CustomerNavBar;
+export default ManagerNavBar;

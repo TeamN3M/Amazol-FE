@@ -1,22 +1,23 @@
-import React, { useEffect } from 'react';
-import { Stack } from '@mui/material';
-import { Route, Routes } from 'react-router-dom';
-import paths from '../constants/paths';
-import Footer from './Footer';
-import NavBar from './NavBar';
-import Profile from './ManageAccount/Profile';
-import HomePage from './HomePage';
-import Login from './Login';
-import Register from './Register';
-import Search from './ItemCatalog/SearchResult';
-import Cart from './Cart/CartPage';
-import { ThemeProvider } from '@mui/material';
-import MainTheme from '../themes/MainTheme';
-import { createTheme } from '@mui/material/styles';
-import { useDispatch } from 'react-redux';
-import { getJwtKey } from '../constants/helpers';
-import { getUser } from '../Services/services';
-import { setUser } from '../store/State';
+import React, { useEffect } from "react";
+import { Stack } from "@mui/material";
+import { Route, Routes } from "react-router-dom";
+import paths from "../constants/paths";
+import Footer from "./Footer";
+import NavBar from "./NavBar";
+import Profile from "./ManageAccount/Profile";
+import MProfile from "./ManageManagerAccount/Profile";
+import HomePage from "./HomePage";
+import Login from "./Login";
+import Register from "./Register";
+import Search from "./ItemCatalog/SearchResult";
+import Cart from "./Cart/CartPage";
+import { ThemeProvider } from "@mui/material";
+import MainTheme from "../themes/MainTheme";
+import { createTheme } from "@mui/material/styles";
+import { useDispatch } from "react-redux";
+import { getJwtKey } from "../constants/helpers";
+import { getUser } from "../Services/services";
+import { setUser } from "../store/State";
 //import Products from "./products/Products";
 //import Cart from "./cart/Cart";
 // import { getJwtKey } from "../constants/helpers";
@@ -24,7 +25,7 @@ import { setUser } from '../store/State';
 const themeDark = createTheme({
   palette: {
     background: {
-      default: '#212121',
+      default: "#212121",
     },
   },
 });
@@ -55,6 +56,7 @@ const RouteNavigate = () => {
           <Route path={paths.login} element={<Login />} />
           <Route path={paths.register} element={<Register />} />
           <Route path={paths.profile} element={<Profile />} />
+          <Route path={paths.Mprofile} element={<MProfile />} />
           <Route path={paths.search} element={<Search />} />
           <Route path={paths.cart} element={<Cart />} />
         </Routes>

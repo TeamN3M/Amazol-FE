@@ -1,9 +1,9 @@
 // import React, { useState } from "react";
-import MainNavBar from "./Logout/MainNavBar";
+//import MainNavBar from "./Logout/MainNavBar";
 import CustomerNavBar from "./Login/CustomerNavBar";
 import { useSelector } from "react-redux";
 import { getUser } from "../store/State";
-//import ManagerNavBar from "./Login/ManagerNavBar";
+import ManagerNavBar from "./Login/ManagerNavBar";
 
 const NavBar = () => {
   const state = useSelector((s) => s);
@@ -17,7 +17,7 @@ const NavBar = () => {
   }
 
   // eslint-disable-next-line react/react-in-jsx-scope
-  return <>{user !== undefined ? <CustomerNavBar /> : <MainNavBar />}</>;
+  return <>{user !== undefined ? <CustomerNavBar /> : <ManagerNavBar />}</>;
 };
 
 export default NavBar;
