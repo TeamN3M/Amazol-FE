@@ -6,6 +6,7 @@ export default Object.freeze({
   profile: "/Profile",
   search: "/Search",
   cart: "/Cart",
+  cusomerorders: "/Orders",
 });
 
 const api = "api";

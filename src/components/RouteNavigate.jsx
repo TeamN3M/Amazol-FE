@@ -6,6 +6,7 @@ import Footer from "./Footer";
 import NavBar from "./NavBar";
 import Profile from "./ManageAccount/Profile";
 import MProfile from "./ManageManagerAccount/Profile";
+import Orders from "./CustomerOrders/Orders";
 import HomePage from "./HomePage";
 import Login from "./Login";
 import Register from "./Register";
@@ -59,6 +60,7 @@ const RouteNavigate = () => {
           <Route path={paths.Mprofile} element={<MProfile />} />
           <Route path={paths.search} element={<Search />} />
           <Route path={paths.cart} element={<Cart />} />
+          <Route path={paths.cusomerorders} element={<Orders />} />
         </Routes>
       </ThemeProvider>
       <ThemeProvider theme={MainTheme}>

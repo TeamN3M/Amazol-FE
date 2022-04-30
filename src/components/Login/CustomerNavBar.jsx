@@ -36,7 +36,7 @@ const CustomerNavBar = () => {
     },
     {
       name: "Orders",
-      path: paths.login,
+      path: paths.cusomerorders,
       icon: <ShoppingBasketIcon />,
     },
     {
