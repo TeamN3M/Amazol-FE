@@ -12,6 +12,7 @@ const Products = () => {
   const searchValue = state.value;
 
   const [priceSorted, setpriceSorted] = useState(false);
+  const [ratingSorted, setratingSorted] = useState(false);
 
   const handlePriceClicked = () => {
     if (priceSorted == true) {
@@ -20,7 +21,13 @@ const Products = () => {
       setpriceSorted(true);
     }
   };
-
+  const handleRatingClicked = () => {
+    if (ratingSorted == true) {
+      setratingSorted(false);
+    } else {
+      setratingSorted(true);
+    }
+  };
   if (!products.length) return <p>Loading...</p>;
   return (
     <main className={classes.content}>
@@ -44,7 +51,7 @@ const Products = () => {
                 }}
                 variant="outlined"
                 size="small"
-                // onClick={handleRegisterClicked}
+                //onClick={handleCategoryClicked}
               >
                 filter by category
               </Button>
@@ -66,27 +73,107 @@ const Products = () => {
               >
                 filter by price range
               </Button>
+              <Button
+                className={classes.btn}
+                sx={{ m: 2, textTransform: "capitalize" }}
+                variant="outlined"
+                size="small"
+                onClick={handleRatingClicked}
+              >
+                filter by rating
+              </Button>
             </Toolbar>
           </AppBar>
         </Grid>
         <Grid>
-          <Grid container justify="center" spacing={4}>
-            {products
-              .filter((product) => {
-                if (searchValue == "") {
-                  return product;
-                } else if (
-                  product.name.toLowerCase().includes(searchValue.toLowerCase())
-                ) {
-                  return product;
-                }
-              })
-              .map((product) => (
-                <Grid item key={product.id} xs={12} sm={6} ms={4} lg={3}>
-                  <Product product={product} />
-                </Grid>
-              ))}
-          </Grid>
+          {priceSorted ? (
+            <Grid container justify="center" spacing={4}>
+              {products
+                .filter((product) => {
+                  if (searchValue == "") {
+                    return product;
+                  } else if (
+                    product.name
+                      .toLowerCase()
+                      .includes(searchValue.toLowerCase())
+                  ) {
+                    return product;
+                  }
+                })
+                .map((product) => (
+                  <Grid item key={product.id} xs={12} sm={6} ms={4} lg={3}>
+                    <Product product={product} />
+                  </Grid>
+                ))}
+            </Grid>
+          ) : (
+            <Grid container justify="center" spacing={4}>
+              {products
+                .sort(function (a, b) {
+                  return parseInt(a.price) - parseInt(b.price);
+                })
+                .filter((product) => {
+                  if (searchValue == "") {
+                    return product;
+                  } else if (
+                    product.name
+                      .toLowerCase()
+                      .includes(searchValue.toLowerCase())
+                  ) {
+                    return product;
+                  }
+                })
+                .map((product) => (
+                  <Grid item key={product.id} xs={12} sm={6} ms={4} lg={3}>
+                    <Product product={product} />
+                  </Grid>
+                ))}
+            </Grid>
+          )}
+          {/* {ratingSorted ? (
+            <Grid container justify="center" spacing={4}>
+              {products
+                .filter((product) => {
+                  if (searchValue == "") {
+                    return product;
+                  } else if (
+                    product.name
+                      .toLowerCase()
+                      .includes(searchValue.toLowerCase())
+                  ) {
+                    return product;
+                  }
+                })
+                .map((product) => (
+                  <Grid item key={product.id} xs={12} sm={6} ms={4} lg={3}>
+                    <Product product={product} />
+                  </Grid>
+                ))}
+            </Grid>
+          ) : (
+            <Grid container justify="center" spacing={4}>
+              {products
+                .sort(function (a, b) {
+                  return parseInt(a.rating) - parseInt(b.rating);
+                })
+                .filter((product) => {
+                  if (searchValue == "") {
+                    return product;
+                  } else if (
+                    product.name
+                      .toLowerCase()
+                      .includes(searchValue.toLowerCase())
+                  ) {
+                    return product;
+                  }
+                })
+                .map((product) => (
+                  <Grid item key={product.id} xs={12} sm={6} ms={4} lg={3}>
+                    <Product product={product} />
+                  </Grid>
+                ))}
+            </Grid>
+          )} */}
           <Grid container justify="center" spacing={4}></Grid>
         </Grid>
       </Grid>

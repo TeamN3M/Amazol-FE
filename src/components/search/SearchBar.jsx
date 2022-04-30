@@ -38,7 +38,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
+    padding: theme.spacing(1, 25, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
@@ -65,7 +65,10 @@ const SearchBar = () => {
   return (
     <Search>
       <Box /*onSubmit={handleSubmit}*/>
-        <IconButton onClick={() => toComponentProducts()}>
+        <IconButton
+          onClick={() => toComponentProducts()}
+          sx={{ minHeight: 0, minWidth: 0, padding: 2 }}
+        >
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
