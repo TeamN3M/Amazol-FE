@@ -26,6 +26,11 @@ export default makeStyles({
     display: "flex",
     justifyContent: "space-between",
   },
+  btn: {
+    color: "white !important",
+    border: "solid 1px white",
+    backgroundcolor: "#333333 !important",
+  },
   name: { fontSize: "2.5rem", fontWeight: "bold", color: "#003333" },
   price: { fontSize: "2re", fontWeight: "bold", color: "#002222" },
   rating: { fontSize: "2re" },

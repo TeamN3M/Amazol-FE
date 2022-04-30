@@ -2,6 +2,13 @@ import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import { styled, alpha } from "@mui/material/styles";
+import { useState } from "react";
+import Box from "@mui/material/Box";
+import paths from "../../constants/paths";
+//import Products from "../ItemCatalog/Products/Products";
+import { useNavigate } from "react-router-dom";
+//import Link from "@mui/material/Link";
+import { IconButton } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -45,15 +52,35 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 const SearchBar = () => {
+  const navigate = useNavigate();
+  //   const handleSearch = (e) => {
+  //     const searchText = e.target.value;
+  //     const matchedProducts = products.filter(product => product.name.toLowerCase().includes(searchText.toLowerCase()));
+  //     setDisplayProducts(matchedProducts);
+  // }
+  const [searchTerm, setSearchTerm] = useState("");
+  const toComponentProducts = () => {
+    navigate(paths.search, { state: { value: searchTerm } });
+  };
   return (
     <Search>
-      <SearchIconWrapper>
-        <SearchIcon />
-      </SearchIconWrapper>
-      <StyledInputBase
-        placeholder="Search…"
-        inputProps={{ "aria-label": "search" }}
-      />
+      <Box /*onSubmit={handleSubmit}*/>
+        <IconButton onClick={() => toComponentProducts()}>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+        </IconButton>
+        <StyledInputBase
+          className="input"
+          placeholder="Search…"
+          inputProps={{ "aria-label": "search" }}
+          type="text"
+          value={searchTerm}
+          name="s"
+          id="site-search"
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </Box>
     </Search>
   );
 };

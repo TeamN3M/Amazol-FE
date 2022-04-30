@@ -9,4 +9,10 @@ export default makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  btn: {
+    color: "white !important",
+    border: "solid 1px white",
+    backgroundcolor: "#333333 !important",
+    borderRadius: 15,
+  },
 }));

@@ -76,6 +76,12 @@ const Product = ({ product }) => {
           color="textSecondary"
           component="p"
         />
+        <Typography
+          dangerouslySetInnerHTML={{ __html: product.category }}
+          variant="body2"
+          color="textSecondary"
+          component="p"
+        />
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
         <IconButton aria-label="Example">
