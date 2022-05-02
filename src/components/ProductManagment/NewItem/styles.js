@@ -6,10 +6,15 @@ export default makeStyles({
     maxWidth: "100%",
     maxHeight: "100%",
     minWidth: "200px",
-    backgroundColor: "#555555",
-    "&:hover": {
-      background: "#777777",
-    },
+    backgroundColor: "#AAAAAA",
+  },
+  card:{
+       marginBottom: "1%",
+       marginTop: "2%",
+       maxWidth: "100%",
+       maxHeight: "100%",
+       minWidth: "200px",
+       backgroundColor: "#AAAAAA",
   },
   media: {
     // paddingTop: '56.25%', // 16:9
@@ -21,7 +26,7 @@ export default makeStyles({
   },
   cardActions: {
     display: "flex",
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
   },
   cardContent: {
     display: "flex",
