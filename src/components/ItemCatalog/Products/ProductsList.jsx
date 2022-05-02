@@ -1,8 +1,8 @@
 export const products = [
   {
     id: 1,
-    name: " dildo1",
-    description: "For shuving up yo pussy",
+    name: " item1",
+    description: "lurem epusem korb djdn reno",
     price: "103",
     rating: "1",
     quantity: "100",
@@ -12,8 +12,8 @@ export const products = [
   },
   {
     id: 2,
-    name: " dildo2",
-    description: "For shuving up yo ass",
+    name: " item2",
+    description: "lurem epusem korb djdn reno",
     price: "102",
     rating: "2",
     quantity: "50",
@@ -23,8 +23,8 @@ export const products = [
   },
   {
     id: 3,
-    name: " dildo3",
-    description: "For shuving up yo mouth",
+    name: " item3",
+    description: "lurem epusem korb djdn reno",
     price: "104",
     rating: "2",
     quantity: "0",
@@ -34,8 +34,8 @@ export const products = [
   },
   {
     id: 4,
-    name: " dildo2",
-    description: "For shuving up yo nose",
+    name: " item4",
+    description: "lurem epusem korb djdn reno",
     price: "1011",
     rating: "2",
     quantity: "50",
@@ -45,8 +45,8 @@ export const products = [
   },
   {
     id: 5,
-    name: " dildo2",
-    description: "For shuving up yo ear canal",
+    name: " item5",
+    description: "lurem epusem korb djdn reno",
     price: "10",
     rating: "2",
     quantity: "50",
@@ -56,8 +56,8 @@ export const products = [
   },
   {
     id: 6,
-    name: " dildo2",
-    description: "For shuving up yo nose",
+    name: " item6",
+    description: "lurem epusem korb djdn reno",
     price: "100",
     rating: "2",
     quantity: "0",
@@ -68,7 +68,7 @@ export const products = [
   {
     id: 7,
     name: " dildo2",
-    description: "For shuving up yo ear canal",
+    description: "lurem epusem korb djdn reno",
     price: "1030",
     rating: "2",
     quantity: "50",
