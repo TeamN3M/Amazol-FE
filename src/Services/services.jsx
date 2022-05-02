@@ -1,5 +1,6 @@
 import { getUserURL, loginURL, registerURL } from "../constants/paths";
 import { handleErrResponse, post, get } from "./axios";
+import { getCodeURL } from "../constants/paths";
 
 export const loginUser = async (email, password) => {
   try {
@@ -11,9 +12,22 @@ export const loginUser = async (email, password) => {
   }
 };
 
-export const registerUser = async (email, password) => {
+export const registerUser = async (
+  code,
+  firstname,
+  lastname,
+  email,
+  password
+) => {
+  const isadmin = code ? true : false;
   try {
-    const res = await post(registerURL, { email, password });
+    const res = await post(registerURL, {
+      firstname,
+      lastname,
+      email,
+      password,
+      isadmin
+    });
 
     return { data: res.data, status: res.status };
   } catch (err) {
@@ -24,6 +38,15 @@ export const registerUser = async (email, password) => {
 export const getUser = async () => {
   try {
     const res = await get(getUserURL);
+    console.log(res.data);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+export const getCode = async () => {
+  try {
+    const res = await get(getCodeURL);
     console.log(res.data);
     return { data: res.data, status: res.status };
   } catch (err) {

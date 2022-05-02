@@ -6,13 +6,13 @@ export default Object.freeze({
   profile: "/Profile",
   search: "/Search",
   cart: "/Cart",
-  cusomerorders: "/Orders",
+  cusomerorders: "/Orders"
 });
 
 const api = "api";
 
-const authEndPoint = `/${api}/auth`;
-const authRegister = "/register";
+// const authEndPoint = `/${api}/auth`;
+// const authRegister = "/register";
 // const authLogin = "/login";
 // const authGetUser = "/getUser";
 
@@ -25,9 +25,11 @@ const userGetAll = "getUsers";
 
 export const loginURL = "http://localhost:4000/auth/login";
 export const getUserURL = "http://localhost:4000/auth";
+export const getCodeURL = "http://localhost:4000/code";
+export const registerURL = "http://localhost:4000/auth/register";
 
 // export const loginURL = `${authEndPoint}/${authLogin}`;
-export const registerURL = `${authEndPoint}/${authRegister}`;
+// export const registerURL = `${authEndPoint}/${authRegister}`;
 // export const getUserURL = `${authEndPoint}/${authGetUser}`;
 
 export const changeUserInfoURL = `${userEndPoint}/${userChangeInfo}`;
