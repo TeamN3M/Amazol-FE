@@ -8,19 +8,17 @@ import {
   //   Grid,
 } from '@material-ui/core';
 import Box from '@mui/material/Box';
-
+import IconButton from '@mui/material/IconButton';
 import Rating from '@mui/material/Rating';
 // import { AddShoppingCart } from '@material-ui/icons';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
 import useStyles from './styles';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 //import MainTheme from "../../../themes/MainTheme";
-
 // const styleForPaper = {
 //   width: '96vw',
 //   height: '20vh',
@@ -39,7 +37,7 @@ const styleForIcon = {
 // const styleForPrice = {
 //   font: '5rem',
 // };
-const Product = ({ product }) => {
+const Item = ({ product }) => {
   const [count, setCount] = React.useState(parseInt(product.count));
   const [itemVisible, setItemVisible] = React.useState(true);
   const classes = useStyles();
@@ -168,4 +166,4 @@ const Product = ({ product }) => {
   );
 };
 
-export default Product;
+export default Item;
