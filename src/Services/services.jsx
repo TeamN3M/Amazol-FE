@@ -3,9 +3,10 @@ import {
   loginURL,
   registerURL,
   addItemURL,
-} from '../constants/paths';
-import { handleErrResponse, post, get } from './axios';
-import { getCodeURL } from '../constants/paths';
+  getItemURL
+} from "../constants/paths";
+import { handleErrResponse, post, get } from "./axios";
+import { getCodeURL } from "../constants/paths";
 
 export const loginUser = async (email, password) => {
   try {
@@ -31,7 +32,7 @@ export const registerUser = async (
       lastname,
       email,
       password,
-      isadmin,
+      isadmin
     });
 
     return { data: res.data, status: res.status };
@@ -61,21 +62,33 @@ export const getCode = async () => {
 export const addItem = async (
   item_name,
   item_description,
+  item_price,
   item_rating,
   item_quantity,
-  item_pictures,
-  isAvailable
+  isAvailable,
+  item_pictures
 ) => {
   try {
     const res = await post(addItemURL, {
       item_name,
       item_description,
+      item_price,
       item_rating,
       item_quantity,
-      item_pictures,
       isAvailable,
+      item_pictures
     });
 
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const getItemById = async (id) => {
+  try {
+    const res = await get(getItemURL + id, { id });
+    console.log(res.data);
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);
