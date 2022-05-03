@@ -41,7 +41,6 @@ const CartGrid = (props /*, addToCart, removeFromCart*/) => {
             }}
           >
             <Typography className={classes.summary}>&nbsp;Summary</Typography>
-
             <Divider></Divider>
             <Typography className={classes.summary}>
               &nbsp;Total: &nbsp;${calculateTotal(props.products).toFixed(2)}
