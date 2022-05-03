@@ -18,13 +18,7 @@ const ItemGrid = (props /*, addToCart, removeFromCart*/) => {
           <NewItem product={props.products[0]} />
         </Grid>
         {props.products.map((product) => (
-          <Grid
-            item
-            key={product.id}
-            direction='row'
-            justifyContent='space-around'
-            alignItems='center'
-          >
+          <Grid item key={product.id} direction='row'>
             <Item product={product} />
           </Grid>
         ))}
