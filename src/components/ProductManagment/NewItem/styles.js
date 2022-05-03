@@ -3,14 +3,18 @@ import MainTheme from '../../../themes/MainTheme';
 
 export default makeStyles({
   root: {
-    marginBottom: "0.5%",
     maxWidth: "100%",
     maxHeight: "100%",
     minWidth: "200px",
-    backgroundColor: "#555555",
-    "&:hover": {
-      background: "#777777",
-    },
+    backgroundColor: "#AAAAAA",
+  },
+  card:{
+       marginBottom: "1%",
+       marginTop: "2%",
+       maxWidth: "100%",
+       maxHeight: "100%",
+       minWidth: "200px",
+       backgroundColor: "#AAAAAA",
   },
   media: {
     // paddingTop: '56.25%', // 16:9
@@ -22,7 +26,7 @@ export default makeStyles({
   },
   cardActions: {
     display: "flex",
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
   },
   cardContent: {
     display: "flex",
@@ -32,7 +36,7 @@ export default makeStyles({
   price: { fontSize: "2re", fontWeight: "bold", color: "#002222",marginLeft:"13%" },
   amount: { fontSize: "2re", fontWeight: "bold", color: "#EEEEEE" },
   rating: { fontSize: "2re" },
-  stock: { fontSize: "2re" ,color: "#EEEEEE" },
+  stock: { fontSize: "2re" },
 
   textFiled: {
     color: 'white',

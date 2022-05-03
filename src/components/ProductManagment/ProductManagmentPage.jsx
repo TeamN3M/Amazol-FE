@@ -4,7 +4,7 @@ import { Grid, Typography } from '@mui/material';
 // import MainTheme from '../../themes/MainTheme';
 import { CssBaseline } from '@mui/material';
 import ItemGrid from './ItemGrid/ItemGrid';
-import { keyframes } from '@emotion/react';
+// import { keyframes } from '@emotion/react';
 // import { keyframes } from '@emotion/react';
 // import ImageList from '@mui/material/ImageList';
 // import ImageListItemBar from '@mui/material/ImageListItem';
@@ -95,13 +95,6 @@ const products = [
   },
 ];
 
-const RGB = keyframes`
-  0% { color: red; }
-33% { color: blue; }
-66% { color: green; }
-100% { color: red; }
-`;
-
 const ProductManagmentPage = () =>
   /*{
     products , addToCart, removeFromCart 
@@ -110,17 +103,17 @@ const ProductManagmentPage = () =>
     return (
       <>
         <Grid>
+          <br />
           <Typography
             color={'white'}
             variant='h1'
-            sx={{ animation: `${RGB} 2.5s infinite`, alignItems: 'center' }}
+            sx={{ alignItems: 'center' }}
           >
-            Product Managment :
+            &nbsp;Product Managment :
           </Typography>
           {products.length === 0 ? <p>No items in cart.</p> : null}
           <ItemGrid products={products /*, addToCart, removeFromCart */} />
         </Grid>
-
         <CssBaseline />
       </>
     );

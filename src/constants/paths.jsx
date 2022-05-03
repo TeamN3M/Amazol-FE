@@ -5,13 +5,11 @@ export default Object.freeze({
   profile: '/Profile',
   search: '/Search',
   cart: '/Cart',
+  cusomerorders: '/Orders',
   prodmanage: '/ProdManage',
-  cusomerorders: "/Orders",
-
 });
 
 const api = 'api';
-
 
 // const authEndPoint = `/${api}/auth`;
 // const authRegister = "/register";
@@ -25,12 +23,11 @@ const userDelete = 'deleteUser/:id';
 const userFind = 'findUser/:id';
 const userGetAll = 'getUsers';
 
-
-export const loginURL = "http://localhost:4000/auth/login";
-export const getUserURL = "http://localhost:4000/auth";
-export const getCodeURL = "http://localhost:4000/code";
-export const registerURL = "http://localhost:4000/auth/register";
-export const addItemURL = "http://localhost:4000/item";
+export const loginURL = 'http://localhost:4000/auth/login';
+export const getUserURL = 'http://localhost:4000/auth';
+export const getCodeURL = 'http://localhost:4000/code';
+export const registerURL = 'http://localhost:4000/auth/register';
+export const addItemURL = 'http://localhost:4000/item';
 
 // export const loginURL = `${authEndPoint}/${authLogin}`;
 // export const registerURL = `${authEndPoint}/${authRegister}`;

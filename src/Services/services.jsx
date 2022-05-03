@@ -1,12 +1,11 @@
-
 import {
   getUserURL,
   loginURL,
   registerURL,
-  addItemURL
-} from "../constants/paths";
-import { handleErrResponse, post, get } from "./axios";
-import { getCodeURL } from "../constants/paths";
+  addItemURL,
+} from '../constants/paths';
+import { handleErrResponse, post, get } from './axios';
+import { getCodeURL } from '../constants/paths';
 
 export const loginUser = async (email, password) => {
   try {
@@ -32,7 +31,7 @@ export const registerUser = async (
       lastname,
       email,
       password,
-      isadmin
+      isadmin,
     });
 
     return { data: res.data, status: res.status };
@@ -50,7 +49,6 @@ export const getUser = async () => {
     return handleErrResponse(err);
   }
 };
-
 export const getCode = async () => {
   try {
     const res = await get(getCodeURL);
@@ -75,9 +73,8 @@ export const addItem = async (
       item_rating,
       item_quantity,
       item_pictures,
-      isAvailable
+      isAvailable,
     });
-
 
     return { data: res.data, status: res.status };
   } catch (err) {
