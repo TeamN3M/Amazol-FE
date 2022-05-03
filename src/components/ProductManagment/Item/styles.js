@@ -3,6 +3,7 @@ import MainTheme from '../../../themes/MainTheme';
 
 export default makeStyles({
   root: {
+    marginBottom: "0.5%",
     maxWidth: "100%",
     maxHeight: "100%",
     minWidth: "200px",
@@ -31,7 +32,7 @@ export default makeStyles({
   price: { fontSize: "2re", fontWeight: "bold", color: "#002222",marginLeft:"13%" },
   amount: { fontSize: "2re", fontWeight: "bold", color: "#EEEEEE" },
   rating: { fontSize: "2re" },
-  stock: { fontSize: "2re" },
+  stock: { fontSize: "2re" ,color: "#EEEEEE" },
 
   textFiled: {
     color: 'white',

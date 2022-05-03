@@ -13,12 +13,18 @@ const ItemGrid = (props /*, addToCart, removeFromCart*/) => {
   if (!props.products.length) return <p>Loading...</p>;
   return (
     <>
-      <Grid direction='row' spacing={2} columns={16}>
+      <Grid direction='row' columns={16}>
         <Grid item key={0} direction='row'>
           <NewItem product={props.products[0]} />
         </Grid>
         {props.products.map((product) => (
-          <Grid item key={product.id} direction='row'>
+          <Grid
+            item
+            key={product.id}
+            direction='row'
+            justifyContent='space-around'
+            alignItems='center'
+          >
             <Item product={product} />
           </Grid>
         ))}

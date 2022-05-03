@@ -7,6 +7,7 @@ export default makeStyles({
     maxHeight: "100%",
     minWidth: "200px",
     backgroundColor: "#AAAAAA",
+    marginBottom: "5%",
   },
   card:{
        marginBottom: "1%",
