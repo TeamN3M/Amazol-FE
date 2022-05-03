@@ -27,6 +27,7 @@ export const loginURL = "http://localhost:4000/auth/login";
 export const getUserURL = "http://localhost:4000/auth";
 export const getCodeURL = "http://localhost:4000/code";
 export const registerURL = "http://localhost:4000/auth/register";
+export const addItemURL = "http://localhost:4000/item";
 
 // export const loginURL = `${authEndPoint}/${authLogin}`;
 // export const registerURL = `${authEndPoint}/${authRegister}`;
