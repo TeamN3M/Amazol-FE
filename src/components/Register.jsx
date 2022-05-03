@@ -54,7 +54,9 @@ const Register = () => {
   const [openAlert, setOpenAlert] = useState(false);
   const [userType, setUserType] = useState(MANAGERSIGNUP);
   const [alertType, setAlertType] = useState({});
+  const [registerFlag, setRegisterFlag] = useState(false);
   let CODE = "";
+  let errorFlag = [false, false, false, false, false];
 
   const alerts = {
     OK: [{ severity: "success", message: REGISTEROK }],
@@ -87,6 +89,17 @@ const Register = () => {
     isManagerClicked ? setUserType(COSTUMERSIGNUP) : setUserType(MANAGERSIGNUP);
   }, [isManagerClicked]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setOpenAlert(false);
+
+      if (registerFlag) {
+        navigate(paths.login);
+      }
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [openAlert]);
+
   const handleValidate = async (
     managerCode,
     firstname,
@@ -100,67 +113,85 @@ const Register = () => {
     } else {
       console.log("ERROR IN SERVER");
     }
-    if (!managerCode) {
-      setManagerCodeErrorText("Please enter code");
-    } else if (managerCode !== CODE) {
-      setManagerCodeErrorText("Incorrect code");
-    } else {
-      setManagerCodeErrorText("");
+    if (isManagerClicked) {
+      if (!managerCode) {
+        setManagerCodeErrorText("Please enter code");
+        errorFlag[0] = true;
+      } else if (managerCode !== CODE) {
+        setManagerCodeErrorText("Incorrect code");
+        errorFlag[0] = true;
+      } else {
+        setManagerCodeErrorText("");
+        errorFlag[0] = false;
+      }
     }
     if (!email) {
       setEmailErrorText("Please enter email");
+      errorFlag[1] = true;
     } else if (checkEmail(email)) {
       setEmailErrorText("email is not valid!");
+      errorFlag[1] = true;
     } else {
       setEmailErrorText("");
+      errorFlag[1] = false;
     }
     if (!password) {
       setPasswordErrorText("Please enter password");
+      errorFlag[2] = true;
     } else if (checkPassword(password)) {
       setPasswordErrorText("Invalid password !");
+      errorFlag[2] = true;
     } else {
       setPasswordErrorText("");
+      errorFlag[2] = false;
     }
     if (!firstname) {
       setFirstnameErrorText("Please enter first name");
+      errorFlag[3] = true;
     } else if (!checkNames(firstname)) {
       setFirstnameErrorText("The first name cant contain this char");
+      errorFlag[3] = true;
     } else if (firstname.length < 2) {
       setFirstnameErrorText("The first name must contain at least 2 letters");
+      errorFlag[3] = true;
     } else {
       setFirstnameErrorText("");
+      errorFlag[3] = false;
     }
 
     if (!checkNames(lastname)) {
       setLastnameErrorText("The last name cant contain this char");
+      errorFlag[4] = true;
     } else if (lastname.length < 2) {
       setLastnameErrorText("The last name must contain at least 2 letters");
+      errorFlag[4] = true;
     } else {
       setLastnameErrorText("");
+      errorFlag[4] = false;
     }
 
-    const res = await registerUser(
-      managerCode,
-      firstname,
-      lastname,
-      email,
-      password
-    );
+    const isAllfalse = (value) => value === false;
+    if (errorFlag.every(isAllfalse)) {
+      const res = await registerUser(
+        managerCode,
+        firstname,
+        lastname,
+        email,
+        password
+      );
 
-    if (res.status === 200) {
-      // console.log("register good");
-      setAlertType(alerts["OK"][0]);
-    } else if (res.code === 400) {
-      if (res.msg["error"] === "user exists") {
-        setAlertType(alerts["EXIST"][0]);
-        // console.log("register bad user exist");
-      } else {
-        setAlertType(alerts["FAIL"][0]);
-        // console.log("register bad ");
+      if (res.status === 200) {
+        setAlertType(alerts["OK"][0]);
+        setRegisterFlag(true);
+      } else if (res.code === 400) {
+        if (res.msg["error"] === "user exists") {
+          setAlertType(alerts["EXIST"][0]);
+        } else {
+          setAlertType(alerts["FAIL"][0]);
+        }
       }
+      setOpenAlert(true);
     }
-    setOpenAlert(true);
-    // navigate(paths.login);
   };
   const handleSubmit = (event) => {
     event.preventDefault();
