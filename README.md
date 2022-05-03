@@ -1,4 +1,4 @@
-# AmaZol | <img src="https://img.shields.io/badge/CurrentSprint-1-green" alt="Sprint" >  | ![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg) | <img src="https://upload.wikimedia.org/wikipedia/he/4/44/SCE_logo.png"  alt="SCE logo" width="100" height="30">
+# AmaZol | <img src="https://img.shields.io/badge/CurrentSprint-3-green" alt="Sprint" >  | ![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg) | <img src="https://upload.wikimedia.org/wikipedia/he/4/44/SCE_logo.png"  alt="SCE logo" width="100" height="30">
 
 
 
