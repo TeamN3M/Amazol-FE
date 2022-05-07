@@ -30,7 +30,7 @@ export const getCodeURL = 'http://localhost:4000/code';
 export const registerURL = 'http://localhost:4000/auth/register';
 export const addItemURL = 'http://localhost:4000/item';
 export const getItemURL = 'http://localhost:4000/item/';
-
+export const updateItemURL = 'http://localhost:4000/item/updateItem/';
 // export const loginURL = `${authEndPoint}/${authLogin}`;
 // export const registerURL = `${authEndPoint}/${authRegister}`;
 // export const getUserURL = `${authEndPoint}/${authGetUser}`;

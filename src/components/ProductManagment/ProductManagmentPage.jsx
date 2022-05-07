@@ -5,6 +5,7 @@ import { Grid, Typography } from '@mui/material';
 import { CssBaseline } from '@mui/material';
 import ItemGrid from './ItemGrid/ItemGrid';
 import { getItemById } from '../../Services/services';
+import { makeStyles } from '@mui/styles';
 
 // import { keyframes } from '@emotion/react';
 // import { keyframes } from '@emotion/react';
@@ -125,6 +126,16 @@ import { getItemById } from '../../Services/services';
 //   },
 // ];
 
+const useStyles = makeStyles({
+  header: {
+    padding: '60px',
+    textAlign: 'center',
+    background: '#888888',
+    color: 'white',
+    fontSize: '5rem',
+  },
+});
+
 const ProductManagmentPage = () => {
   const [products, setProducts] = React.useState([]);
   const getProds = async () => {
@@ -138,13 +149,19 @@ const ProductManagmentPage = () => {
       console.log('no sex fuck u');
     }
   };
+  const classes = useStyles();
   if (!products.length) getProds();
   return (
     <>
       <Grid>
         <br />
-        <Typography color={'white'} variant='h1' sx={{ alignItems: 'center' }}>
-          &nbsp;Product Managment :
+        <Typography
+          color={'white'}
+          variant='h1'
+          sx={{ alignItems: 'center' }}
+          class={classes.header}
+        >
+          Product Managment
         </Typography>
 
         <ItemGrid products={products /*, addToCart, removeFromCart */} />
