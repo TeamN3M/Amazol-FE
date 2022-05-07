@@ -1,10 +1,10 @@
-import React, { useReducer, useEffect } from "react";
-import { Grid } from "@material-ui/core";
-import Product from "../Product/Product";
-import { CssBaseline } from "@mui/material";
-import useStyles from "./styles";
-import { useLocation } from "react-router-dom";
-import { AppBar, Toolbar, Button, Slider, Box } from "@mui/material";
+import React, { useReducer, useEffect } from 'react';
+import { Grid } from '@material-ui/core';
+import Product from '../Product/Product';
+import { CssBaseline } from '@mui/material';
+import useStyles from './styles';
+import { useLocation } from 'react-router-dom';
+import { AppBar, Toolbar, Button, Slider, Box } from '@mui/material';
 
 function reducer(state, action) {
   return [...state, ...action];
@@ -30,11 +30,11 @@ const Products = (props) => {
   const sortResults = (e, val) => {
     e.preventDefault();
     let sortedResults = props.products.sort((a, b) => {
-      if (val === "price") {
+      if (val === 'price') {
         return parseInt(a.item_price) - parseInt(b.item_price);
-      } else if (val === "rating") {
+      } else if (val === 'rating') {
         return parseFloat(b.item_rating) - parseFloat(a.item_rating);
-      } else if (val === "pricerange") {
+      } else if (val === 'pricerange') {
         return b.TotalRecovered - a.TotalRecovered;
       }
     });
@@ -46,21 +46,21 @@ const Products = (props) => {
   return (
     <main className={classes.content}>
       {/* <div className={classes.toolbar} /> */}
-      <Grid container spacing={2} justify="center">
+      <Grid container spacing={2} justify='center'>
         <Grid item>
           <AppBar
-            position="static"
+            position='static'
             sx={{
-              backgroundColor: "#212121 !important ",
+              backgroundColor: '#212121 !important ',
               borderRadius: 8,
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around",
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-around',
               // width: "min",
               // margin: "auto",
             }}
             style={{
-              border: "solid white 0.1px",
+              border: 'solid white 0.1px',
             }}
           >
             <Toolbar>
@@ -68,20 +68,20 @@ const Products = (props) => {
                 className={classes.btn}
                 sx={{
                   m: 2,
-                  textTransform: "capitalize",
+                  textTransform: 'capitalize',
                 }}
-                variant="outlined"
-                size="small"
+                variant='outlined'
+                size='small'
                 //onClick={handleCategoryClicked}
               >
                 filter by category
               </Button>
               <Button
                 className={classes.btn}
-                sx={{ m: 2, textTransform: "capitalize" }}
-                variant="outlined"
-                size="small"
-                onClick={(e) => sortResults(e, "price")}
+                sx={{ m: 2, textTransform: 'capitalize' }}
+                variant='outlined'
+                size='small'
+                onClick={(e) => sortResults(e, 'price')}
               >
                 filter by price
               </Button>
@@ -96,10 +96,10 @@ const Products = (props) => {
               </Button> */}
               <Button
                 className={classes.btn}
-                sx={{ m: 2, textTransform: "capitalize" }}
-                variant="outlined"
-                size="small"
-                onClick={(e) => sortResults(e, "rating")}
+                sx={{ m: 2, textTransform: 'capitalize' }}
+                variant='outlined'
+                size='small'
+                onClick={(e) => sortResults(e, 'rating')}
               >
                 filter by rating
               </Button>
@@ -108,27 +108,27 @@ const Products = (props) => {
         </Grid>
         <Grid>
           <AppBar
-            position="static"
+            position='static'
             sx={{
-              backgroundColor: "#212121 !important ",
+              backgroundColor: '#212121 !important ',
               borderRadius: 8,
             }}
-            style={{ border: "solid white 0.1px" }}
+            style={{ border: 'solid white 0.1px' }}
           >
             <Box sx={{ width: 300 }}>
               <Slider
-                getAriaLabel={() => "Temperature range"}
+                getAriaLabel={() => 'Temperature range'}
                 value={value}
                 onChange={handleChange}
-                valueLabelDisplay="auto"
+                valueLabelDisplay='auto'
                 getAriaValueText={valuetext}
               />
               <Button
                 className={classes.btn}
-                sx={{ m: 2, textTransform: "capitalize" }}
-                variant="outlined"
-                size="small"
-                onClick={(e) => sortResults(e, "pricerange")}
+                sx={{ m: 2, textTransform: 'capitalize' }}
+                variant='outlined'
+                size='small'
+                onClick={(e) => sortResults(e, 'pricerange')}
               >
                 filter by Price Range
               </Button>
@@ -137,18 +137,20 @@ const Products = (props) => {
         </Grid>
 
         <Grid>
-          <Grid container justify="center" spacing={4}>
+          <Grid container justify='center' spacing={4}>
             {props.products
 
               .filter((product) => {
-                if (searchValue == "") {
-                  return product;
-                } else if (
-                  product.item_name
-                    .toLowerCase()
-                    .includes(searchValue.toLowerCase())
-                ) {
-                  return product;
+                if (product.isAvailable) {
+                  if (searchValue == '') {
+                    return product;
+                  } else if (
+                    product.item_name
+                      .toLowerCase()
+                      .includes(searchValue.toLowerCase())
+                  ) {
+                    return product;
+                  }
                 }
               })
               .map((product) => (
