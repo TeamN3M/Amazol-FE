@@ -13,12 +13,26 @@ import Products from "./Products/Products";
 // import ListSubheader from '@mui/material/ListSubheader';
 // import IconButton from '@mui/material/IconButton';
 // import InfoIcon from '@mui/icons-material/Info';
+import { getItemById } from "../../Services/services";
 
 const SearchResult = () => {
+  const [products, setProducts] = React.useState([]);
+  const getProds = async () => {
+    console.log("getting items");
+    const res = await getItemById("");
+    if (res.status == 200) {
+      console.log("got itemsddd");
+      console.log(res.data);
+      setProducts(res.data);
+    } else {
+      console.log("no sex fuck u");
+    }
+  };
+  if (!products.length) getProds();
   return (
     <>
       <Grid>
-        <Products />
+        <Products products={products} />
       </Grid>
 
       <CssBaseline />
