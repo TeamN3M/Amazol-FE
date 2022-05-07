@@ -58,7 +58,7 @@ const RouteNavigate = () => {
           <Route path={paths.login} element={<Login />} />
           <Route path={paths.register} element={<Register />} />
           <Route path={paths.profile} element={<Profile />} />
-          <Route path={paths.Mprofile} element={<MProfile />} />
+          <Route path={paths.mprofile} element={<MProfile />} />
           <Route path={paths.search} element={<Search />} />
           <Route path={paths.cart} element={<Cart />} />
           <Route path={paths.cusomerorders} element={<Orders />} />

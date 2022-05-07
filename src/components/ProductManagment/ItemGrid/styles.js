@@ -14,5 +14,12 @@ export default makeStyles(() => ({
   },
   summary: {
     fontSize: '2.5rem',
+  },
+  loading: {
+    padding: '60px',
+    textAlign: 'center',
+    background: '#888888',
+    color: 'white',
+    fontSize: '30px',
   }
 }));
