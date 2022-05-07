@@ -69,6 +69,7 @@ const NewItem = ({ product }) => {
 
   // const handleOpen = () => setOpen(true);
   // const handleClose = () => setOpen(false);
+  //
 
   const handleUpdateItem = async () => {
     console.log('Updating an item');
