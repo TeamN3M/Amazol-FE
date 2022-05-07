@@ -98,6 +98,7 @@ const NavBar = () => {
             sx={{
               backgroundColor: MainTheme.palette.primary.main,
             }}
+            style={{ border: "solid white 0.1px" }}
           >
             <Toolbar>
               <img alt="logo" style={{ width: 200, height: 70 }} src={LOGO} />
