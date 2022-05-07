@@ -4,17 +4,18 @@ import Item from '../Item/Item';
 import NewItem from '../NewItem/NewItem';
 import { CssBaseline } from '@mui/material';
 import LinearProgress from '@mui/material/LinearProgress';
+import useStyles from './styles';
 // import useStyles from './styles';
 // import Box from '@mui/material/Box';
 // import Paper from '@mui/material/Paper';
 // import Divider from '@mui/material/Divider';
 
 const ItemGrid = (props /*, addToCart, removeFromCart*/) => {
-  // const classes = useStyles();
+  const classes = useStyles();
   if (!props.products.length)
     return (
       <>
-        <p>Loading...</p>
+        <p className={classes.loading}>Loading...</p>
         <LinearProgress />
       </>
     );

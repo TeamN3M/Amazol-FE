@@ -136,6 +136,7 @@ const NewItem = ({ product }) => {
             navSize={20}
             navMargin={20}
             bgColor={'#555555'}
+            navStyle={2}
           />
           <Rating
             name='read-only'
