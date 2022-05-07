@@ -19,9 +19,9 @@ export default makeStyles({
   media: {
     // paddingTop: '56.25%', // 16:9
     // padding: "20%",
-    height: '10%',
-    width: '10%',
-    marginLeft: '25px'
+    height: '100%',
+    width: '100%',
+    padding: '25px'
 
   },
   cardActions: {
@@ -38,43 +38,12 @@ export default makeStyles({
   rating: { fontSize: "2re" },
   stock: { fontSize: "2re" },
 
-  textFiled: {
-    color: 'white',
-    backgroundColor: MainTheme.palette.background.default,
-  },
-  cssLabel: {
-    color: 'white',
-    '&.Mui-focused': {
-      color: 'white',
-    },
-  },
-
-  cssOutlinedInput: {
-    '&$cssFocused $notchedOutline': {
-      borderColor: '#FFF',
-    },
-  },
-  cssFocused: {},
-
-  notchedOutline: {
-    borderWidth: '1px',
-    borderColor: 'white !important',
-  },
-
-  input: {
-    color: 'white',
-    '&:-webkit-autofill': {
-      WebkitBoxShadow: '0 0 0 100px #212121 inset',
-      WebkitTextFillColor: 'white',
-    },
-  },
   modal: {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     color: '#FFFFFF',
-    width: 400,
     backgroundColor: '#212121',
     bgcolor: '#212121',
     border: '2px solid #FFF',
@@ -82,4 +51,40 @@ export default makeStyles({
     p: 4,
     padding: '20px',
   },
+
+
+
+  textFiled: {
+    color: "white",
+    backgroundColor: MainTheme.palette.background.default
+  },
+  cssLabel: {
+    color: "white",
+    "&.Mui-focused": {
+      color: "white"
+    },
+    "& .MuiInputBase-root.Mui-disabled": {
+      color: "rgba(0, 0, 0, 0.6) !important" // (default alpha is 0.38)
+    }
+  },
+
+  cssOutlinedInput: {
+    "&$cssFocused $notchedOutline": {
+      borderColor: "#FFF"
+    }
+  },
+  cssFocused: {},
+
+  notchedOutline: {
+    borderWidth: "1px",
+    borderColor: "white !important"
+  },
+
+  input: {
+    color: "white",
+    "&:-webkit-autofill": {
+      WebkitBoxShadow: "0 0 0 100px #212121 inset",
+      WebkitTextFillColor: "white"
+    }
+  }
 });

@@ -15,10 +15,12 @@ export default makeStyles({
   media: {
     // paddingTop: '56.25%', // 16:9
     // padding: "20%",
-    height: '10%',
-    width: '10%',
-    marginLeft: '25px'
-
+    // height: '10%',
+    // width: '10%',
+    bgColor: "#555555",
+    "&:hover": {
+      bgColor: "#777777",
+    },
   },
   cardActions: {
     display: "flex",
