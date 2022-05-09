@@ -140,7 +140,6 @@ const Products = (props) => {
         <Grid>
           <Grid container justify='center' spacing={4}>
             {props.products
-
               .filter((product) => {
                 if (
                   product.isAvailable &&
@@ -161,7 +160,7 @@ const Products = (props) => {
                 }
               })
               .map((product) => (
-                <Grid item key={product._id} xs={12} sm={6} ms={4} lg={3}>
+                <Grid item key={product._id} xs={12} sm={6} ms={3} lg={3}>
                   <Product product={product} />
                 </Grid>
               ))}

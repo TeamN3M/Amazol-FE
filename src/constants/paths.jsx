@@ -1,14 +1,14 @@
 export default Object.freeze({
-  index: "/",
-  login: "/Login",
-  register: "/Register",
-  forgot:"/Forgot",
-  profile: "/Profile",
-  mprofile: "/MProfile",
-  search: "/Search",
-  cart: "/Cart",
-  cusomerorders: "/Orders",
-  prodmanage: "/ProdManage"
+  index: '/',
+  login: '/Login',
+  register: '/Register',
+  forgot: '/Forgot',
+  profile: '/Profile',
+  mprofile: '/MProfile',
+  search: '/Search',
+  cart: '/Cart',
+  cusomerorders: '/Orders',
+  prodmanage: '/ProdManage',
 });
 
 // const authEndPoint = `/${api}/auth`;
@@ -32,6 +32,7 @@ export const getItemURL = 'http://localhost:4000/item/finditem/';
 export const getItemsURL = 'http://localhost:4000/item';
 export const updateItemURL = 'http://localhost:4000/item/updateItem/';
 export const getUserCartURL = 'http://localhost:4000/cart/userCart/';
+export const updateCartURL = 'http://localhost:4000/cart/updateCart/';
 
 // export const loginURL = `${authEndPoint}/${authLogin}`;
 // export const registerURL = `${authEndPoint}/${authRegister}`;

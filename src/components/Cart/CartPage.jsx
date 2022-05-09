@@ -1,27 +1,15 @@
 import React from 'react';
 import { Grid, Typography } from '@mui/material';
-// import { ThemeProvider } from '@mui/material/styles';
-// import MainTheme from '../../themes/MainTheme';
 import { CssBaseline } from '@mui/material';
 import CartGrid from './CartGrid/CartGrid';
 import { keyframes } from '@emotion/react';
-// import { keyframes } from '@emotion/react';
-// import ImageList from '@mui/material/ImageList';
-// import ImageListItemBar from '@mui/material/ImageListItem';
-// import ImageList from '@mui/material/ImageList';
-// import ImageListItem from '@mui/material/ImageListItem';
-// import ImageListItemBar from '@mui/material/ImageListItemBar';
-// import ListSubheader from '@mui/material/ListSubheader';
-// import IconButton from '@mui/material/IconButton';
-// import InfoIcon from '@mui/icons-material/Info';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCart } from '../../store/StateCart';
 import { getUser } from '../../store/StateUser';
-import { getCartById } from '../../Services/services';
+import { getCartById, getItems } from '../../Services/services';
 import { useState } from 'react';
-
-const calculateTotal = (items) =>
-  items.reduce((acc, item) => acc + item.quantity * item.price, 0);
+import LinearProgress from '@mui/material/LinearProgress';
+import { makeStyles } from '@material-ui/core/styles';
 
 const RGB = keyframes`
   0% { color: red; }
@@ -32,9 +20,42 @@ const RGB = keyframes`
 
 const CartPage = () => {
   const [tempCart, setTempCart] = useState([]);
+  const [allItems, setItems] = useState([]);
+  const state = useSelector((s) => s);
 
-  const getUserCart = async (state) => {
-    const user = getUser(state);
+  const useStyles = makeStyles({
+    loading: {
+      padding: '60px',
+      textAlign: 'center',
+      background: '#888888',
+      color: 'white',
+      fontSize: '30px',
+    },
+    header: {
+      padding: '60px',
+      textAlign: 'center',
+      background: '#888888',
+      color: 'white',
+      fontSize: '5rem',
+    },
+  });
+  const classes = useStyles();
+  const getAllItems = async () => {
+    const res = await getItems();
+    if (res.status == 200) {
+      console.log('got items');
+      console.log(res.data);
+      setItems(res.data);
+    } else {
+      console.log('no sex fuck u');
+    }
+  };
+
+  if (allItems.length == 0) {
+    getAllItems();
+  }
+
+  const getUserCartByUser = async (user) => {
     if (user !== undefined) {
       const id = user._id;
       const res = await getCartById(id);
@@ -46,14 +67,40 @@ const CartPage = () => {
     }
   };
 
-  const state = useSelector((s) => s);
-
   if (tempCart.length == 0) {
-    getUserCart(state);
-    console.log('HERE!');
+    getUserCartByUser(getUser(state));
+    console.log('Got Cart obj:');
     console.log(tempCart);
-    return <>Loading...</>;
   }
+
+  let sum = 0;
+  let text = '';
+  if (allItems.length != 0 && tempCart.length != 0) {
+    for (let i = 0; i < tempCart.length; i++) {
+      for (let j = 0; j < allItems.length; j++) {
+        if (tempCart[i].item_id == allItems[j]._id) {
+          text =
+            text +
+            allItems[j].item_price +
+            ' X ' +
+            tempCart[i].quantity +
+            ' <br>';
+          sum =
+            sum +
+            parseInt(allItems[j].item_price) * parseInt(tempCart[i].quantity);
+        }
+      }
+    }
+  } else
+    return (
+      <>
+        <p className={classes.loading}>Loading...</p>
+        <LinearProgress />
+        <CssBaseline />
+      </>
+    );
+  console.log(text);
+  console.log(sum);
 
   const dispatch = useDispatch();
   dispatch(setCart(tempCart));
@@ -64,12 +111,13 @@ const CartPage = () => {
           color={'white'}
           variant='h1'
           sx={{ animation: `${RGB} 2.5s infinite`, alignItems: 'center' }}
+          class={classes.header}
         >
           Your Cart :
         </Typography>
+
         {tempCart.length === 0 ? <p>No items in cart.</p> : null}
-        <CartGrid products={tempCart} />
-        <h2>Total: ${calculateTotal(tempCart).toFixed(2)}</h2>
+        <CartGrid products={tempCart} sum={sum} reciptText={text} />
       </Grid>
 
       <CssBaseline />
