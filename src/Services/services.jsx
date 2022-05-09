@@ -53,6 +53,7 @@ export const getUser = async () => {
     return handleErrResponse(err);
   }
 };
+
 export const getCode = async () => {
   try {
     const res = await get(getCodeURL);
