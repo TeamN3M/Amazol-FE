@@ -2,6 +2,7 @@ export default Object.freeze({
   index: "/",
   login: "/Login",
   register: "/Register",
+  forgot:"/Forgot",
   profile: "/Profile",
   mprofile: "/MProfile",
   search: "/Search",

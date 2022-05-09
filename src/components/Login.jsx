@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,7 +11,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { SIGNIN, FORGOT, SIGNUP_OPT } from "../constants/strings";
+import { SIGNIN, FORGOT, SIGNUP_OPT, ERRORLOGIN } from "../constants/strings";
 import paths from "../constants/paths";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
@@ -24,6 +24,8 @@ import { validateEmail } from "../constants/strings";
 import { rememberMeSession } from "../constants/helpers";
 import { useDispatch } from "react-redux";
 import { setUser } from "../store/State";
+import MySnackBar from "./Alerts/MySnackBar";
+import { loginAlerts } from "../constants/strings";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -32,9 +34,21 @@ const Login = () => {
   const [passwordErrorText, setPasswordErrorText] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [loginError, setLoginError] = useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
+  const [loginFlag, setLoginFlag] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const handleLoginError = () => {
+    setLoginError(true);
+    if (loginError) {
+      setOpenAlert(true);
+      setTimeout(() => {
+        setOpenAlert(false);
+      }, 1000);
+    }
+  };
   const handleClickShowPassword = () => {
     setPasswordVisible((prevState) => !prevState);
   };
@@ -100,9 +114,16 @@ const Login = () => {
       if (rememberMe) {
         rememberMeSession(res.data["accessToken"]);
       }
-
       dispatch(setUser(res.data["user"]));
-      navigate(paths.index);
+      setLoginFlag(true);
+      setLoginError(false);
+      setOpenAlert(true);
+      setTimeout(() => {
+        setOpenAlert(false);
+        navigate(paths.index);
+      }, 2000);
+    } else {
+      handleLoginError();
     }
   };
 
@@ -113,6 +134,16 @@ const Login = () => {
     const password = data.get("password");
     handleValidate(email, password);
   };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setOpenAlert(false);
+
+      if (loginFlag) {
+        navigate(paths.index);
+      }
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [openAlert]);
 
   return (
     <Grid container component='main' sx={{ height: "80vh" }}>
@@ -253,6 +284,19 @@ const Login = () => {
               }}
               label='Remember me'
             />
+            {loginError ? (
+              <Typography
+                variant='h6'
+                style={{
+                  color: "red",
+                  fontfamily: "Lucida Console, Courier New, monospace",
+                  alignItems: "center",
+                  marginTop: "2px"
+                }}
+              >
+                {ERRORLOGIN}
+              </Typography>
+            ) : null}
             <Button
               type='submit'
               fullWidth
@@ -265,36 +309,49 @@ const Login = () => {
             >
               {SIGNIN}
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link
-                  href='/'
-                  variant='body2'
-                  style={{
-                    color: "white",
-                    textDecoration: "none"
-                  }}
-                >
-                  {FORGOT}
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link
-                  component='button'
-                  onClick={() => {
-                    navigate(paths.register);
-                  }}
-                  style={{
-                    color: "white",
-                    textDecoration: "none"
-                  }}
-                  variant='body2'
-                >
-                  {SIGNUP_OPT}
-                </Link>
-              </Grid>
-            </Grid>
+            <MySnackBar
+              open={openAlert}
+              timeout={2000}
+              severity={
+                loginError ? loginAlerts.FAIL.severity : loginAlerts.OK.severity
+              }
+              message={
+                loginError ? loginAlerts.FAIL.message : loginAlerts.OK.message
+              }
+            />
           </Box>
+          <Grid container>
+            <Grid item xs>
+              <Button
+                type='submit'
+                variant='text'
+                onClick={() => {
+                  navigate(paths.forgot);
+                }}
+                style={{
+                  color: "white",
+                  textDecoration: "none"
+                }}
+              >
+                {FORGOT}
+              </Button>
+            </Grid>
+            <Grid item>
+              <Link
+                component='button'
+                onClick={() => {
+                  navigate(paths.register);
+                }}
+                style={{
+                  color: "white",
+                  textDecoration: "none"
+                }}
+                variant='body2'
+              >
+                {SIGNUP_OPT}
+              </Link>
+            </Grid>
+          </Grid>
         </Box>
       </Grid>
     </Grid>

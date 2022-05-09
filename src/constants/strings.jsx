@@ -12,8 +12,13 @@ export const MANAGERREGISTER = "Manager Registration";
 export const ENTERCODE = "Enter the manager code here:";
 export const REGISTEROK = "Registration Succeeded :)";
 export const REGISTERFAIL = "Registration Failed :(";
+export const LOGINOK = "Log in Succeeded :)";
+export const LOGINFAIL = "Log in Failed :(";
 export const EXISTUSER = "User exist ";
 export const ADDNEWPROD = "Add new Product ";
+export const ERRORLOGIN = "Wrong Email or Password ";
+export const RESETPASSWORDTITLE = "Reset Password ";
+export const CANCEL = "Cancel ";
 
 // validate email Minimum 8 characters, at least one letter and one number
 export const validatePassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/i;
@@ -24,3 +29,8 @@ export const validateEmail =
 export const validateNames = /[^A-Za-z]+/;
 
 export const JWT_KEY = "JWT-KEY";
+
+export const loginAlerts = {
+  OK: { severity: "success", message: LOGINOK },
+  FAIL: { severity: "error", message: LOGINFAIL }
+};

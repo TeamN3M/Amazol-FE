@@ -20,6 +20,7 @@ import { useDispatch } from "react-redux";
 import { getJwtKey } from "../constants/helpers";
 import { getUser } from "../Services/services";
 import { setUser } from "../store/State";
+import ForgotPassword from "./ForgotPassword";
 //import Products from "./products/Products";
 //import Cart from "./cart/Cart";
 // import { getUser } from "../Services/services";
@@ -60,6 +61,7 @@ const RouteNavigate = () => {
           <Route path={paths.index} element={<HomePage />} />
           <Route path={paths.login} element={<Login />} />
           <Route path={paths.register} element={<Register />} />
+          <Route path={paths.forgot} element={<ForgotPassword />} />
           <Route path={paths.profile} element={<Profile />} />
           <Route path={paths.mprofile} element={<MProfile />} />
           <Route path={paths.search} element={<Search />} />
