@@ -4,12 +4,12 @@ import {
   registerURL,
   addItemURL,
   getItemURL,
-
+  getItemsURL,
+  getUserCartURL,
   updateItemURL,
 } from '../constants/paths';
 import { handleErrResponse, post, get, put } from './axios';
 import { getCodeURL } from '../constants/paths';
-
 
 export const loginUser = async (email, password) => {
   try {
@@ -92,7 +92,7 @@ export const addItem = async (
 export const getItemById = async (id) => {
   try {
     const res = await get(getItemURL + id, { id });
-    //console.log(res.data);
+    console.log('requesting item');
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);
@@ -101,7 +101,7 @@ export const getItemById = async (id) => {
 
 export const getItems = async () => {
   try {
-    const res = await get(getItemURL);
+    const res = await get(getItemsURL);
     console.log(res.data);
     return { data: res.data, status: res.status };
   } catch (err) {
@@ -113,6 +113,16 @@ export const updateItemById = async (id, item) => {
   try {
     const res = await put(updateItemURL + id, { id, item });
     console.log('Update Item - ' + res.data);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const getCartById = async (id) => {
+  try {
+    const res = await get(getUserCartURL + id, { id });
+    //console.log(res.data);
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);

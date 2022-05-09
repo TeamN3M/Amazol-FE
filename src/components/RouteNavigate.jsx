@@ -27,9 +27,9 @@ import ForgotPassword from "./ForgotPassword";
 const themeDark = createTheme({
   palette: {
     background: {
-      default: "#212121"
-    }
-  }
+      default: '#212121',
+    },
+  },
 });
 
 const RouteNavigate = () => {
@@ -42,10 +42,10 @@ const RouteNavigate = () => {
     if (localJwt) {
       func().then((res) => {
         if (res.status === 200) {
-          console.log("find user");
+          console.log('find user');
           dispatch(setUser(res.data.user));
         } else {
-          console.log("not found");
+          console.log('not found');
         }
       });
     }

@@ -4,7 +4,7 @@ import { Grid, Typography } from '@mui/material';
 // import MainTheme from '../../themes/MainTheme';
 import { CssBaseline } from '@mui/material';
 import ItemGrid from './ItemGrid/ItemGrid';
-import { getItemById } from '../../Services/services';
+import { getItems } from '../../Services/services';
 import { makeStyles } from '@mui/styles';
 
 // import { keyframes } from '@emotion/react';
@@ -140,7 +140,7 @@ const ProductManagmentPage = () => {
   const [products, setProducts] = React.useState([]);
   const getProds = async () => {
     console.log('getting items');
-    const res = await getItemById('');
+    const res = await getItems();
     if (res.status == 200) {
       console.log('got items');
       console.log(res.data);

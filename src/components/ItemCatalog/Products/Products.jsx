@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect } from 'react';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import Product from '../Product/Product';
 import { CssBaseline } from '@mui/material';
 import useStyles from './styles';
@@ -10,7 +10,7 @@ function reducer(state, action) {
   return [...state, ...action];
 }
 function valuetext(value) {
-  return `${value}°C`;
+  return `${value}$`;
 }
 const Products = (props) => {
   const classes = useStyles();
@@ -18,11 +18,9 @@ const Products = (props) => {
   const searchValue = state.value;
 
   const [sortedProducts, setSortedProducts] = useReducer(reducer, []);
-  useEffect(() => {
-    console.log(sortedProducts);
-  }, [sortedProducts]);
-  const [value, setValue] = React.useState([20, 37]);
+  useEffect(() => {}, [sortedProducts]);
 
+  const [value, setValue] = React.useState([1, 1000]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -38,7 +36,6 @@ const Products = (props) => {
         return b.TotalRecovered - a.TotalRecovered;
       }
     });
-    console.log(sortedResults);
     setSortedProducts(sortedResults);
   };
   if (!props.products.length) return <p>Loading...</p>;
@@ -46,7 +43,13 @@ const Products = (props) => {
   return (
     <main className={classes.content}>
       {/* <div className={classes.toolbar} /> */}
-      <Grid container spacing={2} justify='center'>
+      <Grid
+        container
+        spacing={2}
+        justify='center'
+        direction='column'
+        alignItems='center'
+      >
         <Grid item>
           <AppBar
             position='static'
@@ -56,6 +59,7 @@ const Products = (props) => {
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'space-around',
+
               // width: "min",
               // margin: "auto",
             }}
@@ -83,17 +87,8 @@ const Products = (props) => {
                 size='small'
                 onClick={(e) => sortResults(e, 'price')}
               >
-                filter by price
+                Sort by price
               </Button>
-              {/* <Button
-                className={classes.btn}
-                sx={{ m: 2, textTransform: "capitalize" }}
-                variant="outlined"
-                size="small"
-                // onClick={handleLoginClicked}
-              >
-                filter by price range
-              </Button> */}
               <Button
                 className={classes.btn}
                 sx={{ m: 2, textTransform: 'capitalize' }}
@@ -101,12 +96,12 @@ const Products = (props) => {
                 size='small'
                 onClick={(e) => sortResults(e, 'rating')}
               >
-                filter by rating
+                Sort by rating
               </Button>
             </Toolbar>
           </AppBar>
         </Grid>
-        <Grid>
+        <Grid item>
           <AppBar
             position='static'
             sx={{
@@ -115,24 +110,30 @@ const Products = (props) => {
             }}
             style={{ border: 'solid white 0.1px' }}
           >
-            <Box sx={{ width: 300 }}>
-              <Slider
-                getAriaLabel={() => 'Temperature range'}
-                value={value}
-                onChange={handleChange}
-                valueLabelDisplay='auto'
-                getAriaValueText={valuetext}
-              />
-              <Button
-                className={classes.btn}
-                sx={{ m: 2, textTransform: 'capitalize' }}
-                variant='outlined'
-                size='small'
-                onClick={(e) => sortResults(e, 'pricerange')}
-              >
-                filter by Price Range
-              </Button>
-            </Box>
+            <Toolbar>
+              <Box sx={{ width: 330, height: 88 }} justify='center'>
+                <Grid container justify='center'>
+                  <Typography
+                    variant='body1'
+                    style={{
+                      color: 'white',
+                      marginTop: 10,
+                    }}
+                  >
+                    Filter by Price Range
+                  </Typography>
+                </Grid>
+                <Slider
+                  getAriaLabel={() => 'Temperature range'}
+                  value={value}
+                  min={1}
+                  max={1000}
+                  onChange={handleChange}
+                  valueLabelDisplay='auto'
+                  getAriaValueText={valuetext}
+                />
+              </Box>
+            </Toolbar>
           </AppBar>
         </Grid>
 
@@ -141,13 +142,19 @@ const Products = (props) => {
             {props.products
 
               .filter((product) => {
-                if (product.isAvailable) {
+                if (
+                  product.isAvailable &&
+                  product.item_price <= value[1] &&
+                  product.item_price >= value[0]
+                ) {
                   if (searchValue == '') {
                     return product;
                   } else if (
                     product.item_name
                       .toLowerCase()
-                      .includes(searchValue.toLowerCase())
+                      .includes(searchValue.toLowerCase()) &&
+                    product.item_price <= value[1] &&
+                    product.item_price >= value[0]
                   ) {
                     return product;
                   }
