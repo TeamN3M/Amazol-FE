@@ -40,6 +40,9 @@ export const updateCartURL = "http://localhost:4000/cart/updateCart/";
 export const addAddressURL = "http://localhost:4000/address/";
 export const getAddressURL = "http://localhost:4000/address/getAddress/";
 export const updateAddressURL = "http://localhost:4000/address/updateAddress/";
+export const addCreditURL = "http://localhost:4000/credit/";
+export const getCreditURL = "http://localhost:4000/credit/getCredit/";
+export const updateCreditURL = "http://localhost:4000/credit/updateCredit/";
 
 // export const loginURL = `${authEndPoint}/${authLogin}`;
 // export const registerURL = `${authEndPoint}/${authRegister}`;

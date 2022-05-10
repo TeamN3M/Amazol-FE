@@ -14,7 +14,8 @@ import {
   validateEmail,
   validatePassword,
   changeInfoAlerts,
-  SAVE
+  SAVE,
+  NEXT
 } from "../../constants/strings";
 import { useSelector } from "react-redux";
 import { getUser } from "../../store/StateUser";
@@ -26,6 +27,8 @@ import { setUser } from "../../store/StateUser";
 import { useDispatch } from "react-redux";
 import { updateUserInfo } from "../../Services/services";
 import MySnackBar from "../Alerts/MySnackBar";
+import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 const useStyles = makeStyles({
   paperRoot: {
@@ -67,7 +70,7 @@ const useStyles = makeStyles({
     }
   }
 });
-export default function AddressForm() {
+export default function AddressForm(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -482,9 +485,22 @@ export default function AddressForm() {
           />
         </Grid>
       </Grid>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleSave}>
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Button
+          variant='contained'
+          endIcon={<ChangeCircleIcon />}
+          sx={{ mt: 3, ml: 1 }}
+          onClick={handleSave}
+        >
           {SAVE}
+        </Button>
+        <Button
+          variant='contained'
+          endIcon={<NavigateNextIcon />}
+          sx={{ mt: 3, ml: 1, borderRadius: 3 }}
+          onClick={props.handleNext}
+        >
+          {NEXT}
         </Button>
       </Box>
     </React.Fragment>

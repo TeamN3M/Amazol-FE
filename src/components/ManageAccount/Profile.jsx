@@ -1,13 +1,12 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
+
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import AddressForm from "./AddressForm";
@@ -16,27 +15,17 @@ import { makeStyles } from "@material-ui/styles";
 
 const steps = ["Shipping address", "Payment details"];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <AddressForm />;
-    case 1:
-      return <PaymentForm />;
-    default:
-      throw new Error("Unknown step");
-  }
-}
 const useStyles = makeStyles({
   paperRoot: {
     backgroundColor: "#212121 !important",
     borderRadius: 20,
     borderColor: "white !important",
-    padding: 50,
+    padding: 50
   },
   myLabel: {
     color: "#1565c0 !important",
-    marginTop: 0,
-  },
+    marginTop: 0
+  }
 });
 
 export default function Checkout() {
@@ -53,29 +42,40 @@ export default function Checkout() {
     setActiveStep(activeStep - 1);
   };
 
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return <AddressForm handleNext={handleNext} />;
+      case 1:
+        return <PaymentForm handleBack={handleBack} />;
+      default:
+        throw new Error("Unknown step");
+    }
+  }
+
   return (
     <Grid>
       <CssBaseline />
       <AppBar
-        position="absolute"
-        color="default"
+        position='absolute'
+        color='default'
         elevation={0}
         sx={{
           position: "relative",
-          borderBottom: (t) => `1px solid ${t.palette.divider}`,
+          borderBottom: (t) => `1px solid ${t.palette.divider}`
         }}
       ></AppBar>
-      <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+      <Container component='main' maxWidth='sm' sx={{ mb: 4 }}>
         <Paper
           classes={{ root: classes.paperRoot }}
-          variant="outlined"
+          variant='outlined'
           sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
         >
           <Typography
-            variant="h4"
-            align="center"
+            variant='h4'
+            align='center'
             style={{
-              color: "white",
+              color: "white"
             }}
           >
             Edit Your Details
@@ -85,7 +85,7 @@ export default function Checkout() {
               <Step key={label}>
                 <StepLabel
                   classes={{
-                    label: classes.myLabel,
+                    label: classes.myLabel
                   }}
                 >
                   {label}
@@ -97,25 +97,7 @@ export default function Checkout() {
             {activeStep === steps.length ? (
               <React.Fragment></React.Fragment>
             ) : (
-              <React.Fragment>
-                {getStepContent(activeStep)}
-                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                  {activeStep !== 0 && (
-                    <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                      Back
-                    </Button>
-                  )}
-                  {activeStep === 0 ? (
-                    <Button
-                      variant="contained"
-                      onClick={handleNext}
-                      sx={{ mt: 3, ml: 1 }}
-                    >
-                      {"Next"}
-                    </Button>
-                  ) : null}
-                </Box>
-              </React.Fragment>
+              <React.Fragment>{getStepContent(activeStep)}</React.Fragment>
             )}
           </React.Fragment>
         </Paper>

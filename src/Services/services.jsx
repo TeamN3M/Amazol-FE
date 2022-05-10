@@ -13,7 +13,10 @@ import {
   addAddressURL,
   getAddressURL,
   updateUserlURL,
-  updateAddressURL
+  updateAddressURL,
+  addCreditURL,
+  getCreditURL,
+  updateCreditURL
 } from "../constants/paths";
 import { handleErrResponse, post, get, put } from "./axios";
 import { getCodeURL } from "../constants/paths";
@@ -233,6 +236,58 @@ export const updateUserInfo = async (id, fname, lname, email, password) => {
       email: email,
       password: password
     });
+
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+export const addCreditCard = async (
+  customer_id,
+  name,
+  card_number,
+  date,
+  cvv
+) => {
+  try {
+    const res = await post(addCreditURL, {
+      customer_id,
+      name,
+      card_number,
+      date,
+      cvv
+    });
+
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+export const updateCreditCard = async (
+  customer_id,
+  name,
+  card_number,
+  date,
+  cvv
+) => {
+  console.log("customer id ", customer_id);
+  try {
+    const res = await put(updateCreditURL, {
+      customer_id,
+      name,
+      card_number,
+      date,
+      cvv
+    });
+
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+export const getUserCredit = async (id) => {
+  try {
+    const res = await get(getCreditURL + id, { id });
 
     return { data: res.data, status: res.status };
   } catch (err) {
