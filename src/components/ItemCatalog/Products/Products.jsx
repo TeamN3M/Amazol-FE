@@ -1,16 +1,16 @@
-import React, { useReducer, useEffect } from 'react';
-import { Grid } from '@material-ui/core';
-import Product from '../Product/Product';
-import { CssBaseline } from '@mui/material';
-import useStyles from './styles';
-import { useLocation } from 'react-router-dom';
-import { AppBar, Toolbar, Button, Slider, Box } from '@mui/material';
+import React, { useReducer, useEffect } from "react";
+import { Grid, Typography } from "@material-ui/core";
+import Product from "../Product/Product";
+import { CssBaseline } from "@mui/material";
+import useStyles from "./styles";
+import { useLocation } from "react-router-dom";
+import { AppBar, Toolbar, Button, Slider, Box } from "@mui/material";
 
 function reducer(state, action) {
   return [...state, ...action];
 }
 function valuetext(value) {
-  return `${value}°C`;
+  return `${value}$`;
 }
 const Products = (props) => {
   const classes = useStyles();
@@ -18,11 +18,9 @@ const Products = (props) => {
   const searchValue = state.value;
 
   const [sortedProducts, setSortedProducts] = useReducer(reducer, []);
-  useEffect(() => {
-    console.log(sortedProducts);
-  }, [sortedProducts]);
-  const [value, setValue] = React.useState([20, 37]);
+  useEffect(() => {}, [sortedProducts]);
 
+  const [value, setValue] = React.useState([1, 1000]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -30,15 +28,14 @@ const Products = (props) => {
   const sortResults = (e, val) => {
     e.preventDefault();
     let sortedResults = props.products.sort((a, b) => {
-      if (val === 'price') {
+      if (val === "price") {
         return parseInt(a.item_price) - parseInt(b.item_price);
-      } else if (val === 'rating') {
+      } else if (val === "rating") {
         return parseFloat(b.item_rating) - parseFloat(a.item_rating);
-      } else if (val === 'pricerange') {
+      } else if (val === "pricerange") {
         return b.TotalRecovered - a.TotalRecovered;
       }
     });
-    console.log(sortedResults);
     setSortedProducts(sortedResults);
   };
   if (!props.products.length) return <p>Loading...</p>;
@@ -46,21 +43,28 @@ const Products = (props) => {
   return (
     <main className={classes.content}>
       {/* <div className={classes.toolbar} /> */}
-      <Grid container spacing={2} justify='center'>
+      <Grid
+        container
+        spacing={2}
+        justify="center"
+        direction="column"
+        alignItems="center"
+      >
         <Grid item>
           <AppBar
-            position='static'
+            position="static"
             sx={{
-              backgroundColor: '#212121 !important ',
+              backgroundColor: "#212121 !important ",
               borderRadius: 8,
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-around',
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-around",
+
               // width: "min",
               // margin: "auto",
             }}
             style={{
-              border: 'solid white 0.1px',
+              border: "solid white 0.1px",
             }}
           >
             <Toolbar>
@@ -68,86 +72,89 @@ const Products = (props) => {
                 className={classes.btn}
                 sx={{
                   m: 2,
-                  textTransform: 'capitalize',
+                  textTransform: "capitalize",
                 }}
-                variant='outlined'
-                size='small'
+                variant="outlined"
+                size="small"
                 //onClick={handleCategoryClicked}
               >
                 filter by category
               </Button>
               <Button
                 className={classes.btn}
-                sx={{ m: 2, textTransform: 'capitalize' }}
-                variant='outlined'
-                size='small'
-                onClick={(e) => sortResults(e, 'price')}
+                sx={{ m: 2, textTransform: "capitalize" }}
+                variant="outlined"
+                size="small"
+                onClick={(e) => sortResults(e, "price")}
               >
-                filter by price
+                Sort by price
               </Button>
-              {/* <Button
+              <Button
                 className={classes.btn}
                 sx={{ m: 2, textTransform: "capitalize" }}
                 variant="outlined"
                 size="small"
-                // onClick={handleLoginClicked}
+                onClick={(e) => sortResults(e, "rating")}
               >
-                filter by price range
-              </Button> */}
-              <Button
-                className={classes.btn}
-                sx={{ m: 2, textTransform: 'capitalize' }}
-                variant='outlined'
-                size='small'
-                onClick={(e) => sortResults(e, 'rating')}
-              >
-                filter by rating
+                Sort by rating
               </Button>
             </Toolbar>
           </AppBar>
         </Grid>
-        <Grid>
+        <Grid item>
           <AppBar
-            position='static'
+            position="static"
             sx={{
-              backgroundColor: '#212121 !important ',
+              backgroundColor: "#212121 !important ",
               borderRadius: 8,
             }}
-            style={{ border: 'solid white 0.1px' }}
+            style={{ border: "solid white 0.1px" }}
           >
-            <Box sx={{ width: 300 }}>
-              <Slider
-                getAriaLabel={() => 'Temperature range'}
-                value={value}
-                onChange={handleChange}
-                valueLabelDisplay='auto'
-                getAriaValueText={valuetext}
-              />
-              <Button
-                className={classes.btn}
-                sx={{ m: 2, textTransform: 'capitalize' }}
-                variant='outlined'
-                size='small'
-                onClick={(e) => sortResults(e, 'pricerange')}
-              >
-                filter by Price Range
-              </Button>
-            </Box>
+            <Toolbar>
+              <Box sx={{ width: 330, height: 88 }} justify="center">
+                <Grid container justify="center">
+                  <Typography
+                    variant="body1"
+                    style={{
+                      color: "white",
+                      marginTop: 10,
+                    }}
+                  >
+                    Filter by Price Range
+                  </Typography>
+                </Grid>
+                <Slider
+                  getAriaLabel={() => "Temperature range"}
+                  value={value}
+                  min={1}
+                  max={1000}
+                  onChange={handleChange}
+                  valueLabelDisplay="auto"
+                  getAriaValueText={valuetext}
+                />
+              </Box>
+            </Toolbar>
           </AppBar>
         </Grid>
 
         <Grid>
-          <Grid container justify='center' spacing={4}>
+          <Grid container justify="center" spacing={4}>
             {props.products
 
               .filter((product) => {
-                if (product.isAvailable) {
-                  if (searchValue == '') {
+                if (
+                  product.isAvailable &&
+                  product.item_price <= value[1] &&
+                  product.item_price >= value[0]
+                ) {
+                  if (searchValue == "") {
                     return product;
                   } else if (
                     product.item_name
                       .toLowerCase()
-                      .includes(searchValue.toLowerCase())
+                      .includes(searchValue.toLowerCase()) &&
+                    product.item_price <= value[1] &&
+                    product.item_price >= value[0]
                   ) {
                     return product;
                   }
