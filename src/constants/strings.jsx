@@ -14,7 +14,10 @@ export const REGISTEROK = "Registration Succeeded :)";
 export const REGISTERFAIL = "Registration Failed :(";
 export const LOGINOK = "Log in Succeeded :)";
 export const LOGINFAIL = "Log in Failed :(";
+export const RESETOK = "Password changed successfully :)";
+export const RESETFAIL = "Password change failed :(";
 export const EXISTUSER = "User exist ";
+export const NOTEXISTUSER = "User dosen't exist ";
 export const ADDNEWPROD = "Add new Product ";
 export const ERRORLOGIN = "Wrong Email or Password ";
 export const RESETPASSWORDTITLE = "Reset Password ";
@@ -33,4 +36,9 @@ export const JWT_KEY = "JWT-KEY";
 export const loginAlerts = {
   OK: { severity: "success", message: LOGINOK },
   FAIL: { severity: "error", message: LOGINFAIL }
+};
+export const resetPasswordAlerts = {
+  OK: { severity: "success", message: RESETOK },
+  FAIL: { severity: "error", message: RESETFAIL },
+  EXIST: { severity: "error", message: NOTEXISTUSER }
 };

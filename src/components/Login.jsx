@@ -33,7 +33,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [passwordErrorText, setPasswordErrorText] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
+  const [rememberMe, setRememberMe] = useState(true);
   const [loginError, setLoginError] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [loginFlag, setLoginFlag] = useState(false);
@@ -330,7 +330,7 @@ const Login = () => {
                 }}
                 style={{
                   color: "white",
-                  textDecoration: "none"
+                  textTransform: "capitalize"
                 }}
               >
                 {FORGOT}
