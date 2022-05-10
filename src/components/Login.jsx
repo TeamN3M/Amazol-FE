@@ -330,7 +330,7 @@ const Login = () => {
                 }}
                 style={{
                   color: "white",
-                  textDecoration: "none"
+                  textTransform: "capitalize"
                 }}
               >
                 {FORGOT}

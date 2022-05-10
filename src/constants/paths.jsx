@@ -2,7 +2,7 @@ export default Object.freeze({
   index: "/",
   login: "/Login",
   register: "/Register",
-  forgot:"/Forgot",
+  forgot: "/Forgot",
   profile: "/Profile",
   mprofile: "/MProfile",
   search: "/Search",
@@ -16,7 +16,7 @@ export default Object.freeze({
 // const authLogin = "/login";
 // const authGetUser = "/getUser";
 
-const userEndPoint = `/users`;
+const userEndPoint = `/user`;
 const userChangeInfo = "changeInfo/:id";
 const userFavorites = "favorites/:id";
 const userDelete = "deleteUser/:id";
@@ -30,6 +30,8 @@ export const registerURL = "http://localhost:4000/auth/register";
 export const addItemURL = "http://localhost:4000/item";
 export const getItemURL = "http://localhost:4000/item/";
 export const updateItemURL = "http://localhost:4000/item/updateItem/";
+export const getUserByEmailURL = "http://localhost:4000/user/findUserByEmail/";
+export const resetPasswordlURL = "http://localhost:4000/user/resetPassword/";
 
 // export const loginURL = `${authEndPoint}/${authLogin}`;
 // export const registerURL = `${authEndPoint}/${authRegister}`;
@@ -40,3 +42,4 @@ export const addToFavoritesUserURL = `${userEndPoint}/${userFavorites}`;
 export const deleteUserURL = `${userEndPoint}/${userDelete}`;
 export const findUserURL = `${userEndPoint}/${userFind}`;
 export const getAllUsersURL = `${userEndPoint}/${userGetAll}`;
+// export const getUserByEmailURL = `${userEndPoint}/${userGetByEmail}`;

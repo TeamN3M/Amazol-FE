@@ -4,12 +4,12 @@ import {
   registerURL,
   addItemURL,
   getItemURL,
-
+  getUserByEmailURL,
   updateItemURL,
-} from '../constants/paths';
-import { handleErrResponse, post, get, put } from './axios';
-import { getCodeURL } from '../constants/paths';
-
+  resetPasswordlURL
+} from "../constants/paths";
+import { handleErrResponse, post, get, put } from "./axios";
+import { getCodeURL } from "../constants/paths";
 
 export const loginUser = async (email, password) => {
   try {
@@ -35,7 +35,7 @@ export const registerUser = async (
       lastname,
       email,
       password,
-      isadmin,
+      isadmin
     });
 
     return { data: res.data, status: res.status };
@@ -54,6 +54,27 @@ export const getUser = async () => {
   }
 };
 
+export const getUserByEmail = async (email) => {
+  try {
+    const res = await get(getUserByEmailURL + email, { email });
+    console.log(res.data);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+export const resetPassword = async (userID, newPassword) => {
+  try {
+    const res = await put(resetPasswordlURL, {
+      id: userID,
+      password: newPassword
+    });
+    console.log(res.data);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
 export const getCode = async () => {
   try {
     const res = await get(getCodeURL);
@@ -80,7 +101,7 @@ export const addItem = async (
       item_rating,
       item_quantity,
       isAvailable,
-      item_pictures,
+      item_pictures
     });
 
     return { data: res.data, status: res.status };
@@ -112,7 +133,7 @@ export const getItems = async () => {
 export const updateItemById = async (id, item) => {
   try {
     const res = await put(updateItemURL + id, { id, item });
-    console.log('Update Item - ' + res.data);
+    console.log("Update Item - " + res.data);
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);
