@@ -8,7 +8,7 @@ import {
   getItemsURL,
   getUserCartURL,
   updateItemURL,
-  resetPasswordlURL
+  resetPasswordlURL,
   updateCartURL,
 } from '../constants/paths';
 import { handleErrResponse, post, get, put } from './axios';
@@ -38,7 +38,7 @@ export const registerUser = async (
       lastname,
       email,
       password,
-      isadmin
+      isadmin,
     });
 
     return { data: res.data, status: res.status };
@@ -70,7 +70,7 @@ export const resetPassword = async (userID, newPassword) => {
   try {
     const res = await put(resetPasswordlURL, {
       id: userID,
-      password: newPassword
+      password: newPassword,
     });
     console.log(res.data);
     return { data: res.data, status: res.status };
@@ -104,7 +104,7 @@ export const addItem = async (
       item_rating,
       item_quantity,
       isAvailable,
-      item_pictures
+      item_pictures,
     });
 
     return { data: res.data, status: res.status };
@@ -136,7 +136,7 @@ export const getItems = async () => {
 export const updateItemById = async (id, item) => {
   try {
     const res = await put(updateItemURL + id, { id, item });
-    console.log("Update Item - " + res.data);
+    console.log('Update Item - ' + res.data);
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);
