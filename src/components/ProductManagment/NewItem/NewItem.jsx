@@ -11,14 +11,13 @@ import { ADDNEWPROD } from "../../../constants/strings";
 import { UPLOAD } from "../../../constants/urls";
 import { Modal } from "@mui/material";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
-import UploadImage from "./UploadImage";
 
 const NewItem = () => {
   // const [count, setCount] = React.useState(parseInt('5'));
   // const [itemVisible, setItemVisible] = React.useState(true);
   const [open, setOpen] = React.useState(false);
   const [name, setName] = React.useState("");
-  const [upload, setUpload] = React.useState(false);
+
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
@@ -33,9 +32,6 @@ const NewItem = () => {
   const [quantity, setQuantity] = React.useState("");
   const handleQuantityChange = (event) => {
     setQuantity(event.target.value);
-  };
-  const handleClickUpload = () => {
-    setUpload(true);
   };
 
   const classes = useStyles();
@@ -118,27 +114,23 @@ const NewItem = () => {
               justifyContent='space-between'
               alignItems='center'
             >
-              {upload ? (
-                <UploadImage />
-              ) : (
-                <Grid item xs={4} alignItems='center' justifyContent='center'>
-                  {/* col 1 */}
-                  <CardMedia
-                    className={classes.media}
-                    image={UPLOAD}
-                    title={"name"}
-                    component='img'
-                    align={"left"}
-                  />
-                  <Button
-                    variant='outlined'
-                    style={{ color: "white", textTransform: "capitalize" }}
-                    onClick={handleClickUpload}
-                  >
-                    Upload Image
-                  </Button>
-                </Grid>
-              )}
+              <Grid item xs={4} alignItems='center' justifyContent='center'>
+                {/* col 1 */}
+                <CardMedia
+                  className={classes.media}
+                  image={UPLOAD}
+                  title={"name"}
+                  component='img'
+                  align={"left"}
+                />
+                <Button
+                  variant='outlined'
+                  style={{ color: "white", textTransform: "capitalize" }}
+                >
+                  Upload Image
+                </Button>
+              </Grid>
+
               <Grid item xs={4}>
                 {/* col 2 */}
                 <CardContent>

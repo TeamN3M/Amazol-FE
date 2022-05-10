@@ -16,12 +16,15 @@ export const LOGINOK = "Log in Succeeded :)";
 export const LOGINFAIL = "Log in Failed :(";
 export const RESETOK = "Password changed successfully :)";
 export const RESETFAIL = "Password change failed :(";
+export const CHANGETOK = "The change was made successfully :)";
+export const CHANGEFAIL = "There was an error changing the details :(";
 export const EXISTUSER = "User exist ";
 export const NOTEXISTUSER = "User dosen't exist ";
 export const ADDNEWPROD = "Add new Product ";
 export const ERRORLOGIN = "Wrong Email or Password ";
 export const RESETPASSWORDTITLE = "Reset Password ";
 export const CANCEL = "Cancel ";
+export const SAVE = "Save ";
 
 // validate email Minimum 8 characters, at least one letter and one number
 export const validatePassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/i;
@@ -40,10 +43,14 @@ export const JWT_KEY = "JWT-KEY";
 
 export const loginAlerts = {
   OK: { severity: "success", message: LOGINOK },
-  FAIL: { severity: "error", message: LOGINFAIL },
+  FAIL: { severity: "error", message: LOGINFAIL }
 };
 export const resetPasswordAlerts = {
   OK: { severity: "success", message: RESETOK },
   FAIL: { severity: "error", message: RESETFAIL },
   EXIST: { severity: "error", message: NOTEXISTUSER }
+};
+export const changeInfoAlerts = {
+  OK: { severity: "success", message: CHANGETOK },
+  FAIL: { severity: "error", message: CHANGEFAIL }
 };
