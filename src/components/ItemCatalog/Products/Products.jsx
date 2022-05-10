@@ -28,11 +28,11 @@ const Products = (props) => {
   const sortResults = (e, val) => {
     e.preventDefault();
     let sortedResults = props.products.sort((a, b) => {
-      if (val === 'price') {
+      if (val === "price") {
         return parseInt(a.item_price) - parseInt(b.item_price);
-      } else if (val === 'rating') {
+      } else if (val === "rating") {
         return parseFloat(b.item_rating) - parseFloat(a.item_rating);
-      } else if (val === 'pricerange') {
+      } else if (val === "pricerange") {
         return b.TotalRecovered - a.TotalRecovered;
       }
     });
@@ -52,9 +52,9 @@ const Products = (props) => {
       >
         <Grid item>
           <AppBar
-            position='static'
+            position="static"
             sx={{
-              backgroundColor: '#212121 !important ',
+              backgroundColor: "#212121 !important ",
               borderRadius: 8,
               display: 'flex',
               flexDirection: 'row',
@@ -64,7 +64,7 @@ const Products = (props) => {
               // margin: "auto",
             }}
             style={{
-              border: 'solid white 0.1px',
+              border: "solid white 0.1px",
             }}
           >
             <Toolbar>
@@ -72,20 +72,20 @@ const Products = (props) => {
                 className={classes.btn}
                 sx={{
                   m: 2,
-                  textTransform: 'capitalize',
+                  textTransform: "capitalize",
                 }}
-                variant='outlined'
-                size='small'
+                variant="outlined"
+                size="small"
                 //onClick={handleCategoryClicked}
               >
                 filter by category
               </Button>
               <Button
                 className={classes.btn}
-                sx={{ m: 2, textTransform: 'capitalize' }}
-                variant='outlined'
-                size='small'
-                onClick={(e) => sortResults(e, 'price')}
+                sx={{ m: 2, textTransform: "capitalize" }}
+                variant="outlined"
+                size="small"
+                onClick={(e) => sortResults(e, "price")}
               >
                 Sort by price
               </Button>
@@ -103,12 +103,12 @@ const Products = (props) => {
         </Grid>
         <Grid item>
           <AppBar
-            position='static'
+            position="static"
             sx={{
-              backgroundColor: '#212121 !important ',
+              backgroundColor: "#212121 !important ",
               borderRadius: 8,
             }}
-            style={{ border: 'solid white 0.1px' }}
+            style={{ border: "solid white 0.1px" }}
           >
             <Toolbar>
               <Box sx={{ width: 330, height: 88 }} justify='center'>
@@ -138,7 +138,7 @@ const Products = (props) => {
         </Grid>
 
         <Grid>
-          <Grid container justify='center' spacing={4}>
+          <Grid container justify="center" spacing={4}>
             {props.products
               .filter((product) => {
                 if (
