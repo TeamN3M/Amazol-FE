@@ -10,6 +10,8 @@ import { getCartById, getItems } from '../../Services/services';
 import { useState } from 'react';
 import LinearProgress from '@mui/material/LinearProgress';
 import { makeStyles } from '@material-ui/core/styles';
+import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
+import Button from '@mui/material/Button';
 
 const RGB = keyframes`
   0% { color: red; }
@@ -117,7 +119,32 @@ const CartPage = () => {
         </Typography>
 
         {tempCart.length === 0 ? <p>No items in cart.</p> : null}
-        <CartGrid products={tempCart} sum={sum} reciptText={text} />
+        <CartGrid
+          products={tempCart}
+          userid={getUser(state)._id}
+          sum={sum}
+          reciptText={text}
+        />
+        <Button
+          type='submit'
+          fullWidth
+          // onClick={navToPayment}
+          variant='contained'
+          sx={{ mt: 3, mb: 2 }}
+          startIcon={<PaidOutlinedIcon />}
+          style={{
+            marginLeft: '5%',
+            maxWidth: '90%',
+            maxHeight: '70px',
+            minWidth: '150px',
+            minHeight: '50px',
+            backgroundColor: '#161e33',
+            textTransform: 'capitalize',
+            padding: 'auto',
+          }}
+        >
+          Pay now
+        </Button>
       </Grid>
 
       <CssBaseline />

@@ -16,7 +16,7 @@ const CartGrid = (props) => {
         <Grid container direction='column' justifyContent='center' spacing={4}>
           {props.products.map((product) => (
             <Grid item key={product._id}>
-              <CartItem product={product} />
+              <CartItem product={product} userid={props.userid} />
             </Grid>
           ))}
         </Grid>

@@ -12,11 +12,11 @@ export default makeStyles({
   },
   media: {
     // paddingTop: '56.25%', // 16:9
-    // padding: "20%",
+    padding: "20px",
     height: '10%',
     width: '10%',
     "&:hover": {
-      padding: "50%%",
+      padding: "50%",
     },
   },
   cardActions: {

@@ -182,3 +182,36 @@ export const addItemToCart = async (id, inItem) => {
     return handleErrResponse(err);
   }
 };
+
+export const removeItemFromCart = async (id, outItemid) => {
+  let items;
+  let cart_id;
+  try {
+    const res = await get(getUserCartURL + id, { id });
+    if (res.status == 200) {
+      items = [...res.data.items];
+      cart_id = res.data._id;
+    }
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+  console.log('1.The old cart -');
+  console.log(items);
+
+  items = items.filter((item) => {
+    return item.item_id !== outItemid._id;
+  });
+
+  console.log('2.The new cart -');
+  console.log(items);
+  try {
+    const res = await put(updateCartURL + cart_id, {
+      customer_id: id,
+      items: items,
+    });
+    console.log(res);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};

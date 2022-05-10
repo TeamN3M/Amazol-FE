@@ -19,8 +19,10 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { getItemById } from '../../../Services/services';
+import { getItemById, removeItemFromCart } from '../../../Services/services';
 //import MainTheme from "../../../themes/MainTheme";
+import MySnackBar from '../../Alerts/MySnackBar';
+import { useState } from 'react';
 
 // const styleForPaper = {
 //   width: '96vw',
@@ -41,16 +43,17 @@ const styleForIcon = {
 //   font: '5rem',
 // };
 
-const Product = (productIdAndQuantity) => {
+const Product = (/*{ productIdAndQuantity, userid }*/ props) => {
   const [product, setProduct] = React.useState(false);
+  const [cartUpdated, setCartUpdated] = useState(false);
 
   const getProdDetails = async () => {
     console.log('looking for item ');
-    console.log(productIdAndQuantity);
+    console.log(props);
 
-    const res = await getItemById(productIdAndQuantity.product.item_id);
+    const res = await getItemById(props.product.item_id);
     if (res.status == 200) {
-      console.log('Found Item ' + productIdAndQuantity.product.item_id);
+      console.log('Found Item ' + props.product.item_id);
       console.log(res.data);
       setProduct(res.data);
     } else {
@@ -58,9 +61,7 @@ const Product = (productIdAndQuantity) => {
     }
   };
 
-  const [count, setCount] = React.useState(
-    productIdAndQuantity.product.quantity
-  );
+  const [count, setCount] = React.useState(props.product.quantity);
   const [itemVisible, setItemVisible] = React.useState(true);
   const classes = useStyles();
   const inStock =
@@ -73,8 +74,26 @@ const Product = (productIdAndQuantity) => {
     return <></>;
   }
 
+  const handleRemoveItem = async (product, userid) => {
+    const res = await removeItemFromCart(userid, product);
+    if (res.status == 200) {
+      console.log(res.data);
+      setCartUpdated(true);
+    } else {
+      console.log('No sexs Fk you');
+    }
+  };
+  function refreshPage() {
+    window.location.reload(false);
+  }
   return (
     <Card className={classes.root} sx={{ display: 'flex' }}>
+      <MySnackBar
+        open={cartUpdated}
+        timeout={2000}
+        severity='success'
+        message='Removed The product from the cart.'
+      />
       <Box
         sx={{
           display: 'flex',
@@ -150,7 +169,7 @@ const Product = (productIdAndQuantity) => {
                 className={classes.amount}
                 aria-label='increase'
                 onClick={() => {
-                  setCount(count + 1);
+                  setCount(Math.min(count + 1, product.item_quantity));
                 }}
               >
                 <AddIcon fontSize='large' />
@@ -163,7 +182,11 @@ const Product = (productIdAndQuantity) => {
             aria-label='Example'
             style={styleForButton}
             onClick={() => {
+              handleRemoveItem(product, props.userid);
               setItemVisible(false);
+              setTimeout(() => {
+                refreshPage();
+              }, 1000);
             }}
           >
             <DeleteForeverIcon style={styleForIcon} />
