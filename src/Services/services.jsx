@@ -4,12 +4,15 @@ import {
   registerURL,
   addItemURL,
   getItemURL,
-
+  getUserByEmailURL,
+  getItemsURL,
+  getUserCartURL,
   updateItemURL,
+  resetPasswordlURL,
+  updateCartURL,
 } from '../constants/paths';
 import { handleErrResponse, post, get, put } from './axios';
 import { getCodeURL } from '../constants/paths';
-
 
 export const loginUser = async (email, password) => {
   try {
@@ -54,6 +57,27 @@ export const getUser = async () => {
   }
 };
 
+export const getUserByEmail = async (email) => {
+  try {
+    const res = await get(getUserByEmailURL + email, { email });
+    console.log(res.data);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+export const resetPassword = async (userID, newPassword) => {
+  try {
+    const res = await put(resetPasswordlURL, {
+      id: userID,
+      password: newPassword,
+    });
+    console.log(res.data);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
 export const getCode = async () => {
   try {
     const res = await get(getCodeURL);
@@ -92,7 +116,7 @@ export const addItem = async (
 export const getItemById = async (id) => {
   try {
     const res = await get(getItemURL + id, { id });
-    //console.log(res.data);
+    console.log('requesting item');
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);
@@ -101,7 +125,7 @@ export const getItemById = async (id) => {
 
 export const getItems = async () => {
   try {
-    const res = await get(getItemURL);
+    const res = await get(getItemsURL);
     console.log(res.data);
     return { data: res.data, status: res.status };
   } catch (err) {
@@ -113,6 +137,46 @@ export const updateItemById = async (id, item) => {
   try {
     const res = await put(updateItemURL + id, { id, item });
     console.log('Update Item - ' + res.data);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const getCartById = async (id) => {
+  try {
+    const res = await get(getUserCartURL + id, { id });
+    //console.log(res.data);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const addItemToCart = async (id, inItem) => {
+  const item = [{ item_id: inItem._id, item_quantity: 1 }];
+  let items;
+  let cart_id;
+  console.log('1.Added item -');
+  console.log(item);
+  try {
+    const res = await get(getUserCartURL + id, { id });
+    //console.log(res.data);
+    if (res.status == 200) {
+      items = [...res.data.items, { item_id: inItem._id, quantity: 1 }];
+      cart_id = res.data._id;
+    }
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+  console.log('2.The new cart -');
+  console.log(items);
+  try {
+    const res = await put(updateCartURL + cart_id, {
+      customer_id: id,
+      items: items,
+    });
+    console.log(res);
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);

@@ -1,102 +1,15 @@
 import React from 'react';
 import { Grid, Typography } from '@mui/material';
-// import { ThemeProvider } from '@mui/material/styles';
-// import MainTheme from '../../themes/MainTheme';
 import { CssBaseline } from '@mui/material';
 import CartGrid from './CartGrid/CartGrid';
 import { keyframes } from '@emotion/react';
-// import { keyframes } from '@emotion/react';
-// import ImageList from '@mui/material/ImageList';
-// import ImageListItemBar from '@mui/material/ImageListItem';
-// import ImageList from '@mui/material/ImageList';
-// import ImageListItem from '@mui/material/ImageListItem';
-// import ImageListItemBar from '@mui/material/ImageListItemBar';
-// import ListSubheader from '@mui/material/ListSubheader';
-// import IconButton from '@mui/material/IconButton';
-// import InfoIcon from '@mui/icons-material/Info';
-
-const products = [
-  {
-    id: 1,
-    name: ' Item1',
-    description: 'Descriprion 1 2 3 4',
-    price: '100',
-    rating: '1',
-    quantity: '100',
-    image: '../images/home page/promoted_items/item_3.jpg',
-    time: '1',
-    count: '1',
-  },
-  {
-    id: 2,
-    name: ' Item2',
-    description: 'Descriprion 1 2 3 4',
-    price: '100',
-    rating: '2',
-    quantity: '50',
-    image: '../images/home page/promoted_items/item_4.jpg',
-    time: '2',
-    count: '3',
-  },
-  {
-    id: 3,
-    name: ' Item3',
-    description: 'Descriprion 1 2 3 4',
-    price: '100',
-    rating: '2',
-    quantity: '0',
-    image: '../images/home page/promoted_items/item_5.jpg',
-    time: '2',
-    count: '1',
-  },
-  {
-    id: 4,
-    name: ' Item4',
-    description: 'Descriprion 1 2 3 4',
-    price: '100',
-    rating: '2',
-    quantity: '50',
-    image: '../images/home page/promoted_items/item_6.jpg',
-    time: '2',
-    count: '1',
-  },
-  {
-    id: 5,
-    name: ' Item5',
-    description: 'Descriprion 1 2 3 4',
-    price: '100',
-    rating: '2',
-    quantity: '50',
-    image: '../images/home page/promoted_items/item_1.jpg',
-    time: '2',
-    count: '1',
-  },
-  {
-    id: 6,
-    name: ' Item6',
-    description: 'Descriprion 1 2 3 4',
-    price: '100',
-    rating: '2',
-    quantity: '0',
-    image: '../images/home page/promoted_items/item_2.jpg',
-    time: '2',
-    count: '1',
-  },
-  {
-    id: 7,
-    name: ' Item7',
-    description: 'Descriprion 1 2 3 4',
-    price: '100',
-    rating: '2',
-    quantity: '50',
-    image: '../images/home page/promoted_items/item_3.jpg',
-    time: '2',
-    count: '1',
-  },
-];
-
-const calculateTotal = (items) =>
-  items.reduce((acc, item) => acc + item.quantity * item.price, 0);
+import { useSelector, useDispatch } from 'react-redux';
+import { setCart } from '../../store/StateCart';
+import { getUser } from '../../store/StateUser';
+import { getCartById, getItems } from '../../Services/services';
+import { useState } from 'react';
+import LinearProgress from '@mui/material/LinearProgress';
+import { makeStyles } from '@material-ui/core/styles';
 
 const RGB = keyframes`
   0% { color: red; }
@@ -105,45 +18,111 @@ const RGB = keyframes`
 100% { color: red; }
 `;
 
-const CartPage = () =>
-  /*{
-    products , addToCart, removeFromCart 
-  }*/
-  {
+const CartPage = () => {
+  const [tempCart, setTempCart] = useState([]);
+  const [allItems, setItems] = useState([]);
+  const state = useSelector((s) => s);
+
+  const useStyles = makeStyles({
+    loading: {
+      padding: '60px',
+      textAlign: 'center',
+      background: '#888888',
+      color: 'white',
+      fontSize: '30px',
+    },
+    header: {
+      padding: '60px',
+      textAlign: 'center',
+      background: '#888888',
+      color: 'white',
+      fontSize: '5rem',
+    },
+  });
+  const classes = useStyles();
+  const getAllItems = async () => {
+    const res = await getItems();
+    if (res.status == 200) {
+      console.log('got items');
+      console.log(res.data);
+      setItems(res.data);
+    } else {
+      console.log('no sex fuck u');
+    }
+  };
+
+  if (allItems.length == 0) {
+    getAllItems();
+  }
+
+  const getUserCartByUser = async (user) => {
+    if (user !== undefined) {
+      const id = user._id;
+      const res = await getCartById(id);
+      console.log('here');
+      if (res.status == 200) {
+        console.log(res.data.items);
+        setTempCart(res.data.items);
+      }
+    }
+  };
+
+  if (tempCart.length == 0) {
+    getUserCartByUser(getUser(state));
+    console.log('Got Cart obj:');
+    console.log(tempCart);
+  }
+
+  let sum = 0;
+  let text = '';
+  if (allItems.length != 0 && tempCart.length != 0) {
+    for (let i = 0; i < tempCart.length; i++) {
+      for (let j = 0; j < allItems.length; j++) {
+        if (tempCart[i].item_id == allItems[j]._id) {
+          text =
+            text +
+            allItems[j].item_price +
+            ' X ' +
+            tempCart[i].quantity +
+            ' <br>';
+          sum =
+            sum +
+            parseInt(allItems[j].item_price) * parseInt(tempCart[i].quantity);
+        }
+      }
+    }
+  } else
     return (
       <>
-        <Grid>
-          <Typography
-            color={'white'}
-            variant='h1'
-            sx={{ animation: `${RGB} 2.5s infinite`, alignItems: 'center' }}
-          >
-            Your Cart :
-          </Typography>
-          {products.length === 0 ? <p>No items in cart.</p> : null}
-          <CartGrid products={products /*, addToCart, removeFromCart */} />
-          <h2>Total: ${calculateTotal(products).toFixed(2)}</h2>
-        </Grid>
-
+        <p className={classes.loading}>Loading...</p>
+        <LinearProgress />
         <CssBaseline />
       </>
     );
-  };
+  console.log(text);
+  console.log(sum);
 
-/*
-<Wrapper>
-<h2>Your Cart</h2>
-{cartItems.length === 0 ? <p>No items in cart.</p> : null}
-{cartItems.map((item) => (
-  <CartItem
-    key={item.id}
-    item={item}
-    addToCart={addToCart}
-    removeFromCart={removeFromCart}
-  />
-))}
-<h2>Total: ${calculateTotal(cartItems).toFixed(2)}</h2>
-</Wrapper>
-*/
+  const dispatch = useDispatch();
+  dispatch(setCart(tempCart));
+  return (
+    <>
+      <Grid>
+        <Typography
+          color={'white'}
+          variant='h1'
+          sx={{ animation: `${RGB} 2.5s infinite`, alignItems: 'center' }}
+          class={classes.header}
+        >
+          Your Cart :
+        </Typography>
+
+        {tempCart.length === 0 ? <p>No items in cart.</p> : null}
+        <CartGrid products={tempCart} sum={sum} reciptText={text} />
+      </Grid>
+
+      <CssBaseline />
+    </>
+  );
+};
 
 export default CartPage;

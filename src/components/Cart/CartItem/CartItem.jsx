@@ -19,6 +19,7 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { getItemById } from '../../../Services/services';
 //import MainTheme from "../../../themes/MainTheme";
 
 // const styleForPaper = {
@@ -39,15 +40,39 @@ const styleForIcon = {
 // const styleForPrice = {
 //   font: '5rem',
 // };
-const Product = ({ product }) => {
-  const [count, setCount] = React.useState(parseInt(product.count));
+
+const Product = (productIdAndQuantity) => {
+  const [product, setProduct] = React.useState(false);
+
+  const getProdDetails = async () => {
+    console.log('looking for item ');
+    console.log(productIdAndQuantity);
+
+    const res = await getItemById(productIdAndQuantity.product.item_id);
+    if (res.status == 200) {
+      console.log('Found Item ' + productIdAndQuantity.product.item_id);
+      console.log(res.data);
+      setProduct(res.data);
+    } else {
+      console.log('No sexs Fk you');
+    }
+  };
+
+  const [count, setCount] = React.useState(
+    productIdAndQuantity.product.quantity
+  );
   const [itemVisible, setItemVisible] = React.useState(true);
   const classes = useStyles();
   const inStock =
-    parseInt(product.quantity) > 0
-      ? '✅ In-stock (' + product.quantity + ')'
+    parseInt(product.item_quantity) > 0
+      ? '✅ In-stock (' + product.item_quantity + ')'
       : '❌ Not in-stock';
   if (itemVisible != true) return <></>;
+  if (!product) {
+    getProdDetails();
+    return <></>;
+  }
+
   return (
     <Card className={classes.root} sx={{ display: 'flex' }}>
       <Box
@@ -60,48 +85,29 @@ const Product = ({ product }) => {
       >
         <CardMedia
           className={classes.media}
-          image={product.image}
-          title={product.name}
+          image={product.item_pictures[0]}
+          title={product.item_name}
           component='img'
           height={'25%'}
           width={'25%'}
           align={'left'}
         />
         <CardContent>
-          <div className={classes.CardContent}>
-            {/* <Grid
-              alignItems='center'
-              container
-              justifyContent='space-between'
-              direction='row'
-            > */}
+          <div className={classes.CardContent}></div>
 
-            {/* </Grid> */}
-            {/* <Grid
-              alignItems='center'
-              container
-              justifyContent='space-between'
-              direction='row'
-            > */}
-
-            {/* </Grid> */}
-          </div>
-          {/* <Typography variant='h2' color='textSecondary'>
-          {product.description}
-        </Typography> */}
           <Typography component='h2' className={classes.name}>
-            {product.name}
+            {product.item_name}
           </Typography>
           <Rating
             name='read-only'
-            value={product.rating}
+            value={product.item_rating}
             readOnly
             className={classes.rating}
           />
 
           <span className={classes.stock}>{inStock}</span>
           <Typography
-            dangerouslySetInnerHTML={{ __html: product.description }}
+            dangerouslySetInnerHTML={{ __html: product.item_description }}
             variant='body2'
             color='textSecondary'
             component='p'
@@ -116,7 +122,7 @@ const Product = ({ product }) => {
               style={{ alignContent: 'right', fontSize: '3rem' }}
               gutterBottom
             >
-              ${product.price}
+              ${product.item_price}
             </Typography>
             <ButtonGroup className={classes.amount}>
               <Button

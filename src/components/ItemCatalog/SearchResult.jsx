@@ -1,34 +1,45 @@
-import React from "react";
-import { Grid } from "@mui/material";
-// import { ThemeProvider } from '@mui/material/styles';
-// import MainTheme from '../../themes/MainTheme';
-import { CssBaseline } from "@mui/material";
-import Products from "./Products/Products";
-// import { keyframes } from '@emotion/react';
-// import ImageList from '@mui/material/ImageList';
-// import ImageListItemBar from '@mui/material/ImageListItem';
-// import ImageList from '@mui/material/ImageList';
-// import ImageListItem from '@mui/material/ImageListItem';
-// import ImageListItemBar from '@mui/material/ImageListItemBar';
-// import ListSubheader from '@mui/material/ListSubheader';
-// import IconButton from '@mui/material/IconButton';
-// import InfoIcon from '@mui/icons-material/Info';
-import { getItemById } from "../../Services/services";
+import React from 'react';
+import { Grid } from '@mui/material';
+import { CssBaseline } from '@mui/material';
+import Products from './Products/Products';
+import { getItems } from '../../Services/services';
+import LinearProgress from '@mui/material/LinearProgress';
+import { makeStyles } from '@material-ui/core/styles';
 
 const SearchResult = () => {
   const [products, setProducts] = React.useState([]);
   const getProds = async () => {
-    console.log("getting items");
-    const res = await getItemById("");
+    console.log('getting items');
+    const res = await getItems();
     if (res.status == 200) {
-      console.log("got itemsddd");
+      console.log('got items');
       console.log(res.data);
       setProducts(res.data);
     } else {
-      console.log("no sex fuck u");
+      console.log('no sex fuck u');
     }
   };
   if (!products.length) getProds();
+
+  const useStyles = makeStyles({
+    loading: {
+      padding: '60px',
+      textAlign: 'center',
+      background: '#888888',
+      color: 'white',
+      fontSize: '30px',
+    },
+  });
+  const classes = useStyles();
+
+  if (!products.length)
+    return (
+      <>
+        <p className={classes.loading}>Loading...</p>
+        <LinearProgress />
+        <CssBaseline />
+      </>
+    );
   return (
     <>
       <Grid>

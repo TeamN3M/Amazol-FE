@@ -1,10 +1,10 @@
-import React, { useReducer, useEffect } from "react";
-import { Grid, Typography } from "@material-ui/core";
-import Product from "../Product/Product";
-import { CssBaseline } from "@mui/material";
-import useStyles from "./styles";
-import { useLocation } from "react-router-dom";
-import { AppBar, Toolbar, Button, Slider, Box } from "@mui/material";
+import React, { useReducer, useEffect } from 'react';
+import { Grid, Typography } from '@material-ui/core';
+import Product from '../Product/Product';
+import { CssBaseline } from '@mui/material';
+import useStyles from './styles';
+import { useLocation } from 'react-router-dom';
+import { AppBar, Toolbar, Button, Slider, Box } from '@mui/material';
 
 function reducer(state, action) {
   return [...state, ...action];
@@ -46,9 +46,9 @@ const Products = (props) => {
       <Grid
         container
         spacing={2}
-        justify="center"
-        direction="column"
-        alignItems="center"
+        justify='center'
+        direction='column'
+        alignItems='center'
       >
         <Grid item>
           <AppBar
@@ -56,9 +56,9 @@ const Products = (props) => {
             sx={{
               backgroundColor: "#212121 !important ",
               borderRadius: 8,
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around",
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-around',
 
               // width: "min",
               // margin: "auto",
@@ -91,10 +91,10 @@ const Products = (props) => {
               </Button>
               <Button
                 className={classes.btn}
-                sx={{ m: 2, textTransform: "capitalize" }}
-                variant="outlined"
-                size="small"
-                onClick={(e) => sortResults(e, "rating")}
+                sx={{ m: 2, textTransform: 'capitalize' }}
+                variant='outlined'
+                size='small'
+                onClick={(e) => sortResults(e, 'rating')}
               >
                 Sort by rating
               </Button>
@@ -111,12 +111,12 @@ const Products = (props) => {
             style={{ border: "solid white 0.1px" }}
           >
             <Toolbar>
-              <Box sx={{ width: 330, height: 88 }} justify="center">
-                <Grid container justify="center">
+              <Box sx={{ width: 330, height: 88 }} justify='center'>
+                <Grid container justify='center'>
                   <Typography
-                    variant="body1"
+                    variant='body1'
                     style={{
-                      color: "white",
+                      color: 'white',
                       marginTop: 10,
                     }}
                   >
@@ -124,12 +124,12 @@ const Products = (props) => {
                   </Typography>
                 </Grid>
                 <Slider
-                  getAriaLabel={() => "Temperature range"}
+                  getAriaLabel={() => 'Temperature range'}
                   value={value}
                   min={1}
                   max={1000}
                   onChange={handleChange}
-                  valueLabelDisplay="auto"
+                  valueLabelDisplay='auto'
                   getAriaValueText={valuetext}
                 />
               </Box>
@@ -140,14 +140,13 @@ const Products = (props) => {
         <Grid>
           <Grid container justify="center" spacing={4}>
             {props.products
-
               .filter((product) => {
                 if (
                   product.isAvailable &&
                   product.item_price <= value[1] &&
                   product.item_price >= value[0]
                 ) {
-                  if (searchValue == "") {
+                  if (searchValue == '') {
                     return product;
                   } else if (
                     product.item_name
@@ -161,7 +160,7 @@ const Products = (props) => {
                 }
               })
               .map((product) => (
-                <Grid item key={product._id} xs={12} sm={6} ms={4} lg={3}>
+                <Grid item key={product._id} xs={12} sm={6} ms={3} lg={3}>
                   <Product product={product} />
                 </Grid>
               ))}

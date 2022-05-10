@@ -1,61 +1,61 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import SearchBar from "../search/SearchBar";
-import paths from "../../constants/paths";
-import { useNavigate } from "react-router-dom";
-import { LOGO } from "../../constants/urls";
-import { Button } from "@mui/material";
-import Avatar from "@mui/material/Avatar";
-import { useDispatch } from "react-redux";
-import { endLoginSession } from "../../constants/helpers";
-import { logoutUser } from "../../store/State";
-import { useSelector } from "react-redux";
-import { getUser } from "../../store/State";
-import PersonIcon from "@mui/icons-material/Person";
-import LogoutIcon from "@mui/icons-material/Logout";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
-import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
-import FeaturedPlayListIcon from "@mui/icons-material/FeaturedPlayList";
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import SearchBar from '../search/SearchBar';
+import paths from '../../constants/paths';
+import { useNavigate } from 'react-router-dom';
+import { LOGO } from '../../constants/urls';
+import { Button } from '@mui/material';
+import Avatar from '@mui/material/Avatar';
+import { useDispatch } from 'react-redux';
+import { endLoginSession } from '../../constants/helpers';
+import { logoutUser } from '../../store/StateUser';
+import { useSelector } from 'react-redux';
+import { getUser } from '../../store/StateUser';
+import PersonIcon from '@mui/icons-material/Person';
+import LogoutIcon from '@mui/icons-material/Logout';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
+import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList';
 
 const ITEM_HEIGHT = 48;
 
 const CustomerNavBar = () => {
   const options = [
     {
-      name: "Profile",
+      name: 'Profile',
       path: paths.profile,
       icon: <PersonIcon />
     },
     {
-      name: "Orders",
+      name: 'Orders',
       path: paths.cusomerorders,
       icon: <ShoppingBasketIcon />
     },
     {
-      name: "Cart",
+      name: 'Cart',
       path: paths.cart,
       icon: <ShoppingCartIcon />
     },
     {
-      name: "Delivery",
+      name: 'Delivery',
       path: paths.login,
       icon: <DeliveryDiningIcon />
     },
     {
-      name: "Wishlist",
+      name: 'Wishlist',
       path: paths.login,
       icon: <FeaturedPlayListIcon />
     },
     {
-      name: "Log Out",
+      name: 'Log Out',
       path: paths.index,
       icon: <LogoutIcon />
     }
@@ -118,9 +118,9 @@ const CustomerNavBar = () => {
           aria-expanded={open ? "true" : undefined}
           aria-haspopup='true'
           onClick={handleClick}
-          style={{ color: "white" }}
+          style={{ color: 'white' }}
         >
-          <Avatar sx={{ bgcolor: "white" }}>{FL}</Avatar>
+          <Avatar sx={{ bgcolor: 'white' }}>{FL}</Avatar>
         </IconButton>
         <Menu
           id='long-menu'

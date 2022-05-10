@@ -7,18 +7,15 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
 
-const calculateTotal = (items) =>
-  items.reduce((acc, item) => acc + item.count * item.price, 0);
-
-const CartGrid = (props /*, addToCart, removeFromCart*/) => {
+const CartGrid = (props) => {
   const classes = useStyles();
   if (!props.products.length) return <p>Loading...</p>;
   return (
     <Grid container direction='row' spacing={2} columns={16}>
       <Grid item xs={8}>
-        <Grid container direction='column' justify='center' spacing={4}>
+        <Grid container direction='column' justifyContent='center' spacing={4}>
           {props.products.map((product) => (
-            <Grid item key={product.id} direction='row'>
+            <Grid item key={product._id}>
               <CartItem product={product} />
             </Grid>
           ))}
@@ -43,7 +40,8 @@ const CartGrid = (props /*, addToCart, removeFromCart*/) => {
             <Typography className={classes.summary}>&nbsp;Summary</Typography>
             <Divider></Divider>
             <Typography className={classes.summary}>
-              &nbsp;Total: &nbsp;${calculateTotal(props.products).toFixed(2)}
+              <div dangerouslySetInnerHTML={{ __html: props.reciptText }} />{' '}
+              &nbsp;Total: &nbsp;${props.sum}
             </Typography>
           </Paper>
         </Box>
