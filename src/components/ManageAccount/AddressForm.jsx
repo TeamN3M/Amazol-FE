@@ -100,16 +100,17 @@ export default function AddressForm(props) {
       }
     }
   }, []);
+  
   const classes = useStyles();
   const state = useSelector((s) => s);
   const user = getUser(state);
-  const [email, setEmail] = useState(user.email || "");
+  const [email, setEmail] = useState(user !== undefined ? user.email: "");
   const [emailErrorText, setEmailErrorText] = useState("");
-  const [password, setPassword] = useState(user.password || "");
+  const [password, setPassword] = useState("");
   const [passwordErrorText, setPasswordErrorText] = useState("");
-  const [firstname, setFirstname] = useState(user.first_name || "");
+  const [firstname, setFirstname] = useState(user !== undefined ? user.first_name: "");
   const [firstnameErrorText, setFirstnameErrorText] = useState("");
-  const [lastname, setLastname] = useState(user.last_name || "");
+  const [lastname, setLastname] = useState(user !== undefined ? user.last_name: "");
   const [lastnameErrorText, setLastnameErrorText] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [address, setAddress] = useState("");
