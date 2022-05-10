@@ -12,14 +12,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import AddressForm from "./AddressForm";
 import PaymentForm from "./PaymentForm";
-import { keyframes } from "@emotion/react";
 import { makeStyles } from "@material-ui/styles";
-const RGB = keyframes`
-    0% { color: red; }
-  33% { color: blue; }
-  66% { color: green; }
-  100% { color: red; }
-`;
 
 const steps = ["Shipping address", "Payment details"];
 
@@ -40,6 +33,10 @@ const useStyles = makeStyles({
     borderColor: "white !important",
     padding: 50,
   },
+  myLabel: {
+    color: "#1565c0 !important",
+    marginTop: 0,
+  },
 });
 
 export default function Checkout() {
@@ -47,7 +44,9 @@ export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
-    setActiveStep(activeStep + 1);
+    if (activeStep == 0) {
+      setActiveStep(activeStep + 1);
+    }
   };
 
   const handleBack = () => {
@@ -73,16 +72,24 @@ export default function Checkout() {
           sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
         >
           <Typography
-            variant="h5"
-            sx={{ animation: `${RGB} 2.5s infinite` }}
+            variant="h4"
             align="center"
+            style={{
+              color: "white",
+            }}
           >
             Edit Your Details
           </Typography>
           <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
             {steps.map((label) => (
               <Step key={label}>
-                <StepLabel>{label}</StepLabel>
+                <StepLabel
+                  classes={{
+                    label: classes.myLabel,
+                  }}
+                >
+                  {label}
+                </StepLabel>
               </Step>
             ))}
           </Stepper>
@@ -98,14 +105,15 @@ export default function Checkout() {
                       Back
                     </Button>
                   )}
-
-                  <Button
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 3, ml: 1 }}
-                  >
-                    {activeStep === steps.length - 1 ? "Save" : "Next"}
-                  </Button>
+                  {activeStep === 0 ? (
+                    <Button
+                      variant="contained"
+                      onClick={handleNext}
+                      sx={{ mt: 3, ml: 1 }}
+                    >
+                      {"Next"}
+                    </Button>
+                  ) : null}
                 </Box>
               </React.Fragment>
             )}

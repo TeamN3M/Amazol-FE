@@ -31,11 +31,16 @@ export const validateEmail =
 // validate name
 export const validateNames = /[^A-Za-z]+/;
 
+export const validateCardNumber = /^[0-9]{13,19}$/;
+export const validateExpire = /^(0[1-9]|1[0-2]|[1-9])\/?(([0-9]{4}|[0-9]{2})$)/;
+
+export const validateCvv = /^[0-9]{3}$/;
+
 export const JWT_KEY = "JWT-KEY";
 
 export const loginAlerts = {
   OK: { severity: "success", message: LOGINOK },
-  FAIL: { severity: "error", message: LOGINFAIL }
+  FAIL: { severity: "error", message: LOGINFAIL },
 };
 export const resetPasswordAlerts = {
   OK: { severity: "success", message: RESETOK },
