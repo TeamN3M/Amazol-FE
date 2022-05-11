@@ -1,17 +1,18 @@
-import React from 'react';
-import { Grid, Typography } from '@mui/material';
-import { CssBaseline } from '@mui/material';
-import CartGrid from './CartGrid/CartGrid';
-import { keyframes } from '@emotion/react';
-import { useSelector, useDispatch } from 'react-redux';
-import { setCart } from '../../store/StateCart';
-import { getUser } from '../../store/StateUser';
-import { getCartById, getItems } from '../../Services/services';
-import { useState } from 'react';
-import LinearProgress from '@mui/material/LinearProgress';
-import { makeStyles } from '@material-ui/core/styles';
-import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
-import Button from '@mui/material/Button';
+import React from "react";
+import { Grid, Typography } from "@mui/material";
+import { CssBaseline } from "@mui/material";
+import CartGrid from "./CartGrid/CartGrid";
+import { keyframes } from "@emotion/react";
+import { useSelector, useDispatch } from "react-redux";
+import { setCart } from "../../store/StateCart";
+import { getUser } from "../../store/StateUser";
+import { getCartById, getItems } from "../../Services/services";
+import { useState } from "react";
+import LinearProgress from "@mui/material/LinearProgress";
+import { makeStyles } from "@material-ui/core/styles";
+import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
+import Button from "@mui/material/Button";
+import { setCartSession } from "../../constants/helpers";
 
 const RGB = keyframes`
   0% { color: red; }
@@ -27,29 +28,29 @@ const CartPage = () => {
 
   const useStyles = makeStyles({
     loading: {
-      padding: '60px',
-      textAlign: 'center',
-      background: '#888888',
-      color: 'white',
-      fontSize: '30px',
+      padding: "60px",
+      textAlign: "center",
+      background: "#888888",
+      color: "white",
+      fontSize: "30px"
     },
     header: {
-      padding: '60px',
-      textAlign: 'center',
-      background: '#888888',
-      color: 'white',
-      fontSize: '5rem',
-    },
+      padding: "60px",
+      textAlign: "center",
+      background: "#888888",
+      color: "white",
+      fontSize: "5rem"
+    }
   });
   const classes = useStyles();
   const getAllItems = async () => {
     const res = await getItems();
     if (res.status == 200) {
-      console.log('got items');
+      console.log("got items");
       console.log(res.data);
       setItems(res.data);
     } else {
-      console.log('no sex fuck u');
+      console.log("no sex fuck u");
     }
   };
 
@@ -61,7 +62,7 @@ const CartPage = () => {
     if (user !== undefined) {
       const id = user._id;
       const res = await getCartById(id);
-      console.log('here');
+      console.log("here");
       if (res.status == 200) {
         console.log(res.data.items);
         setTempCart(res.data.items);
@@ -71,12 +72,12 @@ const CartPage = () => {
 
   if (tempCart.length == 0) {
     getUserCartByUser(getUser(state));
-    console.log('Got Cart obj:');
+    console.log("Got Cart obj:");
     console.log(tempCart);
   }
 
   let sum = 0;
-  let text = '';
+  let text = "";
   if (allItems.length != 0 && tempCart.length != 0) {
     for (let i = 0; i < tempCart.length; i++) {
       for (let j = 0; j < allItems.length; j++) {
@@ -84,9 +85,9 @@ const CartPage = () => {
           text =
             text +
             allItems[j].item_price +
-            ' X ' +
+            " X " +
             tempCart[i].quantity +
-            ' <br>';
+            " <br>";
           sum =
             sum +
             parseInt(allItems[j].item_price) * parseInt(tempCart[i].quantity);
@@ -106,13 +107,14 @@ const CartPage = () => {
 
   const dispatch = useDispatch();
   dispatch(setCart(tempCart));
+  setCartSession(tempCart);
   return (
     <>
       <Grid>
         <Typography
-          color={'white'}
+          color={"white"}
           variant='h1'
-          sx={{ animation: `${RGB} 2.5s infinite`, alignItems: 'center' }}
+          sx={{ animation: `${RGB} 2.5s infinite`, alignItems: "center" }}
           class={classes.header}
         >
           Your Cart :
@@ -133,14 +135,14 @@ const CartPage = () => {
           sx={{ mt: 3, mb: 2 }}
           startIcon={<PaidOutlinedIcon />}
           style={{
-            marginLeft: '5%',
-            maxWidth: '90%',
-            maxHeight: '70px',
-            minWidth: '150px',
-            minHeight: '50px',
-            backgroundColor: '#161e33',
-            textTransform: 'capitalize',
-            padding: 'auto',
+            marginLeft: "5%",
+            maxWidth: "90%",
+            maxHeight: "70px",
+            minWidth: "150px",
+            minHeight: "50px",
+            backgroundColor: "#161e33",
+            textTransform: "capitalize",
+            padding: "auto"
           }}
         >
           Pay now

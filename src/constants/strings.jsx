@@ -44,6 +44,7 @@ export const validateExpire = /^(0[1-9]|1[0-2]|[1-9])\/?(([0-9]{4}|[0-9]{2})$)/;
 export const validateCvv = /^[0-9]{3}$/;
 
 export const JWT_KEY = "JWT-KEY";
+export const CART_KEY = "CART-KEY";
 
 export const loginAlerts = {
   OK: { severity: "success", message: LOGINOK },

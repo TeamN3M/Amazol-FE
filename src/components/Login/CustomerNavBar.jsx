@@ -10,13 +10,14 @@ import SearchBar from "../search/SearchBar";
 import paths from "../../constants/paths";
 import { useNavigate } from "react-router-dom";
 import { LOGO } from "../../constants/urls";
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import { useDispatch } from "react-redux";
 import { endLoginSession } from "../../constants/helpers";
 import { logoutUser } from "../../store/StateUser";
 import { useSelector } from "react-redux";
 import { getUser } from "../../store/StateUser";
+import CartIcon from "../Cart/CartIcon";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -110,6 +111,9 @@ const CustomerNavBar = () => {
         >
           Hello {userFisrtName}
         </Typography>
+        <Grid sx={{ display: "flex" }}>
+          <CartIcon />
+        </Grid>
 
         <IconButton
           aria-label='more'
