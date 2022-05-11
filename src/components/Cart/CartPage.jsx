@@ -12,7 +12,7 @@ import { useState } from "react";
 import LinearProgress from "@mui/material/LinearProgress";
 import { makeStyles } from "@material-ui/core/styles";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
-import Button from "@mui/material/Button";
+import LoadingButton from "@mui/lab/LoadingButton";
 import paths from "../../constants/paths";
 import { useNavigate } from "react-router-dom";
 
@@ -29,31 +29,33 @@ const CartPage = () => {
   const [allItems, setItems] = useState([]);
   const state = useSelector((s) => s);
 
+  const handleCheckoutClick = () => {
+    navigate(paths.purchase);
+  };
+
   const useStyles = makeStyles({
     loading: {
       padding: "60px",
       textAlign: "center",
       background: "#888888",
       color: "white",
-      fontSize: "30px",
+      fontSize: "30px"
     },
     header: {
       padding: "60px",
       textAlign: "center",
       background: "#888888",
       color: "white",
-      fontSize: "5rem",
-    },
+      fontSize: "5rem"
+    }
   });
   const classes = useStyles();
   const getAllItems = async () => {
     const res = await getItems();
     if (res.status == 200) {
-      console.log("got items");
-      console.log(res.data);
+      // console.log("got items");
+      // console.log(res.data);
       setItems(res.data);
-    } else {
-      console.log("no sex fuck u");
     }
   };
 
@@ -65,9 +67,9 @@ const CartPage = () => {
     if (user !== undefined) {
       const id = user._id;
       const res = await getCartById(id);
-      console.log("here");
+      // console.log("here");
       if (res.status == 200) {
-        console.log(res.data.items);
+        // console.log(res.data.items);
         setTempCart(res.data.items);
       }
     }
@@ -75,8 +77,8 @@ const CartPage = () => {
 
   if (tempCart.length == 0) {
     getUserCartByUser(getUser(state));
-    console.log("Got Cart obj:");
-    console.log(tempCart);
+    // console.log("Got Cart obj:");
+    // console.log(tempCart);
   }
 
   let sum = 0;
@@ -116,7 +118,7 @@ const CartPage = () => {
       <Grid>
         <Typography
           color={"white"}
-          variant="h1"
+          variant='h1'
           sx={{ animation: `${RGB} 2.5s infinite`, alignItems: "center" }}
           class={classes.header}
         >
@@ -130,11 +132,11 @@ const CartPage = () => {
           sum={sum}
           reciptText={text}
         />
-        <Button
-          type="submit"
+        <LoadingButton
+          type='submit'
           fullWidth
           // onClick={navToPayment}
-          variant="contained"
+          variant='contained'
           sx={{ mt: 3, mb: 2 }}
           startIcon={<PaidOutlinedIcon />}
           style={{
@@ -145,12 +147,12 @@ const CartPage = () => {
             minHeight: "50px",
             backgroundColor: "#161e33",
             textTransform: "capitalize",
-            padding: "auto",
+            padding: "auto"
           }}
-          onClick={() => toComponentPurchase()}
+          onClick={handleCheckoutClick}
         >
           Pay now
-        </Button>
+        </LoadingButton>
       </Grid>
 
       <CssBaseline />

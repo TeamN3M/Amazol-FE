@@ -1,26 +1,26 @@
-import React from 'react';
+import React from "react";
 import {
   Card,
-  CardContent,
+  CardContent
   // Typography,
   //   Grid,
-} from '@material-ui/core';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import Rating from '@mui/material/Rating';
+} from "@material-ui/core";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import Rating from "@mui/material/Rating";
 // import { AddShoppingCart } from '@material-ui/icons';
-import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
-import useStyles from './styles';
+import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox";
+import useStyles from "./styles";
 // import ButtonGroup from '@mui/material/ButtonGroup';
 // import Button from '@mui/material/Button';
 // import AddIcon from '@mui/icons-material/Add';
 // import RemoveIcon from '@mui/icons-material/Remove';
-import TextField from '@mui/material/TextField';
-import { Grid } from '@mui/material';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import { updateItemById } from '../../../Services/services';
-import SimpleImageSlider from 'react-simple-image-slider';
-import Chip from '@mui/material/Chip';
+import TextField from "@mui/material/TextField";
+import { Grid } from "@mui/material";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import { updateItemById } from "../../../Services/services";
+import SimpleImageSlider from "react-simple-image-slider";
+import Chip from "@mui/material/Chip";
 
 //import MainTheme from "../../../themes/MainTheme";
 // const styleForPaper = {
@@ -72,7 +72,7 @@ const NewItem = ({ product }) => {
   //
 
   const handleUpdateItem = async (avilable) => {
-    console.log('Updating an item');
+    console.log("Updating an item");
     const item = {
       item_name: name,
       item_description: description,
@@ -81,14 +81,12 @@ const NewItem = ({ product }) => {
       item_quantity: quantity,
       isAvailable: avilable,
       item_pictures: [
-        'data:image/jpeg;base64,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',
-      ],
+        " https://lh3.google.com/u/0/d/1TmrN8gtZXCABpuV--KEa2_KVUAT-xrNG=w2735-h1537-iv1"
+      ]
     };
     const res = await updateItemById(product._id, item);
     if (res.status == 200) {
-      console.log('add dildo sexes');
-    } else {
-      console.log('no sex fuck u');
+      console.log("update");
     }
   };
 
@@ -121,21 +119,21 @@ const NewItem = ({ product }) => {
 
   if (itemVisible != true) return <></>;
   return (
-    <Card className={classes.root} sx={{ display: 'flex' }}>
+    <Card className={classes.root} sx={{ display: "flex" }}>
       <Grid
         sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          border: 'solid 1px grey',
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          border: "solid 1px grey"
         }}
       >
         <Grid
           item
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-around',
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-around"
           }}
           xs={3}
           alignItems='center'
@@ -158,7 +156,7 @@ const NewItem = ({ product }) => {
             showNavs={true}
             navSize={20}
             navMargin={20}
-            bgColor={'#555555'}
+            bgColor={"#555555"}
             navStyle={2}
           />
           <Rating
@@ -183,16 +181,16 @@ const NewItem = ({ product }) => {
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused,
-              },
+                focused: classes.cssFocused
+              }
             }}
             InputProps={{
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input,
-              },
+                input: classes.input
+              }
             }}
             // onChange={(e) => setCode(e.target.value)}
           />
@@ -213,16 +211,16 @@ const NewItem = ({ product }) => {
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused,
-              },
+                focused: classes.cssFocused
+              }
             }}
             InputProps={{
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input,
-              },
+                input: classes.input
+              }
             }}
             // onChange={(e) => setCode(e.target.value)}
           />
@@ -230,9 +228,9 @@ const NewItem = ({ product }) => {
 
         <Box
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-around',
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-around"
           }}
         >
           <TextField
@@ -248,26 +246,26 @@ const NewItem = ({ product }) => {
             FormHelperTextProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused,
-              },
+                focused: classes.cssFocused
+              }
             }}
             color='secondary'
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused,
-              },
+                focused: classes.cssFocused
+              }
             }}
             InputProps={{
               inputProps: {
-                min: 0,
+                min: 0
               },
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input,
-              },
+                input: classes.input
+              }
             }}
           />
           <TextField
@@ -284,29 +282,29 @@ const NewItem = ({ product }) => {
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused,
-              },
+                focused: classes.cssFocused
+              }
             }}
             InputProps={{
               inputProps: {
                 max: 100,
-                min: 0,
+                min: 0
               },
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input,
-              },
+                input: classes.input
+              }
             }}
           />
         </Box>
         <Grid item>
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-around',
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-around"
             }}
           >
             <IconButton
@@ -319,7 +317,7 @@ const NewItem = ({ product }) => {
               <Chip
                 label='Remove'
                 color='error'
-                icon={<IndeterminateCheckBoxIcon sx={{ color: '#550000' }} />}
+                icon={<IndeterminateCheckBoxIcon sx={{ color: "#550000" }} />}
               />
             </IconButton>
 
@@ -332,7 +330,7 @@ const NewItem = ({ product }) => {
               <Chip
                 label='Update'
                 color='success'
-                icon={<CheckBoxIcon size='medium' sx={{ color: '#005500' }} />}
+                icon={<CheckBoxIcon size='medium' sx={{ color: "#005500" }} />}
               />
             </IconButton>
           </Box>

@@ -19,7 +19,7 @@ import {
   validateExpire,
   validateCvv,
   paymentAlerts,
-  PURCHASENOW,
+  PURCHASENOW
 } from "../../constants/strings";
 import { useSelector } from "react-redux";
 import { getUser } from "../../store/StateUser";
@@ -28,51 +28,90 @@ import { setUser } from "../../store/StateUser";
 import { useDispatch } from "react-redux";
 import MySnackBar from "../Alerts/MySnackBar";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import PaymentAnimation from "./PaymentAnimation.json";
+// import payment from "./payment.json";
+import Lottie from "lottie-web";
 
 const useStyles = makeStyles({
   paperRoot: {
     backgroundColor: "#212121 !important",
     borderRadius: 20,
     borderColor: "white !important",
-    padding: 50,
+    padding: 50
   },
   myLabel: {
     color: "#1565c0 !important",
-    marginTop: 0,
+    marginTop: 0
   },
   textFiled: {
     color: "white",
     "& .MuiFormHelperText-root": {
-      color: "white",
-    },
+      color: "white"
+    }
   },
   cssLabel: {
     color: "white",
     "&.Mui-focused": {
-      color: "white",
-    },
+      color: "white"
+    }
   },
 
   cssOutlinedInput: {
     "&$cssFocused $notchedOutline": {
-      borderColor: "#FFF",
-    },
+      borderColor: "#FFF"
+    }
   },
   cssFocused: {},
 
   notchedOutline: {
     borderWidth: "1px",
-    borderColor: "white !important",
+    borderColor: "white !important"
   },
 
   input: {
     color: "white",
     "&:-webkit-autofill": {
       WebkitBoxShadow: "0 0 0 100px #212121 inset",
-      WebkitTextFillColor: "white",
-    },
-  },
+      WebkitTextFillColor: "white"
+    }
+  }
 });
+const setStepAnimation = () => {
+  // const lottieConfig = {
+  //   animationData: "",
+  //   container: "",
+  //   loop: true
+  // };
+  // switch (step) {
+  //   case -1:
+  //     lottieConfig.container = document.getElementById(
+  //       "lottie-step-animation--1"
+  //     ) as Element;
+  //     lottieConfig.animationData = ErrorAnimation;
+  //     break;
+  //   case 0:
+  //     lottieConfig.container = document.getElementById(
+  //       "lottie-step-animation-0"
+  //     );
+  //     lottieConfig.animationData = payment;
+  //     break;
+  //   case 1:
+  //     console.log("sucsess anim");
+  //     lottieConfig.container = document.getElementById(
+  //       "lottie-step-animation-1"
+  //     );
+  //     lottieConfig.animationData = PaymentAnimation;
+  //     break;
+  // }
+  Lottie.loadAnimation({
+    animationData: PaymentAnimation,
+    autoplay: true,
+    container: document.getElementById("lottie-step-animation-1"),
+    loop: true,
+    renderer: "svg"
+  });
+};
+
 export default function Purchase() {
   const dispatch = useDispatch();
 
@@ -117,7 +156,7 @@ export default function Purchase() {
   const [cvvErrorText, setCvvErrorText] = useState("");
   const [cardExist, setCardExist] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
-  const [infoFlag, setInfoFlag] = useState(false);
+  const [paymentFlag, setPaymentFlag] = useState(false);
 
   const checkName = (cardname) => {
     return !validateNames.test(cardname);
@@ -182,7 +221,7 @@ export default function Purchase() {
         cvv
       );
       if (res1.status == 200) {
-        setInfoFlag(true);
+        setPaymentFlag(true);
       }
     } else {
       const res2 = await addCreditCard(
@@ -193,10 +232,11 @@ export default function Purchase() {
         cvv
       );
       if (res2.status == 200) {
-        setInfoFlag(true);
+        setPaymentFlag(true);
       }
     }
     setOpenAlert(true);
+    setStepAnimation(paymentFlag);
   };
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -204,198 +244,240 @@ export default function Purchase() {
     }, 3000);
     return () => clearTimeout(timer);
   }, [openAlert]);
+  // useEffect(() => {
+  //   if (paymentFlag) {
+  //     setStepAnimation(1);
+  //   } else {
+  //     setStepAnimation(0);
+  //   }
+  // }, [paymentFlag]);
+
   return (
     <Grid>
       <CssBaseline />
       <AppBar
-        position="absolute"
-        color="default"
+        position='absolute'
+        color='default'
         elevation={0}
         sx={{
           position: "relative",
-          borderBottom: (t) => `1px solid ${t.palette.divider}`,
+          borderBottom: (t) => `1px solid ${t.palette.divider}`
         }}
       ></AppBar>
-      <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+      <Container component='main' maxWidth='sm' sx={{ mb: 4 }}>
         <Paper
           classes={{ root: classes.paperRoot }}
-          variant="outlined"
+          variant='outlined'
           sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
         >
-          <Typography
-            variant="h5"
-            align="center"
-            style={{
-              color: "#9edeaf",
-              marginBottom: 10,
-            }}
-          >
-            One more step to complete the order
-          </Typography>
-          <React.Fragment>
-            <React.Fragment>
-              <MySnackBar
-                open={openAlert}
-                timeout={2000}
-                severity={
-                  infoFlag
-                    ? paymentAlerts.OK.severity
-                    : paymentAlerts.FAIL.severity
-                }
-                message={
-                  infoFlag
-                    ? paymentAlerts.OK.message
-                    : paymentAlerts.FAIL.message
-                }
-              />
+          {paymentFlag ? (
+            <>
               <Typography
-                variant="h6"
-                gutterBottom
+                variant='h5'
+                align='center'
                 style={{
-                  color: "#9c8786",
+                  color: "#9edeaf",
+                  marginBottom: 10
                 }}
               >
-                Payment method
+                Payment passed successfully
               </Typography>
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={6}>
-                  <TextField
-                    className={classes.textField}
-                    margin="dense"
-                    autoComplete="given-name"
-                    name="cardName"
-                    required
-                    fullWidth
-                    id="cardName"
-                    label="Name on card"
-                    color="secondary"
-                    autoFocus
-                    InputLabelProps={{
-                      classes: {
-                        root: classes.cssLabel,
-                        focused: classes.cssFocused,
-                      },
-                    }}
-                    InputProps={{
-                      classes: {
-                        root: classes.cssOutlinedInput,
-                        focused: classes.cssFocused,
-                        notchedOutline: classes.notchedOutline,
-                        input: classes.input,
-                      },
-                    }}
-                    value={cardname}
-                    error={!!cardnameErrorText}
-                    helperText={cardnameErrorText}
-                    onChange={(e) => setCardname(e.target.value)}
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <TextField
-                    className={classes.textField}
-                    margin="dense"
-                    autoComplete="given-name"
-                    required
-                    fullWidth
-                    id="cardNumber"
-                    label="Card number"
-                    color="secondary"
-                    autoFocus
-                    InputLabelProps={{
-                      classes: {
-                        root: classes.cssLabel,
-                        focused: classes.cssFocused,
-                      },
-                    }}
-                    InputProps={{
-                      classes: {
-                        root: classes.cssOutlinedInput,
-                        focused: classes.cssFocused,
-                        notchedOutline: classes.notchedOutline,
-                        input: classes.input,
-                      },
-                    }}
-                    value={cardnumber}
-                    error={!!cardnumberErrorText}
-                    helperText={cardnumberErrorText}
-                    onChange={(e) => setCardnumber(e.target.value)}
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <TextField
-                    className={classes.textField}
-                    margin="dense"
-                    autoComplete="given-name"
-                    required
-                    fullWidth
-                    id="expDate"
-                    label="Expiry date"
-                    color="secondary"
-                    autoFocus
-                    InputLabelProps={{
-                      classes: {
-                        root: classes.cssLabel,
-                        focused: classes.cssFocused,
-                      },
-                    }}
-                    InputProps={{
-                      classes: {
-                        root: classes.cssOutlinedInput,
-                        focused: classes.cssFocused,
-                        notchedOutline: classes.notchedOutline,
-                        input: classes.input,
-                      },
-                    }}
-                    value={expiredate}
-                    error={!!expiredateErrorText}
-                    helperText={expiredateErrorText}
-                    onChange={(e) => setExpiredate(e.target.value)}
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <TextField
-                    className={classes.textField}
-                    margin="dense"
-                    autoComplete="given-name"
-                    required
-                    fullWidth
-                    id="cvv"
-                    label="CVV"
-                    color="secondary"
-                    autoFocus
-                    InputLabelProps={{
-                      classes: {
-                        root: classes.cssLabel,
-                        focused: classes.cssFocused,
-                      },
-                    }}
-                    InputProps={{
-                      classes: {
-                        root: classes.cssOutlinedInput,
-                        focused: classes.cssFocused,
-                        notchedOutline: classes.notchedOutline,
-                        input: classes.input,
-                      },
-                    }}
-                    value={cvv}
-                    error={!!cvvErrorText}
-                    helperText={cvvErrorText}
-                    onChange={(e) => setCvv(e.target.value)}
-                  />
-                </Grid>
+              <Grid style={{ height: 400, width: 400 }}>
+                <div id={`lottie-step-animation-1`} />
               </Grid>
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <Button
-                  variant="contained"
-                  endIcon={<CheckCircleOutlineIcon />}
-                  sx={{ mt: 3, ml: 1, borderRadius: 3 }}
-                  onClick={handleSave}
-                >
-                  {PURCHASENOW}
-                </Button>
-              </Box>
-            </React.Fragment>
-          </React.Fragment>
+              <Typography
+                variant='h6'
+                align='center'
+                style={{
+                  color: "gray",
+                  marginBottom: 10
+                }}
+                fontStyle='italic'
+              >
+                The receipt will be sent to you by email
+              </Typography>
+            </>
+          ) : (
+            <>
+              <Typography
+                variant='h5'
+                align='center'
+                style={{
+                  color: "#9edeaf",
+                  marginBottom: 10
+                }}
+              >
+                One more step to complete the order
+              </Typography>
+              {/* <Grid style={{ height: 200, width: 200 }}>
+                <div id={`lottie-step-animation-0`} />
+              </Grid> */}
+              <React.Fragment>
+                <React.Fragment>
+                  <MySnackBar
+                    open={openAlert}
+                    timeout={2000}
+                    severity={
+                      paymentFlag
+                        ? paymentAlerts.OK.severity
+                        : paymentAlerts.FAIL.severity
+                    }
+                    message={
+                      paymentFlag
+                        ? paymentAlerts.OK.message
+                        : paymentAlerts.FAIL.message
+                    }
+                  />
+                  <Typography
+                    variant='h6'
+                    gutterBottom
+                    style={{
+                      color: "#9c8786"
+                    }}
+                  >
+                    Payment method
+                  </Typography>
+                  <Grid container spacing={3}>
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        className={classes.textField}
+                        margin='dense'
+                        autoComplete='given-name'
+                        name='cardName'
+                        required
+                        fullWidth
+                        id='cardName'
+                        label='Name on card'
+                        color='secondary'
+                        autoFocus
+                        InputLabelProps={{
+                          classes: {
+                            root: classes.cssLabel,
+                            focused: classes.cssFocused
+                          }
+                        }}
+                        InputProps={{
+                          classes: {
+                            root: classes.cssOutlinedInput,
+                            focused: classes.cssFocused,
+                            notchedOutline: classes.notchedOutline,
+                            input: classes.input
+                          }
+                        }}
+                        value={cardname}
+                        error={!!cardnameErrorText}
+                        helperText={cardnameErrorText}
+                        onChange={(e) => setCardname(e.target.value)}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        className={classes.textField}
+                        margin='dense'
+                        autoComplete='given-name'
+                        required
+                        fullWidth
+                        id='cardNumber'
+                        label='Card number'
+                        color='secondary'
+                        autoFocus
+                        InputLabelProps={{
+                          classes: {
+                            root: classes.cssLabel,
+                            focused: classes.cssFocused
+                          }
+                        }}
+                        InputProps={{
+                          classes: {
+                            root: classes.cssOutlinedInput,
+                            focused: classes.cssFocused,
+                            notchedOutline: classes.notchedOutline,
+                            input: classes.input
+                          }
+                        }}
+                        value={cardnumber}
+                        error={!!cardnumberErrorText}
+                        helperText={cardnumberErrorText}
+                        onChange={(e) => setCardnumber(e.target.value)}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        className={classes.textField}
+                        margin='dense'
+                        autoComplete='given-name'
+                        required
+                        fullWidth
+                        id='expDate'
+                        label='Expiry date'
+                        color='secondary'
+                        autoFocus
+                        InputLabelProps={{
+                          classes: {
+                            root: classes.cssLabel,
+                            focused: classes.cssFocused
+                          }
+                        }}
+                        InputProps={{
+                          classes: {
+                            root: classes.cssOutlinedInput,
+                            focused: classes.cssFocused,
+                            notchedOutline: classes.notchedOutline,
+                            input: classes.input
+                          }
+                        }}
+                        value={expiredate}
+                        error={!!expiredateErrorText}
+                        helperText={expiredateErrorText}
+                        onChange={(e) => setExpiredate(e.target.value)}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        className={classes.textField}
+                        margin='dense'
+                        autoComplete='given-name'
+                        required
+                        fullWidth
+                        id='cvv'
+                        label='CVV'
+                        color='secondary'
+                        autoFocus
+                        InputLabelProps={{
+                          classes: {
+                            root: classes.cssLabel,
+                            focused: classes.cssFocused
+                          }
+                        }}
+                        InputProps={{
+                          classes: {
+                            root: classes.cssOutlinedInput,
+                            focused: classes.cssFocused,
+                            notchedOutline: classes.notchedOutline,
+                            input: classes.input
+                          }
+                        }}
+                        value={cvv}
+                        error={!!cvvErrorText}
+                        helperText={cvvErrorText}
+                        onChange={(e) => setCvv(e.target.value)}
+                      />
+                    </Grid>
+                  </Grid>
+                  <Box sx={{ display: "flex", justifyContent: "center" }}>
+                    <Button
+                      variant='contained'
+                      endIcon={<CheckCircleOutlineIcon />}
+                      sx={{ mt: 3, ml: 1, borderRadius: 3 }}
+                      onClick={handleSave}
+                    >
+                      {PURCHASENOW}
+                    </Button>
+                  </Box>
+                </React.Fragment>
+              </React.Fragment>
+            </>
+          )}
         </Paper>
       </Container>
     </Grid>
