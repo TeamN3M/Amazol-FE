@@ -15,6 +15,9 @@ export const RESETOK = "Password changed successfully :)";
 export const RESETFAIL = "Password change failed :(";
 export const CHANGETOK = "The change was made successfully :)";
 export const CHANGEFAIL = "There was an error changing the details :(";
+export const PAYMENTTOK = "The payment was made successfully :)";
+export const PAYMENTFAIL =
+  "There was an error with payment,check your details again !";
 export const EXISTUSER = "User exist ";
 export const NOTEXISTUSER = "User dosen't exist ";
 export const ADDNEWPROD = "Add new Product ";
@@ -29,6 +32,7 @@ export const BACK = "Back ";
 export const SIGNIN = "Sign In";
 export const SIGNUP = "Sign Up";
 export const HOMEPAGE = "Home Page";
+export const PURCHASENOW = "Checkout";
 
 // validate email Minimum 8 characters, at least one letter and one number
 export const validatePassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/i;
@@ -47,14 +51,18 @@ export const JWT_KEY = "JWT-KEY";
 
 export const loginAlerts = {
   OK: { severity: "success", message: LOGINOK },
-  FAIL: { severity: "error", message: LOGINFAIL }
+  FAIL: { severity: "error", message: LOGINFAIL },
 };
 export const resetPasswordAlerts = {
   OK: { severity: "success", message: RESETOK },
   FAIL: { severity: "error", message: RESETFAIL },
-  EXIST: { severity: "error", message: NOTEXISTUSER }
+  EXIST: { severity: "error", message: NOTEXISTUSER },
 };
 export const changeInfoAlerts = {
   OK: { severity: "success", message: CHANGETOK },
-  FAIL: { severity: "error", message: CHANGEFAIL }
+  FAIL: { severity: "error", message: CHANGEFAIL },
+};
+export const paymentAlerts = {
+  OK: { severity: "success", message: PAYMENTTOK },
+  FAIL: { severity: "error", message: PAYMENTFAIL },
 };

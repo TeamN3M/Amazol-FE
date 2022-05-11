@@ -13,7 +13,7 @@ import {
   validateCvv,
   changeInfoAlerts,
   SAVE,
-  BACK
+  BACK,
 } from "../../constants/strings";
 import { useSelector } from "react-redux";
 import { getUser } from "../../store/StateUser";
@@ -31,35 +31,35 @@ const useStyles = makeStyles({
   textFiled: {
     color: "white",
     "& .MuiFormHelperText-root": {
-      color: "white"
-    }
+      color: "white",
+    },
   },
   cssLabel: {
     color: "white",
     "&.Mui-focused": {
-      color: "white"
-    }
+      color: "white",
+    },
   },
 
   cssOutlinedInput: {
     "&$cssFocused $notchedOutline": {
-      borderColor: "#FFF"
-    }
+      borderColor: "#FFF",
+    },
   },
   cssFocused: {},
 
   notchedOutline: {
     borderWidth: "1px",
-    borderColor: "white !important"
+    borderColor: "white !important",
   },
 
   input: {
     color: "white",
     "&:-webkit-autofill": {
       WebkitBoxShadow: "0 0 0 100px #212121 inset",
-      WebkitTextFillColor: "white"
-    }
-  }
+      WebkitTextFillColor: "white",
+    },
+  },
 });
 
 export default function PaymentForm(props) {
@@ -209,10 +209,10 @@ export default function PaymentForm(props) {
         }
       />
       <Typography
-        variant='h6'
+        variant="h6"
         gutterBottom
         style={{
-          color: "#9c8786"
+          color: "#9c8786",
         }}
       >
         Payment method
@@ -221,28 +221,28 @@ export default function PaymentForm(props) {
         <Grid item xs={12} md={6}>
           <TextField
             className={classes.textField}
-            margin='dense'
-            autoComplete='given-name'
-            name='cardName'
+            margin="dense"
+            autoComplete="given-name"
+            name="cardName"
             required
             fullWidth
-            id='cardName'
-            label='Name on card'
-            color='secondary'
+            id="cardName"
+            label="Name on card"
+            color="secondary"
             autoFocus
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused
-              }
+                focused: classes.cssFocused,
+              },
             }}
             InputProps={{
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input
-              }
+                input: classes.input,
+              },
             }}
             value={cardname}
             error={!!cardnameErrorText}
@@ -253,27 +253,27 @@ export default function PaymentForm(props) {
         <Grid item xs={12} md={6}>
           <TextField
             className={classes.textField}
-            margin='dense'
-            autoComplete='given-name'
+            margin="dense"
+            autoComplete="given-name"
             required
             fullWidth
-            id='cardNumber'
-            label='Card number'
-            color='secondary'
+            id="cardNumber"
+            label="Card number"
+            color="secondary"
             autoFocus
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused
-              }
+                focused: classes.cssFocused,
+              },
             }}
             InputProps={{
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input
-              }
+                input: classes.input,
+              },
             }}
             value={cardnumber}
             error={!!cardnumberErrorText}
@@ -284,27 +284,27 @@ export default function PaymentForm(props) {
         <Grid item xs={12} md={6}>
           <TextField
             className={classes.textField}
-            margin='dense'
-            autoComplete='given-name'
+            margin="dense"
+            autoComplete="given-name"
             required
             fullWidth
-            id='expDate'
-            label='Expiry date'
-            color='secondary'
+            id="expDate"
+            label="Expiry date"
+            color="secondary"
             autoFocus
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused
-              }
+                focused: classes.cssFocused,
+              },
             }}
             InputProps={{
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input
-              }
+                input: classes.input,
+              },
             }}
             value={expiredate}
             error={!!expiredateErrorText}
@@ -315,27 +315,27 @@ export default function PaymentForm(props) {
         <Grid item xs={12} md={6}>
           <TextField
             className={classes.textField}
-            margin='dense'
-            autoComplete='given-name'
+            margin="dense"
+            autoComplete="given-name"
             required
             fullWidth
-            id='cvv'
-            label='CVV'
-            color='secondary'
+            id="cvv"
+            label="CVV"
+            color="secondary"
             autoFocus
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused
-              }
+                focused: classes.cssFocused,
+              },
             }}
             InputProps={{
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input
-              }
+                input: classes.input,
+              },
             }}
             value={cvv}
             error={!!cvvErrorText}
@@ -346,7 +346,7 @@ export default function PaymentForm(props) {
       </Grid>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button
-          variant='contained'
+          variant="contained"
           startIcon={<ArrowBackIosNewIcon />}
           sx={{ mt: 3, ml: 1, borderRadius: 3 }}
           onClick={props.handleBack}
@@ -354,7 +354,7 @@ export default function PaymentForm(props) {
           {BACK}
         </Button>
         <Button
-          variant='contained'
+          variant="contained"
           endIcon={<ChangeCircleIcon />}
           sx={{ mt: 3, ml: 1, borderRadius: 3 }}
           onClick={handleSave}

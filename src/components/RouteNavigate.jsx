@@ -1,33 +1,34 @@
-import React, { useEffect } from 'react';
-import { Stack } from '@mui/material';
-import { Route, Routes } from 'react-router-dom';
-import paths from '../constants/paths';
-import Footer from './Footer';
-import NavBar from './NavBar';
-import Profile from './ManageAccount/Profile';
-import MProfile from './ManageManagerAccount/Profile';
-import Orders from './CustomerOrders/Orders';
-import HomePage from './HomePage';
-import Login from './Login';
-import Register from './Register';
-import Search from './ItemCatalog/SearchResult';
-import Cart from './Cart/CartPage';
-import ProductManagment from './ProductManagment/ProductManagmentPage';
-import { ThemeProvider } from '@mui/material';
-import MainTheme from '../themes/MainTheme';
-import { createTheme } from '@mui/material/styles';
-import { useDispatch } from 'react-redux';
-import { getJwtKey } from '../constants/helpers';
-import { getUser } from '../Services/services';
-import { setUser } from '../store/StateUser';
-import ForgotPassword from './ForgotPassword';
+import React, { useEffect } from "react";
+import { Stack } from "@mui/material";
+import { Route, Routes } from "react-router-dom";
+import paths from "../constants/paths";
+import Footer from "./Footer";
+import NavBar from "./NavBar";
+import Profile from "./ManageAccount/Profile";
+import MProfile from "./ManageManagerAccount/Profile";
+import Orders from "./CustomerOrders/Orders";
+import Purchase from "./Purchase/PurchaseCart";
+import HomePage from "./HomePage";
+import Login from "./Login";
+import Register from "./Register";
+import Search from "./ItemCatalog/SearchResult";
+import Cart from "./Cart/CartPage";
+import ProductManagment from "./ProductManagment/ProductManagmentPage";
+import { ThemeProvider } from "@mui/material";
+import MainTheme from "../themes/MainTheme";
+import { createTheme } from "@mui/material/styles";
+import { useDispatch } from "react-redux";
+import { getJwtKey } from "../constants/helpers";
+import { getUser } from "../Services/services";
+import { setUser } from "../store/StateUser";
+import ForgotPassword from "./ForgotPassword";
 //import Products from "./products/Products";
 //import Cart from "./cart/Cart";
 // import { getUser } from "../Services/services";
 const themeDark = createTheme({
   palette: {
     background: {
-      default: '#212121',
+      default: "#212121",
     },
   },
 });
@@ -42,10 +43,10 @@ const RouteNavigate = () => {
     if (localJwt) {
       func().then((res) => {
         if (res.status === 200) {
-          console.log('find user');
+          console.log("find user");
           dispatch(setUser(res.data.user));
         } else {
-          console.log('not found');
+          console.log("not found");
         }
       });
     }
@@ -68,6 +69,7 @@ const RouteNavigate = () => {
           <Route path={paths.cart} element={<Cart />} />
           <Route path={paths.cusomerorders} element={<Orders />} />
           <Route path={paths.prodmanage} element={<ProductManagment />} />
+          <Route path={paths.purchase} element={<Purchase />} />
         </Routes>
       </ThemeProvider>
       <ThemeProvider theme={MainTheme}>

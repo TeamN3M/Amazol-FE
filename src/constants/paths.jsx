@@ -9,7 +9,8 @@ export default Object.freeze({
   cart: "/Cart",
   cusomerorders: "/Orders",
   prodmanage: "/ProdManage",
-  uploadImage: "/upload"
+  uploadImage: "/upload",
+  purchase: "/Purchase",
 });
 
 // const authEndPoint = `/${api}/auth`;

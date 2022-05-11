@@ -18,7 +18,7 @@ import {
   validateEmail,
   validatePassword,
   changeInfoAlerts,
-  SAVE
+  SAVE,
 } from "../../constants/strings";
 import { useSelector } from "react-redux";
 import { getUser } from "../../store/StateUser";
@@ -34,40 +34,40 @@ const useStyles = makeStyles({
     backgroundColor: "#212121 !important",
     borderRadius: 20,
     borderColor: "white !important",
-    padding: 50
+    padding: 50,
   },
   textFiled: {
     color: "white",
     "& .MuiFormHelperText-root": {
-      color: "white"
-    }
+      color: "white",
+    },
   },
   cssLabel: {
     color: "white",
     "&.Mui-focused": {
-      color: "white"
-    }
+      color: "white",
+    },
   },
 
   cssOutlinedInput: {
     "&$cssFocused $notchedOutline": {
-      borderColor: "#FFF"
-    }
+      borderColor: "#FFF",
+    },
   },
   cssFocused: {},
 
   notchedOutline: {
     borderWidth: "1px",
-    borderColor: "white !important"
+    borderColor: "white !important",
   },
 
   input: {
     color: "white",
     "&:-webkit-autofill": {
       WebkitBoxShadow: "0 0 0 100px #212121 inset",
-      WebkitTextFillColor: "white"
-    }
-  }
+      WebkitTextFillColor: "white",
+    },
+  },
 });
 
 export default function Checkout() {
@@ -197,25 +197,25 @@ export default function Checkout() {
       />
       <CssBaseline />
       <AppBar
-        position='absolute'
-        color='default'
+        position="absolute"
+        color="default"
         elevation={0}
         sx={{
           position: "relative",
-          borderBottom: (t) => `1px solid ${t.palette.divider}`
+          borderBottom: (t) => `1px solid ${t.palette.divider}`,
         }}
       ></AppBar>
-      <Container component='main' maxWidth='sm' sx={{ mb: 4 }}>
+      <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper
           classes={{ root: classes.paperRoot }}
-          variant='outlined'
+          variant="outlined"
           sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
         >
           <Typography
-            variant='h4'
-            align='center'
+            variant="h4"
+            align="center"
             style={{
-              color: "white"
+              color: "white",
             }}
           >
             Edit Your Details
@@ -225,28 +225,28 @@ export default function Checkout() {
             <Grid item xs={12}>
               <TextField
                 className={classes.textField}
-                margin='normal'
-                autoComplete='given-name'
-                name='firstName'
+                margin="normal"
+                autoComplete="given-name"
+                name="firstName"
                 required
                 fullWidth
-                id='firstName'
-                label='First Name'
-                color='secondary'
+                id="firstName"
+                label="First Name"
+                color="secondary"
                 autoFocus
                 InputLabelProps={{
                   classes: {
                     root: classes.cssLabel,
-                    focused: classes.cssFocused
-                  }
+                    focused: classes.cssFocused,
+                  },
                 }}
                 InputProps={{
                   classes: {
                     root: classes.cssOutlinedInput,
                     focused: classes.cssFocused,
                     notchedOutline: classes.notchedOutline,
-                    input: classes.input
-                  }
+                    input: classes.input,
+                  },
                 }}
                 value={firstname}
                 error={!!firstnameErrorText}
@@ -257,12 +257,12 @@ export default function Checkout() {
             <Grid item xs={12}>
               <TextField
                 className={classes.textField}
-                margin='normal'
+                margin="normal"
                 fullWidth
-                id='lastName'
-                label='Last Name'
-                name='lastName'
-                autoComplete='family-name'
+                id="lastName"
+                label="Last Name"
+                name="lastName"
+                autoComplete="family-name"
                 value={lastname}
                 error={!!lastnameErrorText}
                 helperText={lastnameErrorText}
@@ -270,29 +270,29 @@ export default function Checkout() {
                 InputLabelProps={{
                   classes: {
                     root: classes.cssLabel,
-                    focused: classes.cssFocused
-                  }
+                    focused: classes.cssFocused,
+                  },
                 }}
                 InputProps={{
                   classes: {
                     root: classes.cssOutlinedInput,
                     focused: classes.cssFocused,
                     notchedOutline: classes.notchedOutline,
-                    input: classes.input
-                  }
+                    input: classes.input,
+                  },
                 }}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                margin='normal'
+                margin="normal"
                 required
                 fullWidth
-                id='email'
-                color='secondary'
-                label='Email Address'
-                name='email'
-                autoComplete='email'
+                id="email"
+                color="secondary"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
                 value={email}
                 error={!!emailErrorText}
                 helperText={emailErrorText}
@@ -300,50 +300,50 @@ export default function Checkout() {
                 InputLabelProps={{
                   classes: {
                     root: classes.cssLabel,
-                    focused: classes.cssFocused
-                  }
+                    focused: classes.cssFocused,
+                  },
                 }}
                 InputProps={{
                   classes: {
                     root: classes.cssOutlinedInput,
                     focused: classes.cssFocused,
                     notchedOutline: classes.notchedOutline,
-                    input: classes.input
-                  }
+                    input: classes.input,
+                  },
                 }}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                margin='normal'
+                margin="normal"
                 required
                 fullWidth
-                color='secondary'
-                name='password'
-                label='Password'
+                color="secondary"
+                name="password"
+                label="Password"
                 type={passwordVisible ? "text" : "password"}
-                id='password'
-                autoComplete='new-password'
+                id="password"
+                autoComplete="new-password"
                 InputProps={{
                   classes: {
                     root: classes.cssOutlinedInput,
                     focused: classes.cssFocused,
                     notchedOutline: classes.notchedOutline,
-                    input: classes.input
+                    input: classes.input,
                   },
                   endAdornment: (
-                    <InputAdornment position='end'>
+                    <InputAdornment position="end">
                       <IconButton
-                        aria-label='toggle password visibility'
+                        aria-label="toggle password visibility"
                         onClick={handleClickShowPassword}
                         style={{
-                          color: "white"
+                          color: "white",
                         }}
                       >
                         {passwordVisible ? <Visibility /> : <VisibilityOff />}
                       </IconButton>
                     </InputAdornment>
-                  )
+                  ),
                 }}
                 value={password}
                 error={!!passwordErrorText}
@@ -352,8 +352,8 @@ export default function Checkout() {
                 InputLabelProps={{
                   classes: {
                     root: classes.cssLabel,
-                    focused: classes.cssFocused
-                  }
+                    focused: classes.cssFocused,
+                  },
                 }}
               />
             </Grid>
@@ -361,7 +361,7 @@ export default function Checkout() {
 
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
             <Button
-              variant='contained'
+              variant="contained"
               endIcon={<ChangeCircleIcon />}
               sx={{ mt: 3, ml: 1, borderRadius: 3 }}
               onClick={handleSave}
