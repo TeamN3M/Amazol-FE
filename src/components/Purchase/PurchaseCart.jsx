@@ -5,7 +5,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { addCreditCard } from "../../Services/services";
@@ -31,6 +31,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import PaymentAnimation from "./PaymentAnimation.json";
 // import payment from "./payment.json";
 import Lottie from "lottie-web";
+import { LoadingButton } from "@mui/lab";
 
 const useStyles = makeStyles({
   paperRoot: {
@@ -465,14 +466,15 @@ export default function Purchase() {
                     </Grid>
                   </Grid>
                   <Box sx={{ display: "flex", justifyContent: "center" }}>
-                    <Button
+                    <LoadingButton
                       variant='contained'
                       endIcon={<CheckCircleOutlineIcon />}
                       sx={{ mt: 3, ml: 1, borderRadius: 3 }}
                       onClick={handleSave}
+                      loading={paymentFlag}
                     >
                       {PURCHASENOW}
-                    </Button>
+                    </LoadingButton>
                   </Box>
                 </React.Fragment>
               </React.Fragment>
