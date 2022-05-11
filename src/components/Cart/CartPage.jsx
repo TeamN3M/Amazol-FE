@@ -1,3 +1,4 @@
+import { setCartSession } from "../../constants/helpers";
 import React from "react";
 import { Grid, Typography } from "@mui/material";
 import { CssBaseline } from "@mui/material";
@@ -109,11 +110,7 @@ const CartPage = () => {
 
   const dispatch = useDispatch();
   dispatch(setCart(tempCart));
-
-  const toComponentPurchase = () => {
-    navigate(paths.purchase);
-  };
-
+  setCartSession(tempCart);
   return (
     <>
       <Grid>

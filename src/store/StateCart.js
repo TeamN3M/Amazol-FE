@@ -1,8 +1,9 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
+import { getCartSession } from "../constants/helpers";
 
 const initialState = {
-  cart: undefined
+  cart: getCartSession()
 };
 
 export const sliceReducer = createSlice({
@@ -20,6 +21,6 @@ export const sliceReducer = createSlice({
 
 export const { setCart, clearCart } = sliceReducer.actions;
 
-export const getCart = (state) => state.StateCart.cart;
+export const getCart = (state) => state.State.cart;
 
 export default sliceReducer.reducer;
