@@ -25,7 +25,7 @@ const CartIcon = () => {
   console.log("your cart ", cart);
 
   const handleCartClicked = () => {
-    navigate(paths.cart);
+    navigate(paths.cartt);
   };
 
   return (

@@ -8,6 +8,7 @@ export const getJwtKey = () => localStorage.getItem(JWT_KEY);
 
 export const endLoginSession = () => {
   localStorage.removeItem(JWT_KEY);
+  localStorage.removeItem(CART_KEY);
 };
 
 export const setCartSession = (cart) => {
@@ -19,11 +20,11 @@ export const getCartSession = () => {
     return JSON.parse(sessionCart);
   }
   return {
-    products: [],
+    items: [],
     total: 0
   };
 };
-export const findCartProductIndex = (items, itemsID) =>
+export const findCartItemIndex = (items, itemsID) =>
   items.findIndex((item) => item?.product?._id === itemsID);
 
 export const calcCartTotal = (items) => {

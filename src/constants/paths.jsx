@@ -7,10 +7,11 @@ export default Object.freeze({
   mprofile: "/MProfile",
   search: "/Search",
   cart: "/Cart",
+  cartt: "/Cartt",
   cusomerorders: "/Orders",
   prodmanage: "/ProdManage",
   uploadImage: "/upload",
-  purchase: "/Purchase",
+  purchase: "/Purchase"
 });
 
 // const authEndPoint = `/${api}/auth`;
