@@ -167,7 +167,7 @@ const Cart = () => {
   //   const user = getUser(state);
   const cart = getUserCart(state);
 
-  console.log("cart: ", cart);
+  console.log("cart: ", cart.items);
 
   const handleRemoveFromCart = (item_id) => {
     dispatch(removeFromCart({ id: item_id }));

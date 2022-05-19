@@ -37,6 +37,7 @@ export const updateItemURL = "http://localhost:4000/item/updateItem/";
 export const getUserByEmailURL = "http://localhost:4000/user/findUserByEmail/";
 export const resetPasswordlURL = "http://localhost:4000/user/resetPassword/";
 export const updateUserlURL = "http://localhost:4000/user/updateInfo/";
+export const addUserCartURL = "http://localhost:4000/cart";
 export const getUserCartURL = "http://localhost:4000/cart/userCart/";
 export const updateCartURL = "http://localhost:4000/cart/updateCart/";
 export const addAddressURL = "http://localhost:4000/address/";

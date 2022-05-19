@@ -35,7 +35,7 @@ import MainTheme from "../themes/MainTheme";
 import { makeStyles } from "@material-ui/styles";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { getCode, registerUser } from "../Services/services";
+import { addCart, getCode, registerUser } from "../Services/services";
 import MySnackBar from "./Alerts/MySnackBar";
 
 const Register = () => {
@@ -182,6 +182,11 @@ const Register = () => {
 
       if (res.status === 200) {
         setAlertType(alerts["OK"][0]);
+        const resCart = await addCart(res.data._id);
+        if (resCart.status == 200) {
+          console.log("add cart user");
+          //TO DO set cart session
+        }
         setRegisterFlag(true);
       } else if (res.code === 400) {
         if (res.msg["error"] === "user exists") {

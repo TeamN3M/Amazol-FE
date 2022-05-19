@@ -1,49 +1,54 @@
-import React from 'react';
+import React from "react";
+import { useDispatch } from "react-redux";
 import {
   Card,
   CardMedia,
   CardContent,
   CardActions,
   Typography,
-  Grid,
-} from '@material-ui/core';
-import IconButton from '@mui/material/IconButton';
-import Rating from '@mui/material/Rating';
-import { AddShoppingCart, Favorite } from '@material-ui/icons';
-import useStyles from './styles';
-import { addItemToCart } from '../../../Services/services';
+  Grid
+} from "@material-ui/core";
+import IconButton from "@mui/material/IconButton";
+import Rating from "@mui/material/Rating";
+import { AddShoppingCart, Favorite } from "@material-ui/icons";
+import useStyles from "./styles";
+import { addItemToCart } from "../../../Services/services";
 //import MainTheme from "../../../themes/MainTheme";
-import MySnackBar from '../../Alerts/MySnackBar';
-import { useSelector } from 'react-redux';
-import { getUser } from '../../../store/StateUser';
-import { useState } from 'react';
+import MySnackBar from "../../Alerts/MySnackBar";
+import { useSelector } from "react-redux";
+import { getUser } from "../../../store/StateUser";
+import { useState, useEffect } from "react";
+import { addToUserCart } from "../../../store/StateUser";
 
 const Product = ({ product }) => {
   const state = useSelector((s) => s);
   const user = getUser(state);
+  const dispatch = useDispatch();
   const [cartUpdated, setCartUpdated] = useState(false);
 
   const classes = useStyles();
 
   const handleAddToCart = async (id, item) => {
-    console.log('Adding item to cart');
+    console.log("Adding item to cart");
     const res = await addItemToCart(id, item);
     if (res.status == 200) {
-      console.log('added item');
+      // console.log("added item ", item);
+      dispatch(addToUserCart({ item, quantity: 1 }));
       setCartUpdated(true);
-    } else {
-      console.log('no sex fuck u');
     }
   };
 
-  const timer = setTimeout(() => {
-    setCartUpdated(false);
-  }, 3000);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCartUpdated(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [cartUpdated]);
 
   const inStock =
     parseInt(product.item_quantity) > 0
-      ? '✅ In-stock (' + product.item_quantity + ')'
-      : '❌ Not in-stock';
+      ? "✅ In-stock (" + product.item_quantity + ")"
+      : "❌ Not in-stock";
   return (
     <Card className={classes.root}>
       <MySnackBar
@@ -75,7 +80,7 @@ const Product = ({ product }) => {
             </Typography>
             <Typography
               className={classes.price}
-              style={{ alignContent: 'right' }}
+              style={{ alignContent: "right" }}
               gutterBottom
               component='h2'
               align='right'
@@ -120,7 +125,6 @@ const Product = ({ product }) => {
           aria-label='Example'
           onClick={() => {
             handleAddToCart(user._id, product);
-            timer();
           }}
         >
           <AddShoppingCart />

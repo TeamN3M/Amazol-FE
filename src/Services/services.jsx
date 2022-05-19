@@ -16,7 +16,8 @@ import {
   updateAddressURL,
   addCreditURL,
   getCreditURL,
-  updateCreditURL
+  updateCreditURL,
+  addUserCartURL
 } from "../constants/paths";
 import { handleErrResponse, post, get, put } from "./axios";
 import { getCodeURL } from "../constants/paths";
@@ -144,6 +145,18 @@ export const updateItemById = async (id, item) => {
   try {
     const res = await put(updateItemURL + id, { id, item });
     console.log("Update Item - " + res.data);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const addCart = async (id) => {
+  const customer_id = id;
+  const items = [];
+  try {
+    const res = await post(addUserCartURL, { customer_id, items });
+    //console.log(res.data);
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);
@@ -307,19 +320,19 @@ export const removeItemFromCart = async (id, outItemid) => {
   } catch (err) {
     return handleErrResponse(err);
   }
-  console.log('1.The old cart -');
+  console.log("1.The old cart -");
   console.log(items);
 
   items = items.filter((item) => {
     return item.item_id !== outItemid._id;
   });
 
-  console.log('2.The new cart -');
+  console.log("2.The new cart -");
   console.log(items);
   try {
     const res = await put(updateCartURL + cart_id, {
       customer_id: id,
-      items: items,
+      items: items
     });
     console.log(res);
     return { data: res.data, status: res.status };

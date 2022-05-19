@@ -23,27 +23,25 @@ export const sliceReducer = createSlice({
       state.user = undefined;
     },
     addToUserCart: (state, action) => {
-      const prodIndex = findCartItemIndex(
-        state.cart.products,
-        action.payload.id
-      );
-      if (prodIndex > -1) {
-        state.cart.products[prodIndex] = {
-          product: action.payload.id,
+      const itemIndex = findCartItemIndex(state.cart.items, action.payload.id);
+      console.log("items ", state.cart.items, "id ", action.payload.id);
+      if (itemIndex > -1) {
+        state.cart.items[itemIndex] = {
+          item: action.payload.id,
           quantity:
-            state.cart.products[prodIndex].quantity +
+            state.cart.items[itemIndex].quantity +
             (1 || action.payload.quantity)
         };
       } else {
-        state.cart.products = [
-          ...state.cart.products,
+        state.cart.items = [
+          ...state.cart.items,
           {
-            product: action.payload.product,
+            items: action.payload.item,
             quantity: action.payload.quantity || 1
           }
         ];
       }
-      state.cart.total = calcCartTotal(state.cart.products);
+      state.cart.total = calcCartTotal(state.cart.items);
       setCartSession(state.cart);
     },
     removeFromCart: (state, action) => {

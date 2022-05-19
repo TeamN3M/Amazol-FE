@@ -30,7 +30,7 @@ export const findCartItemIndex = (items, itemsID) =>
 export const calcCartTotal = (items) => {
   let totalCart = 0;
   items.map((item) => {
-    totalCart += item.product.price * item.quantity;
+    totalCart += item.item_price * item.item_quantity;
     return 1;
   });
 
