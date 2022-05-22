@@ -1,16 +1,16 @@
 /* eslint-disable no-confusing-arrow */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-// import MainTheme from "../../themes/MainTheme";
 import { Grid, IconButton } from "@mui/material";
 import { Add, Delete, Remove } from "@mui/icons-material";
 import Animation from "../Animation";
 import FreeShipping from "./FreeShiping";
 import EmptyCart from "../../assets/empty-cart.json";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
-import { getUserCart, removeFromCart } from "../../store/StateUser";
+import { getUser, removeFromCart } from "../../store/StateUser";
+import { getCartById, getItems } from "../../Services/services";
 import { findCartItemIndex } from "../../constants/helpers";
 import paths from "../../constants/paths";
 
@@ -70,10 +70,12 @@ const ProductDetail = styled.div`
   flex: 2;
   display: flex;
   color: white;
+  margin-bottom: 10px;
 `;
 
 const Image = styled.img`
   width: 200px;
+  border-radius: 20px;
 `;
 
 const Details = styled.div`
@@ -84,13 +86,21 @@ const Details = styled.div`
   color: white;
 `;
 
-const ProductName = styled.span``;
+const ProductName = styled.span`
+  font-size: 20px;
+  font-family: system-ui;
+  color: "blue";
+`;
 
-const ProductId = styled.span``;
+const ProductRating = styled.span`
+  font-size: 20px;
+  font-family: system-ui;
+`;
 
 const PriceDetail = styled.div`
   flex: 1;
   display: flex;
+  font-family: system-ui;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -106,6 +116,7 @@ const ProductAmountContainer = styled.div`
 
 const ProductAmount = styled.div`
   font-size: 24px;
+  font-family: system-ui;
   margin: 5px;
   color: white;
 `;
@@ -113,6 +124,7 @@ const ProductAmount = styled.div`
 const ProductPrice = styled.div`
   font-size: 30px;
   font-weight: 200;
+  font-family: system-ui;
   color: white;
 `;
 
@@ -163,11 +175,50 @@ const Cart = () => {
   const state = useSelector((s) => s);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [makeChange, setMakeChange] = useState(false);
+  const [cart, setCart] = useState();
+  const [allItems, setAllItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+  const [total, setTotal] = useState(0);
 
-  //   const user = getUser(state);
-  const cart = getUserCart(state);
+  const user = getUser(state);
 
-  console.log("cart: ", cart.items);
+  const getAllItems = async () => {
+    const res = await getItems();
+    if (res.status == 200) {
+      setAllItems(res.data);
+      setMakeChange(true);
+    }
+  };
+
+  const getUserCart = async (user) => {
+    if (user !== undefined) {
+      const id = user._id;
+      const res = await getCartById(id);
+      if (res.status == 200) {
+        setCart(res.data);
+        console.log("got cart", res.data);
+        calculateUserCart(cart);
+      }
+    }
+  };
+
+  const calculateUserCart = (cart) => {
+    let totalPrice = 0;
+    for (let i = 0; i < allItems.length; i++) {
+      let addingItem;
+      cart.items.map((item) => {
+        if (allItems[i]._id === item.item_id) {
+          addingItem = allItems[i];
+          addingItem.item_quantity = item.quantity;
+          totalPrice += addingItem.item_quantity * addingItem.item_price;
+          cartItems.push(addingItem);
+        }
+      });
+    }
+    setCartItems(cartItems);
+    setTotal(totalPrice);
+  };
 
   const handleRemoveFromCart = (item_id) => {
     dispatch(removeFromCart({ id: item_id }));
@@ -182,6 +233,11 @@ const Cart = () => {
   const handleCheckoutClicked = () => {
     navigate(paths.purchase);
   };
+
+  useEffect(() => {
+    getAllItems();
+    getUserCart(user);
+  }, [makeChange]);
 
   return (
     <Container style={{ background: "#212121" }}>
@@ -201,31 +257,32 @@ const Cart = () => {
         <Bottom>
           <Info>
             {cart?.items.length ? (
-              cart.items.map((item) => (
+              cartItems.map((item) => (
                 <Product key={item._id}>
                   <ProductDetail>
-                    <Image src={item?.item_pictures[0]} />
+                    <Image src={item.item_pictures[0]} />
                     <Details>
                       <ProductName>
-                        <b>Product:</b> {item.item_name}
+                        <b>Name:</b> {item.item_name}
                       </ProductName>
-                      <ProductId>
-                        <b>ID:</b> {item._id}
-                      </ProductId>
+                      <ProductRating>
+                        <b>Rating:</b> {item.item_rating}
+                      </ProductRating>
                     </Details>
                   </ProductDetail>
                   <PriceDetail>
                     <ProductAmountContainer>
                       <Add />
-                      <ProductAmount>{item.quantity}</ProductAmount>
+                      <ProductAmount>{item.item_quantity}</ProductAmount>
                       <Remove />
                     </ProductAmountContainer>
                     <ProductPrice>
-                      ₪ {item.item_price * item.quantity}
+                      {item.item_price * item.item_quantity} $
                     </ProductPrice>
                     <Grid>
                       <IconButton
                         onClick={() => handleRemoveFromCart(item._id)}
+                        style={{ color: "red" }}
                       >
                         <Delete />
                       </IconButton>
@@ -244,19 +301,19 @@ const Cart = () => {
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>₪ {cart.total}</SummaryItemPrice>
+              <SummaryItemPrice> {total} $</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>$ 15</SummaryItemPrice>
+              <SummaryItemPrice> 15 $</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice>$ -15</SummaryItemPrice>
+              <SummaryItemPrice> -15 $</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type='total'>
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+              <SummaryItemPrice> {total} $</SummaryItemPrice>
             </SummaryItem>
             <Button
               startIcon={<PaidOutlinedIcon />}

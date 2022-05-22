@@ -134,7 +134,7 @@ export const getItemById = async (id) => {
 export const getItems = async () => {
   try {
     const res = await get(getItemsURL);
-    console.log(res.data);
+    // console.log(res.data);
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);

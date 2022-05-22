@@ -37,6 +37,7 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { addCart, getCode, registerUser } from "../Services/services";
 import MySnackBar from "./Alerts/MySnackBar";
+import { setCartSession } from "../constants/helpers";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -185,7 +186,7 @@ const Register = () => {
         const resCart = await addCart(res.data._id);
         if (resCart.status == 200) {
           console.log("add cart user");
-          //TO DO set cart session
+          setCartSession(resCart.data.items);
         }
         setRegisterFlag(true);
       } else if (res.code === 400) {
