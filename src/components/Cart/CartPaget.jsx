@@ -1,6 +1,6 @@
 /* eslint-disable no-confusing-arrow */
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Grid, IconButton } from "@mui/material";
@@ -9,10 +9,10 @@ import Animation from "../Animation";
 import FreeShipping from "./FreeShiping";
 import EmptyCart from "../../assets/empty-cart.json";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
-import { getUser, removeFromCart } from "../../store/StateUser";
+import { getUser } from "../../store/StateUser";
 import { getCartById, getItems } from "../../Services/services";
-import { findCartItemIndex } from "../../constants/helpers";
 import paths from "../../constants/paths";
+import { setTotalCart } from "../../constants/helpers";
 
 const Container = styled.div`
   backgroundcolor: #212121;
@@ -173,7 +173,6 @@ const Button = styled.button`
 
 const Cart = () => {
   const state = useSelector((s) => s);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [makeChange, setMakeChange] = useState(false);
   const [cart, setCart] = useState();
@@ -216,14 +215,14 @@ const Cart = () => {
         }
       });
     }
+    console.log("your len cart is : ", cartItems.length);
     setCartItems(cartItems);
     setTotal(totalPrice);
+    setTotalCart(cartItems.length);
   };
 
   const handleRemoveFromCart = (item_id) => {
-    dispatch(removeFromCart({ id: item_id }));
-    const item_index = findCartItemIndex(cart.items, item_id);
-    console.log(JSON.parse(JSON.stringify(cart.items)).splice(item_index, 1));
+    console.log(item_id);
   };
 
   const handleContinueShopping = () => {

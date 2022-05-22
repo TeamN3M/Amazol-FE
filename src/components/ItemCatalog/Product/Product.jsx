@@ -1,5 +1,4 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import {
   Card,
   CardMedia,
@@ -18,12 +17,11 @@ import MySnackBar from "../../Alerts/MySnackBar";
 import { useSelector } from "react-redux";
 import { getUser } from "../../../store/StateUser";
 import { useState, useEffect } from "react";
-import { addToUserCart } from "../../../store/StateUser";
 
 const Product = ({ product }) => {
   const state = useSelector((s) => s);
   const user = getUser(state);
-  const dispatch = useDispatch();
+
   const [cartUpdated, setCartUpdated] = useState(false);
 
   const classes = useStyles();
@@ -33,7 +31,7 @@ const Product = ({ product }) => {
     const res = await addItemToCart(id, item);
     if (res.status == 200) {
       // console.log("added item ", item);
-      dispatch(addToUserCart({ item, quantity: 1 }));
+
       setCartUpdated(true);
     }
   };
