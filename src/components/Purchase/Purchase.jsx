@@ -1,7 +1,6 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "@mui/material/AppBar";
-
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Stepper from "@mui/material/Stepper";
@@ -9,11 +8,11 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import AddressForm from "./AddressForm";
-import PaymentForm from "./PaymentForm";
+import PurchaseForm from "./PurchaseCart";
+import DeliveryForm from "./Delivery";
 import { makeStyles } from "@material-ui/styles";
 
-const steps = ["Shipping address", "Payment details"];
+const steps = ["Delivery address", "Payment details"];
 
 const useStyles = makeStyles({
   paperRoot: {
@@ -45,9 +44,9 @@ export default function Checkout() {
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <AddressForm handleNext={handleNext} />;
+        return <DeliveryForm handleNext={handleNext} />;
       case 1:
-        return <PaymentForm handleBack={handleBack} />;
+        return <PurchaseForm handleBack={handleBack} />;
       default:
         throw new Error("Unknown step");
     }
@@ -78,7 +77,7 @@ export default function Checkout() {
               color: "white",
             }}
           >
-            Edit Your Details
+            Complete your purchase proccess
           </Typography>
           <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
             {steps.map((label) => (

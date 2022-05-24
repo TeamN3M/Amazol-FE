@@ -15,7 +15,7 @@ import {
   validatePassword,
   changeInfoAlerts,
   SAVE,
-  NEXT
+  NEXT,
 } from "../../constants/strings";
 import { useSelector } from "react-redux";
 import { getUser } from "../../store/StateUser";
@@ -35,40 +35,40 @@ const useStyles = makeStyles({
     backgroundColor: "#212121 !important",
     borderRadius: 20,
     borderColor: "white !important",
-    padding: 50
+    padding: 50,
   },
   textFiled: {
     color: "white",
     "& .MuiFormHelperText-root": {
-      color: "white"
-    }
+      color: "white",
+    },
   },
   cssLabel: {
     color: "white",
     "&.Mui-focused": {
-      color: "white"
-    }
+      color: "white",
+    },
   },
 
   cssOutlinedInput: {
     "&$cssFocused $notchedOutline": {
-      borderColor: "#FFF"
-    }
+      borderColor: "#FFF",
+    },
   },
   cssFocused: {},
 
   notchedOutline: {
     borderWidth: "1px",
-    borderColor: "white !important"
+    borderColor: "white !important",
   },
 
   input: {
     color: "white",
     "&:-webkit-autofill": {
       WebkitBoxShadow: "0 0 0 100px #212121 inset",
-      WebkitTextFillColor: "white"
-    }
-  }
+      WebkitTextFillColor: "white",
+    },
+  },
 });
 export default function AddressForm(props) {
   const dispatch = useDispatch();
@@ -100,17 +100,21 @@ export default function AddressForm(props) {
       }
     }
   }, []);
-  
+
   const classes = useStyles();
   const state = useSelector((s) => s);
   const user = getUser(state);
-  const [email, setEmail] = useState(user !== undefined ? user.email: "");
+  const [email, setEmail] = useState(user !== undefined ? user.email : "");
   const [emailErrorText, setEmailErrorText] = useState("");
   const [password, setPassword] = useState("");
   const [passwordErrorText, setPasswordErrorText] = useState("");
-  const [firstname, setFirstname] = useState(user !== undefined ? user.first_name: "");
+  const [firstname, setFirstname] = useState(
+    user !== undefined ? user.first_name : ""
+  );
   const [firstnameErrorText, setFirstnameErrorText] = useState("");
-  const [lastname, setLastname] = useState(user !== undefined ? user.last_name: "");
+  const [lastname, setLastname] = useState(
+    user !== undefined ? user.last_name : ""
+  );
   const [lastnameErrorText, setLastnameErrorText] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [address, setAddress] = useState("");
@@ -236,10 +240,10 @@ export default function AddressForm(props) {
         }
       />
       <Typography
-        variant='h6'
+        variant="h6"
         gutterBottom
         style={{
-          color: "#9c8786"
+          color: "#9c8786",
         }}
       >
         Edit Details
@@ -248,28 +252,28 @@ export default function AddressForm(props) {
         <Grid item xs={12} sm={6}>
           <TextField
             className={classes.textField}
-            margin='dense'
-            autoComplete='given-name'
-            name='firstName'
+            margin="dense"
+            autoComplete="given-name"
+            name="firstName"
             required
             fullWidth
-            id='firstName'
-            label='First Name'
-            color='secondary'
+            id="firstName"
+            label="First Name"
+            color="secondary"
             autoFocus
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused
-              }
+                focused: classes.cssFocused,
+              },
             }}
             InputProps={{
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input
-              }
+                input: classes.input,
+              },
             }}
             value={firstname}
             error={!!firstnameErrorText}
@@ -280,12 +284,12 @@ export default function AddressForm(props) {
         <Grid item xs={12} sm={6}>
           <TextField
             className={classes.textField}
-            margin='dense'
+            margin="dense"
             fullWidth
-            id='lastName'
-            label='Last Name *'
-            name='lastName'
-            autoComplete='family-name'
+            id="lastName"
+            label="Last Name *"
+            name="lastName"
+            autoComplete="family-name"
             value={lastname}
             error={!!lastnameErrorText}
             helperText={lastnameErrorText}
@@ -293,50 +297,50 @@ export default function AddressForm(props) {
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused
-              }
+                focused: classes.cssFocused,
+              },
             }}
             InputProps={{
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input
-              }
+                input: classes.input,
+              },
             }}
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
-            margin='dense'
+            margin="dense"
             required
             fullWidth
-            color='secondary'
-            name='password'
-            label='Password'
+            color="secondary"
+            name="password"
+            label="Password"
             type={passwordVisible ? "text" : "password"}
-            id='password'
-            autoComplete='new-password'
+            id="password"
+            autoComplete="new-password"
             InputProps={{
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input
+                input: classes.input,
               },
               endAdornment: (
-                <InputAdornment position='end'>
+                <InputAdornment position="end">
                   <IconButton
-                    aria-label='toggle password visibility'
+                    aria-label="toggle password visibility"
                     onClick={handleClickShowPassword}
                     style={{
-                      color: "white"
+                      color: "white",
                     }}
                   >
                     {passwordVisible ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
-              )
+              ),
             }}
             value={password}
             error={!!passwordErrorText}
@@ -345,22 +349,22 @@ export default function AddressForm(props) {
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused
-              }
+                focused: classes.cssFocused,
+              },
             }}
             s
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
-            margin='dense'
+            margin="dense"
             required
             fullWidth
-            id='email'
-            color='secondary'
-            label='Email Address'
-            name='email'
-            autoComplete='email'
+            id="email"
+            color="secondary"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
             value={email}
             error={!!emailErrorText}
             helperText={emailErrorText}
@@ -368,25 +372,25 @@ export default function AddressForm(props) {
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused
-              }
+                focused: classes.cssFocused,
+              },
             }}
             InputProps={{
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input
-              }
+                input: classes.input,
+              },
             }}
           />
         </Grid>
         <Grid item>
           <Typography
-            variant='h6'
+            variant="h6"
             gutterBottom
             style={{
-              color: "#9c8786"
+              color: "#9c8786",
             }}
           >
             Shipping Address
@@ -399,12 +403,12 @@ export default function AddressForm(props) {
           <TextField
             contentEditable
             className={classes.textField}
-            margin='dense'
+            margin="dense"
             fullWidth
-            id='address'
-            label='Address *'
-            name='Address'
-            autoComplete='address-line'
+            id="address"
+            label="Address *"
+            name="Address"
+            autoComplete="address-line"
             value={address}
             error={!!addressErrorText}
             helperText={addressErrorText}
@@ -412,16 +416,16 @@ export default function AddressForm(props) {
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused
-              }
+                focused: classes.cssFocused,
+              },
             }}
             InputProps={{
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input
-              }
+                input: classes.input,
+              },
             }}
           />
         </Grid>
@@ -429,12 +433,12 @@ export default function AddressForm(props) {
           <TextField
             className={classes.textField}
             required
-            id='city'
-            name='city'
-            label='City'
-            margin='dense'
+            id="city"
+            name="city"
+            label="City"
+            margin="dense"
             fullWidth
-            autoComplete='shipping address-level2'
+            autoComplete="shipping address-level2"
             value={city}
             error={!!cityErrorText}
             helperText={cityErrorText}
@@ -442,16 +446,16 @@ export default function AddressForm(props) {
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused
-              }
+                focused: classes.cssFocused,
+              },
             }}
             InputProps={{
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input
-              }
+                input: classes.input,
+              },
             }}
           />
         </Grid>
@@ -459,12 +463,12 @@ export default function AddressForm(props) {
           <TextField
             className={classes.textField}
             required
-            id='country'
-            name='country'
-            label='Country'
-            margin='dense'
+            id="country"
+            name="country"
+            label="Country"
+            margin="dense"
             fullWidth
-            autoComplete='shipping country'
+            autoComplete="shipping country"
             value={country}
             error={!!countryErrorText}
             helperText={countryErrorText}
@@ -472,23 +476,23 @@ export default function AddressForm(props) {
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused
-              }
+                focused: classes.cssFocused,
+              },
             }}
             InputProps={{
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input
-              }
+                input: classes.input,
+              },
             }}
           />
         </Grid>
       </Grid>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button
-          variant='contained'
+          variant="contained"
           endIcon={<ChangeCircleIcon />}
           sx={{ mt: 3, ml: 1 }}
           onClick={handleSave}
@@ -496,7 +500,7 @@ export default function AddressForm(props) {
           {SAVE}
         </Button>
         <Button
-          variant='contained'
+          variant="contained"
           endIcon={<NavigateNextIcon />}
           sx={{ mt: 3, ml: 1, borderRadius: 3 }}
           onClick={props.handleNext}

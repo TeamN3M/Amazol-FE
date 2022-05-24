@@ -1,10 +1,10 @@
-import React, { useReducer, useEffect } from 'react';
-import { Grid, Typography } from '@material-ui/core';
-import Product from '../Product/Product';
-import { CssBaseline } from '@mui/material';
-import useStyles from './styles';
-import { useLocation } from 'react-router-dom';
-import { AppBar, Toolbar, Button, Slider, Box } from '@mui/material';
+import React, { useReducer, useEffect } from "react";
+import { Grid, Typography } from "@material-ui/core";
+import Product from "../Product/Product";
+import { CssBaseline } from "@mui/material";
+import useStyles from "./styles";
+import { useLocation } from "react-router-dom";
+import { AppBar, Toolbar, Button, Slider, Box } from "@mui/material";
 
 function reducer(state, action) {
   return [...state, ...action];
@@ -16,6 +16,12 @@ const Products = (props) => {
   const classes = useStyles();
   const { state } = useLocation();
   const searchValue = state.value;
+  const [categoryFlag, setCategoryFlag] = React.useState(false);
+  const handleButton = (e) => {
+    e.preventDefault();
+    if (categoryFlag == false) setCategoryFlag(true);
+    else setCategoryFlag(false);
+  };
 
   const [sortedProducts, setSortedProducts] = useReducer(reducer, []);
   useEffect(() => {}, [sortedProducts]);
@@ -25,6 +31,12 @@ const Products = (props) => {
     setValue(newValue);
   };
 
+  const [category, setCategory] = React.useState("");
+  const handleCategory = (e, newValue1) => {
+    e.preventDefault();
+    setCategory(newValue1);
+  };
+
   const sortResults = (e, val) => {
     e.preventDefault();
     let sortedResults = props.products.sort((a, b) => {
@@ -32,8 +44,6 @@ const Products = (props) => {
         return parseInt(a.item_price) - parseInt(b.item_price);
       } else if (val === "rating") {
         return parseFloat(b.item_rating) - parseFloat(a.item_rating);
-      } else if (val === "pricerange") {
-        return b.TotalRecovered - a.TotalRecovered;
       }
     });
     setSortedProducts(sortedResults);
@@ -46,9 +56,9 @@ const Products = (props) => {
       <Grid
         container
         spacing={2}
-        justify='center'
-        direction='column'
-        alignItems='center'
+        justify="center"
+        direction="column"
+        alignItems="center"
       >
         <Grid item>
           <AppBar
@@ -56,9 +66,9 @@ const Products = (props) => {
             sx={{
               backgroundColor: "#212121 !important ",
               borderRadius: 8,
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-around',
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-around",
 
               // width: "min",
               // margin: "auto",
@@ -70,18 +80,6 @@ const Products = (props) => {
             <Toolbar>
               <Button
                 className={classes.btn}
-                sx={{
-                  m: 2,
-                  textTransform: "capitalize",
-                }}
-                variant="outlined"
-                size="small"
-                //onClick={handleCategoryClicked}
-              >
-                filter by category
-              </Button>
-              <Button
-                className={classes.btn}
                 sx={{ m: 2, textTransform: "capitalize" }}
                 variant="outlined"
                 size="small"
@@ -91,16 +89,113 @@ const Products = (props) => {
               </Button>
               <Button
                 className={classes.btn}
-                sx={{ m: 2, textTransform: 'capitalize' }}
-                variant='outlined'
-                size='small'
-                onClick={(e) => sortResults(e, 'rating')}
+                sx={{ m: 2, textTransform: "capitalize" }}
+                variant="outlined"
+                size="small"
+                onClick={(e) => sortResults(e, "rating")}
               >
                 Sort by rating
+              </Button>
+              <Button
+                className={classes.btn}
+                sx={{ m: 2, textTransform: "capitalize" }}
+                variant="outlined"
+                size="small"
+                onClick={(e) => handleButton(e)}
+              >
+                Filter by category
               </Button>
             </Toolbar>
           </AppBar>
         </Grid>
+        {categoryFlag ? (
+          <Grid item>
+            <AppBar
+              position="static"
+              sx={{
+                backgroundColor: "#212121 !important ",
+                borderRadius: 8,
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-around",
+
+                // width: "min",
+                // margin: "auto",
+              }}
+              style={{
+                border: "solid white 0.1px",
+              }}
+            >
+              <Toolbar>
+                <Button
+                  className={classes.btn}
+                  sx={{
+                    m: 2,
+                    textTransform: "capitalize",
+                  }}
+                  variant="outlined"
+                  size="small"
+                  onClick={(e) => handleCategory(e, "Keyboard")}
+                  //onClick={handleCategoryClicked}
+                >
+                  Keyboards
+                </Button>
+                <Button
+                  value={category}
+                  className={classes.btn}
+                  sx={{ m: 2, textTransform: "capitalize" }}
+                  variant="outlined"
+                  size="small"
+                  onClick={(e) => handleCategory(e, "chair")}
+                >
+                  Chairs
+                </Button>
+                <Button
+                  value={category}
+                  className={classes.btn}
+                  sx={{ m: 2, textTransform: "capitalize" }}
+                  variant="outlined"
+                  size="small"
+                  onClick={(e) => handleCategory(e, "mouse")}
+                >
+                  Mouses
+                </Button>
+                <Button
+                  value={category}
+                  className={classes.btn}
+                  sx={{ m: 2, textTransform: "capitalize" }}
+                  variant="outlined"
+                  size="small"
+                  onClick={(e) => handleCategory(e, "headphone")}
+                >
+                  Headphones
+                </Button>
+                <Button
+                  value={category}
+                  className={classes.btn}
+                  sx={{ m: 2, textTransform: "capitalize" }}
+                  variant="outlined"
+                  size="small"
+                  onClick={(e) => handleCategory(e, "controller")}
+                >
+                  Controllers
+                </Button>
+                <Button
+                  className={classes.btn}
+                  value={category}
+                  sx={{ m: 2, textTransform: "capitalize" }}
+                  variant="outlined"
+                  size="small"
+                  onClick={(e) => handleCategory(e, "other")}
+                >
+                  other
+                </Button>
+              </Toolbar>
+            </AppBar>
+          </Grid>
+        ) : (
+          <></>
+        )}
         <Grid item>
           <AppBar
             position="static"
@@ -111,12 +206,12 @@ const Products = (props) => {
             style={{ border: "solid white 0.1px" }}
           >
             <Toolbar>
-              <Box sx={{ width: 330, height: 88 }} justify='center'>
-                <Grid container justify='center'>
+              <Box sx={{ width: 330, height: 88 }} justify="center">
+                <Grid container justify="center">
                   <Typography
-                    variant='body1'
+                    variant="body1"
                     style={{
-                      color: 'white',
+                      color: "white",
                       marginTop: 10,
                     }}
                   >
@@ -124,12 +219,12 @@ const Products = (props) => {
                   </Typography>
                 </Grid>
                 <Slider
-                  getAriaLabel={() => 'Temperature range'}
+                  getAriaLabel={() => "range"}
                   value={value}
                   min={1}
                   max={1000}
                   onChange={handleChange}
-                  valueLabelDisplay='auto'
+                  valueLabelDisplay="auto"
                   getAriaValueText={valuetext}
                 />
               </Box>
@@ -144,9 +239,18 @@ const Products = (props) => {
                 if (
                   product.isAvailable &&
                   product.item_price <= value[1] &&
-                  product.item_price >= value[0]
+                  product.item_price >= value[0] &&
+                  (product.item_name.toLowerCase().includes(category) ||
+                    (!(
+                      product.item_name.toLowerCase().includes("keyboard") ||
+                      product.item_name.toLowerCase().includes("chair") ||
+                      product.item_name.toLowerCase().includes("mouse") ||
+                      product.item_name.toLowerCase().includes("headphone") ||
+                      product.item_name.toLowerCase().includes("controller")
+                    ) &&
+                      category == "other"))
                 ) {
-                  if (searchValue == '') {
+                  if (searchValue == "") {
                     return product;
                   } else if (
                     product.item_name

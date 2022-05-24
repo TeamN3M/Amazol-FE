@@ -7,7 +7,7 @@ import NavBar from "./NavBar";
 import Profile from "./ManageAccount/Profile";
 import MProfile from "./ManageManagerAccount/Profile";
 import Orders from "./CustomerOrders/Orders";
-import Purchase from "./Purchase/PurchaseCart";
+import Purchase from "./Purchase/Purchase";
 import HomePage from "./HomePage";
 import Login from "./Login";
 import Register from "./Register";
@@ -29,9 +29,9 @@ import ForgotPassword from "./ForgotPassword";
 const themeDark = createTheme({
   palette: {
     background: {
-      default: "#212121"
-    }
-  }
+      default: "#212121",
+    },
+  },
 });
 
 const RouteNavigate = () => {
