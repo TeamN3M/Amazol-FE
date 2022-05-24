@@ -9,9 +9,10 @@ export default Object.freeze({
   cart: "/Cart",
   cartt: "/Cartt",
   cusomerorders: "/Orders",
+  manageorders: "/ManageOrders",
   prodmanage: "/ProdManage",
   uploadImage: "/upload",
-  purchase: "/Purchase"
+  purchase: "/Purchase",
 });
 
 // const authEndPoint = `/${api}/auth`;

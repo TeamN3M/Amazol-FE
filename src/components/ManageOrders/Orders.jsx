@@ -77,6 +77,15 @@ const MTable = () => {
                     color: "white ",
                   }}
                 >
+                  Costumer Name
+                </TableCell>
+                <TableCell
+                  style={{
+                    fontWeight: "bold ",
+                    backgroundColor: "#212121",
+                    color: "white ",
+                  }}
+                >
                   Price
                 </TableCell>
                 <TableCell
@@ -97,6 +106,13 @@ const MTable = () => {
                 >
                   Status
                 </TableCell>
+                <TableCell
+                  style={{
+                    fontWeight: "bold ",
+                    backgroundColor: "#212121",
+                    color: "white ",
+                  }}
+                ></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

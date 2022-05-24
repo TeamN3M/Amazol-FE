@@ -6,16 +6,12 @@ import TextField from "@mui/material/TextField";
 import { makeStyles } from "@material-ui/styles";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { /*changeInfoAlerts,*/ SAVE, NEXT } from "../../constants/strings";
-//import { useSelector } from "react-redux";
-//import { getUser } from "../../store/StateUser";
-// import { addAddress } from "../../Services/services";
-// import { updateAddress } from "../../Services/services";
-// import { getUserAddress } from "../../Services/services";
-//import { getJwtKey } from "../../constants/helpers";
-//import { setUser } from "../../store/StateUser";
-//import { useDispatch } from "react-redux";
-// import { updateUserInfo } from "../../Services/services";
+import { SAVE, NEXT } from "../../constants/strings";
+import { useSelector } from "react-redux";
+import { getUser } from "../../store/StateUser";
+
+import { getUserAddress } from "../../Services/services";
+import { getJwtKey } from "../../constants/helpers";
 import MySnackBar from "../Alerts/MySnackBar";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -68,151 +64,59 @@ const useStyles = makeStyles({
 export default function AddressForm(props) {
   //const dispatch = useDispatch();
 
-  //   useEffect(() => {
-  //     const localJwt = getJwtKey();
-  //     const func = async () => getUser();
+  useEffect(() => {
+    const localJwt = getJwtKey();
+    const func = async () => getUser();
 
-  //     if (localJwt) {
-  //       func().then((res) => {
-  //         if (res.status === 200) {
-  //           console.log("find user");
-  //           dispatch(setUser(res.data.user));
-  //         } else {
-  //           console.log("not found");
-  //         }
-  //       });
-  //     }
-  //   }, []);
-  //   useEffect(async () => {
-  //     if (user !== undefined) {
-  //       const res = await getUserAddress(user._id);
-  //       if (res.status == 200) {
-  //         const userAddr = res.data;
-  //          setAddress(userAddr.address);
-  //          setCountry(userAddr.country);
-  //          setCity(userAddr.city);
-  //          setAddressExist(true);
-  //       }
-  //     }
-  //   }, []);
+    if (localJwt) {
+      func().then((res) => {
+        if (res.status === 200) {
+          console.log("find user");
+        } else {
+          console.log("not found");
+        }
+      });
+    }
+  }, []);
+  useEffect(async () => {
+    if (user !== undefined) {
+      const res = await getUserAddress(user._id);
+      if (res.status == 200) {
+        const userAddr = res.data;
+        setAddress(userAddr.address);
+        setCountry(userAddr.country);
+        setCity(userAddr.city);
+      }
+    }
+  }, []);
 
   const classes = useStyles();
-  // const state = useSelector((s) => s);
-  //const user = getUser(state);
-  //   const [email, setEmail] = useState(user !== undefined ? user.email : "");
-  //   const [emailErrorText, setEmailErrorText] = useState("");
-  //   const [password, setPassword] = useState("");
-  //   const [passwordErrorText, setPasswordErrorText] = useState("");
-  //   const [firstname, setFirstname] = useState(
-  //     user !== undefined ? user.first_name : ""
-  //   );
-  //   const [firstnameErrorText, setFirstnameErrorText] = useState("");
-  //   const [lastname, setLastname] = useState(
-  //     user !== undefined ? user.last_name : ""
-  //   );
-  //   const [lastnameErrorText, setLastnameErrorText] = useState("");
-  //   const [passwordVisible, setPasswordVisible] = useState(false);
-  //   const [address, setAddress] = useState("");
-  //   const [addressErrorText, setAddressErrorText] = useState("");
-  //   const [city, setCity] = useState("");
-  //   const [cityErrorText, setCityErrorText] = useState("");
-  //   const [country, setCountry] = useState("");
-  //   const [countryErrorText, setCountryErrorText] = useState("");
-  // const [addressExist, setAddressExist] = useState(false);
+  const state = useSelector((s) => s);
+  const user = getUser(state);
+
+  const [address, setAddress] = useState("");
+  const [addressErrorText, setAddressErrorText] = useState("");
+  const [city, setCity] = useState("");
+  const [cityErrorText, setCityErrorText] = useState("");
+  const [country, setCountry] = useState("");
+  const [countryErrorText, setCountryErrorText] = useState("");
   const [openAlert, setOpenAlert] = useState(false);
-  //const [infoFlag, setInfoFlag] = useState(false);
 
-  //   const checkNames = (name) => {
-  //     return !validateNames.test(name);
-  //   };
+  const handleSave = async () => {
+    if (!address) {
+      setAddressErrorText("Please enter Address");
+      return;
+    }
+    if (!city) {
+      setCityErrorText("Please enter City");
+      return;
+    }
+    if (!country) {
+      setCountryErrorText("Please enter Country");
+      return;
+    }
+  };
 
-  //   const checkEmail = (email) => {
-  //     return !validateEmail.test(email);
-  //   };
-
-  //   const checkPassword = (password) => {
-  //     return !validatePassword.test(password);
-  //   };
-  //   const handleClickShowPassword = () => {
-  //     setPasswordVisible((prevState) => !prevState);
-  //   };
-
-  //const handleSave = async () => {
-  // if (!email) {
-  //   setEmailErrorText("Please enter email");
-  //   return;
-  // } else if (checkEmail(email)) {
-  //   setEmailErrorText("email is not valid!");
-  //   return;
-  // } else {
-  //   setEmailErrorText("");
-  // }
-  // if (!password) {
-  //   setPasswordErrorText("");
-  // } else if (checkPassword(password)) {
-  //   setPasswordErrorText("Invalid password !");
-  //   return;
-  // } else {
-  //   setPasswordErrorText("");
-  // }
-  // if (!firstname) {
-  //   setFirstnameErrorText("Please enter first name");
-  //   return;
-  // } else if (!checkNames(firstname)) {
-  //   setFirstnameErrorText("The first name cant contain this char");
-  //   return;
-  // } else if (firstname.length < 2) {
-  //   setFirstnameErrorText("The first name must contain at least 2 letters");
-  //   return;
-  // } else {
-  //   setFirstnameErrorText("");
-  // }
-
-  // if (!checkNames(lastname)) {
-  //   setLastnameErrorText("The last name cant contain this char");
-  //   return;
-  // } else if (lastname.length < 2) {
-  //   setLastnameErrorText("The last name must contain at least 2 letters");
-  //   return;
-  // } else {
-  //   setLastnameErrorText("");
-  // }
-  // if (!address) {
-  //   setAddressErrorText("Please enter Address");
-  //   return;
-  // }
-  // if (!city) {
-  //   setCityErrorText("Please enter City");
-  //   return;
-  // }
-  // if (!country) {
-  //   setCountryErrorText("Please enter Country");
-  //   return;
-  // }
-  // const res1 = await updateUserInfo(
-  //   user._id,
-  //   firstname,
-  //   lastname,
-  //   email,
-  //   password
-  // );
-  // if (res1.status == 200) {
-  //   setInfoFlag(true);
-  // }
-  // if (addressExist) {
-  //   const res2 = await updateAddress(user._id, country, city, address);
-  //   if (res2.status == 200) {
-  //     setInfoFlag(true);
-  //   }
-  // } else {
-  //   const res3 = await addAddress(user._id, country, city, address);
-  //   if (res3.status == 200) {
-  //     setInfoFlag(true);
-  //   }
-  // }
-
-  // setOpenAlert(true);
-  // };
   const [DateValue, setDateValue] = React.useState("");
   const [HourValue, setHourValue] = React.useState("");
 
@@ -232,18 +136,7 @@ export default function AddressForm(props) {
 
   return (
     <React.Fragment>
-      <MySnackBar
-      // open={openAlert}
-      // timeout={2000}
-      // severity={
-      //   infoFlag
-      //     ? changeInfoAlerts.OK.severity
-      //     : changeInfoAlerts.FAIL.severity
-      // }
-      // message={
-      //   infoFlag ? changeInfoAlerts.OK.message : changeInfoAlerts.FAIL.message
-      // }
-      />
+      <MySnackBar />
       <Typography
         variant="h6"
         gutterBottom
@@ -284,6 +177,9 @@ export default function AddressForm(props) {
                   value={HourValue}
                   onChange={handleHourChange}
                   renderInput={(params) => <TextField {...params} />}
+                  shouldDisableTime={(timeValue, clockType) => {
+                    return clockType === "minutes" && timeValue > 0;
+                  }}
                   autoFocus
                   InputLabelProps={{
                     classes: {
@@ -328,10 +224,10 @@ export default function AddressForm(props) {
             label="Address *"
             name="Address"
             autoComplete="address-line"
-            // value={address}
-            // error={!!addressErrorText}
-            // helperText={addressErrorText}
-            //onChange={(e) => setAddress(e.target.value)}
+            value={address}
+            error={!!addressErrorText}
+            helperText={addressErrorText}
+            onChange={(e) => setAddress(e.target.value)}
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
@@ -358,10 +254,10 @@ export default function AddressForm(props) {
             margin="dense"
             fullWidth
             autoComplete="shipping address-level2"
-            // value={city}
-            //error={!!cityErrorText}
-            //helperText={cityErrorText}
-            // onChange={(e) => setCity(e.target.value)}
+            value={city}
+            error={!!cityErrorText}
+            helperText={cityErrorText}
+            onChange={(e) => setCity(e.target.value)}
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
@@ -388,10 +284,10 @@ export default function AddressForm(props) {
             margin="dense"
             fullWidth
             autoComplete="shipping country"
-            //value={country}
-            // error={!!countryErrorText}
-            //  helperText={countryErrorText}
-            //   onChange={(e) => setCountry(e.target.value)}
+            value={country}
+            error={!!countryErrorText}
+            helperText={countryErrorText}
+            onChange={(e) => setCountry(e.target.value)}
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
@@ -414,7 +310,7 @@ export default function AddressForm(props) {
           variant="contained"
           endIcon={<ChangeCircleIcon />}
           sx={{ mt: 3, ml: 1 }}
-          // onClick={handleSave}
+          onClick={handleSave}
         >
           {SAVE}
         </Button>

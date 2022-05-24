@@ -16,7 +16,7 @@ import {
   OFFERS,
   validateNames,
   validateEmail,
-  validatePassword
+  validatePassword,
 } from "../constants/strings";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -61,7 +61,7 @@ const Register = () => {
   const alerts = {
     OK: [{ severity: "success", message: REGISTEROK }],
     EXIST: [{ severity: "warning", message: EXISTUSER }],
-    FAIL: [{ severity: "error", message: REGISTERFAIL }]
+    FAIL: [{ severity: "error", message: REGISTERFAIL }],
   };
 
   const navigate = useNavigate();
@@ -212,37 +212,37 @@ const Register = () => {
   const useStyles = makeStyles({
     textFiled: {
       color: "white",
-      backgroundColor: MainTheme.palette.background.default
+      backgroundColor: MainTheme.palette.background.default,
     },
     cssLabel: {
       color: "white",
       "&.Mui-focused": {
-        color: "white"
+        color: "white",
       },
       "& .MuiInputBase-root.Mui-disabled": {
-        color: "rgba(0, 0, 0, 0.6) !important" // (default alpha is 0.38)
-      }
+        color: "rgba(0, 0, 0, 0.6) !important", // (default alpha is 0.38)
+      },
     },
 
     cssOutlinedInput: {
       "&$cssFocused $notchedOutline": {
-        borderColor: "#FFF"
-      }
+        borderColor: "#FFF",
+      },
     },
     cssFocused: {},
 
     notchedOutline: {
       borderWidth: "1px",
-      borderColor: "white !important"
+      borderColor: "white !important",
     },
 
     input: {
       color: "white",
       "&:-webkit-autofill": {
         WebkitBoxShadow: "0 0 0 100px #212121 inset",
-        WebkitTextFillColor: "white"
-      }
-    }
+        WebkitTextFillColor: "white",
+      },
+    },
   });
 
   const classes = useStyles();
@@ -250,21 +250,21 @@ const Register = () => {
   return (
     <Grid
       container
-      component='main'
+      component="main"
       sx={{
         minWidth: "100%",
         height: "80vh",
-        mb: 15
+        mb: 15,
       }}
     >
       <CssBaseline />
-      <Grid item xs={12} sm={8} md={5} component='main' elevation={6}>
-        <Box textAlign='center'>
+      <Grid item xs={12} sm={8} md={5} component="main" elevation={6}>
+        <Box textAlign="center">
           <Button
-            type='submit'
+            type="submit"
             fullWidth
             onClick={handleClickManager}
-            variant='contained'
+            variant="contained"
             sx={{ mt: 3, mb: 2 }}
             startIcon={
               isManagerClicked ? <AccountCircleIcon /> : <ManageAccountsIcon />
@@ -275,7 +275,7 @@ const Register = () => {
               minWidth: "150px",
               minHeight: "30px",
               backgroundColor: "#161e33",
-              textTransform: "capitalize"
+              textTransform: "capitalize",
             }}
           >
             {userType}
@@ -287,23 +287,23 @@ const Register = () => {
             mx: 4,
             display: "flex",
             flexDirection: "column",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "#161e33", color: "#fff" }}>
             <AccountBoxIcon />
           </Avatar>
           <Typography
-            component='h1'
-            variant='h5'
+            component="h1"
+            variant="h5"
             style={{
-              color: "white"
+              color: "white",
             }}
           >
             {SIGNUP}
           </Typography>
           <Box
-            component='form'
+            component="form"
             noValidate
             onSubmit={handleSubmit}
             sx={{ mt: 1 }}
@@ -312,28 +312,28 @@ const Register = () => {
             {isManagerClicked ? (
               <TextField
                 className={classes.textField}
-                margin='normal'
+                margin="normal"
                 autoComplete
-                name='code'
+                name="code"
                 required
                 fullWidth
-                id='code'
-                label='Manager Code'
-                color='secondary'
+                id="code"
+                label="Manager Code"
+                color="secondary"
                 autoFocus
                 InputLabelProps={{
                   classes: {
                     root: classes.cssLabel,
-                    focused: classes.cssFocused
-                  }
+                    focused: classes.cssFocused,
+                  },
                 }}
                 InputProps={{
                   classes: {
                     root: classes.cssOutlinedInput,
                     focused: classes.cssFocused,
                     notchedOutline: classes.notchedOutline,
-                    input: classes.input
-                  }
+                    input: classes.input,
+                  },
                 }}
                 value={managerCode}
                 error={!!managerCodeErrorText}
@@ -343,28 +343,28 @@ const Register = () => {
             ) : null}
             <TextField
               className={classes.textField}
-              margin='normal'
-              autoComplete='given-name'
-              name='firstName'
+              margin="normal"
+              autoComplete="given-name"
+              name="firstName"
               required
               fullWidth
-              id='firstName'
-              label='First Name'
-              color='secondary'
+              id="firstName"
+              label="First Name"
+              color="secondary"
               autoFocus
               InputLabelProps={{
                 classes: {
                   root: classes.cssLabel,
-                  focused: classes.cssFocused
-                }
+                  focused: classes.cssFocused,
+                },
               }}
               InputProps={{
                 classes: {
                   root: classes.cssOutlinedInput,
                   focused: classes.cssFocused,
                   notchedOutline: classes.notchedOutline,
-                  input: classes.input
-                }
+                  input: classes.input,
+                },
               }}
               value={firstname}
               error={!!firstnameErrorText}
@@ -374,13 +374,13 @@ const Register = () => {
 
             <TextField
               className={classes.textField}
-              margin='normal'
+              margin="normal"
               fullWidth
-              id='lastName'
-              color='secondary'
-              label='Last Name'
-              name='lastName'
-              autoComplete='family-name'
+              id="lastName"
+              color="secondary"
+              label="Last Name"
+              name="lastName"
+              autoComplete="family-name"
               value={lastname}
               error={!!lastnameErrorText}
               helperText={lastnameErrorText}
@@ -388,27 +388,27 @@ const Register = () => {
               InputLabelProps={{
                 classes: {
                   root: classes.cssLabel,
-                  focused: classes.cssFocused
-                }
+                  focused: classes.cssFocused,
+                },
               }}
               InputProps={{
                 classes: {
                   root: classes.cssOutlinedInput,
                   focused: classes.cssFocused,
                   notchedOutline: classes.notchedOutline,
-                  input: classes.input
-                }
+                  input: classes.input,
+                },
               }}
             />
             <TextField
-              margin='normal'
+              margin="normal"
               required
               fullWidth
-              id='email'
-              color='secondary'
-              label='Email Address'
-              name='email'
-              autoComplete='email'
+              id="email"
+              color="secondary"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
               value={email}
               error={!!emailErrorText}
               helperText={emailErrorText}
@@ -416,48 +416,48 @@ const Register = () => {
               InputLabelProps={{
                 classes: {
                   root: classes.cssLabel,
-                  focused: classes.cssFocused
-                }
+                  focused: classes.cssFocused,
+                },
               }}
               InputProps={{
                 classes: {
                   root: classes.cssOutlinedInput,
                   focused: classes.cssFocused,
                   notchedOutline: classes.notchedOutline,
-                  input: classes.input
-                }
+                  input: classes.input,
+                },
               }}
             />
             <TextField
-              margin='normal'
+              margin="normal"
               required
               fullWidth
-              color='secondary'
-              name='password'
-              label='Password'
+              color="secondary"
+              name="password"
+              label="Password"
               type={passwordVisible ? "text" : "password"}
-              id='password'
-              autoComplete='new-password'
+              id="password"
+              autoComplete="new-password"
               InputProps={{
                 classes: {
                   root: classes.cssOutlinedInput,
                   focused: classes.cssFocused,
                   notchedOutline: classes.notchedOutline,
-                  input: classes.input
+                  input: classes.input,
                 },
                 endAdornment: (
-                  <InputAdornment position='end'>
+                  <InputAdornment position="end">
                     <IconButton
-                      aria-label='toggle password visibility'
+                      aria-label="toggle password visibility"
                       onClick={handleClickShowPassword}
                       style={{
-                        color: "white"
+                        color: "white",
                       }}
                     >
                       {passwordVisible ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
-                )
+                ),
               }}
               value={password}
               error={!!passwordErrorText}
@@ -466,8 +466,8 @@ const Register = () => {
               InputLabelProps={{
                 classes: {
                   root: classes.cssLabel,
-                  focused: classes.cssFocused
-                }
+                  focused: classes.cssFocused,
+                },
               }}
             />
 
@@ -476,42 +476,42 @@ const Register = () => {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      value='allowExtraEmails'
+                      value="allowExtraEmails"
                       sx={{
                         color: "#FFFFFF",
                         "&.Mui-checked": {
-                          color: "#FFFFFF"
-                        }
+                          color: "#FFFFFF",
+                        },
                       }}
                     />
                   }
                   style={{
-                    color: "white"
+                    color: "white",
                   }}
                   label={OFFERS}
                 />
               </Grid>
             </Box>
 
-            <Box textAlign='center'>
+            <Box textAlign="center">
               <Button
-                type='submit'
+                type="submit"
                 fullWidth
                 // onClick={handleSubmit}
-                variant='contained'
+                variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 style={{
                   maxWidth: "700px",
                   maxHeight: "50px",
                   minWidth: "350px",
                   minHeight: "30px",
-                  backgroundColor: "#161e33"
+                  backgroundColor: "#161e33",
                 }}
               >
                 {SIGNUP}
               </Button>
             </Box>
-            <Grid item justifyContent='flex-start' sx={{ mr: 2 }}>
+            <Grid item justifyContent="flex-start" sx={{ mr: 2 }}>
               <InfoPop />
             </Grid>
             <MySnackBar
@@ -520,18 +520,18 @@ const Register = () => {
               severity={alertType.severity}
               message={alertType.message}
             />
-            <Grid container justifyContent='flex-end'>
+            <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link
-                  component='button'
+                  component="button"
                   onClick={() => {
                     navigate(paths.login);
                   }}
                   style={{
                     color: "white",
-                    textDecoration: "none"
+                    textDecoration: "none",
                   }}
-                  variant='body2'
+                  variant="body2"
                 >
                   {SIGNIN_OPT}
                 </Link>
@@ -543,7 +543,7 @@ const Register = () => {
       <Grid
         theme={MainTheme}
         item
-        component='main'
+        component="main"
         xs={false}
         sm={4}
         md={7}
@@ -552,7 +552,7 @@ const Register = () => {
           backgroundRepeat: "no-repeat",
           backgroundColor: MainTheme.palette.background.default,
           backgroundSize: "cover",
-          backgroundPosition: "center"
+          backgroundPosition: "center",
         }}
       />
       <CssBaseline />

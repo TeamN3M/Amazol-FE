@@ -7,6 +7,7 @@ import NavBar from "./NavBar";
 import Profile from "./ManageAccount/Profile";
 import MProfile from "./ManageManagerAccount/Profile";
 import Orders from "./CustomerOrders/Orders";
+import ManageOrders from "./ManageOrders/Orders";
 import Purchase from "./Purchase/Purchase";
 import HomePage from "./HomePage";
 import Login from "./Login";
@@ -72,6 +73,7 @@ const RouteNavigate = () => {
           <Route path={paths.cusomerorders} element={<Orders />} />
           <Route path={paths.prodmanage} element={<ProductManagment />} />
           <Route path={paths.purchase} element={<Purchase />} />
+          <Route path={paths.manageorders} element={<ManageOrders />} />
         </Routes>
       </ThemeProvider>
       <ThemeProvider theme={MainTheme}>

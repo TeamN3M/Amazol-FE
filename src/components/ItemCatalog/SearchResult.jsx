@@ -25,8 +25,8 @@ const SearchResult = () => {
       textAlign: "center",
       background: "#888888",
       color: "white",
-      fontSize: "30px"
-    }
+      fontSize: "30px",
+    },
   });
   const classes = useStyles();
 
