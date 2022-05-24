@@ -37,15 +37,15 @@ const CartPage = () => {
       textAlign: "center",
       background: "#888888",
       color: "white",
-      fontSize: "30px"
+      fontSize: "30px",
     },
     header: {
       padding: "60px",
       textAlign: "center",
       background: "#888888",
       color: "white",
-      fontSize: "5rem"
-    }
+      fontSize: "5rem",
+    },
   });
   const classes = useStyles();
   const getAllItems = async () => {
@@ -113,14 +113,14 @@ const CartPage = () => {
       <Grid>
         <Typography
           color={"white"}
-          variant='h1'
+          variant="h1"
           sx={{ animation: `${RGB} 2.5s infinite`, alignItems: "center" }}
           class={classes.header}
         >
           Your Cart :
         </Typography>
 
-        {tempCart.length === 0 ? <p>No items in cart.</p> : null}
+        {tempCart.length === 0 ? <p>No items in cart</p> : null}
         <CartGrid
           products={tempCart}
           userid={getUser(state)._id}
@@ -128,10 +128,10 @@ const CartPage = () => {
           reciptText={text}
         />
         <LoadingButton
-          type='submit'
+          type="submit"
           fullWidth
           // onClick={navToPayment}
-          variant='contained'
+          variant="contained"
           sx={{ mt: 3, mb: 2 }}
           startIcon={<PaidOutlinedIcon />}
           style={{
@@ -142,7 +142,7 @@ const CartPage = () => {
             minHeight: "50px",
             backgroundColor: "#161e33",
             textTransform: "capitalize",
-            padding: "auto"
+            padding: "auto",
           }}
           onClick={handleCheckoutClick}
         >
