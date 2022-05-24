@@ -3,7 +3,7 @@ import { Badge, IconButton } from "@mui/material";
 import { ShoppingCart } from "@mui/icons-material";
 import { styled } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
-import { getTotalCart } from "../../constants/helpers";
+import { getCart } from "../../constants/helpers";
 
 import paths from "../../constants/paths";
 
@@ -18,19 +18,18 @@ const StyledBadge = styled(Badge)(() => ({
 
 const CartIcon = () => {
   const navigate = useNavigate();
-  const [total, setTotal] = useState(getTotalCart());
+  const [userCart, setUserCart] = useState();
 
   const handleCartClicked = () => {
-    setTotal(getTotalCart());
     navigate(paths.cartt);
   };
   useEffect(() => {
-    setTotal(getTotalCart());
-  }, []);
+    setUserCart(JSON.parse(getCart()));
+  }, [userCart]);
 
   return (
     <IconButton onClick={handleCartClicked}>
-      <StyledBadge badgeContent={total} color='primary'>
+      <StyledBadge badgeContent={userCart?.items?.length} color='primary'>
         <ShoppingCart sx={{ color: "white" }} fontSize='large' />
       </StyledBadge>
     </IconButton>

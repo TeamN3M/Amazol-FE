@@ -1,8 +1,10 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
+import { getCart } from "../constants/helpers";
 
 const initialState = {
-  user: undefined
+  user: undefined,
+  cart: getCart()
 };
 
 export const sliceReducer = createSlice({
@@ -21,5 +23,7 @@ export const sliceReducer = createSlice({
 export const { setUser, logoutUser } = sliceReducer.actions;
 
 export const getUser = (state) => state.State.user;
+
+export const getUserStateCart = (state) => state.State.cart;
 
 export default sliceReducer.reducer;

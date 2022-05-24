@@ -10,9 +10,9 @@ import FreeShipping from "./FreeShiping";
 import EmptyCart from "../../assets/empty-cart.json";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 import { getUser } from "../../store/StateUser";
-import { getCartById, getItems, updateCart } from "../../Services/services";
+import { updateCart, getCartById } from "../../Services/services";
 import paths from "../../constants/paths";
-import { setTotalCart } from "../../constants/helpers";
+import { setUserCart } from "../../constants/helpers";
 
 const Container = styled.div`
   backgroundcolor: #212121;
@@ -174,21 +174,10 @@ const Button = styled.button`
 const Cart = () => {
   const state = useSelector((s) => s);
   const navigate = useNavigate();
-  const [makeChange, setMakeChange] = useState(false);
   const [cart, setCart] = useState();
-  const [allItems, setAllItems] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState(0);
 
   const user = getUser(state);
-
-  const getAllItems = async () => {
-    const res = await getItems();
-    if (res.status == 200) {
-      setAllItems(res.data);
-      setMakeChange(true);
-    }
-  };
 
   const getUserCart = async (user) => {
     if (user !== undefined) {
@@ -196,28 +185,12 @@ const Cart = () => {
       const res = await getCartById(id);
       if (res.status == 200) {
         setCart(res.data);
+        setUserCart(JSON.stringify(res.data));
         console.log("got cart", res.data);
-        calculateUserCart(cart);
+        // setTotalCart(cart.items.length);
+        calcTotalPrice();
       }
     }
-  };
-
-  const calculateUserCart = (cart) => {
-    let totalPrice = 0;
-    for (let i = 0; i < allItems.length; i++) {
-      let addingItem;
-      cart.items.map((item) => {
-        if (allItems[i]._id === item.item_id) {
-          addingItem = allItems[i];
-          addingItem.item_quantity = item.quantity;
-          totalPrice += addingItem.item_quantity * addingItem.item_price;
-          cartItems.push(addingItem);
-        }
-      });
-    }
-    setCartItems(cartItems);
-    setTotal(totalPrice);
-    setTotalCart(cartItems.length);
   };
 
   const handleRemoveFromCart = async (item_id) => {
@@ -231,7 +204,6 @@ const Cart = () => {
     const res = await updateCart(cartID, customer_id, cart.items);
     if (res.status == 200) {
       console.log("removee item");
-      setMakeChange(true);
     }
   };
 
@@ -243,11 +215,18 @@ const Cart = () => {
     navigate(paths.purchase);
   };
 
-  useEffect(() => {
-    getAllItems();
-    getUserCart(user);
-  }, [makeChange]);
+  const calcTotalPrice = () => {
+    let totalPrice = 0;
+    cart.items.map((item) => {
+      totalPrice += item.item_price * item.quantity;
+    });
+    setTotal(totalPrice);
+  };
 
+  useEffect(() => {
+    getUserCart(user);
+  }, []);
+  // console.log("user cart from local ", user.first_name, cart.items);
   return (
     <Container style={{ background: "#212121" }}>
       <FreeShipping />
@@ -266,7 +245,7 @@ const Cart = () => {
         <Bottom>
           <Info>
             {cart?.items.length ? (
-              cartItems.map((item) => (
+              cart.items.map((item) => (
                 <Product key={item._id}>
                   <ProductDetail>
                     <Image src={item.item_pictures[0]} />
@@ -282,11 +261,11 @@ const Cart = () => {
                   <PriceDetail>
                     <ProductAmountContainer>
                       <Add />
-                      <ProductAmount>{item.item_quantity}</ProductAmount>
+                      <ProductAmount>{item.quantity}</ProductAmount>
                       <Remove />
                     </ProductAmountContainer>
                     <ProductPrice>
-                      {item.item_price * item.item_quantity} $
+                      {item.item_price * item.quantity} $
                     </ProductPrice>
                     <Grid>
                       <IconButton

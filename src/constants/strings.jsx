@@ -49,6 +49,7 @@ export const validateCvv = /^[0-9]{3}$/;
 
 export const JWT_KEY = "JWT-KEY";
 export const CART_TOTAL = "CART-TOTAL";
+export const CART = "USER-CART";
 
 export const loginAlerts = {
   OK: { severity: "success", message: LOGINOK },
