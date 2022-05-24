@@ -10,7 +10,7 @@ import FreeShipping from "./FreeShiping";
 import EmptyCart from "../../assets/empty-cart.json";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 import { getUser } from "../../store/StateUser";
-import { getCartById, getItems } from "../../Services/services";
+import { getCartById, getItems, updateCart } from "../../Services/services";
 import paths from "../../constants/paths";
 import { setTotalCart } from "../../constants/helpers";
 
@@ -215,14 +215,24 @@ const Cart = () => {
         }
       });
     }
-    console.log("your len cart is : ", cartItems.length);
     setCartItems(cartItems);
     setTotal(totalPrice);
     setTotalCart(cartItems.length);
   };
 
-  const handleRemoveFromCart = (item_id) => {
-    console.log(item_id);
+  const handleRemoveFromCart = async (item_id) => {
+    const cartID = cart._id;
+    const customer_id = cart.customer_id;
+    const indexOfObject = cart.items.findIndex((item) => {
+      return item.item_id === item_id;
+    });
+    cart.items.splice(indexOfObject, 1);
+
+    const res = await updateCart(cartID, customer_id, cart.items);
+    if (res.status == 200) {
+      console.log("removee item");
+      setMakeChange(true);
+    }
   };
 
   const handleContinueShopping = () => {

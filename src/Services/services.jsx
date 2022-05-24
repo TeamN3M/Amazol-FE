@@ -189,14 +189,25 @@ export const addItemToCart = async (id, inItem) => {
   } catch (err) {
     return handleErrResponse(err);
   }
-  console.log("2.The new cart -");
-  console.log(items);
+  // console.log("2.The new cart -");
+  // console.log(items);
   try {
     const res = await put(updateCartURL + cart_id, {
       customer_id: id,
       items: items
     });
     console.log(res);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+export const updateCart = async (cartID, customer_id, items) => {
+  try {
+    const res = await put(updateCartURL + cartID, {
+      customer_id,
+      items
+    });
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);
