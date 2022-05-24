@@ -48,22 +48,22 @@ export const validateExpire = /^(0[1-9]|1[0-2]|[1-9])\/?(([0-9]{4}|[0-9]{2})$)/;
 export const validateCvv = /^[0-9]{3}$/;
 
 export const JWT_KEY = "JWT-KEY";
-export const CART_KEY = "CART-KEY";
+export const CART_TOTAL = "CART-TOTAL";
 
 export const loginAlerts = {
   OK: { severity: "success", message: LOGINOK },
-  FAIL: { severity: "error", message: LOGINFAIL },
+  FAIL: { severity: "error", message: LOGINFAIL }
 };
 export const resetPasswordAlerts = {
   OK: { severity: "success", message: RESETOK },
   FAIL: { severity: "error", message: RESETFAIL },
-  EXIST: { severity: "error", message: NOTEXISTUSER },
+  EXIST: { severity: "error", message: NOTEXISTUSER }
 };
 export const changeInfoAlerts = {
   OK: { severity: "success", message: CHANGETOK },
-  FAIL: { severity: "error", message: CHANGEFAIL },
+  FAIL: { severity: "error", message: CHANGEFAIL }
 };
 export const paymentAlerts = {
   OK: { severity: "success", message: PAYMENTTOK },
-  FAIL: { severity: "error", message: PAYMENTFAIL },
+  FAIL: { severity: "error", message: PAYMENTFAIL }
 };

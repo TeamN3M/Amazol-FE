@@ -1,11 +1,9 @@
-import { setCartSession } from "../../constants/helpers";
 import React from "react";
 import { Grid, Typography } from "@mui/material";
 import { CssBaseline } from "@mui/material";
 import CartGrid from "./CartGrid/CartGrid";
 import { keyframes } from "@emotion/react";
-import { useSelector, useDispatch } from "react-redux";
-import { setCart } from "../../store/StateCart";
+import { useSelector } from "react-redux";
 import { getUser } from "../../store/StateUser";
 import { getCartById, getItems } from "../../Services/services";
 import { useState } from "react";
@@ -110,9 +108,6 @@ const CartPage = () => {
   console.log(text);
   console.log(sum);
 
-  const dispatch = useDispatch();
-  dispatch(setCart(tempCart));
-  setCartSession(tempCart);
   return (
     <>
       <Grid>

@@ -28,8 +28,7 @@ import { setUser } from "../../store/StateUser";
 import { useDispatch } from "react-redux";
 import MySnackBar from "../Alerts/MySnackBar";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import PaymentAnimation from "./PaymentAnimation.json";
-// import payment from "./payment.json";
+import PaymentAnimation from "../../assets/PaymentAnimation.json";
 import Lottie from "lottie-web";
 import { LoadingButton } from "@mui/lab";
 

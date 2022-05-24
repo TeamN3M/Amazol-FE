@@ -25,13 +25,13 @@ import { rememberMeSession } from "../constants/helpers";
 import { useDispatch } from "react-redux";
 import MySnackBar from "./Alerts/MySnackBar";
 import { loginAlerts } from "../constants/strings";
-import { setUser } from '../store/StateUser';
+import { setUser } from "../store/StateUser";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [emailErrorText, setEmailErrorText] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordErrorText, setPasswordErrorText] = useState('');
+  const [email, setEmail] = useState("");
+  const [emailErrorText, setEmailErrorText] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordErrorText, setPasswordErrorText] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
   const [loginError, setLoginError] = useState(false);
@@ -61,58 +61,58 @@ const Login = () => {
 
   const useStyles = makeStyles({
     textFiled: {
-      color: 'white',
-      backgroundColor: MainTheme.palette.background.default,
+      color: "white",
+      backgroundColor: MainTheme.palette.background.default
     },
     cssLabel: {
-      color: 'white',
-      '&.Mui-focused': {
-        color: 'white',
-      },
+      color: "white",
+      "&.Mui-focused": {
+        color: "white"
+      }
     },
 
     cssOutlinedInput: {
-      '&$cssFocused $notchedOutline': {
-        borderColor: '#FFF',
-      },
+      "&$cssFocused $notchedOutline": {
+        borderColor: "#FFF"
+      }
     },
     cssFocused: {},
 
     notchedOutline: {
-      borderWidth: '1px',
-      borderColor: 'white !important',
+      borderWidth: "1px",
+      borderColor: "white !important"
     },
     input: {
-      color: 'white',
-      '&:-webkit-autofill': {
-        WebkitBoxShadow: '0 0 0 100px #212121 inset',
-        WebkitTextFillColor: 'white',
-      },
-    },
+      color: "white",
+      "&:-webkit-autofill": {
+        WebkitBoxShadow: "0 0 0 100px #212121 inset",
+        WebkitTextFillColor: "white"
+      }
+    }
   });
   const classes = useStyles();
 
   const handleValidate = async (email, password) => {
     if (!email) {
-      setEmailErrorText('Please enter email');
+      setEmailErrorText("Please enter email");
       return;
     } else if (checkEmail(email)) {
-      setEmailErrorText('email is not valid!');
+      setEmailErrorText("email is not valid!");
       return;
     } else {
-      setEmailErrorText('');
+      setEmailErrorText("");
     }
     if (!password) {
-      setPasswordErrorText('Please enter password');
+      setPasswordErrorText("Please enter password");
       return;
     } else {
-      setPasswordErrorText('');
+      setPasswordErrorText("");
     }
 
     const res = await loginUser(email, password);
     if (res.status == 200) {
       if (rememberMe) {
-        rememberMeSession(res.data['accessToken']);
+        rememberMeSession(res.data["accessToken"]);
       }
       dispatch(setUser(res.data["user"]));
       setLoginFlag(true);
@@ -130,8 +130,8 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const email = data.get('email');
-    const password = data.get('password');
+    const email = data.get("email");
+    const password = data.get("password");
     handleValidate(email, password);
   };
   useEffect(() => {
@@ -146,7 +146,7 @@ const Login = () => {
   }, [openAlert]);
 
   return (
-    <Grid container component='main' sx={{ height: '80vh' }}>
+    <Grid container component='main' sx={{ height: "80vh" }}>
       <CssBaseline />
       <Grid
         theme={MainTheme}
@@ -156,10 +156,10 @@ const Login = () => {
         md={7}
         sx={{
           backgroundImage: `url("../images/sign in page/sign-in.jpg")`,
-          backgroundRepeat: 'no-repeat',
+          backgroundRepeat: "no-repeat",
 
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundSize: "cover",
+          backgroundPosition: "center"
         }}
       >
         <CssBaseline />
@@ -169,19 +169,19 @@ const Login = () => {
           sx={{
             my: 4,
             mx: 4,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: '#161e33', color: '#fff' }}>
+          <Avatar sx={{ m: 1, bgcolor: "#161e33", color: "#fff" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography
             component='h1'
             variant='h5'
             style={{
-              color: 'white',
+              color: "white"
             }}
           >
             {SIGNIN}
@@ -211,16 +211,16 @@ const Login = () => {
               InputLabelProps={{
                 classes: {
                   root: classes.cssLabel,
-                  focused: classes.cssFocused,
-                },
+                  focused: classes.cssFocused
+                }
               }}
               InputProps={{
                 classes: {
                   root: classes.cssOutlinedInput,
                   focused: classes.cssFocused,
                   notchedOutline: classes.notchedOutline,
-                  input: classes.input,
-                },
+                  input: classes.input
+                }
               }}
             />
             <TextField
@@ -230,7 +230,7 @@ const Login = () => {
               fullWidth
               name='password'
               label='Password'
-              type={passwordVisible ? 'text' : 'password'}
+              type={passwordVisible ? "text" : "password"}
               id='password'
               autoComplete='current-password'
               InputProps={{
@@ -238,7 +238,7 @@ const Login = () => {
                   root: classes.cssOutlinedInput,
                   focused: classes.cssFocused,
                   notchedOutline: classes.notchedOutline,
-                  input: classes.input,
+                  input: classes.input
                 },
                 endAdornment: (
                   <InputAdornment position='end'>
@@ -246,13 +246,13 @@ const Login = () => {
                       aria-label='toggle password visibility'
                       onClick={handleClickShowPassword}
                       style={{
-                        color: 'white',
+                        color: "white"
                       }}
                     >
                       {passwordVisible ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
-                ),
+                )
               }}
               color='secondary'
               value={password}
@@ -262,8 +262,8 @@ const Login = () => {
               InputLabelProps={{
                 classes: {
                   root: classes.cssLabel,
-                  focused: classes.cssFocused,
-                },
+                  focused: classes.cssFocused
+                }
               }}
             />
             <FormControlLabel
@@ -272,15 +272,15 @@ const Login = () => {
                   checked={rememberMe}
                   onChange={handleClickRememberMe}
                   sx={{
-                    color: '#FFFFFF',
-                    '&.Mui-checked': {
-                      color: '#FFFFFF',
-                    },
+                    color: "#FFFFFF",
+                    "&.Mui-checked": {
+                      color: "#FFFFFF"
+                    }
                   }}
                 />
               }
               style={{
-                color: 'white',
+                color: "white"
               }}
               label='Remember me'
             />
@@ -304,7 +304,7 @@ const Login = () => {
               sx={{ mt: 3, mb: 2 }}
               style={{
                 color: MainTheme.palette.text.primary,
-                backgroundColor: '#161e33',
+                backgroundColor: "#161e33"
               }}
             >
               {SIGNIN}
