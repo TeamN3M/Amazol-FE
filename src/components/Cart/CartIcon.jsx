@@ -25,7 +25,8 @@ const CartIcon = () => {
   };
   useEffect(() => {
     setUserCart(JSON.parse(getCart()));
-  }, [userCart]);
+    console.log(userCart?.items?.length);
+  }, []);
 
   return (
     <IconButton onClick={handleCartClicked}>

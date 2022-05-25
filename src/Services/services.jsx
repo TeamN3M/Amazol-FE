@@ -174,27 +174,38 @@ export const getCartById = async (id) => {
 };
 
 export const addItemToCart = async (id, inItem) => {
-  const item = [{ item_id: inItem._id, item_quantity: 1 }];
-  let items;
+  let userCart;
   let cart_id;
-  console.log("1.Added item -");
-  console.log(item);
   try {
     const res = await get(getUserCartURL + id, { id });
-    //console.log(res.data);
     if (res.status == 200) {
-      items = [...res.data.items, { item_id: inItem._id, quantity: 1 }];
+      userCart = res.data;
+      const indexOfObject = userCart.items.findIndex((item) => {
+        return item.item_id === inItem._id;
+      });
+      if (indexOfObject > -1) {
+        userCart.items[indexOfObject].item_quantity++;
+      } else {
+        userCart.items.push({
+          item_id: inItem._id,
+          item_name: inItem.item_name,
+          item_rating: inItem.item_rating,
+          item_price: inItem.item_price,
+          item_pictures: inItem.item_pictures,
+          item_quantity: 1
+        });
+      }
+
       cart_id = res.data._id;
     }
   } catch (err) {
     return handleErrResponse(err);
   }
-  // console.log("2.The new cart -");
-  // console.log(items);
+
   try {
     const res = await put(updateCartURL + cart_id, {
       customer_id: id,
-      items: items
+      items: userCart.items
     });
     console.log(res);
     return { data: res.data, status: res.status };

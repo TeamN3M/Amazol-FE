@@ -10,9 +10,10 @@ import FreeShipping from "./FreeShiping";
 import EmptyCart from "../../assets/empty-cart.json";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 import { getUser } from "../../store/StateUser";
-import { updateCart, getCartById } from "../../Services/services";
+import { updateCart, getCartById, getItemById } from "../../Services/services";
 import paths from "../../constants/paths";
 import { setUserCart } from "../../constants/helpers";
+import MySnackBar from "../Alerts/MySnackBar";
 
 const Container = styled.div`
   backgroundcolor: #212121;
@@ -176,6 +177,8 @@ const Cart = () => {
   const navigate = useNavigate();
   const [cart, setCart] = useState();
   const [total, setTotal] = useState(0);
+  const [changeMade, setChangeMade] = useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
 
   const user = getUser(state);
 
@@ -186,8 +189,8 @@ const Cart = () => {
       if (res.status == 200) {
         setCart(res.data);
         setUserCart(JSON.stringify(res.data));
-        console.log("got cart", res.data);
-        // setTotalCart(cart.items.length);
+        // console.log("got cart", res.data);
+        setChangeMade(true);
         calcTotalPrice();
       }
     }
@@ -203,12 +206,59 @@ const Cart = () => {
 
     const res = await updateCart(cartID, customer_id, cart.items);
     if (res.status == 200) {
-      console.log("removee item");
+      // console.log("removee item");
+      setCart(res.data);
+      setUserCart(JSON.stringify(res.data));
+      calcTotalPrice();
+      setChangeMade(true);
+    }
+  };
+
+  const handleClickPlus = async (item_id) => {
+    const cartID = cart._id;
+    const customer_id = cart.customer_id;
+    const indexOfObject = cart.items.findIndex((item) => {
+      return item.item_id === item_id;
+    });
+    const itemCheck = await getItemById(item_id);
+    if (itemCheck.status == 200) {
+      if (itemCheck.data.item_quantity == cart.items[indexOfObject].quantity) {
+        setOpenAlert(true);
+        return;
+      }
+    }
+    cart.items[indexOfObject].quantity++;
+
+    const res = await updateCart(cartID, customer_id, cart.items);
+    if (res.status == 200) {
+      setCart(res.data);
+      setUserCart(JSON.stringify(res.data));
+      calcTotalPrice();
+      setChangeMade(true);
+    }
+  };
+  const handleClickMinus = async (item_id) => {
+    const cartID = cart._id;
+    const customer_id = cart.customer_id;
+    const indexOfObject = cart.items.findIndex((item) => {
+      return item.item_id === item_id;
+    });
+    cart.items[indexOfObject].quantity--;
+    if (cart.items[indexOfObject].quantity == 0) {
+      handleRemoveFromCart(item_id);
+    }
+
+    const res = await updateCart(cartID, customer_id, cart.items);
+    if (res.status == 200) {
+      setCart(res.data);
+      setUserCart(JSON.stringify(res.data));
+      calcTotalPrice();
+      setChangeMade(true);
     }
   };
 
   const handleContinueShopping = () => {
-    navigate(paths.search);
+    navigate(paths.search, { state: { value: "" } });
   };
 
   const handleCheckoutClicked = () => {
@@ -217,7 +267,7 @@ const Cart = () => {
 
   const calcTotalPrice = () => {
     let totalPrice = 0;
-    cart.items.map((item) => {
+    cart?.items.map((item) => {
       totalPrice += item.item_price * item.quantity;
     });
     setTotal(totalPrice);
@@ -225,10 +275,16 @@ const Cart = () => {
 
   useEffect(() => {
     getUserCart(user);
-  }, []);
+  }, [changeMade]);
   // console.log("user cart from local ", user.first_name, cart.items);
   return (
     <Container style={{ background: "#212121" }}>
+      <MySnackBar
+        open={openAlert}
+        timeout={2000}
+        severity={"error"}
+        message={"this item out of stock"}
+      />
       <FreeShipping />
       <Wrapper>
         <Top>
@@ -260,16 +316,16 @@ const Cart = () => {
                   </ProductDetail>
                   <PriceDetail>
                     <ProductAmountContainer>
-                      <Add />
+                      <Add onClick={() => handleClickPlus(item.item_id)} />
                       <ProductAmount>{item.quantity}</ProductAmount>
-                      <Remove />
+                      <Remove onClick={() => handleClickMinus(item.item_id)} />
                     </ProductAmountContainer>
                     <ProductPrice>
                       {item.item_price * item.quantity} $
                     </ProductPrice>
                     <Grid>
                       <IconButton
-                        onClick={() => handleRemoveFromCart(item._id)}
+                        onClick={() => handleRemoveFromCart(item.item_id)}
                         style={{ color: "red" }}
                       >
                         <Delete />
