@@ -161,6 +161,7 @@ const WishlistPage = () => {
       const res = await getUserFavorites(id);
       if (res.status == 200) {
         setFavorites(res.data);
+        console.log("items", res.data.items);
         setLocalUserFavorites(JSON.stringify(res.data));
         setChangeMade(true);
       }
@@ -228,7 +229,7 @@ const WishlistPage = () => {
             Continue Shopping
           </TopButton>
           <TopTexts>
-            <TopText>Wish List({favorites?.items.length})</TopText>
+            <TopText>Wish List({favorites?.items?.length})</TopText>
           </TopTexts>
           <TopButton type='filled' onClick={handleCheckoutClicked}>
             Go to Cart
@@ -236,7 +237,7 @@ const WishlistPage = () => {
         </Top>
         <Bottom>
           <Info>
-            {favorites?.items.length ? (
+            {favorites?.items?.length ? (
               favorites.items.map((item) => (
                 <Product key={item._id}>
                   <ProductDetail>

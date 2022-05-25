@@ -19,13 +19,16 @@ const StyledBadge = styled(Badge)(() => ({
 const CartIcon = () => {
   const navigate = useNavigate();
   const [userCart, setUserCart] = useState();
+  const [updateCart, SetUpdateCart] = useState(false);
 
   const handleCartClicked = () => {
+    SetUpdateCart(true);
+    setUserCart(JSON.parse(getCart()));
     navigate(paths.cart);
   };
   useEffect(() => {
     setUserCart(JSON.parse(getCart()));
-  }, []);
+  }, [updateCart]);
 
   return (
     <IconButton onClick={handleCartClicked}>

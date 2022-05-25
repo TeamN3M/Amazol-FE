@@ -21,21 +21,15 @@ import {
   addNewOrderURL,
   getUserFavoritesURL,
   updateUserFavoritesURL,
-  addItemToFavoritesURL
+  addItemToFavoritesURL,
+  getAllOrdersURL,
+  updateOrderStatusURL,
+  getUserOrdersURL
 } from "../constants/paths";
 import { handleErrResponse, post, get, put } from "./axios";
 import { getCodeURL } from "../constants/paths";
 
-export const loginUser = async (email, password) => {
-  try {
-    const res = await post(loginURL, { email, password });
-
-    return { data: res.data, status: res.status };
-  } catch (err) {
-    return handleErrResponse(err);
-  }
-};
-
+// register services
 export const registerUser = async (
   code,
   firstname,
@@ -58,7 +52,27 @@ export const registerUser = async (
     return handleErrResponse(err);
   }
 };
+// manager register services
+export const getCode = async () => {
+  try {
+    const res = await get(getCodeURL);
+    console.log(res.data);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+// login services
+export const loginUser = async (email, password) => {
+  try {
+    const res = await post(loginURL, { email, password });
 
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+// user services
 export const getUser = async () => {
   try {
     const res = await get(getUserURL);
@@ -68,7 +82,6 @@ export const getUser = async () => {
     return handleErrResponse(err);
   }
 };
-
 export const getUserByEmail = async (email) => {
   try {
     const res = await get(getUserByEmailURL + email, { email });
@@ -90,15 +103,22 @@ export const resetPassword = async (userID, newPassword) => {
     return handleErrResponse(err);
   }
 };
-export const getCode = async () => {
+export const updateUserInfo = async (id, fname, lname, email, password) => {
   try {
-    const res = await get(getCodeURL);
-    console.log(res.data);
+    const res = await put(updateUserlURL, {
+      id: id,
+      first_name: fname,
+      last_name: lname,
+      email: email,
+      password: password
+    });
+
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);
   }
 };
+// items services
 export const addItem = async (
   item_name,
   item_description,
@@ -124,7 +144,6 @@ export const addItem = async (
     return handleErrResponse(err);
   }
 };
-
 export const getItemById = async (id) => {
   try {
     const res = await get(getItemURL + id, { id });
@@ -134,7 +153,6 @@ export const getItemById = async (id) => {
     return handleErrResponse(err);
   }
 };
-
 export const getItems = async () => {
   try {
     const res = await get(getItemsURL);
@@ -144,7 +162,6 @@ export const getItems = async () => {
     return handleErrResponse(err);
   }
 };
-
 export const updateItemById = async (id, item) => {
   try {
     const res = await put(updateItemURL + id, { id, item });
@@ -154,7 +171,7 @@ export const updateItemById = async (id, item) => {
     return handleErrResponse(err);
   }
 };
-
+// cart services
 export const addCart = async (id) => {
   const customer_id = id;
   const items = [];
@@ -166,7 +183,6 @@ export const addCart = async (id) => {
     return handleErrResponse(err);
   }
 };
-
 export const getCartById = async (id) => {
   try {
     const res = await get(getUserCartURL + id, { id });
@@ -176,7 +192,6 @@ export const getCartById = async (id) => {
     return handleErrResponse(err);
   }
 };
-
 export const addItemToCart = async (id, inItem) => {
   let userCart;
   let cart_id;
@@ -217,6 +232,38 @@ export const addItemToCart = async (id, inItem) => {
     return handleErrResponse(err);
   }
 };
+export const removeItemFromCart = async (id, outItemid) => {
+  let items;
+  let cart_id;
+  try {
+    const res = await get(getUserCartURL + id, { id });
+    if (res.status == 200) {
+      items = [...res.data.items];
+      cart_id = res.data._id;
+    }
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+  console.log("1.The old cart -");
+  console.log(items);
+
+  items = items.filter((item) => {
+    return item.item_id !== outItemid._id;
+  });
+
+  console.log("2.The new cart -");
+  console.log(items);
+  try {
+    const res = await put(updateCartURL + cart_id, {
+      customer_id: id,
+      items: items
+    });
+    console.log(res);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
 export const updateCart = async (cartID, customer_id, items) => {
   try {
     const res = await put(updateCartURL + cartID, {
@@ -228,6 +275,7 @@ export const updateCart = async (cartID, customer_id, items) => {
     return handleErrResponse(err);
   }
 };
+// address services
 export const addAddress = async (customer_id, country, city, address) => {
   try {
     const res = await post(addAddressURL, {
@@ -266,21 +314,7 @@ export const getUserAddress = async (id) => {
     return handleErrResponse(err);
   }
 };
-export const updateUserInfo = async (id, fname, lname, email, password) => {
-  try {
-    const res = await put(updateUserlURL, {
-      id: id,
-      first_name: fname,
-      last_name: lname,
-      email: email,
-      password: password
-    });
-
-    return { data: res.data, status: res.status };
-  } catch (err) {
-    return handleErrResponse(err);
-  }
-};
+// credir card services
 export const addCreditCard = async (
   customer_id,
   name,
@@ -309,7 +343,6 @@ export const updateCreditCard = async (
   date,
   cvv
 ) => {
-  console.log("customer id ", customer_id);
   try {
     const res = await put(updateCreditURL, {
       customer_id,
@@ -333,40 +366,7 @@ export const getUserCredit = async (id) => {
     return handleErrResponse(err);
   }
 };
-
-export const removeItemFromCart = async (id, outItemid) => {
-  let items;
-  let cart_id;
-  try {
-    const res = await get(getUserCartURL + id, { id });
-    if (res.status == 200) {
-      items = [...res.data.items];
-      cart_id = res.data._id;
-    }
-  } catch (err) {
-    return handleErrResponse(err);
-  }
-  console.log("1.The old cart -");
-  console.log(items);
-
-  items = items.filter((item) => {
-    return item.item_id !== outItemid._id;
-  });
-
-  console.log("2.The new cart -");
-  console.log(items);
-  try {
-    const res = await put(updateCartURL + cart_id, {
-      customer_id: id,
-      items: items
-    });
-    console.log(res);
-    return { data: res.data, status: res.status };
-  } catch (err) {
-    return handleErrResponse(err);
-  }
-};
-
+// wishlist services
 export const getUserFavorites = async (id) => {
   try {
     const res = await get(getUserFavoritesURL + id);
@@ -386,7 +386,6 @@ export const updateUserFavorites = async (favoritesID, customer_id, items) => {
     return handleErrResponse(err);
   }
 };
-
 export const addItemToFavorites = async (cid, item) => {
   const itemTo = {
     item_id: item._id,
@@ -405,7 +404,7 @@ export const addItemToFavorites = async (cid, item) => {
     return handleErrResponse(err);
   }
 };
-
+// order services
 export const addNewOrder = async (customer_id, items, price, address) => {
   try {
     const res = await post(addNewOrderURL, {
@@ -414,6 +413,31 @@ export const addNewOrder = async (customer_id, items, price, address) => {
       price,
       address
     });
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+export const getAllOrders = async () => {
+  try {
+    const res = await get(getAllOrdersURL);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+export const updateOrderStatus = async (id, newStatus) => {
+  try {
+    const res = await put(updateOrderStatusURL + id, { status: newStatus });
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+export const getUserOrders = async (id) => {
+  try {
+    const res = await get(getUserOrdersURL + id);
+
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);
