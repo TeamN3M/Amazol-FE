@@ -7,18 +7,13 @@ export default Object.freeze({
   mprofile: "/MProfile",
   search: "/Search",
   cart: "/Cart",
-  cartt: "/Cartt",
   cusomerorders: "/Orders",
   manageorders: "/ManageOrders",
   prodmanage: "/ProdManage",
   uploadImage: "/upload",
   purchase: "/Purchase",
+  wishList: "/Wishlist"
 });
-
-// const authEndPoint = `/${api}/auth`;
-// const authRegister = "/register";
-// const authLogin = "/login";
-// const authGetUser = "/getUser";
 
 const userEndPoint = `/user`;
 const userChangeInfo = "changeInfo/:id";
@@ -47,6 +42,13 @@ export const updateAddressURL = "http://localhost:4000/address/updateAddress/";
 export const addCreditURL = "http://localhost:4000/credit/";
 export const getCreditURL = "http://localhost:4000/credit/getCredit/";
 export const updateCreditURL = "http://localhost:4000/credit/updateCredit/";
+export const addNewOrderURL = "http://localhost:4000/orders";
+export const getUserFavoritesURL =
+  "http://localhost:4000/favorites/userFavorites/";
+export const updateUserFavoritesURL =
+  "http://localhost:4000/favorites/updateFavorites/";
+export const addItemToFavoritesURL =
+  "http://localhost:4000/favorites/addItemFavorites/";
 
 // export const loginURL = `${authEndPoint}/${authLogin}`;
 // export const registerURL = `${authEndPoint}/${authRegister}`;

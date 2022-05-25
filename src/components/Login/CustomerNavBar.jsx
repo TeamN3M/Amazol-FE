@@ -21,7 +21,6 @@ import CartIcon from "../Cart/CartIcon";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
 import FeaturedPlayListIcon from "@mui/icons-material/FeaturedPlayList";
@@ -36,24 +35,19 @@ const CustomerNavBar = () => {
       icon: <PersonIcon />
     },
     {
+      name: "Wishlist",
+      path: paths.wishList,
+      icon: <FeaturedPlayListIcon />
+    },
+    {
       name: "Orders",
       path: paths.cusomerorders,
       icon: <ShoppingBasketIcon />
     },
     {
-      name: "Cart",
-      path: paths.cart,
-      icon: <ShoppingCartIcon />
-    },
-    {
       name: "Delivery",
       path: paths.login,
       icon: <DeliveryDiningIcon />
-    },
-    {
-      name: "Wishlist",
-      path: paths.login,
-      icon: <FeaturedPlayListIcon />
     },
     {
       name: "Log Out",
@@ -148,11 +142,7 @@ const CustomerNavBar = () => {
               style={{ color: "black" }}
               selected={option === "Pyxis"}
               divider='true'
-              disabled={
-                option.name === "Delivery" || option.name === "Wishlist"
-                  ? true
-                  : false
-              }
+              disabled={option.name === "Delivery" ? true : false}
               onClick={() => {
                 if (index == 5) {
                   handleLogoutClick();

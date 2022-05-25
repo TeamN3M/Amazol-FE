@@ -1,4 +1,4 @@
-import { JWT_KEY, CART_TOTAL, CART } from "./strings";
+import { JWT_KEY, CART_TOTAL, CART, FAVORITES } from "./strings";
 
 export const rememberMeSession = (jwt) => {
   localStorage.setItem(JWT_KEY, jwt);
@@ -18,13 +18,14 @@ export const setUserCart = (cart) => {
 export const getCart = () => {
   return localStorage.getItem(CART);
 };
+export const setLocalUserFavorites = (favorites) => {
+  localStorage.setItem(FAVORITES, favorites);
+};
 
-// export const setTotalCart = (amount) => {
-//   localStorage.setItem(CART_TOTAL, amount);
-// };
-// export const getTotalCart = () => {
-//   return localStorage.getItem(CART_TOTAL);
-// };
+export const getLocalFavorites = () => {
+  return localStorage.getItem(FAVORITES);
+};
+
 export const findCartItemIndex = (items, itemsID) =>
   items.findIndex((item) => item?.product?._id === itemsID);
 

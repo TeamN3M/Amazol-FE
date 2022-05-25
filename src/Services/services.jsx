@@ -17,7 +17,11 @@ import {
   addCreditURL,
   getCreditURL,
   updateCreditURL,
-  addUserCartURL
+  addUserCartURL,
+  addNewOrderURL,
+  getUserFavoritesURL,
+  updateUserFavoritesURL,
+  addItemToFavoritesURL
 } from "../constants/paths";
 import { handleErrResponse, post, get, put } from "./axios";
 import { getCodeURL } from "../constants/paths";
@@ -357,6 +361,59 @@ export const removeItemFromCart = async (id, outItemid) => {
       items: items
     });
     console.log(res);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const getUserFavorites = async (id) => {
+  try {
+    const res = await get(getUserFavoritesURL + id);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+export const updateUserFavorites = async (favoritesID, customer_id, items) => {
+  try {
+    const res = await put(updateUserFavoritesURL + favoritesID, {
+      customer_id,
+      items
+    });
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const addItemToFavorites = async (cid, item) => {
+  const itemTo = {
+    item_id: item._id,
+    item_name: item.item_name,
+    item_price: item.item_price,
+    item_rating: item.item_rating,
+    item_pictures: item.item_pictures
+  };
+  try {
+    const res = await put(addItemToFavoritesURL, {
+      customer_id: cid,
+      item: itemTo
+    });
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const addNewOrder = async (customer_id, items, price, address) => {
+  try {
+    const res = await post(addNewOrderURL, {
+      customer_id,
+      items,
+      price,
+      address
+    });
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);

@@ -14,7 +14,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Search from "./ItemCatalog/SearchResult";
 import Cart from "./Cart/CartPage";
-import Cartt from "./Cart/CartPaget";
+import WishlistPage from "./Wishlist/WishlistPage";
 import ProductManagment from "./ProductManagment/ProductManagmentPage";
 import { ThemeProvider } from "@mui/material";
 import MainTheme from "../themes/MainTheme";
@@ -30,9 +30,9 @@ import ForgotPassword from "./ForgotPassword";
 const themeDark = createTheme({
   palette: {
     background: {
-      default: "#212121",
-    },
-  },
+      default: "#212121"
+    }
+  }
 });
 
 const RouteNavigate = () => {
@@ -69,11 +69,11 @@ const RouteNavigate = () => {
           <Route path={paths.mprofile} element={<MProfile />} />
           <Route path={paths.search} element={<Search />} />
           <Route path={paths.cart} element={<Cart />} />
-          <Route path={paths.cartt} element={<Cartt />} />
           <Route path={paths.cusomerorders} element={<Orders />} />
           <Route path={paths.prodmanage} element={<ProductManagment />} />
           <Route path={paths.purchase} element={<Purchase />} />
           <Route path={paths.manageorders} element={<ManageOrders />} />
+          <Route path={paths.wishList} element={<WishlistPage />} />
         </Routes>
       </ThemeProvider>
       <ThemeProvider theme={MainTheme}>

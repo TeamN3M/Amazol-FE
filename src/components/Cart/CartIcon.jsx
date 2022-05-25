@@ -21,11 +21,10 @@ const CartIcon = () => {
   const [userCart, setUserCart] = useState();
 
   const handleCartClicked = () => {
-    navigate(paths.cartt);
+    navigate(paths.cart);
   };
   useEffect(() => {
     setUserCart(JSON.parse(getCart()));
-    console.log(userCart?.items?.length);
   }, []);
 
   return (

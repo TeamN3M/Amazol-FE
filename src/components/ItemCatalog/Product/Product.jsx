@@ -11,7 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import Rating from "@mui/material/Rating";
 import { AddShoppingCart, Favorite } from "@material-ui/icons";
 import useStyles from "./styles";
-import { addItemToCart } from "../../../Services/services";
+import { addItemToCart, addItemToFavorites } from "../../../Services/services";
 //import MainTheme from "../../../themes/MainTheme";
 import MySnackBar from "../../Alerts/MySnackBar";
 import { useSelector } from "react-redux";
@@ -23,16 +23,20 @@ const Product = ({ product }) => {
   const user = getUser(state);
 
   const [cartUpdated, setCartUpdated] = useState(false);
+  const [favoritesUpdated, setFavoritesUpdated] = useState(false);
 
   const classes = useStyles();
 
   const handleAddToCart = async (id, item) => {
-    console.log("Adding item to cart");
     const res = await addItemToCart(id, item);
     if (res.status == 200) {
-      // console.log("added item ", item);
-
       setCartUpdated(true);
+    }
+  };
+  const handleAddToFavorites = async (id, item) => {
+    const res = await addItemToFavorites(id, item);
+    if (res.status == 200) {
+      setFavoritesUpdated(true);
     }
   };
 
@@ -55,8 +59,19 @@ const Product = ({ product }) => {
         severity='success'
         message='Added The product to the cart.'
       />
+      <MySnackBar
+        open={favoritesUpdated}
+        timeout={2000}
+        severity='success'
+        message='Added The product to the Wish List.'
+      />
       <CardActions disableSpacing className={classes.cardFavButt}>
-        <IconButton aria-label='Example'>
+        <IconButton
+          aria-label='Example'
+          onClick={() => {
+            handleAddToFavorites(user._id, product);
+          }}
+        >
           <Favorite />
         </IconButton>
       </CardActions>
