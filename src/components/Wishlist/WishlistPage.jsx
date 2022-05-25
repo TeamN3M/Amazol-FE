@@ -7,7 +7,7 @@ import { Grid, IconButton } from "@mui/material";
 import { AddShoppingCart, Favorite } from "@mui/icons-material";
 import Animation from "../Animation";
 import WishListBar from "./WishListBar";
-import EmptyCart from "../../assets/empty-cart.json";
+import EmptyWishList from "../../assets/empty-wishlist.json";
 import { getUser } from "../../store/StateUser";
 import {
   getUserFavorites,
@@ -279,7 +279,7 @@ const WishlistPage = () => {
               <Grid container justifyContent='center'>
                 <Animation
                   title='Your Wish List Is Empty'
-                  LottieCmp={EmptyCart}
+                  LottieCmp={EmptyWishList}
                 />
               </Grid>
             )}
