@@ -5,7 +5,7 @@ import {
   CardContent,
   CardActions,
   Typography,
-  Grid
+  Grid,
 } from "@material-ui/core";
 import IconButton from "@mui/material/IconButton";
 import Rating from "@mui/material/Rating";
@@ -17,6 +17,8 @@ import MySnackBar from "../../Alerts/MySnackBar";
 import { useSelector } from "react-redux";
 import { getUser } from "../../../store/StateUser";
 import { useState, useEffect } from "react";
+import RateReviewIcon from "@mui/icons-material/RateReview";
+import NewReview from "../NewReview/NewReview";
 
 const Product = ({ product }) => {
   const state = useSelector((s) => s);
@@ -56,18 +58,18 @@ const Product = ({ product }) => {
       <MySnackBar
         open={cartUpdated}
         timeout={2000}
-        severity='success'
-        message='Added The product to the cart.'
+        severity="success"
+        message="Added The product to the cart."
       />
       <MySnackBar
         open={favoritesUpdated}
         timeout={2000}
-        severity='success'
-        message='Added The product to the Wish List.'
+        severity="success"
+        message="Added The product to the Wish List."
       />
       <CardActions disableSpacing className={classes.cardFavButt}>
         <IconButton
-          aria-label='Example'
+          aria-label="Example"
           onClick={() => {
             handleAddToFavorites(user._id, product);
           }}
@@ -83,32 +85,32 @@ const Product = ({ product }) => {
       <CardContent>
         <div className={classes.CardContent}>
           <Grid
-            alignItems='center'
+            alignItems="center"
             container
-            justifyContent='space-between'
-            direction='row'
+            justifyContent="space-between"
+            direction="row"
           >
-            <Typography gutterBottom component='h2' className={classes.name}>
+            <Typography gutterBottom component="h2" className={classes.name}>
               {product.item_name}
             </Typography>
             <Typography
               className={classes.price}
               style={{ alignContent: "right" }}
               gutterBottom
-              component='h2'
-              align='right'
+              component="h2"
+              align="right"
             >
               ${product.item_price}
             </Typography>
           </Grid>
           <Grid
-            alignItems='center'
+            alignItems="center"
             container
-            justifyContent='space-between'
-            direction='row'
+            justifyContent="space-between"
+            direction="row"
           >
             <Rating
-              name='read-only'
+              name="read-only"
               precision={0.5}
               value={parseInt(product.item_rating) / 2}
               readOnly
@@ -122,25 +124,33 @@ const Product = ({ product }) => {
         </Typography> */}
         <Typography
           dangerouslySetInnerHTML={{ __html: product.item_description }}
-          variant='body2'
-          color='textSecondary'
-          component='p'
+          variant="body2"
+          color="textSecondary"
+          component="p"
         />
         <Typography
           dangerouslySetInnerHTML={{ __html: product.category }}
-          variant='body2'
-          color='textSecondary'
-          component='p'
+          variant="body2"
+          color="textSecondary"
+          component="p"
         />
       </CardContent>
-      <CardActions disableSpacing className={classes.cardActions}>
+      <CardActions disableSpacing className={classes.cardContent}>
         <IconButton
-          aria-label='Example'
+          aria-label="Example"
           onClick={() => {
             handleAddToCart(user._id, product);
           }}
         >
           <AddShoppingCart />
+        </IconButton>
+        <IconButton
+          aria-label="Example"
+          onClick={() => {
+            <NewReview />;
+          }}
+        >
+          <RateReviewIcon />
         </IconButton>
       </CardActions>
     </Card>
