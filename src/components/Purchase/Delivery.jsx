@@ -141,8 +141,8 @@ export default function AddressForm(props) {
 
     const res = await addNewOrder(
       user._id,
-      [],
-      10,
+      props.cartitems,
+      props.cartprice,
       address + " " + city + " " + address
     );
     if (res.status == 200) {

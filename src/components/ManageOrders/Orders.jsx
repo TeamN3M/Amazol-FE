@@ -1,5 +1,4 @@
-import { orders } from "./OrdersList";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -15,32 +14,99 @@ import {
 } from "@mui/material";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
+import { getAllOrders, updateOrderStatus } from "../../Services/services";
+import { useSelector } from "react-redux";
+import { getUser } from "../../store/StateUser";
+import { getJwtKey } from "../../constants/helpers";
+import { Button } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+
+const ITEM_HEIGHT = 48;
 
 const MTable = () => {
-  let USERS = [],
-    STATUSES = ["Active", "Pending", "Blocked"];
+  const options = [
+    {
+      name: "Pending",
+    },
+    {
+      name: "Active",
+    },
+    {
+      name: "Done",
+    },
+    {
+      name: "Cancled",
+    },
+  ];
 
-  {
-    orders.map(
-      (order, index) =>
-        (USERS[index] = {
-          id: order.orderid,
-          productname: order.productname,
-          orderdate: order.orderdate,
-          status: STATUSES[Math.floor(Math.random() * STATUSES.length)],
-        })
-    );
-  }
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const state = useSelector((s) => s);
+  const user = getUser(state);
 
-  const handleChangePage = (event, newPage) => {
+  useEffect(() => {
+    const localJwt = getJwtKey();
+    const func = async () => getUser();
+
+    if (localJwt) {
+      func().then((res) => {
+        if (res.status === 200) {
+          console.log("find user");
+        } else {
+          console.log("not found");
+        }
+      });
+    }
+  }, []);
+  const [changeMade, setChangeMade] = useState(false);
+  const [orders, setOrders] = useState([]);
+  const getOrders = async () => {
+    if (user !== undefined) {
+      const res = await getAllOrders();
+
+      if (res.status == 200) {
+        console.log("got orders");
+        console.log(res.data);
+        setOrders(res.data);
+      }
+    }
+  };
+  if (!orders.length) getOrders();
+  useEffect(() => {
+    getOrders(user);
+  }, [changeMade]);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const [status_new, setStatus] = useState("");
+  // const [orderRow, setOrderRow] = useState("");
+
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
+  const handleChangePage = (newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+
+  const handleSave = async (orderRow) => {
+    console.log(status_new);
+    console.log(orderRow);
+    const id = orderRow;
+    const newStatus = status_new;
+    const res = await updateOrderStatus(id, newStatus);
+    if (res.status == 200) {
+      setChangeMade(true);
+    }
   };
 
   return (
@@ -68,7 +134,7 @@ const MTable = () => {
                     color: "white ",
                   }}
                 >
-                  Order ID
+                  Order ID <br></br>Costumer ID
                 </TableCell>
                 <TableCell
                   style={{
@@ -77,7 +143,7 @@ const MTable = () => {
                     color: "white ",
                   }}
                 >
-                  Costumer Name
+                  Price
                 </TableCell>
                 <TableCell
                   style={{
@@ -86,7 +152,7 @@ const MTable = () => {
                     color: "white ",
                   }}
                 >
-                  Price
+                  Products Number
                 </TableCell>
                 <TableCell
                   style={{
@@ -104,7 +170,7 @@ const MTable = () => {
                     color: "white ",
                   }}
                 >
-                  Status
+                  Current Status
                 </TableCell>
                 <TableCell
                   style={{
@@ -112,60 +178,146 @@ const MTable = () => {
                     backgroundColor: "#212121",
                     color: "white ",
                   }}
-                ></TableCell>
+                >
+                  Change Status
+                </TableCell>
+                <TableCell
+                  style={{
+                    fontWeight: "bold ",
+                    backgroundColor: "#212121",
+                    color: "white ",
+                  }}
+                >
+                  Save
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {USERS.slice(
-                page * rowsPerPage,
-                page * rowsPerPage + rowsPerPage
-              ).map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>
-                    <Grid container>
-                      <Grid item lg={6}>
-                        <Typography
-                          style={{ fontWeight: "bold", color: "#7EC8E3" }}
-                        >
-                          {row.id}
-                        </Typography>
+              {orders
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row) => (
+                  <TableRow key={row._id}>
+                    <TableCell>
+                      <Grid container>
+                        <Grid item lg={6}>
+                          <Typography
+                            style={{ fontWeight: "bold", color: "#7EC8E3" }}
+                          >
+                            {row._id}
+                          </Typography>
+                          <Typography
+                            style={{ fontWeight: "bold", color: "#7EC8E3" }}
+                          >
+                            {row.customer_id}
+                          </Typography>
+                        </Grid>
                       </Grid>
-                    </Grid>
-                  </TableCell>
-                  <TableCell>
-                    <Typography color="primary" variant="subtitle2">
-                      {row.productname}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography color="primary">{row.orderdate}</Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      style={{
-                        backgroundColor:
-                          (row.status === "Active" && "green") ||
-                          (row.status === "Pending" && "blue") ||
-                          (row.status === "Blocked" && "orange"),
+                    </TableCell>
+                    <TableCell>
+                      <Typography color="primary" variant="subtitle2">
+                        {row.price}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography color="primary">
+                        {row.items.length}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography color="primary">
+                        {row.updatedAt.substring(0, 10)}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography
+                        style={{
+                          backgroundColor:
+                            (row.status === "Pending" && "blue") ||
+                            (row.status === "Active" && "green") ||
+                            (row.status === "Done" && "orange") ||
+                            (row.status === "Cancled" && "red"),
 
-                        fontSize: "0.75rem",
-                        color: "white ",
-                        borderRadius: 8,
-                        padding: "3px 10px",
-                        display: "inline-block",
-                      }}
-                    >
-                      {row.status}
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-              ))}
+                          fontSize: "0.75rem",
+                          color: "white ",
+                          borderRadius: 8,
+                          padding: "3px 10px",
+                          display: "inline-block",
+                        }}
+                      >
+                        {row.status}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <IconButton
+                        aria-label="more"
+                        id="long-button"
+                        aria-controls={open ? "long-menu" : undefined}
+                        aria-expanded={open ? "true" : undefined}
+                        aria-haspopup="true"
+                        onClick={handleClick}
+                        style={{ color: "white" }}
+                      >
+                        <MoreVertIcon />
+                      </IconButton>
+                      <Menu
+                        id="long-menu"
+                        MenuListProps={{
+                          "aria-labelledby": "long-button",
+                        }}
+                        anchorEl={anchorEl}
+                        open={open}
+                        disableScrollLock={true}
+                        onClose={handleClose}
+                        PaperProps={{
+                          style: {
+                            maxHeight: ITEM_HEIGHT * 5,
+                            width: "20ch",
+                          },
+                        }}
+                      >
+                        {options.map((option) => (
+                          <MenuItem
+                            key={option.name}
+                            style={{ color: "black" }}
+                            selected={option === "Pyxis"}
+                            divider="true"
+                            onClick={() => {
+                              setStatus(option.name);
+                              handleClose();
+                            }}
+                          >
+                            {option.name}
+                          </MenuItem>
+                        ))}
+                      </Menu>
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        sx={{
+                          m: 2,
+                          textTransform: "capitalize",
+                          color: "white !important",
+                          border: "solid 1px white",
+                          backgroundcolor: "#333333 !important",
+                        }}
+                        variant="outlined"
+                        size="small"
+                        onClick={() => {
+                          handleSave(row._id);
+                          setChangeMade(false);
+                        }}
+                      >
+                        SAVE
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
             <TableFooter>
               <TablePagination
-                rowsPerPageOptions={[5, 10, 15]}
+                rowsPerPageOptions={[10, 25, 50]}
                 component="div"
-                count={USERS.length}
+                count={orders.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangePage={handleChangePage}

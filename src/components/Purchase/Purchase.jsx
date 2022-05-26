@@ -11,7 +11,7 @@ import Grid from "@mui/material/Grid";
 import PurchaseForm from "./PurchaseCart";
 import DeliveryForm from "./Delivery";
 import { makeStyles } from "@material-ui/styles";
-
+import { useLocation } from "react-router-dom";
 const steps = ["Delivery address", "Payment details"];
 
 const useStyles = makeStyles({
@@ -28,6 +28,10 @@ const useStyles = makeStyles({
 });
 
 export default function Checkout() {
+  const { state } = useLocation();
+  const cartprice = state.pricevalue;
+  const cartitems = state.itemsvalue;
+
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -44,7 +48,13 @@ export default function Checkout() {
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <DeliveryForm handleNext={handleNext} />;
+        return (
+          <DeliveryForm
+            handleNext={handleNext}
+            cartprice={cartprice}
+            cartitems={cartitems}
+          />
+        );
       case 1:
         return <PurchaseForm handleBack={handleBack} />;
       default:

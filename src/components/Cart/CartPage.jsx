@@ -262,7 +262,9 @@ const Cart = () => {
   };
 
   const handleCheckoutClicked = () => {
-    navigate(paths.purchase);
+    navigate(paths.purchase, {
+      state: { pricevalue: total, itemsvalue: cart.items },
+    });
   };
 
   const calcTotalPrice = () => {
@@ -294,7 +296,7 @@ const Cart = () => {
           <TopTexts>
             <TopText>Shopping Cart({cart?.items.length})</TopText>
           </TopTexts>
-          <TopButton type='filled' onClick={handleCheckoutClicked}>
+          <TopButton type="filled" onClick={handleCheckoutClicked}>
             Checkout Now
           </TopButton>
         </Top>
@@ -335,8 +337,8 @@ const Cart = () => {
                 </Product>
               ))
             ) : (
-              <Grid container justifyContent='center'>
-                <Animation title='Your Cart Is Empty' LottieCmp={EmptyCart} />
+              <Grid container justifyContent="center">
+                <Animation title="Your Cart Is Empty" LottieCmp={EmptyCart} />
               </Grid>
             )}
             <Hr />
@@ -355,7 +357,7 @@ const Cart = () => {
               <SummaryItemText>Shipping Discount</SummaryItemText>
               <SummaryItemPrice> -15 $</SummaryItemPrice>
             </SummaryItem>
-            <SummaryItem type='total'>
+            <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice> {total} $</SummaryItemPrice>
             </SummaryItem>
