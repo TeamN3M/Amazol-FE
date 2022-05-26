@@ -62,33 +62,33 @@ const Login = () => {
   const useStyles = makeStyles({
     textFiled: {
       color: "white",
-      backgroundColor: MainTheme.palette.background.default
+      backgroundColor: MainTheme.palette.background.default,
     },
     cssLabel: {
       color: "white",
       "&.Mui-focused": {
-        color: "white"
-      }
+        color: "white",
+      },
     },
 
     cssOutlinedInput: {
       "&$cssFocused $notchedOutline": {
-        borderColor: "#FFF"
-      }
+        borderColor: "#FFF",
+      },
     },
     cssFocused: {},
 
     notchedOutline: {
       borderWidth: "1px",
-      borderColor: "white !important"
+      borderColor: "white !important",
     },
     input: {
       color: "white",
       "&:-webkit-autofill": {
         WebkitBoxShadow: "0 0 0 100px #212121 inset",
-        WebkitTextFillColor: "white"
-      }
-    }
+        WebkitTextFillColor: "white",
+      },
+    },
   });
   const classes = useStyles();
 
@@ -146,7 +146,7 @@ const Login = () => {
   }, [openAlert]);
 
   return (
-    <Grid container component='main' sx={{ height: "80vh" }}>
+    <Grid container component="main" sx={{ height: "80vh" }}>
       <CssBaseline />
       <Grid
         theme={MainTheme}
@@ -159,35 +159,35 @@ const Login = () => {
           backgroundRepeat: "no-repeat",
 
           backgroundSize: "cover",
-          backgroundPosition: "center"
+          backgroundPosition: "center",
         }}
       >
         <CssBaseline />
       </Grid>
-      <Grid component='main' item xs={12} sm={8} md={5} elevation={6} square>
+      <Grid component="main" item xs={12} sm={8} md={5} elevation={6} square>
         <Box
           sx={{
             my: 4,
             mx: 4,
             display: "flex",
             flexDirection: "column",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "#161e33", color: "#fff" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography
-            component='h1'
-            variant='h5'
+            component="h1"
+            variant="h5"
             style={{
-              color: "white"
+              color: "white",
             }}
           >
             {SIGNIN}
           </Typography>
           <Box
-            component='form'
+            component="form"
             noValidate
             onSubmit={handleSubmit}
             sx={{ mt: 1 }}
@@ -195,14 +195,14 @@ const Login = () => {
             <CssBaseline />
             <TextField
               className={classes.textField}
-              margin='normal'
+              margin="normal"
               required
               fullWidth
-              id='email'
-              label='Email Address'
-              name='email'
-              autoComplete='email'
-              color='secondary'
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              color="secondary"
               autoFocus
               value={email}
               error={!!emailErrorText}
@@ -211,50 +211,50 @@ const Login = () => {
               InputLabelProps={{
                 classes: {
                   root: classes.cssLabel,
-                  focused: classes.cssFocused
-                }
+                  focused: classes.cssFocused,
+                },
               }}
               InputProps={{
                 classes: {
                   root: classes.cssOutlinedInput,
                   focused: classes.cssFocused,
                   notchedOutline: classes.notchedOutline,
-                  input: classes.input
-                }
+                  input: classes.input,
+                },
               }}
             />
             <TextField
               className={classes.textField}
-              margin='normal'
+              margin="normal"
               required
               fullWidth
-              name='password'
-              label='Password'
+              name="password"
+              label="Password"
               type={passwordVisible ? "text" : "password"}
-              id='password'
-              autoComplete='current-password'
+              id="password"
+              autoComplete="current-password"
               InputProps={{
                 classes: {
                   root: classes.cssOutlinedInput,
                   focused: classes.cssFocused,
                   notchedOutline: classes.notchedOutline,
-                  input: classes.input
+                  input: classes.input,
                 },
                 endAdornment: (
-                  <InputAdornment position='end'>
+                  <InputAdornment position="end">
                     <IconButton
-                      aria-label='toggle password visibility'
+                      aria-label="toggle password visibility"
                       onClick={handleClickShowPassword}
                       style={{
-                        color: "white"
+                        color: "white",
                       }}
                     >
                       {passwordVisible ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
-                )
+                ),
               }}
-              color='secondary'
+              color="secondary"
               value={password}
               error={!!passwordErrorText}
               helperText={passwordErrorText}
@@ -262,8 +262,8 @@ const Login = () => {
               InputLabelProps={{
                 classes: {
                   root: classes.cssLabel,
-                  focused: classes.cssFocused
-                }
+                  focused: classes.cssFocused,
+                },
               }}
             />
             <FormControlLabel
@@ -274,37 +274,37 @@ const Login = () => {
                   sx={{
                     color: "#FFFFFF",
                     "&.Mui-checked": {
-                      color: "#FFFFFF"
-                    }
+                      color: "#FFFFFF",
+                    },
                   }}
                 />
               }
               style={{
-                color: "white"
+                color: "white",
               }}
-              label='Remember me'
+              label="Remember me"
             />
             {loginError ? (
               <Typography
-                variant='h6'
+                variant="h6"
                 style={{
                   color: "red",
                   fontfamily: "Lucida Console, Courier New, monospace",
                   alignItems: "center",
-                  marginTop: "2px"
+                  marginTop: "2px",
                 }}
               >
                 {ERRORLOGIN}
               </Typography>
             ) : null}
             <Button
-              type='submit'
+              type="submit"
               fullWidth
-              variant='contained'
+              variant="contained"
               sx={{ mt: 3, mb: 2 }}
               style={{
                 color: MainTheme.palette.text.primary,
-                backgroundColor: "#161e33"
+                backgroundColor: "#161e33",
               }}
             >
               {SIGNIN}
@@ -323,14 +323,14 @@ const Login = () => {
           <Grid container>
             <Grid item xs>
               <Button
-                type='submit'
-                variant='text'
+                type="submit"
+                variant="text"
                 onClick={() => {
                   navigate(paths.forgot);
                 }}
                 style={{
                   color: "white",
-                  textTransform: "capitalize"
+                  textTransform: "capitalize",
                 }}
               >
                 {FORGOT}
@@ -338,15 +338,15 @@ const Login = () => {
             </Grid>
             <Grid item>
               <Link
-                component='button'
+                component="button"
                 onClick={() => {
                   navigate(paths.register);
                 }}
                 style={{
                   color: "white",
-                  textDecoration: "none"
+                  textDecoration: "none",
                 }}
-                variant='body2'
+                variant="body2"
               >
                 {SIGNUP_OPT}
               </Link>
