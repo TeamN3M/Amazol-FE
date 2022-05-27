@@ -14,10 +14,12 @@ import {
 } from "@mui/material";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
-import { getUserOrders } from "../../Services/services";
+import { getUserOrders, updateOrderStatus } from "../../Services/services";
 import { useSelector } from "react-redux";
 import { getUser } from "../../store/StateUser";
 import { getJwtKey } from "../../constants/helpers";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import IconButton from "@mui/material/IconButton";
 
 const MTable = () => {
   const [page, setPage] = useState(0);
@@ -48,7 +50,7 @@ const MTable = () => {
       });
     }
   }, []);
-
+  const [changeMade, setChangeMade] = useState(false);
   const [orders, setOrders] = useState([]);
   const getOrders = async () => {
     if (user !== undefined) {
@@ -62,6 +64,18 @@ const MTable = () => {
     }
   };
   if (!orders.length) getOrders();
+  useEffect(() => {
+    getOrders(user);
+  }, [changeMade]);
+
+  const handleCancle = async (orderRow) => {
+    console.log(orderRow);
+    const id = orderRow;
+    const res = await updateOrderStatus(id, "Cancled");
+    if (res.status == 200) {
+      setChangeMade(true);
+    }
+  };
 
   return (
     <Grid>
@@ -115,7 +129,7 @@ const MTable = () => {
                     color: "white ",
                   }}
                 >
-                  Order Date
+                  Order Status Update
                 </TableCell>
                 <TableCell
                   style={{
@@ -125,6 +139,15 @@ const MTable = () => {
                   }}
                 >
                   Status
+                </TableCell>
+                <TableCell
+                  style={{
+                    fontWeight: "bold ",
+                    backgroundColor: "#212121",
+                    color: "white ",
+                  }}
+                >
+                  Cancel order
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -177,6 +200,23 @@ const MTable = () => {
                       >
                         {row.status}
                       </Typography>
+                    </TableCell>
+
+                    <TableCell>
+                      <IconButton
+                        aria-label="more"
+                        id="long-button"
+                        aria-controls={open ? "long-menu" : undefined}
+                        aria-expanded={open ? "true" : undefined}
+                        aria-haspopup="true"
+                        onClick={() => {
+                          handleCancle(row._id);
+                          setChangeMade(false);
+                        }}
+                        style={{ color: "white" }}
+                      >
+                        <DeleteForeverIcon />
+                      </IconButton>
                     </TableCell>
                   </TableRow>
                 ))}
