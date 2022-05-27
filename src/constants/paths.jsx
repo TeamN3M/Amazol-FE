@@ -14,7 +14,7 @@ export default Object.freeze({
   purchase: "/Purchase",
   wishList: "/Wishlist",
   financeinfo: "/FinanceInfo",
-  affiliate: "/Affiliate",
+  affiliate: "/Affiliate"
 });
 
 const userEndPoint = `/user`;
@@ -56,6 +56,7 @@ export const getAllOrdersURL = "http://localhost:4000/orders";
 export const updateOrderStatusURL = "http://localhost:4000/orders/updateOrder/";
 export const getUserOrdersURL = "http://localhost:4000/orders/userOrders/";
 // favorites
+export const addFavoritesURL = "http://localhost:4000/favorites/";
 export const getUserFavoritesURL =
   "http://localhost:4000/favorites/userFavorites/";
 export const updateUserFavoritesURL =
