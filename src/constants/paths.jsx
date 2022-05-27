@@ -63,6 +63,13 @@ export const updateUserFavoritesURL =
   "http://localhost:4000/favorites/updateFavorites/";
 export const addItemToFavoritesURL =
   "http://localhost:4000/favorites/addItemFavorites/";
+// delivery
+export const addNewDeliveryURL = "http://localhost:4000/delivery";
+export const getAllDeliveriesURL = "http://localhost:4000/delivery";
+export const updateDeliveryURL =
+  "http://localhost:4000/delivery/updateDelivery/";
+export const getDeliveryByIdURL =
+  "http://localhost:4000/delivery/orderDelivery/";
 
 export const changeUserInfoURL = `${userEndPoint}/${userChangeInfo}`;
 export const addToFavoritesUserURL = `${userEndPoint}/${userFavorites}`;

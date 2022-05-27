@@ -25,7 +25,11 @@ import {
   getAllOrdersURL,
   updateOrderStatusURL,
   getUserOrdersURL,
-  addFavoritesURL
+  addFavoritesURL,
+  addNewDeliveryURL,
+  getAllDeliveriesURL,
+  updateDeliveryURL,
+  getDeliveryByIdURL
 } from "../constants/paths";
 import { handleErrResponse, post, get, put } from "./axios";
 import { getCodeURL } from "../constants/paths";
@@ -454,16 +458,51 @@ export const getUserOrders = async (id) => {
     return handleErrResponse(err);
   }
 };
-// export const addNewDelivery = async (date, time, isAvailable, address) => {
-//   try {
-//     const res = await post(addNewDeliveryURL, {
-//       date,
-//       time,
-//       isAvailable,
-//       address,
-//     });
-//     return { data: res.data, status: res.status };
-//   } catch (err) {
-//     return handleErrResponse(err);
-//   }
-// };
+// delivery
+export const addNewDelivery = async (date, time) => {
+  try {
+    const res = await post(addNewDeliveryURL, {
+      date,
+      time
+    });
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+export const getAllDeliveries = async () => {
+  try {
+    const res = await get(getAllDeliveriesURL);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+export const updateDelivery = async (id, orderID, address, newStatus) => {
+  try {
+    const res = await put(updateDeliveryURL + id, {
+      orderID,
+      address,
+      newStatus
+    });
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+export const getDeliveryById = async (id) => {
+  try {
+    const res = await get(getAllDeliveriesURL + id);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+export const getDeleveryByOrderId = async (oid) => {
+  try {
+    const res = await get(getDeliveryByIdURL + oid);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
