@@ -29,7 +29,8 @@ import {
   addNewDeliveryURL,
   getAllDeliveriesURL,
   updateDeliveryURL,
-  getDeliveryByIdURL
+  getDeliveryByIdURL,
+  loginGoogleURL
 } from "../constants/paths";
 import { handleErrResponse, post, get, put } from "./axios";
 import { getCodeURL } from "../constants/paths";
@@ -71,6 +72,15 @@ export const getCode = async () => {
 export const loginUser = async (email, password) => {
   try {
     const res = await post(loginURL, { email, password });
+
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+export const loginGoogleUser = async (email) => {
+  try {
+    const res = await post(loginGoogleURL, { email });
 
     return { data: res.data, status: res.status };
   } catch (err) {
