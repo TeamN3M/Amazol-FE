@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export default makeStyles({
   root: {
     maxWidth: "100%",
-    maxHeight: 700,
+
     minWidth: "200px",
     backgroundColor: "#555555",
     "&:hover": {
@@ -29,8 +29,9 @@ export default makeStyles({
     border: "solid 1px white",
     backgroundcolor: "#333333 !important",
   },
-  name: {maxHeight: 50, fontSize: "2.5rem", fontWeight: "bold", color: "#003333" , whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"},
+  name: {maxHeight: 50, fontSize: "1.5rem", fontWeight: "bold", color: "#003333" , whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" },
   price: { fontSize: "2re", fontWeight: "bold", color: "#002222" },
   rating: { fontSize: "2re" },
   stock: { fontSize: "2re" },
+  desc: {maxHeight: 100, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"},
 });

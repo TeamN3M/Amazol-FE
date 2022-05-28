@@ -29,11 +29,13 @@ import {
   addNewDeliveryURL,
   getAllDeliveriesURL,
   updateDeliveryURL,
-  getDeliveryByIdURL
-} from "../constants/paths";
-import { handleErrResponse, post, get, put } from "./axios";
-import { getCodeURL } from "../constants/paths";
-
+  getDeliveryByIdURL,
+  getReviewByIdURL,
+  addReviewByIdURL,
+  deleteReviewByIdURL,
+} from '../constants/paths';
+import { handleErrResponse, post, get, put } from './axios';
+import { getCodeURL } from '../constants/paths';
 // register services
 export const registerUser = async (
   code,
@@ -49,7 +51,7 @@ export const registerUser = async (
       lastname,
       email,
       password,
-      isadmin
+      isadmin,
     });
 
     return { data: res.data, status: res.status };
@@ -100,7 +102,7 @@ export const resetPassword = async (userID, newPassword) => {
   try {
     const res = await put(resetPasswordlURL, {
       id: userID,
-      password: newPassword
+      password: newPassword,
     });
     console.log(res.data);
     return { data: res.data, status: res.status };
@@ -115,7 +117,7 @@ export const updateUserInfo = async (id, fname, lname, email, password) => {
       first_name: fname,
       last_name: lname,
       email: email,
-      password: password
+      password: password,
     });
 
     return { data: res.data, status: res.status };
@@ -141,7 +143,7 @@ export const addItem = async (
       item_rating,
       item_quantity,
       isAvailable,
-      item_pictures
+      item_pictures,
     });
 
     return { data: res.data, status: res.status };
@@ -152,7 +154,7 @@ export const addItem = async (
 export const getItemById = async (id) => {
   try {
     const res = await get(getItemURL + id, { id });
-    console.log("requesting item");
+    console.log('requesting item');
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);
@@ -170,7 +172,7 @@ export const getItems = async () => {
 export const updateItemById = async (id, item) => {
   try {
     const res = await put(updateItemURL + id, { id, item });
-    console.log("Update Item - " + res.data);
+    console.log('Update Item - ' + res.data);
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);
@@ -216,7 +218,7 @@ export const addItemToCart = async (id, inItem) => {
           item_rating: inItem.item_rating,
           item_price: inItem.item_price,
           item_pictures: inItem.item_pictures,
-          item_quantity: 1
+          item_quantity: 1,
         });
       }
 
@@ -229,7 +231,7 @@ export const addItemToCart = async (id, inItem) => {
   try {
     const res = await put(updateCartURL + cart_id, {
       customer_id: id,
-      items: userCart.items
+      items: userCart.items,
     });
     console.log(res);
     return { data: res.data, status: res.status };
@@ -249,19 +251,19 @@ export const removeItemFromCart = async (id, outItemid) => {
   } catch (err) {
     return handleErrResponse(err);
   }
-  console.log("1.The old cart -");
+  console.log('1.The old cart -');
   console.log(items);
 
   items = items.filter((item) => {
     return item.item_id !== outItemid._id;
   });
 
-  console.log("2.The new cart -");
+  console.log('2.The new cart -');
   console.log(items);
   try {
     const res = await put(updateCartURL + cart_id, {
       customer_id: id,
-      items: items
+      items: items,
     });
     console.log(res);
     return { data: res.data, status: res.status };
@@ -273,7 +275,7 @@ export const updateCart = async (cartID, customer_id, items) => {
   try {
     const res = await put(updateCartURL + cartID, {
       customer_id,
-      items
+      items,
     });
     return { data: res.data, status: res.status };
   } catch (err) {
@@ -287,7 +289,7 @@ export const addAddress = async (customer_id, country, city, address) => {
       customer_id,
       country,
       city,
-      address
+      address,
     });
 
     return { data: res.data, status: res.status };
@@ -296,13 +298,13 @@ export const addAddress = async (customer_id, country, city, address) => {
   }
 };
 export const updateAddress = async (customer_id, country, city, address) => {
-  console.log("customer id ", customer_id);
+  console.log('customer id ', customer_id);
   try {
     const res = await put(updateAddressURL, {
       customer_id,
       country,
       city,
-      address
+      address,
     });
 
     return { data: res.data, status: res.status };
@@ -333,7 +335,7 @@ export const addCreditCard = async (
       name,
       card_number,
       date,
-      cvv
+      cvv,
     });
 
     return { data: res.data, status: res.status };
@@ -354,7 +356,7 @@ export const updateCreditCard = async (
       name,
       card_number,
       date,
-      cvv
+      cvv,
     });
 
     return { data: res.data, status: res.status };
@@ -394,7 +396,7 @@ export const updateUserFavorites = async (favoritesID, customer_id, items) => {
   try {
     const res = await put(updateUserFavoritesURL + favoritesID, {
       customer_id,
-      items
+      items,
     });
     return { data: res.data, status: res.status };
   } catch (err) {
@@ -407,12 +409,12 @@ export const addItemToFavorites = async (cid, item) => {
     item_name: item.item_name,
     item_price: item.item_price,
     item_rating: item.item_rating,
-    item_pictures: item.item_pictures
+    item_pictures: item.item_pictures,
   };
   try {
     const res = await put(addItemToFavoritesURL, {
       customer_id: cid,
-      item: itemTo
+      item: itemTo,
     });
     return { data: res.data, status: res.status };
   } catch (err) {
@@ -426,7 +428,7 @@ export const addNewOrder = async (customer_id, items, price, address) => {
       customer_id,
       items,
       price,
-      address
+      address,
     });
     return { data: res.data, status: res.status };
   } catch (err) {
@@ -463,7 +465,7 @@ export const addNewDelivery = async (date, time) => {
   try {
     const res = await post(addNewDeliveryURL, {
       date,
-      time
+      time,
     });
     return { data: res.data, status: res.status };
   } catch (err) {
@@ -483,7 +485,7 @@ export const updateDelivery = async (id, orderID, address, newStatus) => {
     const res = await put(updateDeliveryURL + id, {
       orderID,
       address,
-      newStatus
+      newStatus,
     });
     return { data: res.data, status: res.status };
   } catch (err) {
@@ -501,6 +503,39 @@ export const getDeliveryById = async (id) => {
 export const getDeleveryByOrderId = async (oid) => {
   try {
     const res = await get(getDeliveryByIdURL + oid);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const getReviewByOrderId = async (rid) => {
+  try {
+    const res = await get(getReviewByIdURL + rid);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const addReviewById = async (iid, review) => {
+  try {
+    const res = await post(addReviewByIdURL + iid, {
+      item_id: review.item_id,
+      customer_name: review.customer_name,
+      date: review.date,
+      review: review.text,
+      rating: review.rating,
+    });
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const deleteReviewById = async (rid) => {
+  try {
+    const res = await get(deleteReviewByIdURL + rid, { id: rid });
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);

@@ -15,4 +15,7 @@ export default makeStyles((theme) => ({
     backgroundcolor: "#333333 !important",
     borderRadius: 15,
   },
+  grid: {
+    maxWidth: "110%"
+  },
 }));

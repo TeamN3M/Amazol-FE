@@ -46,6 +46,15 @@ const makeGraphData = (orders, items) => {
   let otherCounter = 0;
   let productsum = 0;
   let revenuesum = 0;
+
+  // const func = (order) => {
+  //   let addressWords = order.address.split(' ');
+  //   return addressWords[addressWords.length - 1];
+  // };
+
+  // console.log('groupByCountry');
+  // console.log(groupByCountry);
+
   console.log('items V');
   console.log(items);
   console.log('orders V');
@@ -53,6 +62,7 @@ const makeGraphData = (orders, items) => {
   for (const purchase of orders) {
     if (purchase.status == 'Active' || purchase.status == 'Done') {
       revenuesum += purchase.price;
+
       for (const product of purchase.items) {
         console.log('Got Here');
         for (const item of items) {
