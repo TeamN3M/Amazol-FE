@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 import { makeStyles } from "@material-ui/styles";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { SAVE, NEXT } from "../../constants/strings";
+import { NEXT } from "../../constants/strings";
 import { useSelector } from "react-redux";
 import { getUser } from "../../store/StateUser";
 
@@ -438,7 +438,7 @@ export default function AddressForm(props) {
           sx={{ mt: 3, ml: 1 }}
           onClick={handleSave}
         >
-          {SAVE}
+          SEND ORDER
         </Button>
         <Button
           variant="contained"

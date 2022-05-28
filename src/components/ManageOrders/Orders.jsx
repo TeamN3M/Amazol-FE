@@ -461,10 +461,10 @@ const MTable = () => {
                   <TablePagination
                     sx={{
                       ".MuiTablePagination-displayedRows": {
-                        color: "red",
+                        color: "white",
                       },
                       ".MuiTablePagination-selectLabel": {
-                        color: "green",
+                        color: "white",
                       },
                     }}
                     rowsPerPageOptions={[25, 50, 100]}

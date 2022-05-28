@@ -29,7 +29,7 @@ import {
   addNewDeliveryURL,
   getAllDeliveriesURL,
   updateDeliveryURL,
-  loginGoogleURL
+  loginGoogleURL,
   getDeliveryByIdURL,
 } from "../constants/paths";
 import { handleErrResponse, post, get, put } from "./axios";
