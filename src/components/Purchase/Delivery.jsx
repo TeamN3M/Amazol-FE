@@ -6,11 +6,15 @@ import TextField from "@mui/material/TextField";
 import { makeStyles } from "@material-ui/styles";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { SAVE, NEXT } from "../../constants/strings";
+import { NEXT } from "../../constants/strings";
 import { useSelector } from "react-redux";
 import { getUser } from "../../store/StateUser";
 
-import { getUserAddress, addNewOrder } from "../../Services/services";
+import {
+  getUserAddress,
+  addNewOrder,
+  getAllDeliveries,
+} from "../../Services/services";
 import { getJwtKey } from "../../constants/helpers";
 import MySnackBar from "../Alerts/MySnackBar";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
@@ -61,9 +65,28 @@ const useStyles = makeStyles({
     },
   },
 });
+// const setArrays = (deliveries) => {
+//   let dates = [];
+//   let times = [];
+//   for (var i = 0; i < deliveries.length; i++) {
+//     console.log(deliveries[i]);
+//   }
+//   console.log(dates);
+//   console.log(times);
+// };
+
 export default function AddressForm(props) {
   //const dispatch = useDispatch();
-
+  //function disableDates(/*date*/) {
+  //   for (var i = 0; i < deliveries.length; i++) {
+  //     //console.log(date.getDate());
+  //     if (date.getDate() === date[i].toString().split("").slice(6, 7)) {
+  //       console.log("dayexist");
+  //       return date.getDate() === date[i].split("").slice(6, 7);
+  //     }
+  //   }
+  // return date.getDay() === 0 || date.getDay() === 6;
+  //}
   useEffect(() => {
     const localJwt = getJwtKey();
     const func = async () => getUser();
@@ -100,26 +123,25 @@ export default function AddressForm(props) {
   const [cityErrorText, setCityErrorText] = useState("");
   const [country, setCountry] = useState("");
   const [countryErrorText, setCountryErrorText] = useState("");
-  const [openAlert, setOpenAlert] = useState(false);
 
-  //const [DateValueErrorText, setDateValueErrorText] = useState("");
+  const [DateValueErrorText, setDateValueErrorText] = useState("");
   const [HourValue, setHourValue] = useState("");
   const [DateValue, setDateValue] = useState("");
-  //const [HourValueErrorText, setHourValueErrorText] = useState("");
-
+  const [HourValueErrorText, setHourValueErrorText] = useState("");
+  const [orderDone, setOrderUpdated] = useState(false);
   const handleSave = async () => {
-    // if (!DateValue) {
-    //   setDateValueErrorText("Please enter Date");
-    //   return;
-    // } else {
-    //   setDateValueErrorText("");
-    // }
-    // if (!HourValue) {
-    //   setHourValueErrorText("Please enter Hour");
-    //   return;
-    // } else {
-    //   setHourValueErrorText("");
-    // }
+    if (!DateValue) {
+      setDateValueErrorText("Please enter Date");
+      return;
+    } else {
+      setDateValueErrorText("");
+    }
+    if (!HourValue) {
+      setHourValueErrorText("Please enter Hour");
+      return;
+    } else {
+      setHourValueErrorText("");
+    }
     if (!address) {
       setAddressErrorText("Please enter Address");
       return;
@@ -143,10 +165,11 @@ export default function AddressForm(props) {
       user._id,
       props.cartitems,
       props.cartprice,
-      address + " " + city + " " + address
+      address + " " + city + " " + country
     );
     if (res.status == 200) {
       console.log("add new order ", res.data);
+      setOrderUpdated(true);
     }
   };
 
@@ -157,16 +180,62 @@ export default function AddressForm(props) {
     setHourValue(newValue);
   };
 
+  const [deliveries, setDeliveris] = useState([]);
+  const getDeliveries = async () => {
+    const res = await getAllDeliveries();
+    if (res.status == 200) {
+      setDeliveris(res.data);
+    }
+  };
+  if (!deliveries.length) getDeliveries();
+  console.log(deliveries);
+
+  let dates = [];
+  // let times = [];
+  for (var i = 0; i < deliveries.length; i++) {
+    dates.push(
+      new Date(deliveries[i].date)
+      //  .substr(0, 10).replace("-", "").replace("-", "")
+    );
+    //   times.push(parseInt(deliveries[i].time.substr(11, 12).substr(0, 2)));
+  }
+  for (var s = 0; s < dates.length; s++) {
+    dates[s].setHours(0, 0, 0, 0);
+  }
+  //console.log(dates);
+  //console.log(new Date(dates[0]));
+  // const date = new Date(dates[0]);
+  // date.setHours(0, 0, 0, 0);
+  // console.log(date);
+  // console.log("sssssss");
+
+  const disabledDays = (date) => {
+    // let d = new Date(dates[0]).getTime();
+    // if (d.includes(date.getTime())) {
+    //   console.log("from cl");
+    //   console.log(date);
+    //   console.log("from arr");
+    //   console.log(dates[0]);
+    //   return date;
+    // }
+    console.log(new Date(date));
+    return !dates.map((mydate) => mydate.getTime()).includes(date.getTime());
+  };
   useEffect(() => {
     const timer = setTimeout(() => {
-      setOpenAlert(false);
+      setOrderUpdated(false);
     }, 3000);
     return () => clearTimeout(timer);
-  }, [openAlert]);
-
+  }, [orderDone]);
+  // console.log(times);
   return (
     <React.Fragment>
-      <MySnackBar />
+      <MySnackBar
+        open={orderDone}
+        timeout={2000}
+        severity="success"
+        message="Your order now pending for manager,please continue to payment ."
+      />
       <Typography
         variant="h6"
         gutterBottom
@@ -186,8 +255,9 @@ export default function AddressForm(props) {
                   inputFormat="MM/dd/yyyy"
                   value={DateValue}
                   onChange={handleDateChange}
-                  // error={!!DateValueErrorText}
-                  // helperText={DateValueErrorText}
+                  shouldDisableDate={disabledDays}
+                  error={!!DateValueErrorText}
+                  helperText={DateValueErrorText}
                   renderInput={(params) => (
                     <TextField
                       {...params}
@@ -227,8 +297,8 @@ export default function AddressForm(props) {
                       }}
                     />
                   )}
-                  // error={!!HourValueErrorText}
-                  // helperText={HourValueErrorText}
+                  error={!!HourValueErrorText}
+                  helperText={HourValueErrorText}
                   shouldDisableTime={(timeValue, clockType) => {
                     return clockType === "minutes" && timeValue > 0;
                   }}
@@ -368,7 +438,7 @@ export default function AddressForm(props) {
           sx={{ mt: 3, ml: 1 }}
           onClick={handleSave}
         >
-          {SAVE}
+          SEND ORDER
         </Button>
         <Button
           variant="contained"

@@ -25,7 +25,8 @@ const userFind = 'findUser/:id';
 const userGetAll = 'getUsers';
 
 // login
-export const loginURL = 'http://localhost:4000/auth/login';
+export const loginURL = "http://localhost:4000/auth/login";
+export const loginGoogleURL = "http://localhost:4000/auth/loginGoogle";
 // register
 export const getCodeURL = 'http://localhost:4000/code';
 export const registerURL = 'http://localhost:4000/auth/register';
