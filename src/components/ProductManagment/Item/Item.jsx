@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Card,
-  CardContent
+  CardContent,
   // Typography,
   //   Grid,
 } from "@material-ui/core";
@@ -81,8 +81,8 @@ const NewItem = ({ product }) => {
       item_quantity: quantity,
       isAvailable: avilable,
       item_pictures: [
-        " https://lh3.google.com/u/0/d/1TmrN8gtZXCABpuV--KEa2_KVUAT-xrNG=w2735-h1537-iv1"
-      ]
+        " https://lh3.google.com/u/0/d/1TmrN8gtZXCABpuV--KEa2_KVUAT-xrNG=w2735-h1537-iv1",
+      ],
     };
     const res = await updateItemById(product._id, item);
     if (res.status == 200) {
@@ -125,7 +125,7 @@ const NewItem = ({ product }) => {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
-          border: "solid 1px grey"
+          border: "solid 1px grey",
         }}
       >
         <Grid
@@ -133,10 +133,10 @@ const NewItem = ({ product }) => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-around"
+            justifyContent: "space-around",
           }}
           xs={3}
-          alignItems='center'
+          alignItems="center"
         >
           {/* <CardMedia
             className={classes.media}
@@ -160,7 +160,7 @@ const NewItem = ({ product }) => {
             navStyle={2}
           />
           <Rating
-            name='read-only'
+            name="read-only"
             value={parseInt(product.item_rating) / 2}
             readOnly
             precision={0.5}
@@ -170,39 +170,39 @@ const NewItem = ({ product }) => {
         <CardContent>
           <TextField
             className={classes.textField}
-            margin='normal'
+            margin="normal"
             required
             fullWidth
-            label='Name'
+            label="Name"
             value={name}
             onChange={handleNameChange}
-            id='name'
-            color='secondary'
+            id="name"
+            color="secondary"
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused
-              }
+                focused: classes.cssFocused,
+              },
             }}
             InputProps={{
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input
-              }
+                input: classes.input,
+              },
             }}
             // onChange={(e) => setCode(e.target.value)}
           />
 
           <TextField
             className={classes.textField}
-            margin='normal'
+            margin="normal"
             required
             fullWidth
-            label='Description'
-            id='code'
-            color='secondary'
+            label="Description"
+            id="code"
+            color="secondary"
             value={description}
             onChange={handleDescriptionChange}
             multiline
@@ -211,16 +211,16 @@ const NewItem = ({ product }) => {
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused
-              }
+                focused: classes.cssFocused,
+              },
             }}
             InputProps={{
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input
-              }
+                input: classes.input,
+              },
             }}
             // onChange={(e) => setCode(e.target.value)}
           />
@@ -230,72 +230,72 @@ const NewItem = ({ product }) => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-around"
+            justifyContent: "space-around",
           }}
         >
           <TextField
-            margin='normal'
+            margin="normal"
             required
             fullWidth
             className={classes.textField}
-            label='Price'
+            label="Price"
             value={price}
             onChange={handlePriceChange}
-            type='number'
-            helperText='In USD '
+            type="number"
+            helperText="In USD "
             FormHelperTextProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused
-              }
+                focused: classes.cssFocused,
+              },
             }}
-            color='secondary'
+            color="secondary"
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused
-              }
+                focused: classes.cssFocused,
+              },
             }}
             InputProps={{
               inputProps: {
-                min: 0
+                min: 0,
               },
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input
-              }
+                input: classes.input,
+              },
             }}
           />
           <TextField
-            margin='normal'
+            margin="normal"
             required
             fullWidth
             value={quantity}
             onChange={handleQuantityChange}
             className={classes.textField}
-            id='outlined-number'
-            label='Quantity'
-            type='number'
-            color='secondary'
+            id="outlined-number"
+            label="Quantity"
+            type="number"
+            color="secondary"
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused
-              }
+                focused: classes.cssFocused,
+              },
             }}
             InputProps={{
               inputProps: {
                 max: 100,
-                min: 0
+                min: 0,
               },
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input
-              }
+                input: classes.input,
+              },
             }}
           />
         </Box>
@@ -304,33 +304,33 @@ const NewItem = ({ product }) => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-around"
+              justifyContent: "space-around",
             }}
           >
             <IconButton
-              aria-label='Example'
+              aria-label="Example"
               onClick={() => {
                 handleUpdateItem(false);
                 setItemVisible(false);
               }}
             >
               <Chip
-                label='Remove'
-                color='error'
+                label="Remove"
+                color="error"
                 icon={<IndeterminateCheckBoxIcon sx={{ color: "#550000" }} />}
               />
             </IconButton>
 
             <IconButton
-              aria-label='Example'
+              aria-label="Example"
               onClick={() => {
                 handleUpdateItem(true);
               }}
             >
               <Chip
-                label='Update'
-                color='success'
-                icon={<CheckBoxIcon size='medium' sx={{ color: "#005500" }} />}
+                label="Update"
+                color="success"
+                icon={<CheckBoxIcon size="medium" sx={{ color: "#005500" }} />}
               />
             </IconButton>
           </Box>

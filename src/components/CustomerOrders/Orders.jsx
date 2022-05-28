@@ -23,7 +23,7 @@ import IconButton from "@mui/material/IconButton";
 
 const MTable = () => {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(15);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
   const handleChangePage = (newPage) => {
     setPage(newPage);
   };
@@ -223,7 +223,15 @@ const MTable = () => {
             </TableBody>
             <TableFooter>
               <TablePagination
-                rowsPerPageOptions={[5, 10, 15]}
+                sx={{
+                  ".MuiTablePagination-displayedRows": {
+                    color: "white",
+                  },
+                  ".MuiTablePagination-selectLabel": {
+                    color: "white",
+                  },
+                }}
+                rowsPerPageOptions={[25, 50, 100]}
                 component="div"
                 count={orders.length}
                 rowsPerPage={rowsPerPage}

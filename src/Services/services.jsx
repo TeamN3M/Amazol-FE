@@ -29,7 +29,7 @@ import {
   addNewDeliveryURL,
   getAllDeliveriesURL,
   updateDeliveryURL,
-  getDeliveryByIdURL
+  getDeliveryByIdURL,
 } from "../constants/paths";
 import { handleErrResponse, post, get, put } from "./axios";
 import { getCodeURL } from "../constants/paths";
@@ -49,7 +49,7 @@ export const registerUser = async (
       lastname,
       email,
       password,
-      isadmin
+      isadmin,
     });
 
     return { data: res.data, status: res.status };
@@ -100,7 +100,7 @@ export const resetPassword = async (userID, newPassword) => {
   try {
     const res = await put(resetPasswordlURL, {
       id: userID,
-      password: newPassword
+      password: newPassword,
     });
     console.log(res.data);
     return { data: res.data, status: res.status };
@@ -115,7 +115,7 @@ export const updateUserInfo = async (id, fname, lname, email, password) => {
       first_name: fname,
       last_name: lname,
       email: email,
-      password: password
+      password: password,
     });
 
     return { data: res.data, status: res.status };
@@ -141,7 +141,7 @@ export const addItem = async (
       item_rating,
       item_quantity,
       isAvailable,
-      item_pictures
+      item_pictures,
     });
 
     return { data: res.data, status: res.status };
@@ -216,7 +216,7 @@ export const addItemToCart = async (id, inItem) => {
           item_rating: inItem.item_rating,
           item_price: inItem.item_price,
           item_pictures: inItem.item_pictures,
-          item_quantity: 1
+          item_quantity: 1,
         });
       }
 
@@ -229,7 +229,7 @@ export const addItemToCart = async (id, inItem) => {
   try {
     const res = await put(updateCartURL + cart_id, {
       customer_id: id,
-      items: userCart.items
+      items: userCart.items,
     });
     console.log(res);
     return { data: res.data, status: res.status };
@@ -261,7 +261,7 @@ export const removeItemFromCart = async (id, outItemid) => {
   try {
     const res = await put(updateCartURL + cart_id, {
       customer_id: id,
-      items: items
+      items: items,
     });
     console.log(res);
     return { data: res.data, status: res.status };
@@ -273,7 +273,7 @@ export const updateCart = async (cartID, customer_id, items) => {
   try {
     const res = await put(updateCartURL + cartID, {
       customer_id,
-      items
+      items,
     });
     return { data: res.data, status: res.status };
   } catch (err) {
@@ -287,7 +287,7 @@ export const addAddress = async (customer_id, country, city, address) => {
       customer_id,
       country,
       city,
-      address
+      address,
     });
 
     return { data: res.data, status: res.status };
@@ -302,7 +302,7 @@ export const updateAddress = async (customer_id, country, city, address) => {
       customer_id,
       country,
       city,
-      address
+      address,
     });
 
     return { data: res.data, status: res.status };
@@ -333,7 +333,7 @@ export const addCreditCard = async (
       name,
       card_number,
       date,
-      cvv
+      cvv,
     });
 
     return { data: res.data, status: res.status };
@@ -354,7 +354,7 @@ export const updateCreditCard = async (
       name,
       card_number,
       date,
-      cvv
+      cvv,
     });
 
     return { data: res.data, status: res.status };
@@ -394,7 +394,7 @@ export const updateUserFavorites = async (favoritesID, customer_id, items) => {
   try {
     const res = await put(updateUserFavoritesURL + favoritesID, {
       customer_id,
-      items
+      items,
     });
     return { data: res.data, status: res.status };
   } catch (err) {
@@ -407,12 +407,12 @@ export const addItemToFavorites = async (cid, item) => {
     item_name: item.item_name,
     item_price: item.item_price,
     item_rating: item.item_rating,
-    item_pictures: item.item_pictures
+    item_pictures: item.item_pictures,
   };
   try {
     const res = await put(addItemToFavoritesURL, {
       customer_id: cid,
-      item: itemTo
+      item: itemTo,
     });
     return { data: res.data, status: res.status };
   } catch (err) {
@@ -426,7 +426,7 @@ export const addNewOrder = async (customer_id, items, price, address) => {
       customer_id,
       items,
       price,
-      address
+      address,
     });
     return { data: res.data, status: res.status };
   } catch (err) {
@@ -463,7 +463,7 @@ export const addNewDelivery = async (date, time) => {
   try {
     const res = await post(addNewDeliveryURL, {
       date,
-      time
+      time,
     });
     return { data: res.data, status: res.status };
   } catch (err) {
@@ -483,7 +483,7 @@ export const updateDelivery = async (id, orderID, address, newStatus) => {
     const res = await put(updateDeliveryURL + id, {
       orderID,
       address,
-      newStatus
+      newStatus,
     });
     return { data: res.data, status: res.status };
   } catch (err) {
