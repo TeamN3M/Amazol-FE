@@ -165,7 +165,7 @@ export default function AddressForm(props) {
       user._id,
       props.cartitems,
       props.cartprice,
-      address + " " + city + " " + address
+      address + " " + city + " " + country
     );
     if (res.status == 200) {
       console.log("add new order ", res.data);
