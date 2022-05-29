@@ -21,11 +21,7 @@ import MainTheme from "../themes/MainTheme";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { InputAdornment } from "@mui/material";
 import { IconButton } from "@mui/material";
-import {
-  loginUser,
-  getUserByEmail,
-  loginGoogleUser
-} from "../Services/services";
+import { loginUser, loginGoogleUser } from "../Services/services";
 import { validateEmail } from "../constants/strings";
 import { rememberMeSession } from "../constants/helpers";
 import { useDispatch } from "react-redux";
@@ -66,7 +62,6 @@ const Login = () => {
   };
 
   const startLoginsession = (data) => {
-    console.log(data);
     dispatch(setUser(data["user"]));
     setLoginFlag(true);
     setLoginError(false);
@@ -79,17 +74,16 @@ const Login = () => {
 
   const responseGoogleSuccsess = async (resonse) => {
     const userEmail = resonse.profileObj.email;
-    const res = await getUserByEmail(userEmail);
-    if (res.status == 200) {
-      const resG = await loginGoogleUser(userEmail);
-      if (resG.status == 200) {
-        if (rememberMe) {
-          rememberMeSession(resG.data["accessToken"]);
-        }
-        startLoginsession(resG.data);
-      } else {
-        handleLoginError();
+    const fname = resonse.profileObj.givenName;
+    const lname = resonse.profileObj.familyName;
+    const password = resonse.profileObj.googleId;
+
+    const resG = await loginGoogleUser(userEmail, password, fname, lname);
+    if (resG.status == 200) {
+      if (rememberMe) {
+        rememberMeSession(resG.data["accessToken"]);
       }
+      startLoginsession(resG.data);
     } else {
       setLoginFlag(false);
       setLoginError(true);
@@ -101,6 +95,12 @@ const Login = () => {
   };
   const responseGoogleFail = (resonse) => {
     console.log(resonse);
+    setLoginFlag(false);
+    setLoginError(true);
+    setOpenAlert(true);
+    setTimeout(() => {
+      setOpenAlert(false);
+    }, 2000);
   };
 
   const useStyles = makeStyles({
