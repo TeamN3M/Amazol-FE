@@ -27,7 +27,7 @@ const ReviewModal = ({ item }) => {
   const [reviews, setReviews] = React.useState([]);
   const getreviews = async () => {
     //const res = await getReviewByOrderId(item._id);
-    const res = await getReviewByOrderId('627b7ec0136c9b8534ab8590');
+    const res = await getReviewByOrderId(item._id);
     if (res.status == 200) {
       console.log('got reviews');
       console.log(res.data);
