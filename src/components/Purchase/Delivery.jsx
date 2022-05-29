@@ -13,7 +13,7 @@ import { getUser } from "../../store/StateUser";
 import {
   getUserAddress,
   addNewOrder,
-  getAllDeliveries,
+  getAllDeliveries
 } from "../../Services/services";
 import { getJwtKey } from "../../constants/helpers";
 import MySnackBar from "../Alerts/MySnackBar";
@@ -30,40 +30,40 @@ const useStyles = makeStyles({
     backgroundColor: "#212121 !important",
     borderRadius: 20,
     borderColor: "white !important",
-    padding: 50,
+    padding: 50
   },
   textFiled: {
     color: "white",
     "& .MuiFormHelperText-root": {
-      color: "white",
-    },
+      color: "white"
+    }
   },
   cssLabel: {
     color: "white",
     "&.Mui-focused": {
-      color: "white",
-    },
+      color: "white"
+    }
   },
 
   cssOutlinedInput: {
     "&$cssFocused $notchedOutline": {
-      borderColor: "#FFF",
-    },
+      borderColor: "#FFF"
+    }
   },
   cssFocused: {},
 
   notchedOutline: {
     borderWidth: "1px",
-    borderColor: "white !important",
+    borderColor: "white !important"
   },
 
   input: {
     color: "white",
     "&:-webkit-autofill": {
       WebkitBoxShadow: "0 0 0 100px #212121 inset",
-      WebkitTextFillColor: "white",
-    },
-  },
+      WebkitTextFillColor: "white"
+    }
+  }
 });
 // const setArrays = (deliveries) => {
 //   let dates = [];
@@ -233,14 +233,24 @@ export default function AddressForm(props) {
       <MySnackBar
         open={orderDone}
         timeout={2000}
-        severity="success"
-        message="Your order now pending for manager,please continue to payment ."
+        severity='success'
+        message='Your order now pending for manager,please continue to payment .'
       />
       <Typography
-        variant="h6"
+        variant='h5'
+        align='center'
+        style={{
+          color: "#9edeaf",
+          marginBottom: 10
+        }}
+      >
+        First step to complete the order
+      </Typography>
+      <Typography
+        variant='h6'
         gutterBottom
         style={{
-          color: "#9c8786",
+          color: "#9c8786"
         }}
       >
         Choose day and date
@@ -251,8 +261,8 @@ export default function AddressForm(props) {
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <Stack spacing={3}>
                 <DesktopDatePicker
-                  label="Date desktop"
-                  inputFormat="MM/dd/yyyy"
+                  label='Date desktop'
+                  inputFormat='MM/dd/yyyy'
                   value={DateValue}
                   onChange={handleDateChange}
                   shouldDisableDate={disabledDays}
@@ -264,27 +274,27 @@ export default function AddressForm(props) {
                       sx={{
                         svg: { color: "white" },
                         input: { color: "white" },
-                        label: { color: "white" },
+                        label: { color: "white" }
                       }}
                     />
                   )}
                   InputLabelProps={{
                     classes: {
                       root: classes.cssLabel,
-                      focused: classes.cssFocused,
-                    },
+                      focused: classes.cssFocused
+                    }
                   }}
                   InputProps={{
                     classes: {
                       root: classes.cssOutlinedInput,
                       focused: classes.cssFocused,
                       notchedOutline: classes.notchedOutline,
-                      input: classes.input,
-                    },
+                      input: classes.input
+                    }
                   }}
                 />
                 <TimePicker
-                  label="Time"
+                  label='Time'
                   value={HourValue}
                   onChange={handleHourChange}
                   renderInput={(params) => (
@@ -293,7 +303,7 @@ export default function AddressForm(props) {
                       sx={{
                         svg: { color: "white" },
                         input: { color: "white" },
-                        label: { color: "white" },
+                        label: { color: "white" }
                       }}
                     />
                   )}
@@ -303,22 +313,22 @@ export default function AddressForm(props) {
                     return clockType === "minutes" && timeValue > 0;
                   }}
                   style={{
-                    color: "white",
+                    color: "white"
                   }}
                   autoFocus
                   InputLabelProps={{
                     classes: {
                       root: classes.cssLabel,
-                      focused: classes.cssFocused,
-                    },
+                      focused: classes.cssFocused
+                    }
                   }}
                   InputProps={{
                     classes: {
                       root: classes.cssOutlinedInput,
                       focused: classes.cssFocused,
                       notchedOutline: classes.notchedOutline,
-                      input: classes.input,
-                    },
+                      input: classes.input
+                    }
                   }}
                 />
               </Stack>
@@ -328,10 +338,10 @@ export default function AddressForm(props) {
 
         <Grid item>
           <Typography
-            variant="h6"
+            variant='h6'
             gutterBottom
             style={{
-              color: "#9c8786",
+              color: "#9c8786"
             }}
           >
             Shipping Address
@@ -344,12 +354,12 @@ export default function AddressForm(props) {
           <TextField
             contentEditable
             className={classes.textField}
-            margin="dense"
+            margin='dense'
             fullWidth
-            id="address"
-            label="Address *"
-            name="Address"
-            autoComplete="address-line"
+            id='address'
+            label='Address *'
+            name='Address'
+            autoComplete='address-line'
             value={address}
             error={!!addressErrorText}
             helperText={addressErrorText}
@@ -357,16 +367,16 @@ export default function AddressForm(props) {
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused,
-              },
+                focused: classes.cssFocused
+              }
             }}
             InputProps={{
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input,
-              },
+                input: classes.input
+              }
             }}
           />
         </Grid>
@@ -374,12 +384,12 @@ export default function AddressForm(props) {
           <TextField
             className={classes.textField}
             required
-            id="city"
-            name="city"
-            label="City"
-            margin="dense"
+            id='city'
+            name='city'
+            label='City'
+            margin='dense'
             fullWidth
-            autoComplete="shipping address-level2"
+            autoComplete='shipping address-level2'
             value={city}
             error={!!cityErrorText}
             helperText={cityErrorText}
@@ -387,16 +397,16 @@ export default function AddressForm(props) {
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused,
-              },
+                focused: classes.cssFocused
+              }
             }}
             InputProps={{
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input,
-              },
+                input: classes.input
+              }
             }}
           />
         </Grid>
@@ -404,12 +414,12 @@ export default function AddressForm(props) {
           <TextField
             className={classes.textField}
             required
-            id="country"
-            name="country"
-            label="Country"
-            margin="dense"
+            id='country'
+            name='country'
+            label='Country'
+            margin='dense'
             fullWidth
-            autoComplete="shipping country"
+            autoComplete='shipping country'
             value={country}
             error={!!countryErrorText}
             helperText={countryErrorText}
@@ -417,23 +427,23 @@ export default function AddressForm(props) {
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
-                focused: classes.cssFocused,
-              },
+                focused: classes.cssFocused
+              }
             }}
             InputProps={{
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline,
-                input: classes.input,
-              },
+                input: classes.input
+              }
             }}
           />
         </Grid>
       </Grid>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button
-          variant="contained"
+          variant='contained'
           endIcon={<ChangeCircleIcon />}
           sx={{ mt: 3, ml: 1 }}
           onClick={handleSave}
@@ -441,7 +451,7 @@ export default function AddressForm(props) {
           SEND ORDER
         </Button>
         <Button
-          variant="contained"
+          variant='contained'
           endIcon={<NavigateNextIcon />}
           sx={{ mt: 3, ml: 1, borderRadius: 3 }}
           onClick={props.handleNext}

@@ -1,9 +1,8 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-// import Button from "@mui/material/Button";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -20,7 +19,7 @@ import {
   validateExpire,
   validateCvv,
   paymentAlerts,
-  PURCHASENOW,
+  PURCHASENOW
 } from "../../constants/strings";
 import { useSelector } from "react-redux";
 import { getUser } from "../../store/StateUser";
@@ -31,90 +30,68 @@ import MySnackBar from "../Alerts/MySnackBar";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import PaymentAnimation from "../../assets/PaymentAnimation.json";
 import Lottie from "lottie-web";
+import paths from "../../constants/paths";
 import { LoadingButton } from "@mui/lab";
+import GooglePayButton from "@google-pay/button-react";
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 
 const useStyles = makeStyles({
   paperRoot: {
     backgroundColor: "#212121 !important",
     borderRadius: 20,
     borderColor: "white !important",
-    padding: 50,
+    padding: 50
   },
   myLabel: {
     color: "#1565c0 !important",
-    marginTop: 0,
+    marginTop: 0
   },
   textFiled: {
     color: "white",
     "& .MuiFormHelperText-root": {
-      color: "white",
-    },
+      color: "white"
+    }
   },
   cssLabel: {
     color: "white",
     "&.Mui-focused": {
-      color: "white",
-    },
+      color: "white"
+    }
   },
 
   cssOutlinedInput: {
     "&$cssFocused $notchedOutline": {
-      borderColor: "#FFF",
-    },
+      borderColor: "#FFF"
+    }
   },
   cssFocused: {},
 
   notchedOutline: {
     borderWidth: "1px",
-    borderColor: "white !important",
+    borderColor: "white !important"
   },
 
   input: {
     color: "white",
     "&:-webkit-autofill": {
       WebkitBoxShadow: "0 0 0 100px #212121 inset",
-      WebkitTextFillColor: "white",
-    },
-  },
+      WebkitTextFillColor: "white"
+    }
+  }
 });
 const setStepAnimation = () => {
-  // const lottieConfig = {
-  //   animationData: "",
-  //   container: "",
-  //   loop: true
-  // };
-  // switch (step) {
-  //   case -1:
-  //     lottieConfig.container = document.getElementById(
-  //       "lottie-step-animation--1"
-  //     ) as Element;
-  //     lottieConfig.animationData = ErrorAnimation;
-  //     break;
-  //   case 0:
-  //     lottieConfig.container = document.getElementById(
-  //       "lottie-step-animation-0"
-  //     );
-  //     lottieConfig.animationData = payment;
-  //     break;
-  //   case 1:
-  //     console.log("sucsess anim");
-  //     lottieConfig.container = document.getElementById(
-  //       "lottie-step-animation-1"
-  //     );
-  //     lottieConfig.animationData = PaymentAnimation;
-  //     break;
-  // }
   Lottie.loadAnimation({
     animationData: PaymentAnimation,
     autoplay: true,
     container: document.getElementById("lottie-step-animation-1"),
     loop: true,
-    renderer: "svg",
+    renderer: "svg"
   });
 };
 
 export default function Purchase(props) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const localJwt = getJwtKey();
@@ -239,41 +216,29 @@ export default function Purchase(props) {
     setOpenAlert(true);
     setStepAnimation(paymentFlag);
   };
+
+  const handleContinueShopping = () => {
+    navigate(paths.search, { state: { value: "" } });
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setOpenAlert(false);
     }, 3000);
     return () => clearTimeout(timer);
   }, [openAlert]);
-  // useEffect(() => {
-  //   if (paymentFlag) {
-  //     setStepAnimation(1);
-  //   } else {
-  //     setStepAnimation(0);
-  //   }
-  // }, [paymentFlag]);
 
   return (
     <Grid>
       <CssBaseline />
-      <AppBar
-        position="absolute"
-        color="default"
-        elevation={0}
-        sx={{
-          position: "relative",
-          borderBottom: (t) => `1px solid ${t.palette.divider}`,
-        }}
-      ></AppBar>
-
       {paymentFlag ? (
         <>
           <Typography
-            variant="h5"
-            align="center"
+            variant='h5'
+            align='center'
             style={{
               color: "#9edeaf",
-              marginBottom: 10,
+              marginBottom: 10
             }}
           >
             Payment passed successfully
@@ -281,26 +246,46 @@ export default function Purchase(props) {
           <Grid style={{ height: 400, width: 400 }}>
             <div id={`lottie-step-animation-1`} />
           </Grid>
-          <Typography
-            variant="h6"
-            align="center"
-            style={{
-              color: "gray",
-              marginBottom: 10,
-            }}
-            fontStyle="italic"
+          <Grid
+            container
+            direction='column'
+            justifyContent='center'
+            alignItems='center'
           >
-            The receipt will be sent to you by email
-          </Typography>
+            <Grid item>
+              <Typography
+                variant='h6'
+                align='center'
+                style={{
+                  color: "gray",
+                  marginBottom: 10
+                }}
+                fontStyle='italic'
+              >
+                The receipt will be sent to you by email
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Button
+                variant='contained'
+                onClick={handleContinueShopping}
+                endIcon={<ShoppingCartCheckoutIcon />}
+                align='center'
+                style={{ textTransform: "capitalize" }}
+              >
+                Continue Shopping
+              </Button>
+            </Grid>
+          </Grid>
         </>
       ) : (
         <>
           <Typography
-            variant="h5"
-            align="center"
+            variant='h5'
+            align='center'
             style={{
               color: "#9edeaf",
-              marginBottom: 10,
+              marginBottom: 10
             }}
           >
             One more step to complete the order
@@ -325,10 +310,10 @@ export default function Purchase(props) {
                 }
               />
               <Typography
-                variant="h6"
+                variant='h6'
                 gutterBottom
                 style={{
-                  color: "#9c8786",
+                  color: "#9c8786"
                 }}
               >
                 Payment method
@@ -337,28 +322,28 @@ export default function Purchase(props) {
                 <Grid item xs={12} md={6}>
                   <TextField
                     className={classes.textField}
-                    margin="dense"
-                    autoComplete="given-name"
-                    name="cardName"
+                    margin='dense'
+                    autoComplete='given-name'
+                    name='cardName'
                     required
                     fullWidth
-                    id="cardName"
-                    label="Name on card"
-                    color="secondary"
+                    id='cardName'
+                    label='Name on card'
+                    color='secondary'
                     autoFocus
                     InputLabelProps={{
                       classes: {
                         root: classes.cssLabel,
-                        focused: classes.cssFocused,
-                      },
+                        focused: classes.cssFocused
+                      }
                     }}
                     InputProps={{
                       classes: {
                         root: classes.cssOutlinedInput,
                         focused: classes.cssFocused,
                         notchedOutline: classes.notchedOutline,
-                        input: classes.input,
-                      },
+                        input: classes.input
+                      }
                     }}
                     value={cardname}
                     error={!!cardnameErrorText}
@@ -369,27 +354,27 @@ export default function Purchase(props) {
                 <Grid item xs={12} md={6}>
                   <TextField
                     className={classes.textField}
-                    margin="dense"
-                    autoComplete="given-name"
+                    margin='dense'
+                    autoComplete='given-name'
                     required
                     fullWidth
-                    id="cardNumber"
-                    label="Card number"
-                    color="secondary"
+                    id='cardNumber'
+                    label='Card number'
+                    color='secondary'
                     autoFocus
                     InputLabelProps={{
                       classes: {
                         root: classes.cssLabel,
-                        focused: classes.cssFocused,
-                      },
+                        focused: classes.cssFocused
+                      }
                     }}
                     InputProps={{
                       classes: {
                         root: classes.cssOutlinedInput,
                         focused: classes.cssFocused,
                         notchedOutline: classes.notchedOutline,
-                        input: classes.input,
-                      },
+                        input: classes.input
+                      }
                     }}
                     value={cardnumber}
                     error={!!cardnumberErrorText}
@@ -400,27 +385,27 @@ export default function Purchase(props) {
                 <Grid item xs={12} md={6}>
                   <TextField
                     className={classes.textField}
-                    margin="dense"
-                    autoComplete="given-name"
+                    margin='dense'
+                    autoComplete='given-name'
                     required
                     fullWidth
-                    id="expDate"
-                    label="Expiry date"
-                    color="secondary"
+                    id='expDate'
+                    label='Expiry date'
+                    color='secondary'
                     autoFocus
                     InputLabelProps={{
                       classes: {
                         root: classes.cssLabel,
-                        focused: classes.cssFocused,
-                      },
+                        focused: classes.cssFocused
+                      }
                     }}
                     InputProps={{
                       classes: {
                         root: classes.cssOutlinedInput,
                         focused: classes.cssFocused,
                         notchedOutline: classes.notchedOutline,
-                        input: classes.input,
-                      },
+                        input: classes.input
+                      }
                     }}
                     value={expiredate}
                     error={!!expiredateErrorText}
@@ -431,27 +416,27 @@ export default function Purchase(props) {
                 <Grid item xs={12} md={6}>
                   <TextField
                     className={classes.textField}
-                    margin="dense"
-                    autoComplete="given-name"
+                    margin='dense'
+                    autoComplete='given-name'
                     required
                     fullWidth
-                    id="cvv"
-                    label="CVV"
-                    color="secondary"
+                    id='cvv'
+                    label='CVV'
+                    color='secondary'
                     autoFocus
                     InputLabelProps={{
                       classes: {
                         root: classes.cssLabel,
-                        focused: classes.cssFocused,
-                      },
+                        focused: classes.cssFocused
+                      }
                     }}
                     InputProps={{
                       classes: {
                         root: classes.cssOutlinedInput,
                         focused: classes.cssFocused,
                         notchedOutline: classes.notchedOutline,
-                        input: classes.input,
-                      },
+                        input: classes.input
+                      }
                     }}
                     value={cvv}
                     error={!!cvvErrorText}
@@ -460,9 +445,63 @@ export default function Purchase(props) {
                   />
                 </Grid>
               </Grid>
+              <Grid box alignContent='space-between' alignItems='center'>
+                <Typography
+                  variant='h6'
+                  gutterBottom
+                  style={{
+                    color: "#9c8786",
+                    marginTop: 5
+                  }}
+                >
+                  Pay with Google Pay
+                </Typography>
+                <Grid item justifySelf='center' sx={{ mt: 2, mr: 2 }}>
+                  <GooglePayButton
+                    environment='TEST'
+                    paymentRequest={{
+                      apiVersion: 2,
+                      apiVersionMinor: 0,
+                      allowedPaymentMethods: [
+                        {
+                          type: "CARD",
+                          parameters: {
+                            allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+                            allowedCardNetworks: ["MASTERCARD", "VISA"]
+                          },
+                          tokenizationSpecification: {
+                            type: "PAYMENT_GATEWAY",
+                            parameters: {
+                              gateway: "example",
+                              gatewayMerchantId: "exampleGatewayMerchantId"
+                            }
+                          }
+                        }
+                      ],
+                      merchantInfo: {
+                        merchantId: "12345678901234567890",
+                        merchantName: "Demo Merchant"
+                      },
+                      transactionInfo: {
+                        totalPriceStatus: "FINAL",
+                        totalPriceLabel: "Total",
+                        totalPrice: "0.00",
+                        currencyCode: "USD",
+                        countryCode: "US"
+                      }
+                    }}
+                    onLoadPaymentData={(paymentRequest) => {
+                      console.log(paymentRequest);
+                      setPaymentFlag(true);
+                      setOpenAlert(true);
+                      setStepAnimation(paymentFlag);
+                    }}
+                  />
+                </Grid>
+              </Grid>
               <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Button
-                  variant="contained"
+                  variant='contained'
                   startIcon={<ArrowBackIosNewIcon />}
                   sx={{ mt: 3, ml: 1, borderRadius: 3 }}
                   onClick={props.handleBack}
@@ -470,7 +509,7 @@ export default function Purchase(props) {
                   {BACK}
                 </Button>
                 <LoadingButton
-                  variant="contained"
+                  variant='contained'
                   endIcon={<CheckCircleOutlineIcon />}
                   sx={{ mt: 3, ml: 1, borderRadius: 3 }}
                   onClick={handleSave}

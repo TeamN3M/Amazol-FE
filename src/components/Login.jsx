@@ -21,9 +21,18 @@ import MainTheme from "../themes/MainTheme";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { InputAdornment } from "@mui/material";
 import { IconButton } from "@mui/material";
-import { loginUser, loginGoogleUser } from "../Services/services";
+import {
+  loginUser,
+  loginGoogleUser,
+  addCart,
+  addFavorites
+} from "../Services/services";
 import { validateEmail } from "../constants/strings";
-import { rememberMeSession } from "../constants/helpers";
+import {
+  rememberMeSession,
+  setLocalUserFavorites,
+  setUserCart
+} from "../constants/helpers";
 import { useDispatch } from "react-redux";
 import MySnackBar from "./Alerts/MySnackBar";
 import { loginAlerts } from "../constants/strings";
@@ -84,6 +93,15 @@ const Login = () => {
         rememberMeSession(resG.data["accessToken"]);
       }
       startLoginsession(resG.data);
+      const NewUser = resG.data["user"];
+      const resCart = await addCart(NewUser._id);
+      if (resCart.status == 200) {
+        setUserCart(JSON.stringify(resG.data));
+      }
+      const resFav = await addFavorites(NewUser._id);
+      if (resFav.status == 200) {
+        setLocalUserFavorites(JSON.stringify(resFav.data));
+      }
     } else {
       setLoginFlag(false);
       setLoginError(true);

@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 import { CssBaseline } from "@mui/material";
 import Products from "./Products/Products";
 import { getItems } from "../../Services/services";
-import LinearProgress from "@mui/material/LinearProgress";
-import { makeStyles } from "@material-ui/core/styles";
+
+import Animation from "../Animation";
+import Loading from "../../assets/gaming.json";
 
 const SearchResult = () => {
-  const [products, setProducts] = React.useState([]);
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const getProds = async () => {
     console.log("getting items");
     const res = await getItems();
@@ -19,30 +22,28 @@ const SearchResult = () => {
   };
   if (!products.length) getProds();
 
-  const useStyles = makeStyles({
-    loading: {
-      padding: "60px",
-      textAlign: "center",
-      background: "#888888",
-      color: "white",
-      fontSize: "30px",
-    },
-  });
-  const classes = useStyles();
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
-  if (!products.length)
-    return (
-      <>
-        <p className={classes.loading}>Loading...</p>
-        <LinearProgress />
-        <CssBaseline />
-      </>
-    );
   return (
     <>
-      <Grid>
-        <Products products={products} />
-      </Grid>
+      {isLoading ? (
+        <Grid
+          container
+          justifyContent='center'
+          style={{ color: "white", marginBottom: 30 }}
+        >
+          <Animation title='Loading...' LottieCmp={Loading} />
+        </Grid>
+      ) : (
+        <Grid>
+          <Products products={products} />
+        </Grid>
+      )}
 
       <CssBaseline />
     </>
