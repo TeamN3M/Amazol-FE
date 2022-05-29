@@ -69,3 +69,6 @@ export const paymentAlerts = {
   OK: { severity: "success", message: PAYMENTTOK },
   FAIL: { severity: "error", message: PAYMENTFAIL }
 };
+
+export const SALE = "Amazol Sale !";
+export const SHOW = "Show More";

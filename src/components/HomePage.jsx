@@ -4,8 +4,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import MainTheme from "../themes/MainTheme";
 import { CssBaseline } from "@mui/material";
 import { keyframes } from "@emotion/react";
-// import ImageList from '@mui/material/ImageList';
-// import ImageListItemBar from '@mui/material/ImageListItem';
+import SliderOffers from "./SliderOffers";
+import { sliderItems } from "../constants/items";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
@@ -27,7 +27,7 @@ const offersItemData = [
     author: "@Maor",
     rows: 2,
     cols: 2,
-    featured: true,
+    featured: true
   },
   {
     img: "../images/home page/promoted_items/item_2.jpg",
@@ -35,7 +35,7 @@ const offersItemData = [
     author: "@bkristastucchio",
     rows: 2,
     cols: 2,
-    featured: true,
+    featured: true
   },
   {
     img: "../images/home page/promoted_items/item_3.jpg",
@@ -43,7 +43,7 @@ const offersItemData = [
     author: "@bkristastucchio",
     rows: 2,
     cols: 2,
-    featured: true,
+    featured: true
   },
   {
     img: "../images/home page/promoted_items/item_4.jpg",
@@ -51,7 +51,7 @@ const offersItemData = [
     author: "@bkristastucchio",
     rows: 2,
     cols: 2,
-    featured: true,
+    featured: true
   },
   {
     img: "../images/home page/promoted_items/item_5.jpg",
@@ -59,7 +59,7 @@ const offersItemData = [
     author: "@bkristastucchio",
     rows: 2,
     cols: 2,
-    featured: true,
+    featured: true
   },
   {
     img: "../images/home page/promoted_items/item_6.jpg",
@@ -67,7 +67,7 @@ const offersItemData = [
     author: "@bkristastucchio",
     rows: 2,
     cols: 2,
-    featured: true,
+    featured: true
   },
   {
     img: "../images/home page/promoted_items/item_7.jpg",
@@ -75,7 +75,7 @@ const offersItemData = [
     author: "@bkristastucchio",
     rows: 2,
     cols: 2,
-    featured: true,
+    featured: true
   },
   {
     img: "../images/home page/promoted_items/item_8.jpg",
@@ -83,7 +83,7 @@ const offersItemData = [
     author: "@bkristastucchio",
     rows: 2,
     cols: 2,
-    featured: true,
+    featured: true
   },
   // duplicate
   {
@@ -92,7 +92,7 @@ const offersItemData = [
     author: "@Maor",
     rows: 2,
     cols: 2,
-    featured: true,
+    featured: true
   },
   {
     img: "../images/home page/promoted_items/item_2.jpg",
@@ -100,7 +100,7 @@ const offersItemData = [
     author: "@bkristastucchio",
     rows: 2,
     cols: 2,
-    featured: true,
+    featured: true
   },
   {
     img: "../images/home page/promoted_items/item_3.jpg",
@@ -108,7 +108,7 @@ const offersItemData = [
     author: "@bkristastucchio",
     rows: 2,
     cols: 2,
-    featured: true,
+    featured: true
   },
   {
     img: "../images/home page/promoted_items/item_4.jpg",
@@ -116,7 +116,7 @@ const offersItemData = [
     author: "@bkristastucchio",
     rows: 2,
     cols: 2,
-    featured: true,
+    featured: true
   },
   {
     img: "../images/home page/promoted_items/item_5.jpg",
@@ -124,7 +124,7 @@ const offersItemData = [
     author: "@bkristastucchio",
     rows: 2,
     cols: 2,
-    featured: true,
+    featured: true
   },
   {
     img: "../images/home page/promoted_items/item_6.jpg",
@@ -132,7 +132,7 @@ const offersItemData = [
     author: "@bkristastucchio",
     rows: 2,
     cols: 2,
-    featured: true,
+    featured: true
   },
   {
     img: "../images/home page/promoted_items/item_7.jpg",
@@ -140,7 +140,7 @@ const offersItemData = [
     author: "@bkristastucchio",
     rows: 2,
     cols: 2,
-    featured: true,
+    featured: true
   },
   {
     img: "../images/home page/promoted_items/item_8.jpg",
@@ -148,7 +148,7 @@ const offersItemData = [
     author: "@bkristastucchio",
     rows: 2,
     cols: 2,
-    featured: true,
+    featured: true
   },
   // duplicate
   {
@@ -157,7 +157,7 @@ const offersItemData = [
     author: "@Maor",
     rows: 2,
     cols: 2,
-    featured: true,
+    featured: true
   },
   {
     img: "../images/home page/promoted_items/item_2.jpg",
@@ -165,7 +165,7 @@ const offersItemData = [
     author: "@bkristastucchio",
     rows: 2,
     cols: 2,
-    featured: true,
+    featured: true
   },
   {
     img: "../images/home page/promoted_items/item_3.jpg",
@@ -173,7 +173,7 @@ const offersItemData = [
     author: "@bkristastucchio",
     rows: 2,
     cols: 2,
-    featured: true,
+    featured: true
   },
   {
     img: "../images/home page/promoted_items/item_4.jpg",
@@ -181,16 +181,17 @@ const offersItemData = [
     author: "@bkristastucchio",
     rows: 2,
     cols: 2,
-    featured: true,
-  },
+    featured: true
+  }
 ];
 
 const HomePage = () => {
   return (
     <>
-      <Grid container spacing={2} justifyContent="space-around">
+      <SliderOffers sliderItems={sliderItems} />
+      <Grid container spacing={2} justifyContent='space-around'>
         <Grid item xs={12}>
-          <Typography variant="h1" sx={{ alignItems: "center" }} align="center">
+          <Typography variant='h1' sx={{ alignItems: "center" }} align='center'>
             <br />
           </Typography>
         </Grid>
@@ -203,13 +204,13 @@ const HomePage = () => {
             backgroundSize: "fit",
             backgroundPosition: "center",
             height: "800px",
-            width: "0.2vw",
+            width: "0.2vw"
           }}
         >
           <Typography
-            variant="h1"
+            variant='h1'
             sx={{ animation: `${RGB} 2.5s infinite`, alignItems: "center" }}
-            align="center"
+            align='center'
           >
             Sale!
           </Typography>
@@ -221,13 +222,13 @@ const HomePage = () => {
             backgroundImage: `url("../images/home page/offer_2.jpg")`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "fit",
-            backgroundPosition: "center",
+            backgroundPosition: "center"
           }}
         >
           <Typography
-            variant="h1"
+            variant='h1'
             sx={{ animation: `${RGB} 2.5s infinite`, alignItems: "center" }}
-            align="center"
+            align='center'
           >
             Sale!
           </Typography>
@@ -239,27 +240,27 @@ const HomePage = () => {
             backgroundImage: `url("../images/home page/offer_3.jpg")`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "fit",
-            backgroundPosition: "center",
+            backgroundPosition: "center"
           }}
         >
           <Typography
-            variant="h1"
+            variant='h1'
             sx={{ animation: `${RGB} 2.5s infinite`, alignItems: "center" }}
-            align="center"
+            align='center'
           >
             Sale!
           </Typography>
         </Grid>
       </Grid>
       <ListSubheader
-        component="div"
+        component='div'
         sx={{
           fontSize: "69px",
           fontStyle: "oblique",
           animation: `${RGB} 2.5s infinite`,
           alignItems: "center",
           alignSelf: "center",
-          backgroundColor: "transparent",
+          backgroundColor: "transparent"
         }}
       >
         Hot right now! Hot right now!
@@ -272,7 +273,7 @@ const HomePage = () => {
               src={`${item.img}?w=150&fit=crop&auto=format`}
               srcSet={`${item.img}?w=150&fit=crop&auto=format&dpr=4 4x`}
               alt={item.title}
-              loading="lazy"
+              loading='lazy'
             />
             <ImageListItemBar
               title={item.title}
