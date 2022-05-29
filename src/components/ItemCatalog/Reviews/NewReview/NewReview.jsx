@@ -6,16 +6,16 @@ import {
   Grid,
 } from '@material-ui/core';
 import Chip from '@mui/material/Chip';
-import { addReviewById } from '../../../../Services/services';
+import { addReviewById, updateItemById } from '../../../../Services/services';
 import TextField from '@mui/material/TextField';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import MySnackBar from '../../../Alerts/MySnackBar';
 
 import { Divider, Rating } from '@mui/material';
 
-const NewReview = ({ user, CloseModal, item_id }) => {
+const NewReview = ({ user, CloseModal, item, reviews }) => {
   //   const classes = useStyles(); //Style
-
+  const item_id = item._id;
   //user state
   const name = ' ' + user.first_name + ' ' + user.last_name;
   //Current Date
@@ -58,25 +58,44 @@ const NewReview = ({ user, CloseModal, item_id }) => {
       setMissinginput(true);
     } else {
       handleAddReview();
+      setSubmited(true);
       CloseModal();
+      updateItemRating();
     }
   };
 
   const handleAddReview = async () => {
-    console.log('adding new item');
     const newreview = {
       item_id: item_id,
       customer_name: name,
       date: datestring,
       text: text,
-      rating: rating,
+      rating: rating * 2,
     };
     const res = await addReviewById(item_id, newreview);
-    if (res.status == 200) setSubmited(true);
-    console.log(res);
     return res;
   };
 
+  const updateItemRating = async () => {
+    let ratingSum = 0;
+    let rateCount = 0;
+    for (const r of reviews) {
+      ratingSum += r.rating;
+      rateCount++;
+    }
+    const ratingAvg = (ratingSum + rating * 2) / (rateCount + 1);
+    const updatedItem = {
+      item_name: item.name,
+      item_description: item.item_description,
+      item_price: item.item_price,
+      item_rating: ratingAvg,
+      item_quantity: item.item_quantity,
+      isAvailable: item.isAvilable,
+      item_pictures: item.item_pictures,
+    };
+    const res = await updateItemById(item._id, updatedItem);
+    return res;
+  };
   return (
     <>
       <MySnackBar

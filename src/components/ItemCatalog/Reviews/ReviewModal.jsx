@@ -64,7 +64,8 @@ const ReviewModal = ({ item }) => {
                 review={reviews[0]}
                 user={user}
                 CloseModal={handleClose}
-                item_id={item._id}
+                item={item}
+                reviews={reviews}
               />
             </Grid>
             {reviews.map((review) => (
