@@ -113,11 +113,13 @@ const MTable = () => {
   const handleSave = async (orderRow) => {
     console.log(status_new);
     console.log(orderRow);
-    const id = orderRow;
-    const newStatus = status_new;
-    const res = await updateOrderStatus(id, newStatus);
-    if (res.status == 200) {
-      setChangeMade(true);
+    if (status_new != " ") {
+      const id = orderRow;
+      const newStatus = status_new;
+      const res = await updateOrderStatus(id, newStatus);
+      if (res.status == 200) {
+        setChangeMade(true);
+      }
     }
   };
 
