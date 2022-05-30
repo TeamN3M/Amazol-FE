@@ -21,5 +21,10 @@ export default makeStyles(() => ({
     background: '#888888',
     color: 'white',
     fontSize: '30px',
+  },
+  grid: {
+    maxWidth: "70%",
+    margin: "auto",
+
   }
 }));

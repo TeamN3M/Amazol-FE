@@ -4,9 +4,9 @@ import MainTheme from '../../../themes/MainTheme';
 export default makeStyles({
   root: {
     marginBottom: "0.5%",
-    maxWidth: "100%",
+
     maxHeight: "100%",
-    minWidth: "200px",
+
     backgroundColor: "#555555",
     "&:hover": {
       background: "#777777",

@@ -1,26 +1,26 @@
-import React from "react";
+import React from 'react';
 import {
   Card,
   CardContent,
   // Typography,
   //   Grid,
-} from "@material-ui/core";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import Rating from "@mui/material/Rating";
+} from '@material-ui/core';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Rating from '@mui/material/Rating';
 // import { AddShoppingCart } from '@material-ui/icons';
-import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox";
-import useStyles from "./styles";
+import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
+import useStyles from './styles';
 // import ButtonGroup from '@mui/material/ButtonGroup';
 // import Button from '@mui/material/Button';
 // import AddIcon from '@mui/icons-material/Add';
 // import RemoveIcon from '@mui/icons-material/Remove';
-import TextField from "@mui/material/TextField";
-import { Grid } from "@mui/material";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import { updateItemById } from "../../../Services/services";
-import SimpleImageSlider from "react-simple-image-slider";
-import Chip from "@mui/material/Chip";
+import TextField from '@mui/material/TextField';
+import { Grid } from '@mui/material';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import { updateItemById } from '../../../Services/services';
+import SimpleImageSlider from 'react-simple-image-slider';
+import Chip from '@mui/material/Chip';
 
 //import MainTheme from "../../../themes/MainTheme";
 // const styleForPaper = {
@@ -72,7 +72,7 @@ const NewItem = ({ product }) => {
   //
 
   const handleUpdateItem = async (avilable) => {
-    console.log("Updating an item");
+    console.log('Updating an item');
     const item = {
       item_name: name,
       item_description: description,
@@ -81,12 +81,12 @@ const NewItem = ({ product }) => {
       item_quantity: quantity,
       isAvailable: avilable,
       item_pictures: [
-        " https://lh3.google.com/u/0/d/1TmrN8gtZXCABpuV--KEa2_KVUAT-xrNG=w2735-h1537-iv1",
+        ' https://lh3.google.com/u/0/d/1TmrN8gtZXCABpuV--KEa2_KVUAT-xrNG=w2735-h1537-iv1',
       ],
     };
     const res = await updateItemById(product._id, item);
     if (res.status == 200) {
-      console.log("update");
+      console.log('update');
     }
   };
 
@@ -119,24 +119,24 @@ const NewItem = ({ product }) => {
 
   if (itemVisible != true) return <></>;
   return (
-    <Card className={classes.root} sx={{ display: "flex" }}>
+    <Card className={classes.root} sx={{ display: 'flex' }}>
       <Grid
         sx={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          border: "solid 1px grey",
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          border: 'solid 1px grey',
         }}
       >
         <Grid
           item
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-around",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-around',
           }}
           xs={3}
-          alignItems="center"
+          alignItems='center'
         >
           {/* <CardMedia
             className={classes.media}
@@ -156,11 +156,11 @@ const NewItem = ({ product }) => {
             showNavs={true}
             navSize={20}
             navMargin={20}
-            bgColor={"#555555"}
+            bgColor={'#555555'}
             navStyle={2}
           />
           <Rating
-            name="read-only"
+            name='read-only'
             value={parseInt(product.item_rating) / 2}
             readOnly
             precision={0.5}
@@ -170,14 +170,14 @@ const NewItem = ({ product }) => {
         <CardContent>
           <TextField
             className={classes.textField}
-            margin="normal"
+            margin='normal'
             required
             fullWidth
-            label="Name"
+            label='Name'
             value={name}
             onChange={handleNameChange}
-            id="name"
-            color="secondary"
+            id='name'
+            color='secondary'
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
@@ -197,12 +197,12 @@ const NewItem = ({ product }) => {
 
           <TextField
             className={classes.textField}
-            margin="normal"
+            margin='normal'
             required
             fullWidth
-            label="Description"
-            id="code"
-            color="secondary"
+            label='Description'
+            id='code'
+            color='secondary'
             value={description}
             onChange={handleDescriptionChange}
             multiline
@@ -228,28 +228,28 @@ const NewItem = ({ product }) => {
 
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-around",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-around',
           }}
         >
           <TextField
-            margin="normal"
+            margin='normal'
             required
             fullWidth
             className={classes.textField}
-            label="Price"
+            label='Price'
             value={price}
             onChange={handlePriceChange}
-            type="number"
-            helperText="In USD "
+            type='number'
+            helperText='In USD '
             FormHelperTextProps={{
               classes: {
                 root: classes.cssLabel,
                 focused: classes.cssFocused,
               },
             }}
-            color="secondary"
+            color='secondary'
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
@@ -269,16 +269,16 @@ const NewItem = ({ product }) => {
             }}
           />
           <TextField
-            margin="normal"
+            margin='normal'
             required
             fullWidth
             value={quantity}
             onChange={handleQuantityChange}
             className={classes.textField}
-            id="outlined-number"
-            label="Quantity"
-            type="number"
-            color="secondary"
+            id='outlined-number'
+            label='Quantity'
+            type='number'
+            color='secondary'
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
@@ -302,35 +302,35 @@ const NewItem = ({ product }) => {
         <Grid item>
           <Box
             sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-around",
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-around',
             }}
           >
             <IconButton
-              aria-label="Example"
+              aria-label='Example'
               onClick={() => {
                 handleUpdateItem(false);
                 setItemVisible(false);
               }}
             >
               <Chip
-                label="Remove"
-                color="error"
-                icon={<IndeterminateCheckBoxIcon sx={{ color: "#550000" }} />}
+                label='Remove'
+                color='error'
+                icon={<IndeterminateCheckBoxIcon sx={{ color: '#550000' }} />}
               />
             </IconButton>
 
             <IconButton
-              aria-label="Example"
+              aria-label='Example'
               onClick={() => {
                 handleUpdateItem(true);
               }}
             >
               <Chip
-                label="Update"
-                color="success"
-                icon={<CheckBoxIcon size="medium" sx={{ color: "#005500" }} />}
+                label='Update'
+                color='success'
+                icon={<CheckBoxIcon size='medium' sx={{ color: '#005500' }} />}
               />
             </IconButton>
           </Box>

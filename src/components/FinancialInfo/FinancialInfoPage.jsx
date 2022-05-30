@@ -9,33 +9,23 @@ import RevenueTimeLine from './RevenueTimeLine/RevenueTimeLine';
 import TotalCard from './TotalCard/TotalCard';
 import { getAllOrders, getItems } from '../../Services/services';
 
-const graphdata = [
-  ['Date', 'Revenue', 'Expenses'],
-  [new Date(1996, 1, 1), 2000 * Math.random(), 2000 * Math.random()],
-  [new Date(1997, 1, 1), 2000 * Math.random(), 2000 * Math.random()],
-  [new Date(1998, 1, 1), 2000 * Math.random(), 2000 * Math.random()],
-  [new Date(1999, 1, 1), 2000 * Math.random(), 2000 * Math.random()],
-  [new Date(2000, 1, 1), 2000 * Math.random(), 2000 * Math.random()],
-  [new Date(2001, 1, 1), 2000 * Math.random(), 2000 * Math.random()],
-  [new Date(2002, 1, 1), 2000 * Math.random(), 2000 * Math.random()],
-  [new Date(2003, 1, 1), 2000 * Math.random(), 2000 * Math.random()],
-  [new Date(2004, 1, 1), 2000 * Math.random(), 2000 * Math.random()],
-  [new Date(2005, 1, 1), 2000 * Math.random(), 2000 * Math.random()],
-  [new Date(2006, 1, 1), 2000 * Math.random(), 2000 * Math.random()],
-  [new Date(2007, 1, 1), 2000 * Math.random(), 2000 * Math.random()],
-  [new Date(2008, 1, 1), 2000 * Math.random(), 2000 * Math.random()],
-  [new Date(2009, 1, 1), 2000 * Math.random(), 2000 * Math.random()],
-];
-
-const mapdata = [
-  ['Country', 'Total Revenue'],
-  ['Germany', 200],
-  ['Israel', 300],
-  ['Brazil', 400],
-  ['Canada', 500],
-  ['France', 600],
-  ['RU', 700],
-];
+// const graphdata = [
+//   ['Date', 'Revenue'],
+//   [new Date(1996, 1, 1), 2000 * Math.random()],
+//   [new Date(1997, 1, 1), 2000 * Math.random()],
+//   [new Date(1998, 1, 1), 2000 * Math.random()],
+//   [new Date(1999, 1, 1), 2000 * Math.random()],
+//   [new Date(2000, 1, 1), 2000 * Math.random()],
+//   [new Date(2001, 1, 1), 2000 * Math.random()],
+//   [new Date(2002, 1, 1), 2000 * Math.random()],
+//   [new Date(2003, 1, 1), 2000 * Math.random()],
+//   [new Date(2004, 1, 1), 2000 * Math.random()],
+//   [new Date(2005, 1, 1), 2000 * Math.random()],
+//   [new Date(2006, 1, 1), 2000 * Math.random()],
+//   [new Date(2007, 1, 1), 2000 * Math.random()],
+//   [new Date(2008, 1, 1), 2000 * Math.random()],
+//   [new Date(2009, 1, 1), 2000 * Math.random()],
+// ];
 
 const makeGraphData = (orders, items) => {
   let keyboardCounter = 0;
@@ -46,31 +36,45 @@ const makeGraphData = (orders, items) => {
   let otherCounter = 0;
   let productsum = 0;
   let revenuesum = 0;
+  let ordersByCountry = {};
+  let ordersByDate = {};
+  let monthrevsum = 0;
+  let date, newdate;
+  let today = new Date();
 
-  // const func = (order) => {
-  //   let addressWords = order.address.split(' ');
-  //   return addressWords[addressWords.length - 1];
+  const getOrderCountry = (order) => {
+    let addressWords = order.address.split(' ');
+    return addressWords[addressWords.length - 1];
+  };
+
+  // const FlooredDate = (date) => {
+  //   const arr =date.substring(0,10).split("-");
+
+  //   let yy = arr[0];
+  //   let mm = arr[1];
+  //   let dd = arr[2];
+  //   return new Date(yy, mm, dd);
   // };
 
-  // console.log('groupByCountry');
-  // console.log(groupByCountry);
-
-  console.log('items V');
-  console.log(items);
-  console.log('orders V');
-  console.log(orders);
   for (const purchase of orders) {
     if (purchase.status == 'Active' || purchase.status == 'Done') {
+      if (getOrderCountry(purchase) in ordersByCountry) {
+        ordersByCountry[getOrderCountry(purchase)].push(purchase);
+      } else ordersByCountry[getOrderCountry(purchase)] = [purchase];
+      newdate = new Date(purchase.createdAt);
+      date = new Date(
+        newdate.getFullYear(),
+        newdate.getMonth(),
+        newdate.getDate()
+      );
+      if (date in ordersByDate) {
+        ordersByDate[date].push(purchase);
+      } else ordersByDate[date] = [purchase];
+      if (newdate.getMonth() == today.getMonth()) monthrevsum += purchase.price;
       revenuesum += purchase.price;
-
       for (const product of purchase.items) {
-        console.log('Got Here');
         for (const item of items) {
-          console.log(item._id);
-          console.log('==');
-          console.log(product.item_id);
           if (item._id == product.item_id) {
-            console.log(product);
             if (item.item_name.toLowerCase().includes('keyboard'))
               keyboardCounter++;
             else if (item.item_name.toLowerCase().includes('chair'))
@@ -88,6 +92,23 @@ const makeGraphData = (orders, items) => {
       }
     }
   }
+  let sum = 0;
+  let ordersByCountryArray = [['Country', 'Total Revenue']];
+  for (let [key, orders] of Object.entries(ordersByCountry)) {
+    sum = 0;
+    for (const o of orders) sum += o.price;
+    ordersByCountryArray.push([key, sum]);
+  }
+
+  let ordersByDateArray = [];
+  for (let [key, orders] of Object.entries(ordersByDate)) {
+    sum = 0;
+    for (const o of orders) sum += o.price;
+    ordersByDateArray.push([key, sum]);
+  }
+  ordersByDateArray.push(['Date', 'Total Revenue']);
+  ordersByDateArray.reverse();
+
   return {
     keyboardCounter: keyboardCounter,
     chairCounter: chairCounter,
@@ -97,6 +118,9 @@ const makeGraphData = (orders, items) => {
     otherCounter: otherCounter,
     productsum: productsum,
     revenuesum: revenuesum.toString(),
+    ordersByCountry: ordersByCountryArray,
+    ordersByDate: ordersByDateArray,
+    monthRevSum: monthrevsum,
   };
 };
 
@@ -110,7 +134,8 @@ const FinancialInfoPage = () => {
 
   const [orders, setOrders] = useState([]);
   const [items, setItems] = useState([]);
-
+  const [mapdata, setMapdata] = useState([]);
+  const [graphdata, setGraphdata] = useState([]);
   const [piedata, setPieData] = useState([
     ['Category', 'Purchases'],
     ['Mice', 1],
@@ -140,9 +165,11 @@ const FinancialInfoPage = () => {
 
   if (items.length && orders.length) {
     graphsdata = makeGraphData(orders, items);
-    console.log('Graph Data V');
-
+    if (!mapdata.length) setMapdata(graphsdata.ordersByCountry);
+    if (!graphdata.length) setGraphdata(graphsdata.ordersByDate);
+    console.log('graphsdata');
     console.log(graphsdata);
+
     if (piedata.length == 7)
       setPieData([
         ['Category', 'Purchases'],
@@ -186,7 +213,7 @@ const FinancialInfoPage = () => {
               <Card isLoading={isLoading} className={classes.griditem}>
                 <TotalCard
                   title='Total Revenue (current month)'
-                  amount={graphsdata.revenuesum + '$'}
+                  amount={graphsdata.monthRevSum + '$'}
                 />
                 {/* Item 3 - Counter1 */}
               </Card>
@@ -194,8 +221,8 @@ const FinancialInfoPage = () => {
             <Grid item>
               <Card isLoading={isLoading} className={classes.griditem}>
                 <TotalCard
-                  title='Total Expenses (current month)'
-                  amount='6969$'
+                  title='Total Revenue (All Time)'
+                  amount={graphsdata.revenuesum + '$'}
                 />
                 {/* Item 4 - Counter2 */}
               </Card>
