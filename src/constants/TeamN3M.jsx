@@ -21,7 +21,7 @@ export const rightMembers = [
     img: "./images/team/maor.jpg"
   },
   {
-    name: "Matan hoayon",
+    name: "Matan Ohayon",
     linkedin: "https://www.linkedin.com/in/matan-ohayon-35b94421b//",
     github: "https://github.com/matan15595m",
     img: "./images/team/omatan.jpg"
