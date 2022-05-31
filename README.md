@@ -118,13 +118,15 @@ deploy, manage, and scale modern apps. <img src="https://images.g2crowd.com/uplo
 ![screencapture-localhost-3000-FinanceInfo-2022-05-31-21_14_03](https://user-images.githubusercontent.com/73241556/171257562-639e670a-1515-4233-9a9e-5a883a9bcde6.png)
 ![screencapture-localhost-3000-2022-05-31-21_15_32](https://user-images.githubusercontent.com/73241556/171257568-65c29de8-869a-4343-978a-7f2477977450.png)
 ![screencapture-localhost-3000-Cart-2022-05-31-21_18_40](https://user-images.githubusercontent.com/73241556/171257569-3e3c8680-34e1-4556-a76b-7c9ee1e488cb.png)
-![screencapture-localhost-3000-ProdManage-2022-05-31-21_19_35](https://user-images.githubusercontent.com/73241556/171257570-552d14c5-3417-4dfe-ac72-c7ae34447d18.png)
+![screencapture-localhost-3000-ProdManage-2022-05-31-21_19_35](https://user-images.githubusercontent.com/73241556/171258128-cdc7310c-99fb-428c-9a0b-5196c3cebdd0.png)
+
 
  
  ###  Updated - new look
 ![image](https://user-images.githubusercontent.com/73241556/161255739-73f68c07-c25f-46ea-af58-57f73aa8f40f.png)
 ![image](https://user-images.githubusercontent.com/73241556/161255883-1631dde1-f40e-41da-95a3-9267fe7554ba.png)
 ![image](https://user-images.githubusercontent.com/73241556/161255909-de714e65-d7f7-4607-8bb2-1603afa77ef4.png)
+![screencapture-localhost-3000-ManageOrders-2022-05-31-21_24_19](https://user-images.githubusercontent.com/73241556/171258261-1a74d83b-76b7-4861-b75f-47dc17c8a0fb.png)
 
 
  ###  old look
