@@ -290,9 +290,6 @@ export default function Purchase(props) {
           >
             One more step to complete the order
           </Typography>
-          {/* <Grid style={{ height: 200, width: 200 }}>
-                <div id={`lottie-step-animation-0`} />
-              </Grid> */}
           <React.Fragment>
             <React.Fragment>
               <MySnackBar

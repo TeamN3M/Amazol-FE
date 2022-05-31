@@ -34,7 +34,8 @@ import {
   getReviewByIdURL,
   addReviewByIdURL,
   deleteReviewByIdURL,
-  addAfiiliateURL
+  addAfiiliateURL,
+  updateItemsQuantityURL
 } from "../constants/paths";
 import { handleErrResponse, post, get, put } from "./axios";
 import { getCodeURL } from "../constants/paths";
@@ -198,6 +199,14 @@ export const updateItemById = async (id, item) => {
     return handleErrResponse(err);
   }
 };
+export const updateItemsQuantity = async (items) => {
+  try {
+    const res = await put(updateItemsQuantityURL, { items: items });
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
 // cart services
 export const addCart = async (id) => {
   const customer_id = id;
@@ -349,7 +358,7 @@ export const getUserAddress = async (id) => {
     return handleErrResponse(err);
   }
 };
-// credir card services
+// credit card services
 export const addCreditCard = async (
   customer_id,
   name,
@@ -488,7 +497,7 @@ export const getUserOrders = async (id) => {
     return handleErrResponse(err);
   }
 };
-// delivery
+// delivery services
 export const addNewDelivery = async (date, time) => {
   try {
     const res = await post(addNewDeliveryURL, {
@@ -536,7 +545,7 @@ export const getDeleveryByOrderId = async (oid) => {
     return handleErrResponse(err);
   }
 };
-
+// reviews services
 export const getReviewByOrderId = async (rid) => {
   try {
     const res = await get(getReviewByIdURL + rid);

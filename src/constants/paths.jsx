@@ -41,6 +41,8 @@ export const addItemURL = "http://localhost:4000/item";
 export const getItemURL = "http://localhost:4000/item/findItem/";
 export const getItemsURL = "http://localhost:4000/item";
 export const updateItemURL = "http://localhost:4000/item/updateItem/";
+export const updateItemsQuantityURL =
+  "http://localhost:4000/item/updateQuantity";
 // cart
 export const addUserCartURL = "http://localhost:4000/cart";
 export const getUserCartURL = "http://localhost:4000/cart/userCart/";
