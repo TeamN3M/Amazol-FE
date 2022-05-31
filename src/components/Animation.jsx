@@ -5,7 +5,7 @@ import Lottie from "lottie-web";
 import ERROR404 from "../assets/error-404.json";
 import MainTheme from "./../themes/MainTheme";
 
-const AppAnimation = ({ animationSize, loop, LottieCmp, title, subTitle }) => {
+const AppAnimation = ({ animationSize, loop, LottieCmp, title }) => {
   useEffect(() => {
     Lottie.loadAnimation({
       autoplay: true,
@@ -17,7 +17,12 @@ const AppAnimation = ({ animationSize, loop, LottieCmp, title, subTitle }) => {
   }, [LottieCmp]);
 
   return (
-    <Grid container justifyContent='center' direction='column'>
+    <Grid
+      container
+      justifyContent='center'
+      direction='column'
+      style={{ backgroundColor: "#212121", color: "white" }}
+    >
       <Grid
         sx={{
           maxHeight: animationSize || MainTheme.spacing(40),
@@ -31,16 +36,6 @@ const AppAnimation = ({ animationSize, loop, LottieCmp, title, subTitle }) => {
       {title && (
         <Typography mt={2} component='h3' variant='h5' textAlign='center'>
           {title}
-        </Typography>
-      )}
-      {subTitle && (
-        <Typography
-          mt={2}
-          variant='subtitle1'
-          textAlign='center'
-          component='h5'
-        >
-          {subTitle}
         </Typography>
       )}
     </Grid>

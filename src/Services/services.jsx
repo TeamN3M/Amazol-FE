@@ -192,7 +192,6 @@ export const getItems = async () => {
 export const updateItemById = async (id, item) => {
   try {
     const res = await put(updateItemURL + id, { id, item });
-    console.log("Update Item - " + res.data);
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);

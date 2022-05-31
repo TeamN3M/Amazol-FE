@@ -1,31 +1,16 @@
-import { CssBaseline } from '@mui/material';
-import useStyles from './styles';
-import React from 'react';
-import { Grid, Card } from '@material-ui/core';
-import { useEffect, useState } from 'react';
-import GeoMap from './GeoMap/GeoMap';
-import PieChart from './PieChart/PieChart';
-import RevenueTimeLine from './RevenueTimeLine/RevenueTimeLine';
-import TotalCard from './TotalCard/TotalCard';
-import { getAllOrders, getItems } from '../../Services/services';
+import { CssBaseline } from "@mui/material";
+import useStyles from "./styles";
+import React from "react";
+import { Grid, Card, Typography } from "@material-ui/core";
+import { useEffect, useState } from "react";
+import GeoMap from "./GeoMap/GeoMap";
+import PieChart from "./PieChart/PieChart";
+import RevenueTimeLine from "./RevenueTimeLine/RevenueTimeLine";
+import TotalCard from "./TotalCard/TotalCard";
+import { getAllOrders, getItems } from "../../Services/services";
 
-// const graphdata = [
-//   ['Date', 'Revenue'],
-//   [new Date(1996, 1, 1), 2000 * Math.random()],
-//   [new Date(1997, 1, 1), 2000 * Math.random()],
-//   [new Date(1998, 1, 1), 2000 * Math.random()],
-//   [new Date(1999, 1, 1), 2000 * Math.random()],
-//   [new Date(2000, 1, 1), 2000 * Math.random()],
-//   [new Date(2001, 1, 1), 2000 * Math.random()],
-//   [new Date(2002, 1, 1), 2000 * Math.random()],
-//   [new Date(2003, 1, 1), 2000 * Math.random()],
-//   [new Date(2004, 1, 1), 2000 * Math.random()],
-//   [new Date(2005, 1, 1), 2000 * Math.random()],
-//   [new Date(2006, 1, 1), 2000 * Math.random()],
-//   [new Date(2007, 1, 1), 2000 * Math.random()],
-//   [new Date(2008, 1, 1), 2000 * Math.random()],
-//   [new Date(2009, 1, 1), 2000 * Math.random()],
-// ];
+import Animation from "../Animation";
+import Financial from "../../assets/financial.json";
 
 const makeGraphData = (orders, items) => {
   let keyboardCounter = 0;
@@ -43,21 +28,12 @@ const makeGraphData = (orders, items) => {
   let today = new Date();
 
   const getOrderCountry = (order) => {
-    let addressWords = order.address.split(' ');
+    let addressWords = order.address.split(" ");
     return addressWords[addressWords.length - 1];
   };
 
-  // const FlooredDate = (date) => {
-  //   const arr =date.substring(0,10).split("-");
-
-  //   let yy = arr[0];
-  //   let mm = arr[1];
-  //   let dd = arr[2];
-  //   return new Date(yy, mm, dd);
-  // };
-
   for (const purchase of orders) {
-    if (purchase.status == 'Active' || purchase.status == 'Done') {
+    if (purchase.status == "Active" || purchase.status == "Done") {
       if (getOrderCountry(purchase) in ordersByCountry) {
         ordersByCountry[getOrderCountry(purchase)].push(purchase);
       } else ordersByCountry[getOrderCountry(purchase)] = [purchase];
@@ -75,15 +51,15 @@ const makeGraphData = (orders, items) => {
       for (const product of purchase.items) {
         for (const item of items) {
           if (item._id == product.item_id) {
-            if (item.item_name.toLowerCase().includes('keyboard'))
+            if (item.item_name.toLowerCase().includes("keyboard"))
               keyboardCounter++;
-            else if (item.item_name.toLowerCase().includes('chair'))
+            else if (item.item_name.toLowerCase().includes("chair"))
               chairCounter++;
-            else if (item.item_name.toLowerCase().includes('mouse'))
+            else if (item.item_name.toLowerCase().includes("mouse"))
               mouseCounter++;
-            else if (item.item_name.toLowerCase().includes('headphone'))
+            else if (item.item_name.toLowerCase().includes("headphone"))
               headphoneCounter++;
-            else if (item.item_name.toLowerCase().includes('controller'))
+            else if (item.item_name.toLowerCase().includes("controller"))
               controllerCounter++;
             else otherCounter++;
             productsum++;
@@ -93,7 +69,7 @@ const makeGraphData = (orders, items) => {
     }
   }
   let sum = 0;
-  let ordersByCountryArray = [['Country', 'Total Revenue']];
+  let ordersByCountryArray = [["Country", "Total Revenue"]];
   for (let [key, orders] of Object.entries(ordersByCountry)) {
     sum = 0;
     for (const o of orders) sum += o.price;
@@ -106,7 +82,7 @@ const makeGraphData = (orders, items) => {
     for (const o of orders) sum += o.price;
     ordersByDateArray.push([key, sum]);
   }
-  ordersByDateArray.push(['Date', 'Total Revenue']);
+  ordersByDateArray.push(["Date", "Total Revenue"]);
   ordersByDateArray.reverse();
 
   return {
@@ -120,7 +96,7 @@ const makeGraphData = (orders, items) => {
     revenuesum: revenuesum.toString(),
     ordersByCountry: ordersByCountryArray,
     ordersByDate: ordersByDateArray,
-    monthRevSum: monthrevsum,
+    monthRevSum: monthrevsum
   };
 };
 
@@ -129,7 +105,10 @@ let graphsdata = [];
 const FinancialInfoPage = () => {
   const [isLoading, setLoading] = useState(true);
   useEffect(() => {
-    setLoading(false);
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2500);
+    return () => clearTimeout(timer);
   }, []);
 
   const [orders, setOrders] = useState([]);
@@ -137,13 +116,13 @@ const FinancialInfoPage = () => {
   const [mapdata, setMapdata] = useState([]);
   const [graphdata, setGraphdata] = useState([]);
   const [piedata, setPieData] = useState([
-    ['Category', 'Purchases'],
-    ['Mice', 1],
-    ['Chairs', 1],
-    ['Controllers', 1],
-    ['Keyboards', 1],
-    ['Other', 1],
-    ['empty'],
+    ["Category", "Purchases"],
+    ["Mice", 1],
+    ["Chairs", 1],
+    ["Controllers", 1],
+    ["Keyboards", 1],
+    ["Other", 1],
+    ["empty"]
   ]);
 
   const getOrders = async () => {
@@ -167,28 +146,45 @@ const FinancialInfoPage = () => {
     graphsdata = makeGraphData(orders, items);
     if (!mapdata.length) setMapdata(graphsdata.ordersByCountry);
     if (!graphdata.length) setGraphdata(graphsdata.ordersByDate);
-    console.log('graphsdata');
+    console.log("graphsdata");
     console.log(graphsdata);
 
     if (piedata.length == 7)
       setPieData([
-        ['Category', 'Purchases'],
-        ['Mice', graphsdata.mouseCounter],
-        ['Chairs', graphsdata.chairCounter],
-        ['Controllers', graphsdata.controllerCounter],
-        ['Keyboards', graphsdata.keyboardCounter],
-        ['Other', graphsdata.otherCounter],
+        ["Category", "Purchases"],
+        ["Mice", graphsdata.mouseCounter],
+        ["Chairs", graphsdata.chairCounter],
+        ["Controllers", graphsdata.controllerCounter],
+        ["Keyboards", graphsdata.keyboardCounter],
+        ["Other", graphsdata.otherCounter]
       ]);
   }
 
   const classes = useStyles();
-
+  if (isLoading) {
+    return (
+      <Grid
+        container
+        justifyContent='center'
+        style={{ color: "white", marginBottom: 30 }}
+      >
+        <Animation title='Loading...' LottieCmp={Financial} />
+        <CssBaseline />
+      </Grid>
+    );
+  }
   return (
     <>
       {/* Page Header */}
-      <Card className={classes.header}>
-        Financial Info Page <CssBaseline />
-      </Card>
+      <Typography
+        color={"white"}
+        variant='h1'
+        sx={{ alignItems: "center" }}
+        class={classes.header}
+      >
+        Financial Information
+      </Typography>{" "}
+      <CssBaseline />
       {/* Dashboard Grid */}
       <Grid container spacing={3} className={classes.grid}>
         <Grid item sm={12} xs={12} md={12} lg={12}>
@@ -213,7 +209,7 @@ const FinancialInfoPage = () => {
               <Card isLoading={isLoading} className={classes.griditem}>
                 <TotalCard
                   title='Total Revenue (current month)'
-                  amount={graphsdata.monthRevSum + '$'}
+                  amount={graphsdata.monthRevSum + "$"}
                 />
                 {/* Item 3 - Counter1 */}
               </Card>
@@ -222,7 +218,7 @@ const FinancialInfoPage = () => {
               <Card isLoading={isLoading} className={classes.griditem}>
                 <TotalCard
                   title='Total Revenue (All Time)'
-                  amount={graphsdata.revenuesum + '$'}
+                  amount={graphsdata.revenuesum + "$"}
                 />
                 {/* Item 4 - Counter2 */}
               </Card>

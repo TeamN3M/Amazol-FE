@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { keyframes } from "@emotion/react";
 import { Box, styled, Typography } from "@mui/material";
@@ -32,15 +32,15 @@ const useStyles = makeStyles(() => ({
     padding: "50px"
   },
   title: {
-    fontSize: "70px"
-    // fontFamily: "cursive"
+    fontSize: "70px !important",
+    fontFamily: "Courier New !important"
   },
   description: {
-    margin: "50px 0px",
-    fontSize: "20px",
+    margin: "30px 0px !important",
+    fontSize: "20px !important",
     fontWeight: 500,
-    // fontFamily: "cursive",
-    letterSpacing: "4px"
+    fontFamily: "Courier New !important",
+    letterSpacing: "3px !important"
   },
   btn: {
     padding: "10px",
@@ -81,7 +81,7 @@ const StyledSlide = styled(Box)({
 const StyledArrow = styled(Box)(({ direction }) => ({
   width: "50px",
   height: "50px",
-  backgroundColor: "#fff7f7",
+  backgroundColor: "#c5cae9",
   color: "black",
   borderRadius: "50%",
   display: "flex",
@@ -95,7 +95,7 @@ const StyledArrow = styled(Box)(({ direction }) => ({
   margin: "auto",
   cursor: "pointer",
   opacity: 0.5,
-  zIndex: 2
+  zIndex: 3
 }));
 
 const StyledContainer = styled(Box)({
@@ -114,15 +114,22 @@ const SliderOffers = ({ sliderItems }) => {
 
   const handleSliderClicked = (direction) => {
     if (direction === left) {
-      setIndex((prevState) => (prevState > 0 ? prevState - 1 : 2));
+      setIndex((prevState) => (prevState > 0 ? prevState - 1 : 3));
     } else {
-      setIndex((prevState) => (prevState < 2 ? prevState + 1 : 0));
+      setIndex((prevState) => (prevState < 3 ? prevState + 1 : 0));
     }
   };
 
   const handleShowMoreClicked = (name) => {
     navigate(paths.search, { state: { value: name } });
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      handleSliderClicked(right);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [handleSliderClicked]);
 
   return (
     <StyledContainer component='div'>

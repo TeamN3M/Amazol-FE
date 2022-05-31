@@ -15,6 +15,8 @@ export const RESETOK = "Password changed successfully :)";
 export const RESETFAIL = "Password change failed :(";
 export const CHANGETOK = "The change was made successfully :)";
 export const CHANGEFAIL = "There was an error changing the details :(";
+export const UPDATEOK = "The items updated successfully :)";
+export const UPDATEFAIL = "There was an error updating items :(";
 export const PAYMENTTOK = "The payment was made successfully :)";
 export const PAYMENTFAIL =
   "There was an error with payment,check your details again !";
@@ -68,6 +70,10 @@ export const changeInfoAlerts = {
 export const paymentAlerts = {
   OK: { severity: "success", message: PAYMENTTOK },
   FAIL: { severity: "error", message: PAYMENTFAIL }
+};
+export const updateAlerts = {
+  OK: { severity: "success", message: UPDATEOK },
+  FAIL: { severity: "error", message: UPDATEFAIL }
 };
 
 export const SALE = "Amazol Sale !";
