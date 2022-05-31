@@ -5,7 +5,7 @@ import MainTheme from "../themes/MainTheme";
 import { CssBaseline } from "@mui/material";
 import { keyframes } from "@emotion/react";
 import SliderOffers from "./SliderOffers";
-import { sliderItems } from "../constants/items";
+import { sliderItems, offersItemData } from "../constants/items";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
@@ -20,171 +20,6 @@ const RGB = keyframes`
   100% { color: red; }
 `;
 
-const offersItemData = [
-  {
-    img: "../images/home page/promoted_items/item_1.jpg",
-    title: "offer_1",
-    author: "@Maor",
-    rows: 2,
-    cols: 2,
-    featured: true
-  },
-  {
-    img: "../images/home page/promoted_items/item_2.jpg",
-    title: "offer_2",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true
-  },
-  {
-    img: "../images/home page/promoted_items/item_3.jpg",
-    title: "offer_3",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true
-  },
-  {
-    img: "../images/home page/promoted_items/item_4.jpg",
-    title: "offer_4",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true
-  },
-  {
-    img: "../images/home page/promoted_items/item_5.jpg",
-    title: "offer_1",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true
-  },
-  {
-    img: "../images/home page/promoted_items/item_6.jpg",
-    title: "offer_2",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true
-  },
-  {
-    img: "../images/home page/promoted_items/item_7.jpg",
-    title: "offer_3",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true
-  },
-  {
-    img: "../images/home page/promoted_items/item_8.jpg",
-    title: "offer_4",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true
-  },
-  // duplicate
-  {
-    img: "../images/home page/promoted_items/item_1.jpg",
-    title: "offer_1",
-    author: "@Maor",
-    rows: 2,
-    cols: 2,
-    featured: true
-  },
-  {
-    img: "../images/home page/promoted_items/item_2.jpg",
-    title: "offer_2",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true
-  },
-  {
-    img: "../images/home page/promoted_items/item_3.jpg",
-    title: "offer_3",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true
-  },
-  {
-    img: "../images/home page/promoted_items/item_4.jpg",
-    title: "offer_4",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true
-  },
-  {
-    img: "../images/home page/promoted_items/item_5.jpg",
-    title: "offer_1",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true
-  },
-  {
-    img: "../images/home page/promoted_items/item_6.jpg",
-    title: "offer_2",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true
-  },
-  {
-    img: "../images/home page/promoted_items/item_7.jpg",
-    title: "offer_3",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true
-  },
-  {
-    img: "../images/home page/promoted_items/item_8.jpg",
-    title: "offer_4",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true
-  },
-  // duplicate
-  {
-    img: "../images/home page/promoted_items/item_1.jpg",
-    title: "offer_1",
-    author: "@Maor",
-    rows: 2,
-    cols: 2,
-    featured: true
-  },
-  {
-    img: "../images/home page/promoted_items/item_2.jpg",
-    title: "offer_2",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true
-  },
-  {
-    img: "../images/home page/promoted_items/item_3.jpg",
-    title: "offer_3",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true
-  },
-  {
-    img: "../images/home page/promoted_items/item_4.jpg",
-    title: "offer_4",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true
-  }
-];
-
 const HomePage = () => {
   return (
     <>
@@ -193,62 +28,6 @@ const HomePage = () => {
         <Grid item xs={12}>
           <Typography variant='h1' sx={{ alignItems: "center" }} align='center'>
             <br />
-          </Typography>
-        </Grid>
-        <Grid
-          item
-          xs={4}
-          sx={{
-            backgroundImage: `url("../images/home page/offer_1.jpg")`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "fit",
-            backgroundPosition: "center",
-            height: "800px",
-            width: "0.2vw"
-          }}
-        >
-          <Typography
-            variant='h1'
-            sx={{ animation: `${RGB} 2.5s infinite`, alignItems: "center" }}
-            align='center'
-          >
-            Sale!
-          </Typography>
-        </Grid>
-        <Grid
-          item
-          xs={4}
-          sx={{
-            backgroundImage: `url("../images/home page/offer_2.jpg")`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "fit",
-            backgroundPosition: "center"
-          }}
-        >
-          <Typography
-            variant='h1'
-            sx={{ animation: `${RGB} 2.5s infinite`, alignItems: "center" }}
-            align='center'
-          >
-            Sale!
-          </Typography>
-        </Grid>
-        <Grid
-          item
-          xs={4}
-          sx={{
-            backgroundImage: `url("../images/home page/offer_3.jpg")`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "fit",
-            backgroundPosition: "center"
-          }}
-        >
-          <Typography
-            variant='h1'
-            sx={{ animation: `${RGB} 2.5s infinite`, alignItems: "center" }}
-            align='center'
-          >
-            Sale!
           </Typography>
         </Grid>
       </Grid>
@@ -266,7 +45,7 @@ const HomePage = () => {
         Hot right now! Hot right now!
         <br />
       </ListSubheader>
-      <ImageList sx={{}} cols={5}>
+      <ImageList sx={{}} cols={4}>
         {offersItemData.map((item) => (
           <ImageListItem key={item.img}>
             <img
@@ -290,20 +69,6 @@ const HomePage = () => {
           </ImageListItem>
         ))}
       </ImageList>
-      {/* 
-      <ImageList sx={{}} cols={4} rowHeight={400}>
-        {itemData.map((item) => (
-          <ImageListItemBar key={item.img}>
-            <img
-              src={`${item.img}?w=400&h=400&fit=crop&auto=format`}
-              srcSet={`${item.img}?w=400&h=400&fit=crop&auto=format&dpr=2 2x`}
-              alt={item.title}
-              loading='lazy'
-            />
-          </ImageListItemBar>
-        ))}
-      </ImageList> */}
-
       <ThemeProvider theme={MainTheme}>
         <CssBaseline />
       </ThemeProvider>
