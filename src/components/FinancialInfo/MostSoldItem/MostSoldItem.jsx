@@ -74,6 +74,9 @@ export const options = {
   allowHtml: true,
   showRowNumber: true,
 };
+
+const sortBySales = (array) => array.sort((a, b) => b[1] - a[1]);
+
 export const formatters = [
   {
     type: 'ColorFormat',
@@ -93,7 +96,7 @@ export function App({ data }) {
     chartType: 'Table',
     width: '100%',
     // height: '355px',
-    data: data,
+    data: sortBySales(data).slice(0, 4),
     options: options,
     formatters: formatters,
   });
