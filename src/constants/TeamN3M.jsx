@@ -14,7 +14,7 @@ export const leftMembers = [
 ];
 export const rightMembers = [
   {
-    name: "Maor Arnon",
+    name: "Maor Arnon ",
     linkedin:
       "https://www.linkedin.com/in/maor-arnon-software-engineer-student/",
     github: "https://github.com/Maor-Ar",
