@@ -33,7 +33,8 @@ import {
   getDeliveryByIdURL,
   getReviewByIdURL,
   addReviewByIdURL,
-  deleteReviewByIdURL
+  deleteReviewByIdURL,
+  addAfiiliateURL
 } from "../constants/paths";
 import { handleErrResponse, post, get, put } from "./axios";
 import { getCodeURL } from "../constants/paths";
@@ -296,6 +297,14 @@ export const updateCart = async (cartID, customer_id, items) => {
       customer_id,
       items
     });
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+export const addAffiliateToCart = async (user_id) => {
+  try {
+    const res = await put(addAfiiliateURL, { customer_id: user_id });
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);

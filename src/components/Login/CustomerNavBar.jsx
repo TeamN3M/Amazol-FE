@@ -33,29 +33,29 @@ const CustomerNavBar = () => {
     {
       name: "Profile",
       path: paths.profile,
-      icon: <PersonIcon />,
+      icon: <PersonIcon />
     },
     {
       name: "Wishlist",
       path: paths.wishList,
-      icon: <FeaturedPlayListIcon />,
+      icon: <FeaturedPlayListIcon />
     },
     {
       name: "Orders",
       path: paths.cusomerorders,
-      icon: <ShoppingBasketIcon />,
+      icon: <ShoppingBasketIcon />
     },
 
     {
       name: "Affiliate",
       path: paths.affiliate,
-      icon: <PeopleOutlineIcon />,
+      icon: <PeopleOutlineIcon />
     },
     {
       name: "Log Out",
       path: paths.index,
-      icon: <LogoutIcon />,
-    },
+      icon: <LogoutIcon />
+    }
   ];
   // const itempath = [paths.login];
   const navigate = useNavigate();
@@ -72,7 +72,6 @@ const CustomerNavBar = () => {
     setAnchorEl(null);
   };
   const handleLogoutClick = () => {
-    console.log("sss");
     endLoginSession();
     dispatch(logoutUser());
     navigate(paths.index);
@@ -86,12 +85,12 @@ const CustomerNavBar = () => {
     userLastName.substring(0, 1).toUpperCase();
 
   return (
-    <AppBar position="sticky" style={{ border: "solid white 0.1px" }}>
+    <AppBar position='sticky' style={{ border: "solid white 0.1px" }}>
       <Toolbar sx={{ justifyContent: "flex-start" }}>
         <Button onClick={handleLogoClick}>
           <Box
-            component="img"
-            alt="logo"
+            component='img'
+            alt='logo'
             src={LOGO}
             sx={{ width: 150, height: 70 }}
           />
@@ -100,11 +99,11 @@ const CustomerNavBar = () => {
         <SearchBar />
 
         <Typography
-          variant="h6"
+          variant='h6'
           noWrap
           sx={{ flexGrow: 1 }}
-          align="right"
-          textTransform="capitalize"
+          align='right'
+          textTransform='capitalize'
         >
           Hello {userFisrtName}
         </Typography>
@@ -113,20 +112,20 @@ const CustomerNavBar = () => {
         </Grid>
 
         <IconButton
-          aria-label="more"
-          id="long-button"
+          aria-label='more'
+          id='long-button'
           aria-controls={open ? "long-menu" : undefined}
           aria-expanded={open ? "true" : undefined}
-          aria-haspopup="true"
+          aria-haspopup='true'
           onClick={handleClick}
           style={{ color: "white" }}
         >
           <Avatar sx={{ bgcolor: "white" }}>{FL}</Avatar>
         </IconButton>
         <Menu
-          id="long-menu"
+          id='long-menu'
           MenuListProps={{
-            "aria-labelledby": "long-button",
+            "aria-labelledby": "long-button"
           }}
           anchorEl={anchorEl}
           open={open}
@@ -135,8 +134,8 @@ const CustomerNavBar = () => {
           PaperProps={{
             style: {
               maxHeight: ITEM_HEIGHT * 5,
-              width: "20ch",
-            },
+              width: "20ch"
+            }
           }}
         >
           {options.map((option, index) => (
@@ -144,7 +143,7 @@ const CustomerNavBar = () => {
               key={option}
               style={{ color: "black" }}
               selected={option === "Pyxis"}
-              divider="true"
+              divider='true'
               disabled={option.name === "Delivery" ? true : false}
               onClick={() => {
                 if (index == 4) {

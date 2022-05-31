@@ -97,6 +97,11 @@ const ProductRating = styled.span`
   font-size: 20px;
   font-family: system-ui;
 `;
+const Affiliate = styled.span`
+  font-size: 20px;
+  font-family: system-ui;
+  color: blue;
+`;
 
 const PriceDetail = styled.div`
   flex: 1;
@@ -127,6 +132,12 @@ const ProductPrice = styled.div`
   font-weight: 200;
   font-family: system-ui;
   color: white;
+`;
+const AffiliatePrice = styled.div`
+  font-size: 30px;
+  font-weight: 200;
+  font-family: system-ui;
+  color: blue;
 `;
 
 const Hr = styled.hr`
@@ -263,7 +274,7 @@ const Cart = () => {
 
   const handleCheckoutClicked = () => {
     navigate(paths.purchase, {
-      state: { pricevalue: total, itemsvalue: cart.items },
+      state: { pricevalue: total, itemsvalue: cart.items }
     });
   };
 
@@ -296,7 +307,7 @@ const Cart = () => {
           <TopTexts>
             <TopText>Shopping Cart({cart?.items.length})</TopText>
           </TopTexts>
-          <TopButton type="filled" onClick={handleCheckoutClicked}>
+          <TopButton type='filled' onClick={handleCheckoutClicked}>
             Checkout Now
           </TopButton>
         </Top>
@@ -311,34 +322,50 @@ const Cart = () => {
                       <ProductName>
                         <b>Name:</b> {item.item_name}
                       </ProductName>
-                      <ProductRating>
-                        <b>Rating:</b> {item.item_rating}
-                      </ProductRating>
+                      {item.item_id !== "0" ? (
+                        <ProductRating>
+                          <b>Rating:</b> {item.item_rating}
+                        </ProductRating>
+                      ) : (
+                        <Affiliate>
+                          <b>Discount voucher for sharing friends</b>
+                        </Affiliate>
+                      )}
                     </Details>
                   </ProductDetail>
                   <PriceDetail>
-                    <ProductAmountContainer>
-                      <Add onClick={() => handleClickPlus(item.item_id)} />
-                      <ProductAmount>{item.quantity}</ProductAmount>
-                      <Remove onClick={() => handleClickMinus(item.item_id)} />
-                    </ProductAmountContainer>
-                    <ProductPrice>
-                      {item.item_price * item.quantity} $
-                    </ProductPrice>
-                    <Grid>
-                      <IconButton
-                        onClick={() => handleRemoveFromCart(item.item_id)}
-                        style={{ color: "red" }}
-                      >
-                        <Delete />
-                      </IconButton>
-                    </Grid>
+                    {item.item_id !== "0" ? (
+                      <ProductAmountContainer>
+                        <Add onClick={() => handleClickPlus(item.item_id)} />
+                        <ProductAmount>{item.quantity}</ProductAmount>
+                        <Remove
+                          onClick={() => handleClickMinus(item.item_id)}
+                        />
+                      </ProductAmountContainer>
+                    ) : null}
+                    {item.item_id !== "0" ? (
+                      <ProductPrice>
+                        {item.item_price * item.quantity} $
+                      </ProductPrice>
+                    ) : (
+                      <AffiliatePrice>{item.item_price} $</AffiliatePrice>
+                    )}
+                    {item.item_id !== "0" ? (
+                      <Grid>
+                        <IconButton
+                          onClick={() => handleRemoveFromCart(item.item_id)}
+                          style={{ color: "red" }}
+                        >
+                          <Delete />
+                        </IconButton>
+                      </Grid>
+                    ) : null}
                   </PriceDetail>
                 </Product>
               ))
             ) : (
-              <Grid container justifyContent="center">
-                <Animation title="Your Cart Is Empty" LottieCmp={EmptyCart} />
+              <Grid container justifyContent='center'>
+                <Animation title='Your Cart Is Empty' LottieCmp={EmptyCart} />
               </Grid>
             )}
             <Hr />
@@ -357,7 +384,7 @@ const Cart = () => {
               <SummaryItemText>Shipping Discount</SummaryItemText>
               <SummaryItemPrice> -15 $</SummaryItemPrice>
             </SummaryItem>
-            <SummaryItem type="total">
+            <SummaryItem type='total'>
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice> {total} $</SummaryItemPrice>
             </SummaryItem>
