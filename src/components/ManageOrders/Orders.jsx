@@ -113,7 +113,7 @@ const MTable = () => {
   const handleSave = async (orderRow) => {
     console.log(status_new);
     console.log(orderRow);
-    if (status_new != " ") {
+    if (status_new != "") {
       const id = orderRow;
       const newStatus = status_new;
       const res = await updateOrderStatus(id, newStatus);
@@ -169,6 +169,17 @@ const MTable = () => {
         padding={10}
       >
         <Grid>
+          <Typography
+            variant="body1"
+            sx={{
+              color: "white",
+              marginTop: 3,
+              marginBottom: 1,
+              textAlign: "center",
+            }}
+          >
+            Add new delivery
+          </Typography>
           <AppBar
             position="static"
             sx={{
@@ -177,7 +188,8 @@ const MTable = () => {
               display: "flex",
               flexDirection: "row",
               justifyContent: "space-around",
-
+              height: "195px",
+              width: "470px",
               // width: "min",
               // margin: "auto",
             }}
@@ -186,15 +198,6 @@ const MTable = () => {
             }}
           >
             <Toolbar>
-              <Typography
-                variant="body1"
-                style={{
-                  color: "white",
-                  marginTop: 10,
-                }}
-              >
-                Add new delivery time
-              </Typography>
               <Grid item xs={6}>
                 <div>
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -246,9 +249,9 @@ const MTable = () => {
                 </div>
               </Grid>
               <Button
-                sx={{ m: 2, textTransform: "capitalize" }}
+                sx={{ m: 2, textTransform: "capitalize", marginLeft: 10 }}
                 variant="outlined"
-                size="small"
+                size="large"
                 onClick={handleAddDelivery}
               >
                 ADD
