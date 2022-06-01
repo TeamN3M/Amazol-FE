@@ -6,13 +6,19 @@ import {
   Typography,
   Grid,
 } from '@material-ui/core';
-
+import Animation from '../../Animation';
 import Rating from '@mui/material/Rating';
-
+import Noitem from '../../../assets/noitem.json';
 import useStyles from './styles';
 
 const Product = ({ product }) => {
   const classes = useStyles();
+
+  if (!product) {
+    return (
+      <Animation title='There was no sales this month' LottieCmp={Noitem} />
+    );
+  }
 
   return (
     <Card className={classes.root} title={product.item_name} elevation={0}>

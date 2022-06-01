@@ -121,7 +121,7 @@ const NewReview = ({ user, CloseModal, item, reviews }) => {
 
               <Grid
                 item
-                xl={2}
+                xl={3}
                 lg={3}
                 sm={10}
                 justifyContent='flex-end'

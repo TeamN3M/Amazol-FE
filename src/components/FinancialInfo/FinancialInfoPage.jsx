@@ -53,6 +53,9 @@ const makeGraphData = (orders, items) => {
       for (const product of purchase.items) {
         for (const item of items) {
           if (item._id == product.item_id) {
+            console.log('Problem Area');
+            console.log(today);
+            console.log(newdate);
             if (newdate.getMonth() == today.getMonth()) {
               if (item._id in itemCounterThisMonth) {
                 /////
@@ -213,7 +216,7 @@ const FinancialInfoPage = () => {
         class={classes.header}
       >
         Financial Information
-      </Typography>{' '}
+      </Typography>
       <CssBaseline />
       {/* Dashboard Grid */}
       <Grid container spacing={3} className={classes.grid}>
