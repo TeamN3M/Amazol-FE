@@ -25,9 +25,6 @@ import {
 import { Divider, Rating } from '@mui/material';
 
 const Review = ({ review }) => {
-  console.log('Review Here');
-  console.log(review);
-
   //   const classes = useStyles();
 
   return (
@@ -42,7 +39,7 @@ const Review = ({ review }) => {
 
             <Grid
               item
-              xl={2}
+              xl={3}
               lg={3}
               sm={10}
               justifyContent='flex-end'
