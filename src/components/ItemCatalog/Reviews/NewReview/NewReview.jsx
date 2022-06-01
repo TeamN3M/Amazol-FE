@@ -14,6 +14,7 @@ import MySnackBar from '../../../Alerts/MySnackBar';
 import { Divider, Rating } from '@mui/material';
 
 const NewReview = ({ user, CloseModal, item, reviews }) => {
+  if (!user) return <></>;
   //   const classes = useStyles(); //Style
   const item_id = item._id;
   //user state
@@ -96,6 +97,7 @@ const NewReview = ({ user, CloseModal, item, reviews }) => {
     const res = await updateItemById(item._id, updatedItem);
     return res;
   };
+
   return (
     <>
       <MySnackBar

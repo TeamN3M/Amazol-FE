@@ -16,6 +16,7 @@ export default makeStyles(() => ({
         p: 4,
         padding: '20px',
         display: "flex",
+        minWidth: '400px'
 
     },
     review:{

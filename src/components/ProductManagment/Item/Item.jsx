@@ -1,21 +1,21 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { Card, CardContent } from "@material-ui/core";
-import { useNavigate } from "react-router-dom";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import Rating from "@mui/material/Rating";
-import MySnackBar from "../../Alerts/MySnackBar";
-import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox";
-import useStyles from "./styles";
-import TextField from "@mui/material/TextField";
-import { Grid } from "@mui/material";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import { updateItemById } from "../../../Services/services";
-import SimpleImageSlider from "react-simple-image-slider";
-import Chip from "@mui/material/Chip";
-import { updateAlerts } from "../../../constants/strings";
-import paths from "../../../constants/paths";
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { Card, CardContent } from '@material-ui/core';
+import { useNavigate } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Rating from '@mui/material/Rating';
+import MySnackBar from '../../Alerts/MySnackBar';
+import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
+import useStyles from './styles';
+import TextField from '@mui/material/TextField';
+import { Grid } from '@mui/material';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import { updateItemById } from '../../../Services/services';
+import SimpleImageSlider from 'react-simple-image-slider';
+import Chip from '@mui/material/Chip';
+import { updateAlerts } from '../../../constants/strings';
+import paths from '../../../constants/paths';
 
 const NewItem = ({ product }) => {
   const [itemVisible, setItemVisible] = useState(product.isAvailable);
@@ -50,10 +50,10 @@ const NewItem = ({ product }) => {
       item_name: name,
       item_description: description,
       item_price: price,
-      item_rating: 0,
+      item_rating: product.rating,
       item_quantity: quantity,
       isAvailable: avilable,
-      item_pictures: [picture]
+      item_pictures: [picture],
     };
     const res = await updateItemById(product._id, item);
     if (res.status == 200) {
@@ -92,21 +92,21 @@ const NewItem = ({ product }) => {
           updateFlag ? updateAlerts.OK.message : updateAlerts.FAIL.message
         }
       />
-      <Card className={classes.root} sx={{ display: "flex" }}>
+      <Card className={classes.root} sx={{ display: 'flex' }}>
         <Grid
           sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            border: "solid 1px grey"
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+            border: 'solid 1px grey',
           }}
         >
           <Grid
             item
             sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-around"
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-around',
             }}
             xs={3}
             alignItems='center'
@@ -120,7 +120,7 @@ const NewItem = ({ product }) => {
               showNavs={true}
               navSize={20}
               navMargin={20}
-              bgColor={"#555555"}
+              bgColor={'#555555'}
               navStyle={2}
             />
             <Rating
@@ -145,16 +145,16 @@ const NewItem = ({ product }) => {
               InputLabelProps={{
                 classes: {
                   root: classes.cssLabel,
-                  focused: classes.cssFocused
-                }
+                  focused: classes.cssFocused,
+                },
               }}
               InputProps={{
                 classes: {
                   root: classes.cssOutlinedInput,
                   focused: classes.cssFocused,
                   notchedOutline: classes.notchedOutline,
-                  input: classes.input
-                }
+                  input: classes.input,
+                },
               }}
             />
 
@@ -174,16 +174,16 @@ const NewItem = ({ product }) => {
               InputLabelProps={{
                 classes: {
                   root: classes.cssLabel,
-                  focused: classes.cssFocused
-                }
+                  focused: classes.cssFocused,
+                },
               }}
               InputProps={{
                 classes: {
                   root: classes.cssOutlinedInput,
                   focused: classes.cssFocused,
                   notchedOutline: classes.notchedOutline,
-                  input: classes.input
-                }
+                  input: classes.input,
+                },
               }}
             />
             <TextField
@@ -201,25 +201,25 @@ const NewItem = ({ product }) => {
               InputLabelProps={{
                 classes: {
                   root: classes.cssLabel,
-                  focused: classes.cssFocused
-                }
+                  focused: classes.cssFocused,
+                },
               }}
               InputProps={{
                 classes: {
                   root: classes.cssOutlinedInput,
                   focused: classes.cssFocused,
                   notchedOutline: classes.notchedOutline,
-                  input: classes.input
-                }
+                  input: classes.input,
+                },
               }}
             />
           </CardContent>
 
           <Box
             sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-around"
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-around',
             }}
           >
             <TextField
@@ -235,26 +235,26 @@ const NewItem = ({ product }) => {
               FormHelperTextProps={{
                 classes: {
                   root: classes.cssLabel,
-                  focused: classes.cssFocused
-                }
+                  focused: classes.cssFocused,
+                },
               }}
               color='secondary'
               InputLabelProps={{
                 classes: {
                   root: classes.cssLabel,
-                  focused: classes.cssFocused
-                }
+                  focused: classes.cssFocused,
+                },
               }}
               InputProps={{
                 inputProps: {
-                  min: 0
+                  min: 0,
                 },
                 classes: {
                   root: classes.cssOutlinedInput,
                   focused: classes.cssFocused,
                   notchedOutline: classes.notchedOutline,
-                  input: classes.input
-                }
+                  input: classes.input,
+                },
               }}
             />
             <TextField
@@ -271,30 +271,30 @@ const NewItem = ({ product }) => {
               InputLabelProps={{
                 classes: {
                   root: classes.cssLabel,
-                  focused: classes.cssFocused
-                }
+                  focused: classes.cssFocused,
+                },
               }}
               InputProps={{
                 inputProps: {
                   max: 100,
-                  min: 0
+                  min: 0,
                 },
                 classes: {
                   root: classes.cssOutlinedInput,
                   focused: classes.cssFocused,
                   notchedOutline: classes.notchedOutline,
-                  input: classes.input
-                }
+                  input: classes.input,
+                },
               }}
             />
           </Box>
           <Grid item>
             <Box
               sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-around",
-                mt: 16
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-around',
+                mt: 16,
               }}
             >
               <IconButton
@@ -307,7 +307,7 @@ const NewItem = ({ product }) => {
                 <Chip
                   label='Remove'
                   color='error'
-                  icon={<IndeterminateCheckBoxIcon sx={{ color: "#550000" }} />}
+                  icon={<IndeterminateCheckBoxIcon sx={{ color: '#550000' }} />}
                 />
               </IconButton>
 
@@ -321,7 +321,7 @@ const NewItem = ({ product }) => {
                   label='Update'
                   color='success'
                   icon={
-                    <CheckBoxIcon size='medium' sx={{ color: "#005500" }} />
+                    <CheckBoxIcon size='medium' sx={{ color: '#005500' }} />
                   }
                 />
               </IconButton>
