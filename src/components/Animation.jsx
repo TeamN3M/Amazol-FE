@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { Grid, Typography } from "@mui/material";
-
 import Lottie from "lottie-web";
-import ERROR404 from "../assets/error-404.json";
+import ERROR404 from "../assets/error404.json";
 import MainTheme from "./../themes/MainTheme";
 
 const AppAnimation = ({ animationSize, loop, LottieCmp, title }) => {

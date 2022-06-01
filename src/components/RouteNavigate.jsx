@@ -27,9 +27,8 @@ import FinanceInfo from "./FinancialInfo/FinancialInfoPage";
 import ForgotPassword from "./ForgotPassword";
 import Affiliate from "./Affiliate/AffiliatePage";
 import AffiliateNavigate from "./Affiliate";
-//import Products from "./products/Products";
-//import Cart from "./cart/Cart";
-// import { getUser } from "../Services/services";
+import ErrorPage from "./ErrorPage";
+
 const themeDark = createTheme({
   palette: {
     background: {
@@ -64,6 +63,7 @@ const RouteNavigate = () => {
       </ThemeProvider>
       <ThemeProvider theme={themeDark}>
         <Routes>
+          <Route path='*' element={<ErrorPage />} />
           <Route path={paths.index} element={<HomePage />} />
           <Route path={paths.login} element={<Login />} />
           <Route path={paths.register} element={<Register />} />
