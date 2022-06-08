@@ -1,22 +1,23 @@
 /* eslint-disable no-confusing-arrow */
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { Grid, IconButton } from "@mui/material";
-import { AddShoppingCart, Favorite } from "@mui/icons-material";
-import Animation from "../Animation";
-import WishListBar from "./WishListBar";
-import EmptyWishList from "../../assets/empty-wishlist.json";
-import { getUser } from "../../store/StateUser";
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { Grid, IconButton } from '@mui/material';
+import { AddShoppingCart, Favorite } from '@mui/icons-material';
+import Animation from '../Animation';
+import WishListBar from './WishListBar';
+import EmptyWishList from '../../assets/empty-wishlist.json';
+import { getUser } from '../../store/StateUser';
+import { CssBaseline } from '@mui/material';
 import {
   getUserFavorites,
   updateUserFavorites,
-  addItemToCart
-} from "../../Services/services";
-import paths from "../../constants/paths";
-import { setLocalUserFavorites } from "../../constants/helpers";
-import MySnackBar from "../Alerts/MySnackBar";
+  addItemToCart,
+} from '../../Services/services';
+import paths from '../../constants/paths';
+import { setLocalUserFavorites } from '../../constants/helpers';
+import MySnackBar from '../Alerts/MySnackBar';
 
 const Container = styled.div`
   backgroundcolor: #212121;
@@ -40,7 +41,7 @@ const TopButton = styled.button`
   cursor: pointer;
   border: solid white 0.1px;
   background-color: ${(props) =>
-    props.type === "filled" ? "black" : "transparent"};
+    props.type === 'filled' ? 'black' : 'transparent'};
   color: white !important;
   text-transform: capitalize;
 `;
@@ -93,7 +94,7 @@ const Details = styled.div`
 const ProductName = styled.span`
   font-size: 20px;
   font-family: system-ui;
-  color: "blue";
+  color: 'blue';
 `;
 
 const ProductRating = styled.span`
@@ -161,7 +162,7 @@ const WishlistPage = () => {
       const res = await getUserFavorites(id);
       if (res.status == 200) {
         setFavorites(res.data);
-        console.log("items", res.data.items);
+        console.log('items', res.data.items);
         setLocalUserFavorites(JSON.stringify(res.data));
         setChangeMade(true);
       }
@@ -191,7 +192,7 @@ const WishlistPage = () => {
   };
 
   const handleContinueShopping = () => {
-    navigate(paths.search, { state: { value: "" } });
+    navigate(paths.search, { state: { value: '' } });
   };
 
   const handleCheckoutClicked = () => {
@@ -208,19 +209,34 @@ const WishlistPage = () => {
   useEffect(() => {
     getFavorites(user);
   }, [changeMade]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setOpenAlert(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [openAlert]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAddCart(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [addCart]);
+
   return (
-    <Container style={{ background: "#212121" }}>
+    <Container style={{ background: '#212121' }}>
       <MySnackBar
         open={openAlert}
         timeout={2000}
-        severity={"error"}
-        message={"item remove from wish list"}
+        severity={'error'}
+        message={'item remove from wish list'}
       />
       <MySnackBar
         open={addCart}
         timeout={2000}
-        severity={"success"}
-        message={"The product was added to your cart "}
+        severity={'success'}
+        message={'The product was added to your cart '}
       />
       <WishListBar />
       <Wrapper>
@@ -257,18 +273,18 @@ const WishlistPage = () => {
                     <Grid>
                       <IconButton
                         onClick={() => handleRemoveFromFavorites(item.item_id)}
-                        style={{ color: "red" }}
+                        style={{ color: 'red' }}
                       >
                         <Favorite />
                       </IconButton>
                     </Grid>
                   </PriceDetail>
                   <AddCart>
-                    <AddCartTitle>{"Add Item To Cart"}</AddCartTitle>
+                    <AddCartTitle>{'Add Item To Cart'}</AddCartTitle>
                     <Grid>
                       <IconButton
                         onClick={() => handleAddToCart(user._id, item)}
-                        style={{ color: "blue" }}
+                        style={{ color: 'blue' }}
                       >
                         <AddShoppingCart />
                       </IconButton>
@@ -288,6 +304,7 @@ const WishlistPage = () => {
           </Info>
         </Bottom>
       </Wrapper>
+      <CssBaseline />
     </Container>
   );
 };

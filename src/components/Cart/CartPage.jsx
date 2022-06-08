@@ -1,19 +1,20 @@
 /* eslint-disable no-confusing-arrow */
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { Grid, IconButton } from "@mui/material";
-import { Add, Delete, Remove } from "@mui/icons-material";
-import Animation from "../Animation";
-import FreeShipping from "./FreeShiping";
-import EmptyCart from "../../assets/empty-cart.json";
-import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
-import { getUser } from "../../store/StateUser";
-import { updateCart, getCartById, getItemById } from "../../Services/services";
-import paths from "../../constants/paths";
-import { setUserCart } from "../../constants/helpers";
-import MySnackBar from "../Alerts/MySnackBar";
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { Grid, IconButton } from '@mui/material';
+import { Add, Delete, Remove } from '@mui/icons-material';
+import Animation from '../Animation';
+import FreeShipping from './FreeShiping';
+import EmptyCart from '../../assets/empty-cart.json';
+import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
+import { getUser } from '../../store/StateUser';
+import { updateCart, getCartById, getItemById } from '../../Services/services';
+import paths from '../../constants/paths';
+import { setUserCart } from '../../constants/helpers';
+import MySnackBar from '../Alerts/MySnackBar';
+import { CssBaseline } from '@mui/material';
 
 const Container = styled.div`
   backgroundcolor: #212121;
@@ -37,7 +38,7 @@ const TopButton = styled.button`
   cursor: pointer;
   border: solid white 0.1px;
   background-color: ${(props) =>
-    props.type === "filled" ? "black" : "transparent"};
+    props.type === 'filled' ? 'black' : 'transparent'};
   color: white !important;
   text-transform: capitalize;
 `;
@@ -90,7 +91,7 @@ const Details = styled.div`
 const ProductName = styled.span`
   font-size: 20px;
   font-family: system-ui;
-  color: "blue";
+  color: 'blue';
 `;
 
 const ProductRating = styled.span`
@@ -166,8 +167,8 @@ const SummaryItem = styled.div`
   display: flex;
   font-family: cursive;
   justify-content: space-between;
-  font-weight: ${(props) => props.type === "total" && "500"};
-  font-size: ${(props) => props.type === "total" && "24px"};
+  font-weight: ${(props) => props.type === 'total' && '500'};
+  font-size: ${(props) => props.type === 'total' && '24px'};
 `;
 
 const SummaryItemText = styled.span``;
@@ -269,12 +270,12 @@ const Cart = () => {
   };
 
   const handleContinueShopping = () => {
-    navigate(paths.search, { state: { value: "" } });
+    navigate(paths.search, { state: { value: '' } });
   };
 
   const handleCheckoutClicked = () => {
     navigate(paths.purchase, {
-      state: { pricevalue: total, itemsvalue: cart.items }
+      state: { pricevalue: total, itemsvalue: cart.items },
     });
   };
 
@@ -291,12 +292,12 @@ const Cart = () => {
   }, [changeMade]);
   // console.log("user cart from local ", user.first_name, cart.items);
   return (
-    <Container style={{ background: "#212121" }}>
+    <Container style={{ background: '#212121' }}>
       <MySnackBar
         open={openAlert}
         timeout={2000}
-        severity={"error"}
-        message={"this item out of stock"}
+        severity={'error'}
+        message={'this item out of stock'}
       />
       <FreeShipping />
       <Wrapper>
@@ -322,7 +323,7 @@ const Cart = () => {
                       <ProductName>
                         <b>Name:</b> {item.item_name}
                       </ProductName>
-                      {item.item_id !== "0" ? (
+                      {item.item_id !== '0' ? (
                         <ProductRating>
                           <b>Rating:</b> {item.item_rating}
                         </ProductRating>
@@ -334,7 +335,7 @@ const Cart = () => {
                     </Details>
                   </ProductDetail>
                   <PriceDetail>
-                    {item.item_id !== "0" ? (
+                    {item.item_id !== '0' ? (
                       <ProductAmountContainer>
                         <Add onClick={() => handleClickPlus(item.item_id)} />
                         <ProductAmount>{item.quantity}</ProductAmount>
@@ -343,18 +344,18 @@ const Cart = () => {
                         />
                       </ProductAmountContainer>
                     ) : null}
-                    {item.item_id !== "0" ? (
+                    {item.item_id !== '0' ? (
                       <ProductPrice>
                         {item.item_price * item.quantity} $
                       </ProductPrice>
                     ) : (
                       <AffiliatePrice>{item.item_price} $</AffiliatePrice>
                     )}
-                    {item.item_id !== "0" ? (
+                    {item.item_id !== '0' ? (
                       <Grid>
                         <IconButton
                           onClick={() => handleRemoveFromCart(item.item_id)}
-                          style={{ color: "red" }}
+                          style={{ color: 'red' }}
                         >
                           <Delete />
                         </IconButton>
@@ -397,6 +398,7 @@ const Cart = () => {
           </Summary>
         </Bottom>
       </Wrapper>
+      <CssBaseline />
     </Container>
   );
 };

@@ -25,6 +25,7 @@ const Product = ({ product }) => {
 
   const [cartUpdated, setCartUpdated] = useState(false);
   const [favoritesUpdated, setFavoritesUpdated] = useState(false);
+  const [failedUpdate, setFailedUpdate] = useState(false);
 
   const classes = useStyles();
 
@@ -38,6 +39,8 @@ const Product = ({ product }) => {
     const res = await addItemToFavorites(id, item);
     if (res.status == 200) {
       setFavoritesUpdated(true);
+    } else {
+      setFailedUpdate(true);
     }
   };
 
@@ -47,6 +50,20 @@ const Product = ({ product }) => {
     }, 3000);
     return () => clearTimeout(timer);
   }, [cartUpdated]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setFavoritesUpdated(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [favoritesUpdated]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setFailedUpdate(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [failedUpdate]);
 
   const inStock =
     parseInt(product.item_quantity) > 0
@@ -66,6 +83,13 @@ const Product = ({ product }) => {
         severity='success'
         message='Added The product to the Wish List.'
       />
+      <MySnackBar
+        open={failedUpdate}
+        timeout={2000}
+        severity='warning'
+        message='The product is already in the Wish List.'
+      />
+
       <CardActions disableSpacing className={classes.cardFavButt}>
         <IconButton
           aria-label='Example'
